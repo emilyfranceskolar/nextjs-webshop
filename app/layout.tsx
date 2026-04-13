@@ -6,7 +6,7 @@ import { PropsWithChildren } from "react";
 // import { FiShoppingCart } from "react-icons/fi";
 import "./global.css";
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const inter = Inter({ subsets: ["latin"] });
 
