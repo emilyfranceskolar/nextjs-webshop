@@ -1,10 +1,7 @@
-import { Inter, Geist } from "next/font/google";
+import { Inter } from "next/font/google";
 import Link from "next/link";
 import type { Metadata } from "next/types";
 import { PropsWithChildren } from "react";
-import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
+    <html lang="en">
       <body className={inter.className}>
         <header>
           <Link href="/">
