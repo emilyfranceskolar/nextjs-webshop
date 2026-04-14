@@ -2,20 +2,14 @@
  * Beskriver en produkt som ska säljas på sidan.
  * OBS: Kan utökas men inte ändras pga cypress.
  **/
-export interface Product {
-  id: string;
-  slug: string;
-  category: string;
-  articleNumber: string;
-  image: string;
-  title: string;
-  description: string;
-  price: number;
-}
 
-export interface CartItem extends Product {
+import { Product as PrismaProduct } from "@prisma/client";
+
+export interface CartItem extends PrismaProduct {
   quantity: number;
 }
+
+export type Product = PrismaProduct;
 
 /* Lägg till era produkter här */
 export const products: Product[] = [
@@ -289,7 +283,7 @@ export const products: Product[] = [
     slug: "accessory-1",
     category: "Accessories",
     articleNumber: "905",
-    image: "images/accessories-1.jpg",
+    image: "/images/accessories-1.jpg",
     title: "Vintage Cap",
     description:
       "Classic cap with a vintage wash and relaxed fit. A timeless accessory that adds a casual retro touch.",
@@ -333,7 +327,7 @@ export const products: Product[] = [
     slug: "accessory-5",
     category: "Accessories",
     articleNumber: "909",
-    image: "images/accessories-5.jpg",
+    image: "/images/accessories-5.jpg",
     title: "Vintage Tote Bag",
     description:
       "Spacious tote bag with a vintage-inspired design. Perfect for daily use with a relaxed and stylish feel.",
@@ -366,7 +360,7 @@ export const products: Product[] = [
     slug: "accessory-8",
     category: "Accessories",
     articleNumber: "912",
-    image: "images/accessories-8.jpg",
+    image: "/images/accessories-8.jpg",
     title: "Vintage Backpack",
     description:
       "Durable backpack with a vintage aesthetic. Designed for everyday use with both style and practicality.",
