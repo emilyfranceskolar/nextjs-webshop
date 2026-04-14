@@ -191,10 +191,10 @@ export const products: Product[] = [
   },
   {
     id: "17",
-    slug: "shoes-1",
+    slug: "shoe-1",
     category: "Shoes",
     articleNumber: "897",
-    image: "/images/shoe-1.jpg",
+    image: "/assets/images/shoe-1.jpg",
     title: "Vintage Sneakers",
     description:
       "Retro-inspired sneakers with a classic silhouette and worn-in details. Designed for everyday comfort with a timeless streetwear feel.",
@@ -202,10 +202,10 @@ export const products: Product[] = [
   },
   {
     id: "18",
-    slug: "shoes-2",
+    slug: "shoe-2",
     category: "Shoes",
     articleNumber: "898",
-    image: "/images/shoe-2.jpg",
+    image: "/assets/images/shoe-2.jpg",
     title: "Vintage Leather Boots",
     description:
       "Durable leather boots with a vintage finish. Built for both style and longevity with a rugged, timeless look.",
@@ -213,10 +213,10 @@ export const products: Product[] = [
   },
   {
     id: "19",
-    slug: "shoes-3",
+    slug: "shoe-3",
     category: "Shoes",
     articleNumber: "899",
-    image: "/images/shoe-3.jpg",
+    image: "/assets/images/shoe-3.jpg",
     title: "Vintage Canvas Shoes",
     description:
       "Lightweight canvas shoes with a faded vintage look. Perfect for casual wear with a relaxed and effortless style.",
@@ -224,7 +224,7 @@ export const products: Product[] = [
   },
   {
     id: "20",
-    slug: "shoes-4",
+    slug: "shoe4",
     category: "Shoes",
     articleNumber: "900",
     image: "/images/shoe-4.jpg",
@@ -235,7 +235,7 @@ export const products: Product[] = [
   },
   {
     id: "21",
-    slug: "shoes-5",
+    slug: "shoe5",
     category: "Shoes",
     articleNumber: "901",
     image: "/images/shoe-5.jpg",
@@ -246,7 +246,7 @@ export const products: Product[] = [
   },
   {
     id: "22",
-    slug: "shoes-6",
+    slug: "shoe6",
     category: "Shoes",
     articleNumber: "902",
     image: "/images/shoe-6.jpg",
@@ -257,7 +257,7 @@ export const products: Product[] = [
   },
   {
     id: "23",
-    slug: "shoes-7",
+    slug: "shoe7",
     category: "Shoes",
     articleNumber: "903",
     image: "/images/shoe-7.jpg",
@@ -268,7 +268,7 @@ export const products: Product[] = [
   },
   {
     id: "24",
-    slug: "shoes-8",
+    slug: "shoe8",
     category: "Shoes",
     articleNumber: "904",
     image: "/images/shoe-8.jpg",
