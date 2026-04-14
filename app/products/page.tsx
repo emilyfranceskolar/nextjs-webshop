@@ -1,4 +1,4 @@
-import ProductCard from "@/components/ui/product-card";
+import ProductCard from "@/components/ui/product-page-card";
 
 export default function ProductPage() {
   return (
@@ -9,31 +9,31 @@ export default function ProductPage() {
           title="Product 1"
           description="More details about Product 1."
           price={999}
-          imageUrl="/assets/images/test.avif"
+          imageUrl="/assets/images/shirt-black.jpg"
         />
         <ProductCard
           title="Product 2"
           description="More details about Product 2."
           price={1999}
-          imageUrl="/assets/images/test.avif"
+          imageUrl="/assets/images/shirt-red.jpg"
         />
         <ProductCard
           title="Product 3"
           description="More details about Product 3."
           price={2999}
-          imageUrl="/assets/images/test.avif"
+          imageUrl="/assets/images/shirt-white-blue.jpg"
         />
         <ProductCard
           title="Product 4"
           description="More details about Product 4."
           price={3999}
-          imageUrl="/assets/images/test.avif"
+          imageUrl="/assets/images/shirt-grey.jpg"
         />
         <ProductCard
           title="Product 5"
           description="More details about Product 5."
           price={4999}
-          imageUrl="/assets/images/test.avif"
+          imageUrl="/assets/images/shirt-white.jpg"
         />
         <ProductCard
           title="Product 6"
