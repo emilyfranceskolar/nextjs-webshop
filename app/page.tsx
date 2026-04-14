@@ -5,7 +5,7 @@ import { TrendingCard } from "@/components/trending-card";
 
 export default function Home() {
   return (
-    <main className="p-4">
+    <main>
       <div className="w-full bg-[url('/vintage.png')] bg-cover bg-center bg-no-repeat min-h-48">
         <p className="bg-[url('/vintage.png')]"></p>
       </div>
