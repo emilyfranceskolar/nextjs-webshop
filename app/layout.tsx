@@ -4,7 +4,6 @@ import Link from "next/link";
 import type { Metadata } from "next/types";
 import { PropsWithChildren } from "react";
 // import { FiShoppingCart } from "react-icons/fi";
-import Footer from "@/components/footer";
 import "./global.css";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
@@ -20,7 +19,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" className={cn("font-sans", geist.variable)}>
-      <body className={`${inter.className} min-h-screen flex flex-col`}>
+      <body className={inter.className}>
         <header className="flex gap-12 p-4 place-items-center bg-white border-b border-b-zinc-300">
           <Link href="/" className="flex grow text-4xl text-black">
             <h1>NextJS webbshop</h1>
@@ -46,9 +45,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
             </Link>
           </nav>
         </header>
-        <main className="flex-1">{children}</main>
-
-        <Footer />
+        {children}
+        <footer>
+          <p>© 2024</p>
+        </footer>
       </body>
     </html>
   );
