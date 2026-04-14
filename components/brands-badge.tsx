@@ -4,10 +4,10 @@ export function BrandBadge() {
   return (
     <div className="flex w-full flex-wrap justify-center gap-2">
       <Badge
-        className="border-zinc-600 border-1 border-solid px-6 py-3 hover:bg-white"
+        className="border-zinc-600 border border-solid px-6 py-3 hover:bg-white"
         variant="outline"
       >
-        Outline
+        Brand
       </Badge>
     </div>
   );
