@@ -16,7 +16,7 @@ export default function Home() {
         <CategoryCard />
         <CategoryCard />
       </section>
-      <section className="bg-indigo-200 p-2">
+      <section className="bg-[#f5efe6] p-2">
         <h2 className="text-3xl p-4">Brands</h2>
         <div className="flex gap-12 justify-start overflow-x-auto p-2 mb-4">
           <BrandBadge />
