@@ -38,7 +38,7 @@ export default async function Home() {
       <section>
         <div className="flex justify-between items-center p-4">
           <h1 className="text-3xl pt-6 pb-4">Trending items</h1>
-          <HomeButton />
+          <HomeButton>View All</HomeButton>
         </div>
         <div className="flex gap-8 overflow-x-auto p-2 pb-4 mb-4">
           <TrendingCard />
