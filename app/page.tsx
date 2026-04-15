@@ -2,8 +2,11 @@ import { BrandBadge } from "@/components/brands-badge";
 import { CategoryCard } from "@/components/category-card";
 import { HomeButton } from "@/components/home-button";
 import { TrendingCard } from "@/components/trending-card";
+import { db } from "@/prisma/db";
 
-export default function Home() {
+export default async function Home() {
+  const products = await db.product.findMany({});
+
   return (
     <main>
       <div className="w-full bg-[url('/vintage.png')] bg-cover bg-center bg-no-repeat min-h-48">
@@ -43,6 +46,17 @@ export default function Home() {
           <TrendingCard />
           <TrendingCard />
         </div>
+      </section>
+      <section className="grid grid-cols-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 p-2 mb-4">
+        {products.map((product) => (
+          <div key={product.id}>
+            <img
+              className="w-full object-cover rounded-lg"
+              src={product.image}
+              alt={product.title}
+            />
+          </div>
+        ))}
       </section>
     </main>
   );
