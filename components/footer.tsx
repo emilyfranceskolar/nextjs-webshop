@@ -5,7 +5,7 @@ import { Separator } from "./ui/separator";
 
 export default function Footer() {
   return (
-    <main className="bg-zinc-200">
+    <main className="bg-[#f5efe6]">
       <footer className="grid grid-cols-3 max-w-5xl mx-auto justify-items-center pt-12 pb-12">
         <section className="grid gap-6">
           <h2 className="font-bold mb-4">"Brand"</h2>
