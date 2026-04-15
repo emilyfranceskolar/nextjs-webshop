@@ -18,7 +18,7 @@ export default async function ProductDetailPage({
       <section className="grid md:grid-cols-2 md:gap-10">
         <div className="flex items-center justify-center">
           <img
-            className="w-3/4 h-auto mb-5"
+            className="w-3/4 h-auto mb-5 rounded-md"
             src={product.image}
             alt={product.title}
           />
