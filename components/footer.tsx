@@ -11,19 +11,19 @@ export default function Footer() {
           <h2 className="font-bold mb-4">"Brand"</h2>
           <Link
             href="/aboutus"
-            className="relative after:absolute after:left-0 after:bottom-px after:h-px after:w-0 after:bg-black after:transition-all hover:after:w-full"
+            className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
           >
             About Us
           </Link>
           <Link
             href="/sustainability"
-            className="relative after:absolute after:left-0 after:bottom-px after:h-px after:w-0 after:bg-black after:transition-all hover:after:w-full"
+            className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
           >
             Sustainability
           </Link>
           <Link
             href="/careers"
-            className="relative after:absolute after:left-0 after:bottom-px after:h-px after:w-0 after:bg-black after:transition-all hover:after:w-full"
+            className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
           >
             Careers
           </Link>
@@ -32,19 +32,19 @@ export default function Footer() {
           <h2 className="font-bold mb-4">Discover</h2>
           <Link
             href="/howitworks"
-            className="relative after:absolute after:left-0 after:bottom-px after:h-px after:w-0 after:bg-black after:transition-all hover:after:w-full"
+            className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
           >
             How it works
           </Link>
           <Link
             href="/verification"
-            className="relative after:absolute after:left-0 after:bottom-px after:h-px after:w-0 after:bg-black after:transition-all hover:after:w-full"
+            className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
           >
             Verification
           </Link>
           <Link
             href="/signup"
-            className="relative after:absolute after:left-0 after:bottom-px after:h-px after:w-0 after:bg-black after:transition-all hover:after:w-full"
+            className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
           >
             Sign Up
           </Link>
@@ -53,19 +53,19 @@ export default function Footer() {
           <h2 className="font-bold mb-4">Help</h2>
           <Link
             href="/delivery"
-            className="relative after:absolute after:left-0 after:bottom-px after:h-px after:w-0 after:bg-black after:transition-all hover:after:w-full"
+            className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
           >
             Delivery
           </Link>
           <Link
             href="/returnpolicy"
-            className="relative after:absolute after:left-0 after:bottom-px after:h-px after:w-0 after:bg-black after:transition-all hover:after:w-full"
+            className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
           >
             Return Policy
           </Link>
           <Link
             href="/contactus"
-            className="relative after:absolute after:left-0 after:bottom-px after:h-px after:w-0 after:bg-black after:transition-all hover:after:w-full"
+            className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
           >
             Contact Us
           </Link>
