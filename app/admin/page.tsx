@@ -11,7 +11,7 @@ export default async function AdminPage() {
 
        <section className="grid w-full gap-6 p-4 mb-4 sm:grid-cols-2 xl:grid-cols-4">
               {products.map((product) => (
-                  <article key={product.id} className="flex gap-4">
+                  <article key={product.id} className="flex justify-center gap-4">
                     <img
                       className="object-cover rounded-lg w-24 h-auto"
                       src={product.image}

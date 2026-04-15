@@ -18,7 +18,7 @@ export default async function Home() {
         <p className="bg-[url('/vintage.png')]"></p>
       </div>
       <h1 className="text-4xl p-4">Shop by Category</h1>
-      <section className="w-full flex justify-evenly gap-8 overflow-x-auto p-2 m-4">
+      <section className="w-full flex justify-evenly gap-8 overflow-x-auto p-2">
         {categories.map((category) => (
           <a href={`/products?category=${category}`} key={category}>
             <CategoryCard
