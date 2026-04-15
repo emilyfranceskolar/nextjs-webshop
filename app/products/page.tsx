@@ -17,7 +17,7 @@ export default async function ProductPage({
         {params.category || "Products"}
       </h1>
       <nav>
-        <ul className="flex justify-evenly gap-25 font-xl">
+        <ul className="flex justify-evenly gap-3 font-xs sm:gap-10 font-md md:gap-15 font-lg lg:gap-25 font-xl">
           <li>
             <a
               href="/products"
@@ -70,7 +70,7 @@ export default async function ProductPage({
           </li>
         </ul>
       </nav>
-      <section className="grid grid-cols-4 gap-4 p-5 pb-10 pt-10">
+      <section className="grid gap-4 p-5 pb-10 pt-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {products.map((product) => (
           <ProductCard
             key={product.id}
