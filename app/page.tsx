@@ -3,6 +3,7 @@ import { CategoryCard } from "@/components/category-card";
 import { HomeButton } from "@/components/home-button";
 import { TrendingCard } from "@/components/trending-card";
 import { db } from "@/prisma/db";
+import Link from "next/link";
 
 export default async function Home() {
   const products = await db.product.findMany({});
@@ -47,15 +48,17 @@ export default async function Home() {
           <TrendingCard />
         </div>
       </section>
-      <section className="grid grid-cols-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 p-2 mb-4">
+      <section className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-2 mb-4">
         {products.map((product) => (
-          <div key={product.id}>
-            <img
-              className="w-full object-cover rounded-lg"
-              src={product.image}
-              alt={product.title}
-            />
-          </div>
+          <Link href={`/products/${product.slug}`} key={product.id}>
+            <article key={product.id}>
+              <img
+                className="object-cover rounded-lg"
+                src={product.image}
+                alt={product.title}
+              />
+            </article>
+          </Link>
         ))}
       </section>
     </main>
