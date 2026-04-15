@@ -19,12 +19,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" className={cn("font-sans", geist.variable)}>
-      <body className={inter.className}>
-        <header className="flex gap-12 p-4 place-items-center bg-white border-b border-b-zinc-300">
-          <Link href="/" className="flex grow text-4xl text-black">
-            <h1>NextJS webbshop</h1>
-          </Link>
-          <nav className="flex gap-8 place-items-center">
+      <body className={`${inter.className} min-h-screen flex flex-col`}>
+        <header className="flex items-center justify-between p-4 border-b-26 border-rose-900 px-6 py-8">
+          <Link
+            href="/"
+            className="bg-[url('/assets/images/worn-stories-logo.png')] bg-contain bg-no-repeat bg-c w-50 h-26 text-4xl text-black"
+          ></Link>
+          <nav className="flex gap-8">
             <Link
               href="/products"
               className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
