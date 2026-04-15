@@ -18,7 +18,7 @@ export const products: Product[] = [
     slug: "top-1",
     category: "Top",
     articleNumber: "112",
-    image: "/assets/images/shirt-1.jpg",
+    image: "/assets/images/top-1.jpg",
     title: "Vintage T-shirt",
     description:
       "A soft washed T-shirt with a vintage look and feel. Designed with a relaxed fit and subtle fading for everyday comfort and style.",
@@ -29,7 +29,7 @@ export const products: Product[] = [
     slug: "top-2",
     category: "Top",
     articleNumber: "113",
-    image: "/assets/images/shirt-2.jpg",
+    image: "/assets/images/top-2.jpg",
     title: "Vintage T-shirt",
     description:
       "Oversized vintage-inspired T-shirt with a loose silhouette and worn-in finish. Perfect for a laid-back, effortless outfit.",
@@ -40,7 +40,7 @@ export const products: Product[] = [
     slug: "top-3",
     category: "Top",
     articleNumber: "114",
-    image: "/assets/images/shirt-3.jpg",
+    image: "/assets/images/top-3.jpg",
     title: "Vintage T-shirt",
     description:
       "Retro graphic T-shirt with a faded print and vintage character. Made for those who want a bold yet timeless look.",
@@ -51,7 +51,7 @@ export const products: Product[] = [
     slug: "top-4",
     category: "Top",
     articleNumber: "115",
-    image: "/assets/images/shirt-4.jpg",
+    image: "/assets/images/top-4.jpg",
     title: "Vintage T-shirt",
     description:
       "Classic long sleeve top with a vintage touch. Soft fabric and relaxed fit make it ideal for layering or wearing on its own.",
@@ -62,7 +62,7 @@ export const products: Product[] = [
     slug: "top-5",
     category: "Top",
     articleNumber: "116",
-    image: "/assets/images/shirt-5.jpg",
+    image: "/assets/images/top-5.jpg",
     title: "Vintage T-shirt",
     description:
       "Comfortable hoodie with a vintage-inspired wash and relaxed fit. Designed for warmth and effortless streetwear style.",
@@ -73,7 +73,7 @@ export const products: Product[] = [
     slug: "top-6",
     category: "Top",
     articleNumber: "117",
-    image: "/assets/images/shirt-6.jpg",
+    image: "/assets/images/top-6.jpg",
     title: "Vintage T-shirt",
     description:
       "Timeless crewneck sweatshirt with a soft feel and worn-in look. A perfect blend of comfort and vintage style.",
@@ -84,7 +84,7 @@ export const products: Product[] = [
     slug: "top-7",
     category: "Top",
     articleNumber: "118",
-    image: "/assets/images/shirt-7.jpg",
+    image: "/assets/images/top-7.jpg",
     title: "Vintage T-shirt",
     description:
       "A timeless vintage-inspired T-shirt crafted from soft, breathable cotton. Designed with a relaxed fit and a worn-in feel for effortless, everyday style",
@@ -95,7 +95,7 @@ export const products: Product[] = [
     slug: "top-8",
     category: "Top",
     articleNumber: "119",
-    image: "/assets/images/shirt-8.jpg",
+    image: "/assets/images/top-8.jpg",
     title: "Vintage T-shirt",
     description:
       "Lightweight tank top with a vintage aesthetic. Designed for warm days with a relaxed and breathable fit.",
@@ -106,7 +106,7 @@ export const products: Product[] = [
     slug: "bottom-1",
     category: "Bottoms",
     articleNumber: "889",
-    image: "/assets/images/jeans-1.jpg",
+    image: "/assets/images/bottom-1.jpg",
     title: "Vintage Jeans",
     description:
       "Classic vintage-inspired jeans with a relaxed fit and authentic worn-in feel. Made from durable denim for everyday comfort and timeless style.",
@@ -117,7 +117,7 @@ export const products: Product[] = [
     slug: "bottom-2",
     category: "Bottoms",
     articleNumber: "890",
-    image: "/assets/images/jeans-2.jpg",
+    image: "/assets/images/bottom-2.jpg",
     title: "Vintage Sweatpants",
     description:
       "Soft vintage-style sweatpants with a relaxed silhouette and faded finish. Designed for comfort with a laid-back, retro vibe.",
@@ -128,7 +128,7 @@ export const products: Product[] = [
     slug: "bottom-3",
     category: "Bottoms",
     articleNumber: "891",
-    image: "/assets/images/jeans-3.jpg",
+    image: "/assets/images/bottom-3.jpg",
     title: "Vintage Shorts",
     description:
       "Lightweight vintage-inspired shorts with a worn-in look. Perfect for warm days with a relaxed fit and effortless style.",
@@ -139,7 +139,7 @@ export const products: Product[] = [
     slug: "bottom-4",
     category: "Bottoms",
     articleNumber: "892",
-    image: "/assets/images/jeans-4.jpg",
+    image: "/assets/images/bottom-4.jpg",
     title: "Vintage Cargo Pants",
     description:
       "Utility-inspired cargo pants with a vintage finish. Featuring multiple pockets and a relaxed fit for both function and style.",
@@ -150,7 +150,7 @@ export const products: Product[] = [
     slug: "bottom-5",
     category: "Bottoms",
     articleNumber: "893",
-    image: "/assets/images/jeans-5.jpg",
+    image: "/assets/images/bottom-5.jpg",
     title: "Vintage Denim Shorts",
     description:
       "Timeless denim shorts with a vintage wash and slightly distressed details. Designed for a casual, effortless look.",
@@ -161,7 +161,7 @@ export const products: Product[] = [
     slug: "bottom-6",
     category: "Bottoms",
     articleNumber: "894",
-    image: "/assets/images/jeans-6.jpg",
+    image: "/assets/images/bottom-6.jpg",
     title: "Vintage Joggers",
     description:
       "Comfortable vintage-style joggers with a soft feel and tapered fit. Perfect for everyday wear with a retro touch.",
@@ -172,7 +172,7 @@ export const products: Product[] = [
     slug: "bottom-7",
     category: "Bottoms",
     articleNumber: "895",
-    image: "/assets/images/jeans-7.jpg",
+    image: "/assets/images/bottom-7.jpg",
     title: "Vintage Linen Pants",
     description:
       "Breathable linen pants with a vintage-inspired design. Lightweight and relaxed for a clean, effortless summer style.",
@@ -183,7 +183,7 @@ export const products: Product[] = [
     slug: "bottom-8",
     category: "Bottoms",
     articleNumber: "896",
-    image: "/assets/images/jeans-8.jpg",
+    image: "/assets/images/bottom-8.jpg",
     title: "Vintage Corduroy Pants",
     description:
       "Retro corduroy pants with a soft texture and vintage feel. Designed with a relaxed fit for timeless everyday wear.",
@@ -283,7 +283,7 @@ export const products: Product[] = [
     slug: "accessory-1",
     category: "Accessories",
     articleNumber: "905",
-    image: "/assets/images/accessories-1.jpg",
+    image: "/assets/images/accessory-1.jpg",
     title: "Vintage Cap",
     description:
       "Classic cap with a vintage wash and relaxed fit. A timeless accessory that adds a casual retro touch.",
@@ -294,7 +294,7 @@ export const products: Product[] = [
     slug: "accessory-2",
     category: "Accessories",
     articleNumber: "906",
-    image: "/assets/images/accessories-2.jpg",
+    image: "/assets/images/accessory-2.jpg",
     title: "Vintage Beanie",
     description:
       "Soft knit beanie with a vintage-inspired look. Designed for warmth and effortless everyday style.",
@@ -305,7 +305,7 @@ export const products: Product[] = [
     slug: "accessory-3",
     category: "Accessories",
     articleNumber: "907",
-    image: "/assets/images/accessories-3.jpg",
+    image: "/assets/images/accessory-3.jpg",
     title: "Vintage Sunglasses",
     description:
       "Retro sunglasses with a timeless frame design. Perfect for adding a bold vintage edge to any outfit.",
@@ -316,7 +316,7 @@ export const products: Product[] = [
     slug: "accessory-4",
     category: "Accessories",
     articleNumber: "908",
-    image: "/assets/images/accessories-4.jpg",
+    image: "/assets/images/accessory-4.jpg",
     title: "Vintage Leather Belt",
     description:
       "Classic leather belt with a worn-in vintage finish. Durable and versatile for everyday wear.",
@@ -327,7 +327,7 @@ export const products: Product[] = [
     slug: "accessory-5",
     category: "Accessories",
     articleNumber: "909",
-    image: "/assets/images/accessories-5.jpg",
+    image: "/assets/images/accessory-5.jpg",
     title: "Vintage Tote Bag",
     description:
       "Spacious tote bag with a vintage-inspired design. Perfect for daily use with a relaxed and stylish feel.",
@@ -338,7 +338,7 @@ export const products: Product[] = [
     slug: "accessory-6",
     category: "Accessories",
     articleNumber: "910",
-    image: "/assets/images/accessories-6.jpg",
+    image: "/assets/images/accessory-6.jpg",
     title: "Vintage Scarf",
     description:
       "Lightweight scarf with a vintage pattern. Adds a subtle retro touch while keeping you comfortable.",
@@ -349,7 +349,7 @@ export const products: Product[] = [
     slug: "accessory-7",
     category: "Accessories",
     articleNumber: "911",
-    image: "/assets/images/accessories-7.jpg",
+    image: "/assets/images/accessory-7.jpg",
     title: "Vintage Watch",
     description:
       "Classic watch with a vintage-inspired design. A timeless accessory that blends style and function.",
@@ -360,7 +360,7 @@ export const products: Product[] = [
     slug: "accessory-8",
     category: "Accessories",
     articleNumber: "912",
-    image: "/assets/images/accessories-8.jpg",
+    image: "/assets/images/accessory-8.jpg",
     title: "Vintage Backpack",
     description:
       "Durable backpack with a vintage aesthetic. Designed for everyday use with both style and practicality.",
