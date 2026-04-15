@@ -1,16 +1,12 @@
-import { FiShoppingCart } from "react-icons/fi";
+import ShoppingCartList from "@/components/shopping-cart";
 
 export default function CartPage() {
-  // const [items, setItems] = useState<>
-
   return (
     <main>
       <section className="grid place-items-center gap-16 p-12">
-        <h1 className="flex gap-4 text-5xl">
-          Your shopping cart
-          <FiShoppingCart />
-        </h1>
+        <h1 className="flex gap-2 text-3xl font-bold">Shopping cart</h1>
         <p>Your cart is currently empty.</p>
+        <ShoppingCartList />
       </section>
     </main>
   );

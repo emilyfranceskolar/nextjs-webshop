@@ -17,7 +17,7 @@ export default async function Home() {
       <div className="w-full bg-[url('/vintage.png')] bg-cover bg-center bg-no-repeat min-h-98">
         <p className="bg-[url('/vintage.png')]"></p>
       </div>
-      <h1 className="text-4xl p-4">Shop by Category</h1>
+      <h1 className="text-3xl font-bold p-4">Shop by Category</h1>
       <section className="w-full flex justify-evenly gap-8 overflow-x-auto p-2">
         {categories.map((category) => (
           <a href={`/products?category=${category}`} key={category}>
@@ -29,7 +29,7 @@ export default async function Home() {
         ))}
       </section>
       <section className="grid gap-8 place-items-center">
-        <h2 className="text-3xl m-4">Products in right now</h2>
+        <h2 className="text-3xl font-bold m-4">All Products</h2>
         <section className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-2 mb-4">
           {products.map((product) => (
             <Link href={`/products/${product.slug}`} key={product.id}>
