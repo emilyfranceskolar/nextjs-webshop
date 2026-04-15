@@ -7,7 +7,7 @@ export default async function AdminPage() {
   const products = await db.product.findMany({});
   return (
     <main className="grid gap-4 place-items-center">
-      <p>Det här är Adminsidan.</p>
+      <p className="text-3xl font-bold m-10">Our products</p>
 
        <section className="grid w-full gap-6 p-4 mb-4 sm:grid-cols-2 xl:grid-cols-4">
               {products.map((product) => (
