@@ -10,14 +10,12 @@ import Link from "next/link";
 
 export interface ProductCardProps {
   title: string;
-  description: string;
   price: number;
   imageUrl: string;
 }
 
 export default function ProductCard({
   title,
-  description,
   imageUrl,
   price,
 }: ProductCardProps) {
@@ -32,9 +30,7 @@ export default function ProductCard({
           <p>{price}kr</p>
         </CardHeader>
       </Link>
-      <CardContent>
-        <p>{description}</p>
-      </CardContent>
+      <CardContent></CardContent>
       <CardFooter className="flex gap-2 justify-between">
         <Button variant="outline" size="lg" className="flex-1">
           <Link
