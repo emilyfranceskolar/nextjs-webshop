@@ -77,6 +77,7 @@ export default async function ProductPage({
             title={product.title}
             price={product.price}
             imageUrl={product.image}
+            slug={product.slug}
           />
         ))}
       </section>

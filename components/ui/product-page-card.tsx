@@ -1,44 +1,44 @@
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
 export interface ProductCardProps {
   title: string;
   price: number;
   imageUrl: string;
+  slug: string;
 }
 
 export default function ProductCard({
   title,
   imageUrl,
   price,
+  slug,
 }: ProductCardProps) {
   return (
     <Card className="p-0">
-      <Link href="/product-details" className="block">
+      <Link href={`/products/${slug}`} className="block">
         <img src={imageUrl} alt={title} className="relative w-full mt-0" />
       </Link>
-      <Link href="/product-details" className="block">
+      <Link href={`/products/${slug}`} className="block">
         <CardHeader className="flex justify-between">
           <CardTitle>{title}</CardTitle>
           <p>{price}kr</p>
         </CardHeader>
       </Link>
-      <CardContent></CardContent>
       <CardFooter className="flex gap-2 justify-between">
-        <Button variant="outline" size="lg" className="flex-1">
-          <Link
-            href="/product-details" //ändra länken sen
+        <Link
+          className="flex-1"
+          href={`/products/${slug}`} //ändra länken sen
+        >
+          <Button
+            variant="outline"
+            size="lg"
+            className="w-full hover:cursor-pointer"
           >
             View Details
-          </Link>
-        </Button>
+          </Button>
+        </Link>
         <Button
           asChild
           variant="default"
