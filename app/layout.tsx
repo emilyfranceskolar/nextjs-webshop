@@ -4,7 +4,6 @@ import Link from "next/link";
 import type { Metadata } from "next/types";
 import { PropsWithChildren } from "react";
 // import { FiShoppingCart } from "react-icons/fi";
-import Footer from "@/components/footer";
 import "./global.css";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
@@ -47,9 +46,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
             </Link>
           </nav>
         </header>
-        <main className="flex-1">{children}</main>
-
-        <Footer />
+        {children}
+        <footer>
+          <p>© 2024</p>
+        </footer>
       </body>
     </html>
   );
