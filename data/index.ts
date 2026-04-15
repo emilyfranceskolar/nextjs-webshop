@@ -16,7 +16,7 @@ export const products: Product[] = [
   {
     id: "1",
     slug: "top-1",
-    category: "Top",
+    category: "Tops",
     articleNumber: "112",
     image: "/assets/images/top-1.jpg",
     title: "Vintage T-shirt",
@@ -27,7 +27,7 @@ export const products: Product[] = [
   {
     id: "2",
     slug: "top-2",
-    category: "Top",
+    category: "Tops",
     articleNumber: "113",
     image: "/assets/images/top-2.jpg",
     title: "Vintage T-shirt",
@@ -38,7 +38,7 @@ export const products: Product[] = [
   {
     id: "3",
     slug: "top-3",
-    category: "Top",
+    category: "Tops",
     articleNumber: "114",
     image: "/assets/images/top-3.jpg",
     title: "Vintage T-shirt",
@@ -49,7 +49,7 @@ export const products: Product[] = [
   {
     id: "4",
     slug: "top-4",
-    category: "Top",
+    category: "Tops",
     articleNumber: "115",
     image: "/assets/images/top-4.jpg",
     title: "Vintage T-shirt",
@@ -60,7 +60,7 @@ export const products: Product[] = [
   {
     id: "5",
     slug: "top-5",
-    category: "Top",
+    category: "Tops",
     articleNumber: "116",
     image: "/assets/images/top-5.jpg",
     title: "Vintage T-shirt",
@@ -71,7 +71,7 @@ export const products: Product[] = [
   {
     id: "6",
     slug: "top-6",
-    category: "Top",
+    category: "Tops",
     articleNumber: "117",
     image: "/assets/images/top-6.jpg",
     title: "Vintage T-shirt",
@@ -82,7 +82,7 @@ export const products: Product[] = [
   {
     id: "7",
     slug: "top-7",
-    category: "Top",
+    category: "Tops",
     articleNumber: "118",
     image: "/assets/images/top-7.jpg",
     title: "Vintage T-shirt",
@@ -93,7 +93,7 @@ export const products: Product[] = [
   {
     id: "8",
     slug: "top-8",
-    category: "Top",
+    category: "Tops",
     articleNumber: "119",
     image: "/assets/images/top-8.jpg",
     title: "Vintage T-shirt",
