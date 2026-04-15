@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import { cn } from "@/lib/utils";
 import { Geist, Inter } from "next/font/google";
 import Link from "next/link";
@@ -46,10 +47,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
             </Link>
           </nav>
         </header>
-        {children}
-        <footer>
-          <p>© 2024</p>
-        </footer>
+        <main className="flex-1">{children}</main>
+        <Footer />
       </body>
     </html>
   );

@@ -71,8 +71,8 @@ export default function Footer() {
           </Link>
         </section>
       </footer>
-      <Separator />
-      <section className="flex gap-4 justify-center text-2xl pb-10">
+      <Separator className="bg-stone-400" />
+      <section className="flex gap-4 justify-center text-2xl m-8">
         <Link href="#">
           <FiFacebook />
         </Link>
