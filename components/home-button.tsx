@@ -1,9 +1,13 @@
 import { Button } from "@/components/ui/button";
 
-export function HomeButton() {
+type HomeButtonProps = {
+  children: React.ReactNode;
+  className?: string;
+};
+export function HomeButton({children, className}: HomeButtonProps) {
   return (
-    <Button variant="outline" className="py-4 px-8 rounded-4xl">
-      View All
+    <Button variant="outline" className={`py-4 px-8 rounded-4xl ${className}`}>
+       {children ?? "View All"}
     </Button>
   );
 }

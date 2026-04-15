@@ -1,10 +1,10 @@
+import Footer from "@/components/footer";
 import { cn } from "@/lib/utils";
 import { Geist, Inter } from "next/font/google";
 import Link from "next/link";
 import type { Metadata } from "next/types";
 import { PropsWithChildren } from "react";
 // import { FiShoppingCart } from "react-icons/fi";
-import Footer from "@/components/footer";
 import "./global.css";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
@@ -21,10 +21,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" className={cn("font-sans", geist.variable)}>
       <body className={`${inter.className} min-h-screen flex flex-col`}>
-        <header className="flex items-center justify-between p-4 border-b-26 border-rose-900 px-6 py-8">
+        <header className="flex items-center justify-between border-b-26 border-rose-900 px-8 py-10">
           <Link
             href="/"
-            className="bg-[url('/assets/images/worn-stories-logo.png')] bg-contain bg-no-repeat bg-c w-50 h-26 text-4xl text-black"
+            className="bg-[url('/assets/images/worn-stories-logo.png')] bg-contain bg-no-repeat bg-c w-55 h-30 text-4xl text-black"
           ></Link>
           <nav className="flex gap-8">
             <Link
@@ -48,7 +48,6 @@ export default function RootLayout({ children }: PropsWithChildren) {
           </nav>
         </header>
         <main className="flex-1">{children}</main>
-
         <Footer />
       </body>
     </html>
