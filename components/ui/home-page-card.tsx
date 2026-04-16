@@ -35,7 +35,7 @@ export default function HomePageCard({
       <Button
         variant="outline"
         size="icon"
-        className="absolute top-2 right-2 hover:cursor-pointer"
+        className="absolute top-2 right-2 p-4.5 sm:p-3 hover:cursor-pointer"
       >
         <Link
           data-cy="product-buy-button"
