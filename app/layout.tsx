@@ -33,16 +33,16 @@ export default function RootLayout({ children }: PropsWithChildren) {
             >
               Products
             </Link>
-            <Link
+            <Link data-cy="admin-link"
               href="/admin"
               className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
             >
               Admin
             </Link>
-            <Link
-              href="/cart"
+            <Link 
               className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
-            >
+              href="/cart"
+            > 
               Cart
             </Link>
           </nav>
