@@ -1,5 +1,5 @@
 import { CategoryCard } from "@/components/category-card";
-import ProductCard from "@/components/ui/product-page-card";
+import HomePageCard from "@/components/ui/home-page-card";
 import { db } from "@/prisma/db";
 
 export default async function Home() {
@@ -32,7 +32,7 @@ export default async function Home() {
         <h2 className="text-3xl m-4">Products in right now</h2>
         <section className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-2 mb-4">
           {product.map((product) => (
-            <ProductCard
+            <HomePageCard
               key={product.id}
               title={product.title}
               articleNumber={product.articleNumber}
