@@ -1,5 +1,6 @@
 import ProductCard from "@/components/ui/product-page-card";
 import { db } from "@/prisma/db";
+import Link from "next/link";
 
 export default async function ProductPage({
   searchParams,
@@ -19,54 +20,54 @@ export default async function ProductPage({
       <nav>
         <ul className="flex justify-evenly gap-3 font-xs sm:gap-10 font-md md:gap-15 font-lg lg:gap-25 font-xl">
           <li>
-            <a
-              href="/products"
+            <Link
+              href="/product"
               className={`text-black hover:underline ${
                 !params.category ? "font-bold" : ""
               }`}
             >
               ALL
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/products?category=Tops"
+            <Link
+              href="/product?category=Tops"
               className={`text-black hover:underline ${
                 params.category === "Tops" ? "font-bold" : ""
               }`}
             >
               TOPS
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/products?category=Bottoms"
+            <Link
+              href="/product?category=Bottoms"
               className={`text-black hover:underline ${
                 params.category === "Bottoms" ? "font-bold" : ""
               }`}
             >
               BOTTOMS
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/products?category=Shoes"
+            <Link
+              href="/product?category=Shoes"
               className={`text-black hover:underline ${
                 params.category === "Shoes" ? "font-bold" : ""
               }`}
             >
               SHOES
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/products?category=Accessories"
+            <Link
+              href="/product?category=Accessories"
               className={`text-black hover:underline ${
                 params.category === "Accessories" ? "font-bold" : ""
               }`}
             >
               ACCESSORIES
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
@@ -75,6 +76,7 @@ export default async function ProductPage({
           <ProductCard
             key={product.id}
             title={product.title}
+            articleNumber={product.articleNumber}
             price={product.price}
             imageUrl={product.image}
             slug={product.slug}

@@ -4,6 +4,7 @@ import Link from "next/link";
 
 export interface ProductCardProps {
   title: string;
+  articleNumber: string;
   price: number;
   imageUrl: string;
   slug: string;
@@ -11,26 +12,24 @@ export interface ProductCardProps {
 
 export default function ProductCard({
   title,
+  articleNumber,
   imageUrl,
   price,
   slug,
 }: ProductCardProps) {
   return (
-    <Card className="p-0">
-      <Link href={`/products/${slug}`} className="block">
+    <Card data-cy="product" className="p-0">
+      <Link href={`/product/${articleNumber}/${slug}`} className="block">
         <img src={imageUrl} alt={title} className="relative w-full mt-0" />
       </Link>
-      <Link href={`/products/${slug}`} className="block">
+      <Link href={`/product/${articleNumber}/${slug}`} className="block">
         <CardHeader className="flex justify-between">
-          <CardTitle>{title}</CardTitle>
-          <p>{price}kr</p>
+          <CardTitle data-cy="product-title">{title}</CardTitle>
+          <p data-cy="product-price">{price}kr</p>
         </CardHeader>
       </Link>
       <CardFooter className="flex gap-2 justify-between">
-        <Link
-          className="flex-1"
-          href={`/products/${slug}`} //ändra länken sen
-        >
+        <Link className="flex-1" href={`/product/${articleNumber}/${slug}`}>
           <Button
             variant="outline"
             size="lg"
@@ -46,6 +45,7 @@ export default function ProductCard({
           className="flex-1 !bg-black !text-white"
         >
           <Link
+            data-cy="product-buy-button"
             href="/cart" //ändra länken sen
           >
             Add to Cart
