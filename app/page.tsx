@@ -1,6 +1,7 @@
 import { CategoryCard } from "@/components/category-card";
 import HomePageCard from "@/components/ui/home-page-card";
 import { db } from "@/prisma/db";
+import { Link } from "lucide-react";
 
 export default async function Home() {
   const product = await db.product.findMany({});
@@ -20,12 +21,12 @@ export default async function Home() {
       <h1 className="text-4xl p-4">Shop by Category</h1>
       <section className="w-full flex justify-evenly gap-8 overflow-x-auto p-2">
         {categories.map((category) => (
-          <a href={`/product?category=${category}`} key={category}>
+          <Link href={`/products?category=${category}`} key={category}>
             <CategoryCard
               category={category}
               image={categoryImages[category]}
             />
-          </a>
+          </Link>
         ))}
       </section>
       <section className="grid gap-8 place-items-center">
