@@ -1,7 +1,11 @@
+import ShoppingCartList from "@/components/shopping-cart";
+
 export default function CartPage() {
   return (
-    <main className="grid gap-4 place-items-center">
-      <p>Det här är kassasidan.</p>
+    <main>
+      <section className="grid place-items-center gap-16 p-12">
+        <ShoppingCartList />
+      </section>
     </main>
   );
 }
