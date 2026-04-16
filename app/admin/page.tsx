@@ -5,84 +5,114 @@ import { Field, FieldGroup } from "@/components/ui/field";
 import { Label } from "@/components/ui/label";
 import { db } from "@/prisma/db";
 import { Input } from "@base-ui/react";
-import { FiPlusCircle } from "react-icons/fi";
+import { Plus } from "lucide-react";
 
 export default async function AdminPage() {
   const products = await db.product.findMany({});
   return (
-    <main className="grid gap-4">
+    <main className="grid">
       <p className="text-3xl font-bold m-10 text-center">Our products</p>
-      <div className="flex justify-center">
+      <section className="grid gap-6 ml-4 mr-4 sm:grid-cols-2 xl:grid-cols-3">
         <Dialog>
-          <form>
-            <DialogTrigger asChild className="">
-              <Button className="p-6 gap-6" variant="outline">Add product <FiPlusCircle /></Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-sm">
-              <DialogHeader>
-                <DialogTitle className="font-extrabold">Add more products?</DialogTitle>
-                <DialogDescription>
-                  Information about your product
-                </DialogDescription>
-              </DialogHeader>
+          <div className="flex gap-6 items-center p-4 border rounded-xl w-full hover:bg-muted/50 transition">
+            <div className="w-24 h-28 rounded-xl border-2 border-dashed flex items-center justify-center text-sm text-muted-foreground shrink-0">
+              Image
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <div>
+                <p className="font-semibold text-lg text-zinc-700">
+                  New product
+                </p>
+                <p className="text-zinc-600">0 kr</p>
+              </div>
+
+              <DialogTrigger asChild>
+                <Button variant="outline">
+                  <Plus className="mr-2 h-4 w-4" />
+                  Add product
+                </Button>
+              </DialogTrigger>
+            </div>
+          </div>
+
+          <DialogContent className="sm:max-w-sm">
+            <DialogHeader>
+              <DialogTitle className="font-extrabold">
+                Add more products?
+              </DialogTitle>
+              <DialogDescription>
+                Information about your product
+              </DialogDescription>
+            </DialogHeader>
+
+            <form className="grid gap-4">
               <FieldGroup>
                 <Field>
-                  <Label htmlFor="name-1" className="font-bold">Title</Label>
-                  <Input id="name-1" className={`p-2 outline rounded-sm`} />
+                  <Label className="font-bold">Title</Label>
+                  <Input className="p-2 outline rounded-sm" />
                 </Field>
+
                 <Field>
-                  <Label htmlFor="username-1" className="font-bold">Category</Label>
-                  <Input id="name-6" className={`p-2 outline rounded-sm`} />
+                  <Label className="font-bold">Category</Label>
+                  <Input className="p-2 outline rounded-sm" />
                 </Field>
+
                 <Field>
-                  <Label htmlFor="username-1" className="font-bold">Description</Label>
-                  <Input id="name-3" className={`p-2 outline rounded-sm`} />
+                  <Label className="font-bold">Description</Label>
+                  <Input className="p-2 outline rounded-sm" />
                 </Field>
+
                 <Field>
-                  <Label htmlFor="username-1" className="font-bold">Image</Label>
-                  <Input id="name-4" className={`p-2 outline rounded-sm`} />
+                  <Label className="font-bold">Image</Label>
+                  <Input className="p-2 outline rounded-sm" />
                 </Field>
+
                 <Field>
-                  <Label htmlFor="username-1" className="font-bold">Price</Label>
-                  <Input id="name-5" className={`p-2 outline rounded-sm`} />
+                  <Label className="font-bold">Price</Label>
+                  <Input className="p-2 outline rounded-sm" />
                 </Field>
+
                 <Field>
-                  <Label htmlFor="username-1" className="font-bold">Article Number</Label>
-                  <Input id="name-2" className={`p-2 outline rounded-sm`} />
+                  <Label className="font-bold">Article Number</Label>
+                  <Input className="p-2 outline rounded-sm" />
                 </Field>
               </FieldGroup>
+
               <DialogFooter>
                 <DialogClose asChild>
                   <Button variant="outline">Cancel</Button>
                 </DialogClose>
-                <Button className="hover:bg-green-700" type="submit">Add</Button>
+                <Button type="submit" className="hover:bg-green-700">
+                  Add
+                </Button>
               </DialogFooter>
-            </DialogContent>
-          </form>
+            </form>
+          </DialogContent>
         </Dialog>
-      </div>
+        {products.map((product) => (
+          <article key={product.id} className="flex gap-6 items-center p-4 border rounded-xl">
+            <img
+              className="object-cover rounded-lg w-24 h-28 shrink-0"
+              src={product.image}
+              alt={product.title}
+            />
 
-      <section className="grid w-full gap-6 p-4 sm:grid-cols-2 xl:grid-cols-3">{products.map((product) => (
-        <article key={product.id} data-cy="product-id" className="flex justify-center gap-6 mb-4">
-          <img
-            className="object-cover rounded-lg w-24 h-auto"
-            src={product.image}
-            alt={product.title}
-          />
-          <div className="grid items-start">
-            <section className="p-2">
-              <p data-cy="product-title" className="font-bold text-sm">{product.title}</p>
-              <p data-cy="product-price" className="text-sm">{product.price}kr</p>
-            </section>
+            <div className="flex flex-col gap-2">
+              <div>
+                <p className="font-bold text-sm">{product.title}</p>
+                <p className="text-sm">{product.price}kr</p>
+              </div>
 
-            <ButtonGroup>
-              <Button variant="outline">Edit product</Button>
-              <Button variant="outline" className="hover:bg-red-200">Delete product</Button>
-            </ButtonGroup>
-          </div>
-        </article>
-
-      ))}
+              <ButtonGroup>
+                <Button variant="outline">Edit product</Button>
+                <Button variant="outline" className="hover:bg-red-200">
+                  Delete product
+                </Button>
+              </ButtonGroup>
+            </div>
+          </article>
+        ))}
       </section>
     </main >
   );
