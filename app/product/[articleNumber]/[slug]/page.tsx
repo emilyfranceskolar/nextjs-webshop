@@ -4,9 +4,9 @@ import { db } from "@/prisma/db";
 export default async function ProductDetailPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ articleNumber: string; slug: string }>;
 }) {
-  const { slug } = await params;
+  const { articleNumber, slug } = await params;
   const product = await db.product.findUnique({ where: { slug } });
 
   if (!product) {
@@ -26,10 +26,19 @@ export default async function ProductDetailPage({
 
         <div className="flex justify-center">
           <div className="flex flex-col gap-4 justify-start md:mt-25 md:w-3/4">
-            <h1 className="text-3xl font-bold mb-5">{product.title}</h1>
-            <p className="mb-5">{product.description}</p>
-            <p className="text-xl font-semibold">{product.price}kr</p>
-            <button className="px-4 py-2 mb-10 mt-2 bg-[#ddd9cd] text-black rounded hover:bg-[#8b0836] hover:text-white  transition-all duration-300 cursor-pointer">
+            <h1 className="text-3xl font-bold mb-5" data-cy="product-title">
+              {product.title}
+            </h1>
+            <p className="mb-5" data-cy="product-description">
+              {product.description}
+            </p>
+            <p className="text-xl font-semibold" data-cy="product-price">
+              {product.price}kr
+            </p>
+            <button
+              className="px-4 py-2 mb-10 mt-2 bg-[#ddd9cd] text-black rounded hover:bg-[#8b0836] hover:text-white  transition-all duration-300 cursor-pointer"
+              data-cy="product-buy-button"
+            >
               Add to Cart
             </button>
 
