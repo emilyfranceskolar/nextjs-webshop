@@ -20,7 +20,7 @@ export default async function ProductPage({
         <ul className="flex justify-evenly gap-3 font-xs sm:gap-10 font-md md:gap-15 font-lg lg:gap-25 font-xl">
           <li>
             <a
-              href="/products"
+              href="/product"
               className={`text-black hover:underline ${
                 !params.category ? "font-bold" : ""
               }`}
@@ -30,7 +30,7 @@ export default async function ProductPage({
           </li>
           <li>
             <a
-              href="/products?category=Tops"
+              href="/product?category=Tops"
               className={`text-black hover:underline ${
                 params.category === "Tops" ? "font-bold" : ""
               }`}
@@ -40,7 +40,7 @@ export default async function ProductPage({
           </li>
           <li>
             <a
-              href="/products?category=Bottoms"
+              href="/product?category=Bottoms"
               className={`text-black hover:underline ${
                 params.category === "Bottoms" ? "font-bold" : ""
               }`}
@@ -50,7 +50,7 @@ export default async function ProductPage({
           </li>
           <li>
             <a
-              href="/products?category=Shoes"
+              href="/product?category=Shoes"
               className={`text-black hover:underline ${
                 params.category === "Shoes" ? "font-bold" : ""
               }`}
@@ -60,7 +60,7 @@ export default async function ProductPage({
           </li>
           <li>
             <a
-              href="/products?category=Accessories"
+              href="/product?category=Accessories"
               className={`text-black hover:underline ${
                 params.category === "Accessories" ? "font-bold" : ""
               }`}
@@ -75,6 +75,7 @@ export default async function ProductPage({
           <ProductCard
             key={product.id}
             title={product.title}
+            articleNumber={product.articleNumber}
             price={product.price}
             imageUrl={product.image}
             slug={product.slug}
