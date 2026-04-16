@@ -43,7 +43,7 @@ export default async function Home() {
         ))}
       </section>
       <section className="grid gap-8 place-items-center">
-        <h2 className="text-3xl m-4">Products in right now</h2>
+        <h2 className="text-3xl font-bold m-4">All Products</h2>
         <section className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-2 mb-4">
           {product.map((product) => (
             <HomePageCard
