@@ -34,7 +34,7 @@ export default async function Home() {
       <h2 className="text-4xl p-4">Shop by Category</h2>
       <section className="w-full flex justify-evenly gap-8 overflow-x-auto p-2">
         {categories.map((category) => (
-          <Link href={`/products?category=${category}`} key={category}>
+          <Link href={`/product?category=${category}`} key={category}>
             <CategoryCard
               category={category}
               image={categoryImages[category]}
