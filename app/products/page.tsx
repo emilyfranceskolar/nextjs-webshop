@@ -1,5 +1,6 @@
 import ProductCard from "@/components/ui/product-page-card";
 import { db } from "@/prisma/db";
+import Link from "next/link";
 
 export default async function ProductPage({
   searchParams,
@@ -19,54 +20,54 @@ export default async function ProductPage({
       <nav>
         <ul className="flex justify-evenly gap-3 font-xs sm:gap-10 font-md md:gap-15 font-lg lg:gap-25 font-xl">
           <li>
-            <a
+            <Link
               href="/products"
               className={`text-black hover:underline ${
                 !params.category ? "font-bold" : ""
               }`}
             >
               ALL
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               href="/products?category=Tops"
               className={`text-black hover:underline ${
                 params.category === "Tops" ? "font-bold" : ""
               }`}
             >
               TOPS
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               href="/products?category=Bottoms"
               className={`text-black hover:underline ${
                 params.category === "Bottoms" ? "font-bold" : ""
               }`}
             >
               BOTTOMS
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               href="/products?category=Shoes"
               className={`text-black hover:underline ${
                 params.category === "Shoes" ? "font-bold" : ""
               }`}
             >
               SHOES
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               href="/products?category=Accessories"
               className={`text-black hover:underline ${
                 params.category === "Accessories" ? "font-bold" : ""
               }`}
             >
               ACCESSORIES
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
