@@ -1,6 +1,6 @@
 import ProductCard from "@/components/ui/product-page-card";
 import { db } from "@/prisma/db";
-import { Link } from "lucide-react";
+import Link from "next/link";
 
 export default async function ProductPage({
   searchParams,
