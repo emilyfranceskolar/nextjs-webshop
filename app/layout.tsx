@@ -28,7 +28,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           ></Link>
           <nav className="flex gap-8">
             <Link
-              href="/products"
+              href="/product"
               className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
             >
               Products
