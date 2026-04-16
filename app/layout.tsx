@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import { cn } from "@/lib/utils";
 import { Geist, Inter } from "next/font/google";
 import Link from "next/link";
@@ -19,14 +20,15 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" className={cn("font-sans", geist.variable)}>
-      <body className={inter.className}>
-        <header className="flex gap-12 p-4 place-items-center bg-white border-b border-b-zinc-300">
-          <Link href="/" className="flex grow text-4xl text-black">
-            <h1>NextJS webbshop</h1>
-          </Link>
-          <nav className="flex gap-8 place-items-center">
+      <body className={`${inter.className} min-h-screen flex flex-col`}>
+        <header className="flex items-center justify-between border-b-26 border-rose-900 px-8 py-10">
+          <Link
+            href="/"
+            className="bg-[url('/assets/images/worn-stories-logo.png')] bg-contain bg-no-repeat bg-c w-55 h-30 text-4xl text-black"
+          ></Link>
+          <nav className="flex gap-8">
             <Link
-              href="/products"
+              href="/product"
               className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
             >
               Products
@@ -45,10 +47,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
             </Link>
           </nav>
         </header>
-        {children}
-        <footer>
-          <p>© 2024</p>
-        </footer>
+        <main className="flex-1">{children}</main>
+        <Footer />
       </body>
     </html>
   );
