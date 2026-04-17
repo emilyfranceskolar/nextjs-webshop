@@ -48,11 +48,14 @@ export default async function Home() {
           {product.map((product) => (
             <HomePageCard
               key={product.id}
+              id={product.id.toString()}
               title={product.title}
               articleNumber={product.articleNumber}
               price={product.price}
-              imageUrl={product.image}
+              image={product.image}
               slug={product.slug}
+              category={product.category}
+              description={product.description}
             />
           ))}
         </section>

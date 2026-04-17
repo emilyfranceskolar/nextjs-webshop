@@ -1,22 +1,50 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useCart } from "@/hooks/use-cart";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
-import { ProductCardProps } from "./product-page-card";
 
-export interface HomePageCardProps extends ProductCardProps {}
+export interface HomePageCardProps {
+  id: string;
+  title: string;
+  articleNumber: string;
+  image: string;
+  price: number;
+  slug: string;
+  category: string | null;
+  description: string;
+}
 
 export default function HomePageCard({
+  id,
   title,
   articleNumber,
-  imageUrl,
+  image,
   price,
   slug,
+  category,
+  description,
 }: HomePageCardProps) {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart({
+      id,
+      title,
+      articleNumber,
+      image,
+      price,
+      slug,
+      category,
+      description,
+    });
+  };
+
   return (
     <Card data-cy="product" className="p-0 relative">
       <Link href={`/product/${articleNumber}/${slug}`} className="block">
-        <img src={imageUrl} alt={title} className="w-full object-cover" />
+        <img src={image} alt={title} className="w-full object-cover" />
       </Link>
       <Link
         href={`/product/${articleNumber}/${slug}`}
@@ -33,16 +61,13 @@ export default function HomePageCard({
       </p>
 
       <Button
+        onClick={handleAddToCart}
+        data-cy="product-buy-button"
         variant="outline"
         size="icon"
         className="absolute top-2 right-2 p-4.5 sm:p-3 hover:cursor-pointer"
       >
-        <Link
-          data-cy="product-buy-button"
-          href="" //ändra länken sen
-        >
-          <PlusIcon />
-        </Link>
+        <PlusIcon />
       </Button>
     </Card>
   );
