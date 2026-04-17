@@ -178,7 +178,6 @@ export default function ShoppingCartList() {
                   <p className="text-muted-foreground text-xs">includes Moms</p>
                 </div>
               </div>
-              <Link href="/confirmation">
               <Link href="/delivery">
                 <Button
                   size="lg"
