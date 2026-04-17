@@ -12,10 +12,10 @@ export default async function AdminPage() {
   return (
     <main className="grid">
       <p className="text-3xl font-bold m-10 text-center">Our products</p>
-      <section className="grid gap-6 ml-4 mr-4 sm:grid-cols-2 xl:grid-cols-3">
+      <section className="grid gap-4 px-4 sm:grid-cols-2 xl:grid-cols-3">
         <Dialog>
           <div className="flex gap-6 items-center p-4 border rounded-xl w-full hover:bg-muted/50 transition">
-            <div className="w-24 h-28 rounded-xl border-2 border-dashed flex items-center justify-center text-sm text-muted-foreground shrink-0">
+            <div className="w-24 h-28 rounded-xl border-2 border-dashed flex items-center justify-center text-sm text-muted-foreground">
               Image
             </div>
 
@@ -90,18 +90,21 @@ export default async function AdminPage() {
             </form>
           </DialogContent>
         </Dialog>
+
         {products.map((product) => (
-          <article key={product.id} className="flex gap-6 items-center p-4 border rounded-xl">
+          <article key={product.id} data-cy="product" className="flex flex-wrap gap-2 px-2 py-4 border rounded-xl">
             <img
-              className="object-cover rounded-lg w-24 h-28 shrink-0"
+              className="object-cover rounded-lg w-24 h-28"
               src={product.image}
               alt={product.title}
             />
 
-            <div className="flex flex-col gap-2">
-              <div>
-                <p className="font-bold text-sm">{product.title}</p>
-                <p className="text-sm">{product.price}kr</p>
+            <div className="flex flex-col">
+              <div className="pl-2 pb-2">
+                <p data-cy="product-id" className="font-bold text-sm pb-2">{product.articleNumber}</p>
+                <p data-cy="product-title" className="font-bold text-sm pb-2">{product.title}</p>
+                <p data-cy="product-price" className="text-sm pb-2">{product.price}kr</p>
+                <p data-cy="product-description" className="text-sm max-w-xs pb-2">{product.description}</p>
               </div>
 
               <ButtonGroup>
