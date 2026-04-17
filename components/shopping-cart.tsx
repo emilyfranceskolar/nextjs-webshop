@@ -178,15 +178,16 @@ export default function ShoppingCartList() {
                   <p className="text-muted-foreground text-xs">includes Moms</p>
                 </div>
               </div>
-
-              <Button
-                size="lg"
-                className="h-10 px-8 mt-4 w-full cursor-pointer text-base font-medium"
-                disabled={items.length === 0}
-              >
-                <FiShoppingBag />
-                Proceed to Checkout
-              </Button>
+              <Link href="/delivery">
+                <Button
+                  size="lg"
+                  className="h-10 px-8 mt-4 w-full cursor-pointer text-base font-medium"
+                  disabled={items.length === 0}
+                >
+                  <FiShoppingBag />
+                  Proceed to Checkout
+                </Button>
+              </Link>
             </CardContent>
           </Card>
         </div>
