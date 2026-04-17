@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { Metadata } from "next/types";
 import { PropsWithChildren } from "react";
 // import { FiShoppingCart } from "react-icons/fi";
+import { Toaster } from "@/components/ui/sonner";
 import "./global.css";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         </header>
         <main className="flex-1">{children}</main>
         <Footer />
+        <Toaster />
       </body>
     </html>
   );

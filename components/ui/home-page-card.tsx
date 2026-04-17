@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { useCart } from "@/hooks/use-cart";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
+import { toast } from "sonner";
 
 export interface HomePageCardProps {
   id: string;
@@ -39,6 +40,10 @@ export default function HomePageCard({
       category,
       description,
     });
+    toast.success(`${title} added to cart!`, {
+      duration: 2000,
+      position: "top-right",
+    });
   };
 
   return (
@@ -59,7 +64,6 @@ export default function HomePageCard({
       >
         {price}kr
       </p>
-
       <Button
         onClick={handleAddToCart}
         data-cy="product-buy-button"
