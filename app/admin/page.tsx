@@ -22,18 +22,17 @@ export default async function AdminPage() {
       <p className="text-3xl font-bold m-10 text-center">Our products</p>
       <section className="grid gap-4 items-stretch px-4 sm:grid-cols-2 xl:grid-cols-3">
         <Link href="/admin/new">
-          <div className="flex gap-6 items-center p-4 border rounded-xl w-full hover:bg-muted/50 transition h-full">
+          <div className="flex gap-2 px-2 py-2 border rounded-xl w-full hover:bg-muted/50 transition h-full">
             <div className="w-24 h-28 rounded-lg border-2 border-dashed flex items-center justify-center text-sm text-muted-foreground">
               Image
             </div>
 
-            <div className="flex flex-wrap gap-2 px-2 py-4 rounded-xl h-full">
-              <div className="gap-2 px-2 py-4">
-                <p className="font-semibold text-lg text-zinc-700">
-                  New product
-                </p>
-                <p className="text-zinc-600">0 kr</p>
-                <p className="text-zinc-600 text-sm">No description</p>
+            <div className="flex flex-col gap-2 px-2 py-4 rounded-xl h-full">
+              <div className="pl-2 pb-2">
+                <p data-cy="product-id" className="font-bold text-sm text-stone-600 pb-2">New Product</p>
+                <p data-cy="product-title" className="font-bold text-sm pb-2 text-stone-600">Title</p>
+                <p data-cy="product-price" className="text-sm pb-2 text-stone-600">0kr</p>
+                <p data-cy="product-description" className="text-sm max-w-xs pb-6 text-stone-600">No description</p>
               </div>
               <Button variant="outline">
                 <Plus className="mr-2 h-4 w-4" />
@@ -71,12 +70,12 @@ export default async function AdminPage() {
                   </DialogTrigger>
                 </div>
 
-                <DialogContent>
+                <DialogContent className="sm:max-w-200">
                   <form action={deleteProduct}>
                     <input type="hidden" name="id" value={product.id} />
 
                     <DialogHeader>
-                      <DialogTitle>Are you sure you want to delete the product?</DialogTitle>
+                      <DialogTitle className="p-6 whitespace-nowrap">Are you sure you want to delete the product?</DialogTitle>
                     </DialogHeader>
 
                     <DialogFooter>
