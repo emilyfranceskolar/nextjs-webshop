@@ -179,6 +179,7 @@ export default function ShoppingCartList() {
                 </div>
               </div>
               <Link href="/confirmation">
+              <Link href="/delivery">
                 <Button
                   size="lg"
                   className="h-10 px-8 mt-4 w-full cursor-pointer text-base font-medium"
