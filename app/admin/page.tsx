@@ -1,11 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Field, FieldGroup } from "@/components/ui/field";
-import { Label } from "@/components/ui/label";
 import { db } from "@/prisma/db";
-import { Input } from "@base-ui/react";
+
 import { Plus } from "lucide-react";
+import { revalidatePath } from "next/cache";
+import Link from "next/link";
+
+async function deleteProduct(formData: FormData) {
+  "use server"
+
+  const id = formData.get("id") as string
+  await db.product.delete({ where: { id } })
+  revalidatePath("/admin")
+}
 
 export default async function AdminPage() {
   const products = await db.product.findMany({});
@@ -13,7 +21,7 @@ export default async function AdminPage() {
     <main className="grid">
       <p className="text-3xl font-bold m-10 text-center">Our products</p>
       <section className="grid gap-4 px-4 sm:grid-cols-2 xl:grid-cols-3">
-        <Dialog>
+        <Link href="/admin/new">
           <div className="flex gap-6 items-center p-4 border rounded-xl w-full hover:bg-muted/50 transition">
             <div className="w-24 h-28 rounded-xl border-2 border-dashed flex items-center justify-center text-sm text-muted-foreground">
               Image
@@ -26,70 +34,13 @@ export default async function AdminPage() {
                 </p>
                 <p className="text-zinc-600">0 kr</p>
               </div>
-
-              <DialogTrigger asChild>
-                <Button variant="outline">
-                  <Plus className="mr-2 h-4 w-4" />
-                  Add new product
-                </Button>
-              </DialogTrigger>
+              <Button variant="outline">
+                <Plus className="mr-2 h-4 w-4" />
+                Add new product
+              </Button>
             </div>
           </div>
-
-          <DialogContent className="sm:max-w-sm">
-            <DialogHeader>
-              <DialogTitle className="font-extrabold">
-                Add more products?
-              </DialogTitle>
-              <DialogDescription>
-                Information about your product
-              </DialogDescription>
-            </DialogHeader>
-
-            <form className="grid gap-4">
-              <FieldGroup>
-                <Field>
-                  <Label className="font-bold">Title</Label>
-                  <Input className="p-2 outline rounded-sm" />
-                </Field>
-
-                <Field>
-                  <Label className="font-bold">Category</Label>
-                  <Input className="p-2 outline rounded-sm" />
-                </Field>
-
-                <Field>
-                  <Label className="font-bold">Description</Label>
-                  <Input className="p-2 outline rounded-sm" />
-                </Field>
-
-                <Field>
-                  <Label className="font-bold">Image</Label>
-                  <Input className="p-2 outline rounded-sm" />
-                </Field>
-
-                <Field>
-                  <Label className="font-bold">Price</Label>
-                  <Input className="p-2 outline rounded-sm" />
-                </Field>
-
-                <Field>
-                  <Label className="font-bold">Article Number</Label>
-                  <Input className="p-2 outline rounded-sm" />
-                </Field>
-              </FieldGroup>
-
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button variant="outline">Cancel</Button>
-                </DialogClose>
-                <Button type="submit" data-cy="admin-add-product" className="hover:bg-green-700">
-                  Add
-                </Button>
-              </DialogFooter>
-            </form>
-          </DialogContent>
-        </Dialog>
+        </Link>
 
         {products.map((product) => (
           <article key={product.id} data-cy="product" className="flex flex-wrap gap-2 px-2 py-4 border rounded-xl">
@@ -108,32 +59,36 @@ export default async function AdminPage() {
               </div>
 
               <Dialog>
-
-                <ButtonGroup>
-                  <DialogTrigger asChild>
+                <div className="flex gap-2">
+                  <Link href={`/admin/edit/${product.id}`}>
                     <Button variant="outline" data-cy="admin-edit-product">Edit product</Button>
-                  </DialogTrigger>
+                  </Link>
+
                   <DialogTrigger asChild>
                     <Button variant="outline" data-cy="admin-remove-product" className="hover:bg-red-200">Delete product
                     </Button>
                   </DialogTrigger>
-                </ButtonGroup>
-                
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Are you sure you want to delete the product?</DialogTitle>
-                  </DialogHeader>
-                  <DialogFooter>
-                    <DialogClose asChild>
-                      <Button variant="outline">No</Button>
-                    </DialogClose>
+                </div>
 
-                    <DialogClose asChild>
+                <DialogContent>
+                  <form action={deleteProduct}>
+                    <input type="hidden" name="id" value={product.id} />
+
+                    <DialogHeader>
+                      <DialogTitle>Are you sure you want to delete the product?</DialogTitle>
+                    </DialogHeader>
+
+                    <DialogFooter>
+                      <DialogClose asChild>
+                        <Button variant="outline">No</Button>
+                      </DialogClose>
+
                       <Button type="submit" data-cy="confirm-delete-button" className="">
                         Yes
                       </Button>
-                    </DialogClose>
-                  </DialogFooter>
+
+                    </DialogFooter>
+                  </form>
                 </DialogContent>
               </Dialog>
             </div>
