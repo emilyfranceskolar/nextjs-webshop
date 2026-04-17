@@ -71,7 +71,7 @@ export default function ShoppingCartList() {
                 <p className="text-muted-foreground mt-1 text-sm">
                   Add some items to get started
                 </p>
-                <Link href="/products">
+                <Link href="/product">
                   <Button
                     className="h-9 px-4 py-2 mt-4 cursor-pointer"
                     variant="outline"
@@ -121,7 +121,7 @@ export default function ShoppingCartList() {
                           size="icon"
                           className="size-8 cursor-pointer"
                           onClick={() => updateQuantity(item.id, false)}
-                          // disabled={item.quantity <= 1}
+                          disabled={item.quantity <= 1}
                         >
                           <FiMinusCircle />
                         </Button>
@@ -178,6 +178,7 @@ export default function ShoppingCartList() {
                   <p className="text-muted-foreground text-xs">includes Moms</p>
                 </div>
               </div>
+              <Link href="/confirmation">
               <Link href="/delivery">
                 <Button
                   size="lg"
