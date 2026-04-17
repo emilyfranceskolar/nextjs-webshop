@@ -41,7 +41,7 @@ export default function HomePageCard({
       description,
     });
     toast.success(`${title} added to cart!`, {
-      duration: 2000,
+      duration: 3000,
       position: "top-right",
     });
   };
