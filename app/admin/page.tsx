@@ -30,7 +30,7 @@ export default async function AdminPage() {
               <DialogTrigger asChild>
                 <Button variant="outline">
                   <Plus className="mr-2 h-4 w-4" />
-                  Add product
+                  Add new product
                 </Button>
               </DialogTrigger>
             </div>
@@ -83,7 +83,7 @@ export default async function AdminPage() {
                 <DialogClose asChild>
                   <Button variant="outline">Cancel</Button>
                 </DialogClose>
-                <Button type="submit" className="hover:bg-green-700">
+                <Button type="submit" data-cy="admin-add-product" className="hover:bg-green-700">
                   Add
                 </Button>
               </DialogFooter>
@@ -107,12 +107,35 @@ export default async function AdminPage() {
                 <p data-cy="product-description" className="text-sm max-w-xs pb-2">{product.description}</p>
               </div>
 
-              <ButtonGroup>
-                <Button variant="outline">Edit product</Button>
-                <Button variant="outline" className="hover:bg-red-200">
-                  Delete product
-                </Button>
-              </ButtonGroup>
+              <Dialog>
+
+                <ButtonGroup>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" data-cy="admin-edit-product">Edit product</Button>
+                  </DialogTrigger>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" data-cy="admin-remove-product" className="hover:bg-red-200">Delete product
+                    </Button>
+                  </DialogTrigger>
+                </ButtonGroup>
+                
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Are you sure you want to delete the product?</DialogTitle>
+                  </DialogHeader>
+                  <DialogFooter>
+                    <DialogClose asChild>
+                      <Button variant="outline">No</Button>
+                    </DialogClose>
+
+                    <DialogClose asChild>
+                      <Button type="submit" data-cy="confirm-delete-button" className="">
+                        Yes
+                      </Button>
+                    </DialogClose>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
             </div>
           </article>
         ))}
