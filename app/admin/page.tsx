@@ -5,7 +5,7 @@ import { db } from "@/prisma/db";
 import { Plus } from "lucide-react";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
-import NewProductPage from "./new/page";
+import NewProductPage from "./product/new/page";
 
 async function deleteProduct(formData: FormData) {
   "use server"
@@ -21,8 +21,8 @@ export default async function AdminPage() {
     <main className="grid">
       <p className="text-3xl font-bold m-10 text-center">Our products</p>
       <section className="grid gap-4 items-stretch px-4 sm:grid-cols-2 xl:grid-cols-3">
-       
-        <Link href="/admin/new">
+
+        <Link href="/admin/product/new">
           <div className="flex gap-6 items-center p-4 border rounded-xl w-full hover:bg-muted/50 transition h-full">
             <div className="w-24 h-28 rounded-lg border-2 border-dashed flex items-center justify-center text-sm text-muted-foreground">
               Image
@@ -35,7 +35,7 @@ export default async function AdminPage() {
                 <p className="text-zinc-600">0 kr</p>
                 <p className="text-zinc-600 text-sm">No description</p>
               </div>
-              <Button variant="outline">
+              <Button data-cy="admin-add-product" variant="outline">
                 <Plus className="mr-2 h-4 w-4" />
                 Add new product
               </Button>
