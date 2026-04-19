@@ -2,10 +2,10 @@ import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { db } from "@/prisma/db";
-
 import { Plus } from "lucide-react";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
+import NewProductPage from "./product/new/page";
 
 async function deleteProduct(formData: FormData) {
   "use server"
@@ -21,7 +21,7 @@ export default async function AdminPage() {
     <main className="grid">
       <p className="text-3xl font-bold m-10 text-center">Our products</p>
       <section className="grid gap-4 items-stretch px-4 sm:grid-cols-2 xl:grid-cols-3">
-        <Link href="/admin/new">
+        <Link href="/admin/product/new">
           <div className="flex gap-2 px-2 py-2 border rounded-xl w-full hover:bg-muted/50 transition h-full">
             <div className="w-24 h-28 rounded-lg border-2 border-dashed flex items-center justify-center text-sm text-muted-foreground">
               Image
@@ -34,7 +34,7 @@ export default async function AdminPage() {
                 <p data-cy="product-price" className="text-sm pb-2 text-stone-600">0kr</p>
                 <p data-cy="product-description" className="text-sm max-w-xs pb-6 text-stone-600">No description</p>
               </div>
-              <Button variant="outline">
+              <Button data-cy="admin-add-product" variant="outline">
                 <Plus className="mr-2 h-4 w-4" />
                 Add new product
               </Button>
@@ -60,7 +60,7 @@ export default async function AdminPage() {
 
               <Dialog>
                 <div className="flex gap-2">
-                  <Link href={`/admin/edit/${product.id}`}>
+                  <Link href={`/admin/product/${product.id}`}>
                     <Button variant="outline" data-cy="admin-edit-product">Edit product</Button>
                   </Link>
 

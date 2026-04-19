@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 /* Beskriv din hemsida för sökmotorerna */
 export const metadata: Metadata = {
-  title: "Webbshoppen",
+  title: "Worn Stories",
   description: "Dina favoritprodukter online till en bra pris...",
 };
 
@@ -39,10 +39,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
             >
               Admin
             </Link>
-            <Link 
+            <Link
               className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
               href="/cart"
-            > 
+            >
               Cart
             </Link>
           </nav>
