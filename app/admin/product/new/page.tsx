@@ -7,8 +7,6 @@ import { db } from "@/prisma/db";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/dist/server/api-utils";
 
-
-
 async function createNewProduct(formData: FormData) {
   "use server"
 

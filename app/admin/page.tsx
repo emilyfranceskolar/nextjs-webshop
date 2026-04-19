@@ -61,7 +61,7 @@ export default async function AdminPage() {
 
               <Dialog>
                 <div className="flex gap-2">
-                  <Link href={`/admin/edit/${product.id}`}>
+                  <Link href={`/admin/product/${product.id}`}>
                     <Button variant="outline" data-cy="admin-edit-product">Edit product</Button>
                   </Link>
 
