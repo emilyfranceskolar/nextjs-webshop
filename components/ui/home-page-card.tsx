@@ -4,7 +4,7 @@ import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 import { ProductCardProps } from "./product-page-card";
 
-export interface HomePageCardProps extends ProductCardProps {}
+export interface HomePageCardProps extends ProductCardProps { }
 
 export default function HomePageCard({
   title,
