@@ -20,7 +20,7 @@ export default async function AdminPage() {
   return (
     <main className="grid">
       <p className="text-3xl font-bold m-10 text-center">Our products</p>
-      <section className="grid gap-4 items-stretch px-4 sm:grid-cols-2 xl:grid-cols-3">
+      <section className="grid gap-4 items-stretch px-4 py-4 sm:grid-cols-2 xl:grid-cols-3">
 
         <Link href="/admin/product/new">
           <div className="flex gap-6 items-center p-4 border rounded-xl w-full hover:bg-muted/50 transition h-full">
