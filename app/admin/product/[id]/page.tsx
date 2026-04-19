@@ -37,7 +37,7 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
     return (
         <main className="min-h-screen grid bg-muted/30 md:grid-cols-2">
             <div className="flex justify-center items-center space-y-4 text-stone-800 bg-white">
-                <form action={editProduct} className=" w-full max-w-md">
+                <form action={editProduct} data-cy="product-form" className=" w-full max-w-md">
                     <FieldGroup>
                         <div>
                             <FieldLegend className="text-2xl font-bold text-zinc-800">Edit your product?</FieldLegend>
@@ -49,7 +49,7 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
 
                         <Field className="space-y-1">
                             <Label className="font-medium text-sm text-zinc-700">Title</Label>
-                            <Input name="title" defaultValue={product?.title} className="outline rounded-sm p-2 border focus:ring-2 focus:ring-red-600" />
+                            <Input data-cy="product-title" name="title" defaultValue={product?.title} className="outline rounded-sm p-2 border focus:ring-2 focus:ring-red-600" />
                         </Field>
 
                         <Field className="space-y-1">
@@ -59,22 +59,22 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
 
                         <Field className="space-y-1">
                             <Label className="font-medium text-sm text-zinc-700">Description</Label>
-                            <Input name="description" defaultValue={product?.description} className="outline rounded-sm" />
+                            <Input data-cy="product-description" name="description" defaultValue={product?.description} className="outline rounded-sm" />
                         </Field>
 
                         <Field className="space-y-1">
                             <Label className="font-medium text-sm text-zinc-700">Image</Label>
-                            <Input name="image" defaultValue={product?.image} className="outline rounded-sm" />
+                            <Input data-cy="product-image" name="image" defaultValue={product?.image} className="outline rounded-sm" />
                         </Field>
 
                         <Field className="space-y-1">
                             <Label className="font-medium text-sm text-zinc-700">Price</Label>
-                            <Input name="price" defaultValue={product?.price} className="outline rounded-sm" />
+                            <Input data-cy="product-price" name="price" defaultValue={product?.price} className="outline rounded-sm" />
                         </Field>
 
                         <Field className="space-y-1">
                             <Label className="font-medium text-sm text-zinc-700">Article Number</Label>
-                            <Input name="articleNumber" defaultValue={product?.articleNumber} className="outline rounded-sm" />
+                            <Input data-cy="product-id" name="articleNumber" defaultValue={product?.articleNumber} className="outline rounded-sm" />
                         </Field>
                     </FieldGroup>
 
