@@ -15,7 +15,7 @@ export default async function Home() {
 
   return (
     <main className="grid gap-8 place-items-center">
-      <section className="relative w-full">
+      <section className="relative w-full overflow-hidden">
         <h1 className="absolute flex justify-center w-full text-center text-[8rem] font-bold text-white top-15">
           Every Item <br />
           Tells A Story
