@@ -19,7 +19,7 @@ async function createNewProduct(formData: FormData) {
 
   await db.product.create({
     data: {
-      title, price, description, image, slug, articleNumber: Math.floor(Math.random() * 10000).toString(),
+      title, price, description, image, slug, articleNumber: Math.floor(Math.random() * 10000),
 
     },
   });
