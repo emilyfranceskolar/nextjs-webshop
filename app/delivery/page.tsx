@@ -1,4 +1,8 @@
 "use client";
+
+import { PaymentForm } from "@/components/payment-form";
+import { PopoverPhone } from "@/components/popover-info";
+import { SelectCountry } from "@/components/select-country";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Field,
@@ -12,66 +16,105 @@ import { Separator } from "@/components/ui/separator";
 
 export default function DeliveryPage() {
   return (
-    <main className="grid grid-cols-[1fr_auto_1fr] gap-4 m-8">
-      <div className="grid gap-8 w-full max-w-lg">
-        <section>
-          <Field>
-            <FieldLegend className="text-4xl">Contact</FieldLegend>
-            <Input
-              id="input-field-username"
-              type="text"
-              placeholder="Email"
-              className="h-10 p-4"
-            />
-            <Field orientation="horizontal">
-              <Checkbox id="terms-checkbox" name="terms-checkbox" />
-              <Label htmlFor="email-checkbox">
-                Email me with news and offers
-              </Label>
+    <main className="grid grid-cols-[1fr_auto_1fr] gap-4 place-items-end">
+      <div className="grid gap-4 w-full max-w-lg m-8">
+        <div className="grid gap-8 mt-4 rounded-lg border p-8">
+          <section>
+            <Field>
+              <FieldLegend className="text-4xl">Contact</FieldLegend>
+              <Input
+                id="input-field-username"
+                type="text"
+                placeholder="Email"
+                className="h-10 p-4"
+                autoComplete="on"
+              />
+              <Field orientation="horizontal" className="m-2">
+                <Checkbox id="terms-checkbox" name="terms-checkbox" />
+                <Label htmlFor="email-checkbox">
+                  Email me with news and offers
+                </Label>
+              </Field>
             </Field>
-          </Field>
-        </section>
-        <section>
-          <FieldSet className="w-full">
-            <FieldLegend>Delivery</FieldLegend>
-            <FieldGroup>
-              <div className="grid grid-cols-2 gap-4">
+          </section>
+          <section>
+            <FieldSet className="w-full">
+              <FieldLegend>Delivery</FieldLegend>
+              <SelectCountry />
+              <FieldGroup>
+                <div className="grid grid-cols-2 gap-4">
+                  <Field>
+                    <Input
+                      id="first-name"
+                      type="text"
+                      placeholder="First Name"
+                      autoComplete="on"
+                    />
+                  </Field>
+                  <Field>
+                    <Input
+                      id="last-name"
+                      type="text"
+                      placeholder="Last Name"
+                      autoComplete="on"
+                    />
+                  </Field>
+                </div>
                 <Field>
-                  <Input id="first-name" type="text" placeholder="First Name" />
+                  <Input
+                    id="address"
+                    type="text"
+                    placeholder="Address"
+                    autoComplete="on"
+                  />
                 </Field>
                 <Field>
-                  <Input id="last-name" type="text" placeholder="Last Name" />
+                  <Input
+                    id="address"
+                    type="text"
+                    placeholder="Apartment, suite, etc. (optional)"
+                    autoComplete="on"
+                  />
                 </Field>
-              </div>
-              <Field>
-                <Input id="address" type="text" placeholder="Address" />
-              </Field>
-              <Field>
-                <Input
-                  id="address"
-                  type="text"
-                  placeholder="Apartment, suite, etc. (optional)"
-                />
-              </Field>
-              <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <Field>
+                    <Input
+                      id="city"
+                      type="text"
+                      placeholder="City"
+                      autoComplete="on"
+                    />
+                  </Field>
+                  <Field>
+                    <Input
+                      id="zip"
+                      type="text"
+                      placeholder="Postal Code"
+                      autoComplete="on"
+                    />
+                  </Field>
+                </div>
                 <Field>
-                  <Input id="city" type="text" placeholder="City" />
+                  <div className="relative">
+                    <Input
+                      id="phone-nr"
+                      type="text"
+                      placeholder="Phone number"
+                      autoComplete="on"
+                    />
+                    <PopoverPhone />
+                  </div>
                 </Field>
-                <Field>
-                  <Input id="zip" type="text" placeholder="Postal Code" />
-                </Field>
-              </div>
-              <Field>
-                <Input id="address" type="text" placeholder="Phone number" />
-              </Field>
-            </FieldGroup>
-          </FieldSet>
-        </section>
+              </FieldGroup>
+            </FieldSet>
+          </section>
+        </div>
+        <PaymentForm />
         <button className="bg-black text-white p-2 rounded-lg font-medium cursor-pointer">
           Pay now
         </button>
       </div>
-      <Separator orientation="vertical" className="self-stretch mx-auto" />
+      <Separator orientation="vertical" className="max-w-lg" />
       <p>Order information</p>
     </main>
   );
