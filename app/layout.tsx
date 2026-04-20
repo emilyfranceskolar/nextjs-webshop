@@ -50,7 +50,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         </header>
         <main className="flex-1">{children}</main>
         <Footer />
-        <Toaster />
+        <Toaster data-cy="toast" />
       </body>
     </html>
   );
