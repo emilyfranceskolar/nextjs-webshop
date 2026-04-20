@@ -8,7 +8,7 @@ import AddToCartButton from "../add-to-cart-button";
 export interface HomePageCardProps {
   id: string;
   title: string;
-  articleNumber: string;
+  articleNumber: number;
   image: string;
   price: number;
   slug: string;

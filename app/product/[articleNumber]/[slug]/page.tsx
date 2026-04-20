@@ -7,7 +7,7 @@ export default async function ProductDetailPage({
 }: {
   params: Promise<{ articleNumber: string; slug: string }>;
 }) {
-  const { articleNumber, slug } = await params;
+  const { slug } = await params;
   const product = await db.product.findUnique({ where: { slug } });
 
   if (!product) {
