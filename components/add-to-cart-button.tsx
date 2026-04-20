@@ -10,7 +10,6 @@ interface AddToCartButtonProps extends HomePageCardProps {
   variant?: "default" | "outline";
   size?: "icon" | "lg" | null;
   className: string;
-  dataCy: string;
 }
 
 export default function AddToCartButton({
@@ -26,7 +25,6 @@ export default function AddToCartButton({
   variant,
   size,
   className,
-  dataCy = "add-to-cart-button",
 }: HomePageCardProps & AddToCartButtonProps) {
   const { addToCart } = useCart();
 
@@ -51,8 +49,8 @@ export default function AddToCartButton({
       className={className}
       variant={variant}
       size={size}
-      data-cy={dataCy}
       onClick={handleAddToCart}
+      data-cy="product-buy-button"
     >
       <PlusIcon />
       {buttonText}

@@ -76,7 +76,6 @@ export default function HomePageCard({
         variant="outline"
         size="icon"
         className="absolute top-2 right-2 p-4.5 sm:p-3 hover:cursor-pointer"
-        dataCy="add-to-cart-button"
       />
     </Card>
   );
