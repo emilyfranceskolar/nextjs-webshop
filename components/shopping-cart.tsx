@@ -75,7 +75,7 @@ export default function ShoppingCartList() {
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="h-36 w-full object-cover object-center"
+                      className="w-full object-cover"
                     />
                   </div>
 
