@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
+import AddToCartButton from "../add-to-cart-button";
 
 export interface ProductCardProps {
   title: string;
@@ -38,19 +39,20 @@ export default function ProductCard({
             View Details
           </Button>
         </Link>
-        <Button
-          asChild
-          variant="default"
+
+        <AddToCartButton
+          id={articleNumber}
+          title={title}
+          articleNumber={articleNumber}
+          image={imageUrl}
+          price={price}
+          slug={slug}
+          category={null}
+          description={""}
           size="lg"
-          className="flex-1 !bg-black !text-white"
-        >
-          <Link
-            data-cy="product-buy-button"
-            href="/cart" //ändra länken sen
-          >
-            Add to Cart
-          </Link>
-        </Button>
+          buttonText="Add to Cart"
+          className="flex-1 bg-black! text-white! hover:cursor-pointer"
+        />
       </CardFooter>
     </Card>
   );

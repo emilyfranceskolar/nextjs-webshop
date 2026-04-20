@@ -1,18 +1,52 @@
-import { Button } from "@/components/ui/button";
+"use client";
 import { Card } from "@/components/ui/card";
-import { PlusIcon } from "lucide-react";
+import { useCart } from "@/hooks/use-cart";
 import Link from "next/link";
-import { ProductCardProps } from "./product-page-card";
+import { toast } from "sonner";
+import AddToCartButton from "../add-to-cart-button";
+import { Button } from "./button";
+import { PlusIcon } from "lucide-react";
 
-export interface HomePageCardProps extends ProductCardProps { }
+export interface HomePageCardProps {
+  id: string;
+  title: string;
+  articleNumber: number;
+  imageUrl: string;
+  price: number;
+  slug: string;
+  category: string | null;
+  description: string;
+}
 
 export default function HomePageCard({
+  id,
   title,
   articleNumber,
   imageUrl,
   price,
   slug,
+  category,
+  description,
 }: HomePageCardProps) {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart({
+      id,
+      title,
+      articleNumber,
+      image,
+      price,
+      slug,
+      category,
+      description,
+    });
+    toast.success(`${title} added to cart!`, {
+      duration: 3000,
+      position: "top-right",
+    });
+  };
+
   return (
     <Card data-cy="product" className="p-0 relative">
       <Link href={`/product/${articleNumber}/${slug}`} className="block">
@@ -46,6 +80,19 @@ export default function HomePageCard({
           <PlusIcon />
         </Button>
       </Link>
-    </Card >
+      <AddToCartButton
+        id={id}
+        title={title}
+        articleNumber={articleNumber}
+        imageUrl={imageUrl}
+        price={price}
+        slug={slug}
+        category={category}
+        description={description}
+        buttonText=""
+        variant="outline"
+        size="icon"
+        className="absolute top-2 right-2 p-4.5 sm:p-3 hover:cursor-pointer" />
+    </Card>
   );
 }
