@@ -17,7 +17,7 @@ export const products: Product[] = [
     id: "1",
     slug: "top-1",
     category: "Tops",
-    articleNumber: "112",
+    articleNumber: 112,
     image: "/assets/images/top-1.jpg",
     title: "Vintage T-shirt",
     description:
@@ -28,7 +28,7 @@ export const products: Product[] = [
     id: "2",
     slug: "top-2",
     category: "Tops",
-    articleNumber: "113",
+    articleNumber: 113,
     image: "/assets/images/top-2.jpg",
     title: "Vintage T-shirt",
     description:
@@ -39,7 +39,7 @@ export const products: Product[] = [
     id: "3",
     slug: "top-3",
     category: "Tops",
-    articleNumber: "114",
+    articleNumber: 114,
     image: "/assets/images/top-3.jpg",
     title: "Vintage T-shirt",
     description:
@@ -50,7 +50,7 @@ export const products: Product[] = [
     id: "4",
     slug: "top-4",
     category: "Tops",
-    articleNumber: "115",
+    articleNumber: 115,
     image: "/assets/images/top-4.jpg",
     title: "Vintage T-shirt",
     description:
@@ -61,7 +61,7 @@ export const products: Product[] = [
     id: "5",
     slug: "top-5",
     category: "Tops",
-    articleNumber: "116",
+    articleNumber: 116,
     image: "/assets/images/top-5.jpg",
     title: "Vintage T-shirt",
     description:
@@ -72,7 +72,7 @@ export const products: Product[] = [
     id: "6",
     slug: "top-6",
     category: "Tops",
-    articleNumber: "117",
+    articleNumber: 117,
     image: "/assets/images/top-6.jpg",
     title: "Vintage T-shirt",
     description:
@@ -83,7 +83,7 @@ export const products: Product[] = [
     id: "7",
     slug: "top-7",
     category: "Tops",
-    articleNumber: "118",
+    articleNumber: 118,
     image: "/assets/images/top-7.jpg",
     title: "Vintage T-shirt",
     description:
@@ -94,7 +94,7 @@ export const products: Product[] = [
     id: "8",
     slug: "top-8",
     category: "Tops",
-    articleNumber: "119",
+    articleNumber: 119,
     image: "/assets/images/top-8.jpg",
     title: "Vintage T-shirt",
     description:
@@ -105,7 +105,7 @@ export const products: Product[] = [
     id: "9",
     slug: "bottom-1",
     category: "Bottoms",
-    articleNumber: "889",
+    articleNumber: 889,
     image: "/assets/images/bottom-1.jpg",
     title: "Vintage Jeans",
     description:
@@ -116,7 +116,7 @@ export const products: Product[] = [
     id: "10",
     slug: "bottom-2",
     category: "Bottoms",
-    articleNumber: "890",
+    articleNumber: 890,
     image: "/assets/images/bottom-2.jpg",
     title: "Vintage Sweatpants",
     description:
@@ -127,7 +127,7 @@ export const products: Product[] = [
     id: "11",
     slug: "bottom-3",
     category: "Bottoms",
-    articleNumber: "891",
+    articleNumber: 891,
     image: "/assets/images/bottom-3.jpg",
     title: "Vintage Shorts",
     description:
@@ -138,7 +138,7 @@ export const products: Product[] = [
     id: "12",
     slug: "bottom-4",
     category: "Bottoms",
-    articleNumber: "892",
+    articleNumber: 892,
     image: "/assets/images/bottom-4.jpg",
     title: "Vintage Cargo Pants",
     description:
@@ -149,7 +149,7 @@ export const products: Product[] = [
     id: "13",
     slug: "bottom-5",
     category: "Bottoms",
-    articleNumber: "893",
+    articleNumber: 893,
     image: "/assets/images/bottom-5.jpg",
     title: "Vintage Denim Shorts",
     description:
@@ -160,7 +160,7 @@ export const products: Product[] = [
     id: "14",
     slug: "bottom-6",
     category: "Bottoms",
-    articleNumber: "894",
+    articleNumber: 894,
     image: "/assets/images/bottom-6.jpg",
     title: "Vintage Joggers",
     description:
@@ -171,7 +171,7 @@ export const products: Product[] = [
     id: "15",
     slug: "bottom-7",
     category: "Bottoms",
-    articleNumber: "895",
+    articleNumber: 895,
     image: "/assets/images/bottom-7.jpg",
     title: "Vintage Linen Pants",
     description:
@@ -182,7 +182,7 @@ export const products: Product[] = [
     id: "16",
     slug: "bottom-8",
     category: "Bottoms",
-    articleNumber: "896",
+    articleNumber: 896,
     image: "/assets/images/bottom-8.jpg",
     title: "Vintage Corduroy Pants",
     description:
@@ -193,7 +193,7 @@ export const products: Product[] = [
     id: "17",
     slug: "shoe-1",
     category: "Shoes",
-    articleNumber: "897",
+    articleNumber: 897,
     image: "/assets/images/shoe-1.jpg",
     title: "Vintage Sneakers",
     description:
@@ -204,7 +204,7 @@ export const products: Product[] = [
     id: "18",
     slug: "shoe-2",
     category: "Shoes",
-    articleNumber: "898",
+    articleNumber: 898,
     image: "/assets/images/shoe-2.jpg",
     title: "Vintage Leather Boots",
     description:
@@ -215,7 +215,7 @@ export const products: Product[] = [
     id: "19",
     slug: "shoe-3",
     category: "Shoes",
-    articleNumber: "899",
+    articleNumber: 899,
     image: "/assets/images/shoe-3.jpg",
     title: "Vintage Canvas Shoes",
     description:
@@ -226,7 +226,7 @@ export const products: Product[] = [
     id: "20",
     slug: "shoe4",
     category: "Shoes",
-    articleNumber: "900",
+    articleNumber: 900,
     image: "/assets/images/shoe-4.jpg",
     title: "Vintage Running Shoes",
     description:
@@ -237,7 +237,7 @@ export const products: Product[] = [
     id: "21",
     slug: "shoe5",
     category: "Shoes",
-    articleNumber: "901",
+    articleNumber: 901,
     image: "/assets/images/shoe-5.jpg",
     title: "Vintage Loafers",
     description:
@@ -248,7 +248,7 @@ export const products: Product[] = [
     id: "22",
     slug: "shoe6",
     category: "Shoes",
-    articleNumber: "902",
+    articleNumber: 902,
     image: "/assets/images/shoe-6.jpg",
     title: "Vintage Sandals",
     description:
@@ -259,7 +259,7 @@ export const products: Product[] = [
     id: "23",
     slug: "shoe7",
     category: "Shoes",
-    articleNumber: "903",
+    articleNumber: 903,
     image: "/assets/images/shoe-7.jpg",
     title: "Vintage High-Tops",
     description:
@@ -270,7 +270,7 @@ export const products: Product[] = [
     id: "24",
     slug: "shoe8",
     category: "Shoes",
-    articleNumber: "904",
+    articleNumber: 904,
     image: "/assets/images/shoe-8.jpg",
     title: "Vintage Suede Shoes",
     description:
@@ -282,7 +282,7 @@ export const products: Product[] = [
     id: "25",
     slug: "accessory-1",
     category: "Accessories",
-    articleNumber: "905",
+    articleNumber: 905,
     image: "/assets/images/accessory-1.jpg",
     title: "Vintage Cap",
     description:
@@ -293,7 +293,7 @@ export const products: Product[] = [
     id: "26",
     slug: "accessory-2",
     category: "Accessories",
-    articleNumber: "906",
+    articleNumber: 906,
     image: "/assets/images/accessory-2.jpg",
     title: "Vintage Beanie",
     description:
@@ -304,7 +304,7 @@ export const products: Product[] = [
     id: "27",
     slug: "accessory-3",
     category: "Accessories",
-    articleNumber: "907",
+    articleNumber: 907,
     image: "/assets/images/accessory-3.jpg",
     title: "Vintage Sunglasses",
     description:
@@ -315,7 +315,7 @@ export const products: Product[] = [
     id: "28",
     slug: "accessory-4",
     category: "Accessories",
-    articleNumber: "908",
+    articleNumber: 908,
     image: "/assets/images/accessory-4.jpg",
     title: "Vintage Leather Belt",
     description:
@@ -326,7 +326,7 @@ export const products: Product[] = [
     id: "29",
     slug: "accessory-5",
     category: "Accessories",
-    articleNumber: "909",
+    articleNumber: 909,
     image: "/assets/images/accessory-5.jpg",
     title: "Vintage Tote Bag",
     description:
@@ -337,7 +337,7 @@ export const products: Product[] = [
     id: "30",
     slug: "accessory-6",
     category: "Accessories",
-    articleNumber: "910",
+    articleNumber: 910,
     image: "/assets/images/accessory-6.jpg",
     title: "Vintage Scarf",
     description:
@@ -348,7 +348,7 @@ export const products: Product[] = [
     id: "31",
     slug: "accessory-7",
     category: "Accessories",
-    articleNumber: "911",
+    articleNumber: 911,
     image: "/assets/images/accessory-7.jpg",
     title: "Vintage Watch",
     description:
@@ -359,7 +359,7 @@ export const products: Product[] = [
     id: "32",
     slug: "accessory-8",
     category: "Accessories",
-    articleNumber: "912",
+    articleNumber: 912,
     image: "/assets/images/accessory-8.jpg",
     title: "Vintage Backpack",
     description:
