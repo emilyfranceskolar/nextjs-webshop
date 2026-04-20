@@ -1,11 +1,10 @@
 "use client";
-import { useCart } from "@/hooks/use-cart";
-import { Product } from "@prisma/client";
+import { CartProduct, useCart } from "@/hooks/use-cart";
 import { createContext, ReactNode, useContext } from "react";
 
 interface CartContextType {
-  productsInCart: Product[];
-  addToCart: (product: Product) => void;
+  productsInCart: CartProduct[];
+  addToCart: (product: CartProduct) => void;
   isLoaded: boolean;
 }
 

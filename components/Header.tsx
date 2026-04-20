@@ -5,6 +5,11 @@ import Link from "next/link";
 export default function Header() {
   const { productsInCart, isLoaded } = useCartContext();
 
+  const totalQuantity = productsInCart.reduce(
+    (sum, product) => sum + (product.quantity || 1),
+    0,
+  );
+
   return (
     <header className="flex items-center justify-between border-b-26 border-rose-900 px-8 py-10">
       <Link
@@ -30,7 +35,7 @@ export default function Header() {
           data-cy="cart-link"
         >
           <p data-cy="cart-items-count-badge">
-            Cart ({isLoaded ? productsInCart.length : 0})
+            Cart ({isLoaded ? totalQuantity : 0})
           </p>
         </Link>
       </nav>
