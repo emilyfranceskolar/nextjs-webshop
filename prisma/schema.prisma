@@ -14,7 +14,7 @@ model Product {
   id            String  @id @default(cuid())
   slug          String  @unique
   category      String?
-  articleNumber String  @unique @default(cuid())
+  articleNumber Int  @unique
   title         String
   description   String
   image         String

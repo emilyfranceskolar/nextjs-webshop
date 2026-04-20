@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { db } from "@/prisma/db";
 import { Plus } from "lucide-react";
 import { revalidatePath } from "next/cache";
@@ -26,16 +26,18 @@ export default async function AdminPage() {
             </div>
 
             <div className="flex flex-col gap-2 px-2 py-4 rounded-xl h-full">
-              <div className="pl-2 pb-2">
+              <div className="pl-2 pb-2 pt-2">
                 <p data-cy="product-id" className="font-bold text-sm text-stone-600 pb-2">New Product</p>
                 <p data-cy="product-title" className="font-bold text-sm pb-2 text-stone-600">Title</p>
                 <p data-cy="product-price" className="text-sm pb-2 text-stone-600">0kr</p>
                 <p data-cy="product-description" className="text-sm max-w-xs pb-6 text-stone-600">No description</p>
               </div>
-              <Button data-cy="admin-add-product" variant="outline">
-                <Plus className="mr-2 h-4 w-4" />
-                Add new product
-              </Button>
+              <div className="flex gap-2">
+                <Button data-cy="admin-add-product" variant="outline">
+                  <Plus className="mr-2 h-4 w-4" />
+                  Add new product
+                </Button>
+              </div>
             </div>
           </div>
         </Link>
@@ -60,7 +62,7 @@ export default async function AdminPage() {
 
               <Dialog>
                 <div className="flex gap-2">
-                  <Link href={`/admin/product/${product.id}`}>
+                  <Link href={`/admin/product/${product.articleNumber}`}>
                     <Button variant="outline" data-cy="admin-edit-product">Edit product</Button>
                   </Link>
 
