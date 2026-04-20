@@ -11,8 +11,7 @@ async function editProduct(formData: FormData) {
 
     console.log("FORM ID:", formData.get("id"));
 
-    const id = Number(formData.get("articleNumber"))
-    console.log("ID:", id)
+    const articleNumber = Number(formData.get("articleNumber"))
     const title = formData.get("title")?.toString().trim() || ""
     const price = Number(formData.get("price"));
     const description = formData.get("description")?.toString().trim() || ""
@@ -21,7 +20,7 @@ async function editProduct(formData: FormData) {
     const slug = formData.get("slug")?.toString().trim() || ""
 
     await db.product.update({
-        where: { articleNumber: id },
+        where: { articleNumber },
         data: {
             title, price, description, image, category,
         },
@@ -37,15 +36,14 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
 
     return (
         <main className="min-h-screen grid bg-muted/30 md:grid-cols-2">
-            <div className="flex justify-center items-center space-y-4 text-stone-800 bg-white">
+            <div className="flex flex-col flex-1 justify-center items-center text-stone-800 bg-white">
                 <form data-cy="product-form" action={editProduct} className=" w-full max-w-md">
-                    <FieldGroup>
+                    <FieldGroup className="flex-1 pb-4">
                         <div>
                             <FieldLegend className="text-2xl font-bold text-zinc-800">Edit your product?</FieldLegend>
                             <p className="text-sm text-zinc-500">Change your details below</p>
                         </div>
 
-                        {/* <input type="hidden" name="id" value={id} className="outline rounded-sm p-2 border focus:ring-2 focus:ring-red-600" /> */}
                         <input type="hidden" name="slug" value={product?.slug ?? ""} className="outline rounded-sm p-2 border focus:ring-2 focus:ring-red-600" />
 
                         <Field className="space-y-1">
@@ -79,7 +77,7 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
                         </Field>
                     </FieldGroup>
 
-                    <Field className="pt-6 pb-6" orientation="horizontal">
+                    <Field className="flex gap-2 mt-auto" orientation="horizontal">
                         <Button variant="outline" className="rounded-full px-6">Cancel</Button>
                         <Button type="submit" data-cy="admin-edit-product" value={id} className="hover:bg-red-900 text-white rounded-full px-6">
                             Edit
