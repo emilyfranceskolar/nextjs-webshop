@@ -17,7 +17,7 @@ export default function HomePageCard({
     <Card data-cy="product" className="p-0 relative">
       <Link href={`/product/${articleNumber}/${slug}`} className="block">
         {imageUrl && (
-          <img src={imageUrl} alt={title} className="w-full object-cover" />
+          <img src={imageUrl} alt={title} className="w-full object-cover block" />
         )}
       </Link>
       <Link
@@ -36,7 +36,7 @@ export default function HomePageCard({
 
       <Link
         data-cy="product-buy-button"
-        href={`/product/${articleNumber}/${slug}`} //ändra länken sen
+        href={`/product/${articleNumber}/${slug}`}
       >
         <Button
           variant="outline"
