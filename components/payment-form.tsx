@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { FiLock } from "react-icons/fi";
+import { FiLock, FiSmartphone } from "react-icons/fi";
 import { PopoverPhone } from "./popover-info";
 import { SelectCountry } from "./select-country";
 
@@ -164,8 +164,39 @@ export function PaymentForm() {
               </FieldSet>
             </section>
           )}
-          <FieldSet>
-            <p>Save my information for a faster checkout</p>
+          <FieldSet className=" text-gray-600">
+            <p className="text-sm">Save my information for a faster checkout</p>
+            <Field>
+              <div className="relative">
+                <FiSmartphone className="absolute right-3  top-1/2 -translate-y-1/2" />
+                <Input
+                  id="mobile-phone-nr"
+                  type="text"
+                  placeholder="Mobile phone (optional) +46"
+                  autoComplete="on"
+                />
+              </div>
+              <p className="text-xs">
+                By providing your phone number, you agree to create a Shop
+                account subject to Shop's
+                <a
+                  href="https://www.shopify.com/se/legal/privacy/consumers"
+                  target="_blank"
+                  className="text-xs underline pl-1 pr-1"
+                >
+                  Terms
+                </a>
+                and
+                <a
+                  href="https://shop.app/terms-of-service"
+                  target="_blank"
+                  className="text-xs underline pl-1"
+                >
+                  Privacy
+                </a>
+                .
+              </p>
+            </Field>
           </FieldSet>
         </FieldGroup>
       </form>
