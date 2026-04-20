@@ -16,7 +16,9 @@ export default function HomePageCard({
   return (
     <Card data-cy="product" className="p-0 relative">
       <Link href={`/product/${articleNumber}/${slug}`} className="block">
-        <img src={imageUrl} alt={title} className="w-full object-cover" />
+        {imageUrl && (
+          <img src={imageUrl} alt={title} className="w-full object-cover" />
+        )}
       </Link>
       <Link
         href={`/product/${articleNumber}/${slug}`}
@@ -32,18 +34,18 @@ export default function HomePageCard({
         {price}kr
       </p>
 
-      <Button
-        variant="outline"
-        size="icon"
-        className="absolute top-2 right-2 p-4.5 sm:p-3 hover:cursor-pointer"
+      <Link
+        data-cy="product-buy-button"
+        href={`/product/${articleNumber}/${slug}`} //ändra länken sen
       >
-        <Link
-          data-cy="product-buy-button"
-          href="" //ändra länken sen
+        <Button
+          variant="outline"
+          size="icon"
+          className="absolute top-2 right-2 p-4.5 sm:p-3 hover:cursor-pointer"
         >
           <PlusIcon />
-        </Link>
-      </Button>
-    </Card>
+        </Button>
+      </Link>
+    </Card >
   );
 }

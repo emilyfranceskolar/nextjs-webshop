@@ -1,11 +1,11 @@
 
 import { Button } from "@/components/ui/button";
-import { FieldGroup, Field, FieldLegend, FieldDescription, FieldTitle } from "@/components/ui/field";
+import { FieldGroup, Field, FieldLegend } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { db } from "@/prisma/db";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/dist/server/api-utils";
+import Link from "next/link";
 
 async function createNewProduct(formData: FormData) {
   "use server"
@@ -14,7 +14,8 @@ async function createNewProduct(formData: FormData) {
   const price = Number(formData.get("price"));
   const description = formData.get("description") as string;
   const image = formData.get("image") as string;
-  const slug = title.toLowerCase().replace(/\s+/g, "-");
+  const slug = `${title.toLowerCase().replace(/\s+/g, "-")}-${Date.now()}`;
+  const articleNumber = formData.get("articleNumber") as string;
 
   await db.product.create({
     data: {
@@ -69,7 +70,9 @@ export default function NewProductPage() {
           </FieldGroup>
 
           <Field className="pt-6 pb-6" orientation="horizontal">
-            <Button variant="outline" className="rounded-full px-6">Cancel</Button>
+            <Link href="/admin">
+              <Button type="button" variant="outline" className="rounded-full px-6">Cancel</Button>
+            </Link>
             <Button type="submit" data-cy="admin-add-product" className="hover:bg-red-900 text-white rounded-full px-6">
               Add
             </Button>
