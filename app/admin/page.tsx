@@ -15,7 +15,7 @@ async function deleteProduct(formData: FormData) {
 }
 
 export default async function AdminPage() {
-  const products = await db.product.findMany({ orderBy: { id: "desc", }, });
+  const products = await db.product.findMany({});
   return (
     <main className="grid">
       <p className="text-3xl font-bold m-10 text-center">Our products</p>
