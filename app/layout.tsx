@@ -7,6 +7,7 @@ import { PropsWithChildren } from "react";
 // import { FiShoppingCart } from "react-icons/fi";
 import { Toaster } from "@/components/ui/sonner";
 import "./global.css";
+import { CartProvider } from "./providers/cart-provider";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -22,10 +23,12 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" className={cn("font-sans", geist.variable)}>
       <body className={`${inter.className} min-h-screen flex flex-col`}>
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <Toaster data-cy="toast" />
+        <CartProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <Toaster />
+        </CartProvider>
       </body>
     </html>
   );

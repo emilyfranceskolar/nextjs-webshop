@@ -1,5 +1,5 @@
 "use client";
-import { useCart } from "@/hooks/use-cart";
+import { useCartContext } from "@/app/providers/cart-provider";
 import { PlusIcon } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "./ui/button";
@@ -26,7 +26,7 @@ export default function AddToCartButton({
   size,
   className,
 }: HomePageCardProps & AddToCartButtonProps) {
-  const { addToCart } = useCart();
+  const { addToCart } = useCartContext();
 
   const handleAddToCart = () => {
     addToCart({
@@ -39,10 +39,13 @@ export default function AddToCartButton({
       category,
       description,
     });
-    toast.success(`${title} added to cart!`, {
-      duration: 3000,
-      position: "top-right",
-    });
+    toast.success(
+      () => <div data-cy="added-to-cart-toast">{title} has been added!</div>,
+      {
+        duration: 3000,
+        position: "top-right",
+      },
+    );
   };
   return (
     <Button
