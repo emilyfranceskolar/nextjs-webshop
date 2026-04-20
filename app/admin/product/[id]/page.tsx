@@ -11,18 +11,19 @@ async function editProduct(formData: FormData) {
 
     console.log("FORM ID:", formData.get("id"));
 
-    const id = formData.get("id") as string;
-    const title = formData.get("title") as string;
+    const id = Number(formData.get("articleNumber"))
+    console.log("ID:", id)
+    const title = formData.get("title")?.toString().trim() || ""
     const price = Number(formData.get("price"));
-    const description = formData.get("description") as string;
-    const image = formData.get("image") as string;
-    const category = formData.get("category") as string;
-    const slug = formData.get("slug") as string;
+    const description = formData.get("description")?.toString().trim() || ""
+    const image = formData.get("image")?.toString().trim() || ""
+    const category = formData.get("category")?.toString().trim() || ""
+    const slug = formData.get("slug")?.toString().trim() || ""
 
     await db.product.update({
-        where: { id },
+        where: { articleNumber: id },
         data: {
-            title, price, description, image, category, slug,
+            title, price, description, image, category,
         },
     });
 
@@ -32,19 +33,19 @@ async function editProduct(formData: FormData) {
 
 export default async function EditProductPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
-    const product = await db.product.findUnique({ where: { id }, });
+    const product = await db.product.findUnique({ where: { articleNumber: Number(id) }, });
 
     return (
         <main className="min-h-screen grid bg-muted/30 md:grid-cols-2">
             <div className="flex justify-center items-center space-y-4 text-stone-800 bg-white">
-                <form action={editProduct} data-cy="product-form" className=" w-full max-w-md">
+                <form data-cy="product-form" action={editProduct} className=" w-full max-w-md">
                     <FieldGroup>
                         <div>
                             <FieldLegend className="text-2xl font-bold text-zinc-800">Edit your product?</FieldLegend>
                             <p className="text-sm text-zinc-500">Change your details below</p>
                         </div>
 
-                        <input type="hidden" name="id" value={id} className="outline rounded-sm p-2 border focus:ring-2 focus:ring-red-600" />
+                        {/* <input type="hidden" name="id" value={id} className="outline rounded-sm p-2 border focus:ring-2 focus:ring-red-600" /> */}
                         <input type="hidden" name="slug" value={product?.slug ?? ""} className="outline rounded-sm p-2 border focus:ring-2 focus:ring-red-600" />
 
                         <Field className="space-y-1">
