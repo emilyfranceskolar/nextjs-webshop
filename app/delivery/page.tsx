@@ -13,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 
 export default function DeliveryPage() {
   return (
@@ -110,12 +111,14 @@ export default function DeliveryPage() {
         </section>
         {/* </div> */}
         <PaymentForm />
-        <button className="bg-black text-white p-2 rounded-lg font-medium cursor-pointer">
-          Pay now
-        </button>
-      </div>
+        <Link href="/confirmation">
+          <button className="bg-black text-white p-2 rounded-lg font-medium cursor-pointer">
+            Pay now
+          </button>
+        </Link>
+      </div >
       <Separator orientation="vertical" className="max-w-lg" />
       <p>Order information</p>
-    </main>
+    </main >
   );
 }
