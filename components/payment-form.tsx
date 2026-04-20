@@ -19,7 +19,7 @@ import { SelectCountry } from "./select-country";
 export function PaymentForm() {
   const [sameAsShipping, setSameAsShipping] = useState(true);
   return (
-    <div className="w-full max-w-lg mt-4 rounded-lg border p-8">
+    <div className="w-full max-w-lg mt-4 rounded-lg border p-4">
       <form>
         <FieldGroup>
           <FieldSet className="w-full">
