@@ -1,17 +1,16 @@
 import { Button } from "@/components/ui/button";
-import { ButtonGroup } from "@/components/ui/button-group";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { db } from "@/prisma/db";
 import { Plus } from "lucide-react";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
-import NewProductPage from "./product/new/page";
 
 async function deleteProduct(formData: FormData) {
   "use server"
 
   const id = formData.get("id") as string
-  await db.product.delete({ where: { id } })
+
+  await db.product.delete({ where: { articleNumber: Number(id) } })
   revalidatePath("/admin")
 }
 
@@ -60,7 +59,7 @@ export default async function AdminPage() {
 
               <Dialog>
                 <div className="flex gap-2">
-                  <Link href={`/admin/product/${product.id}`}>
+                  <Link href={`/admin/product/${product.articleNumber}`}>
                     <Button variant="outline" data-cy="admin-edit-product">Edit product</Button>
                   </Link>
 
