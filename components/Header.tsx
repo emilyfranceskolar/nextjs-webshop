@@ -30,7 +30,7 @@ export default function Header() {
           <p data-cy="admin-link">Admin</p>
         </Link>
         <Link
-          href="/cart"
+          href="/checkout"
           className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
           data-cy="cart-link"
         >
