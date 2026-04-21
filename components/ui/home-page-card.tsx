@@ -8,7 +8,7 @@ import { Button } from "./button";
 export interface HomePageCardProps {
   id: string;
   title: string;
-  articleNumber: number;
+  articleNumber: string;
   imageUrl: string;
   price: number;
   slug: string;
@@ -58,7 +58,6 @@ export default function HomePageCard({
       >
         <PlusIcon />
       </Button>
-
       <AddToCartButton
         id={id}
         title={title}
@@ -72,6 +71,7 @@ export default function HomePageCard({
         variant="outline"
         size="icon"
         className="absolute top-2 right-2 p-4.5 sm:p-3 hover:cursor-pointer"
+        data-cy="product-buy-button"
       />
     </Card>
   );

@@ -5,6 +5,8 @@ import { createContext, ReactNode, useContext } from "react";
 interface CartContextType {
   productsInCart: CartProduct[];
   addToCart: (product: CartProduct) => void;
+  updateQuantity: (productId: string, quantity: number) => void;
+  removeFromCart: (productId: string) => void;
   isLoaded: boolean;
 }
 
