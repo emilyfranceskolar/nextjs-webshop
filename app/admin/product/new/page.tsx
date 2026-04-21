@@ -20,7 +20,7 @@ async function createNewProduct(formData: FormData) {
   const description = formData.get("description") as string;
   const image = formData.get("image") as string;
   const articleNumberValue = Number(formData.get("articleNumber"));
-  const articleNumber = articleNumberValue > 0 ? articleNumberValue : Math.floor(Math.random() * 10000);
+  const articleNumber = (articleNumberValue > 0 ? articleNumberValue : Math.floor(Math.random() * 10000)).toString();
   const slug = `${title.toLowerCase().replace(/\s+/g, "-")}-${Date.now()}`;
 
   await db.product.create({
