@@ -8,29 +8,37 @@ export default function ConfirmationPage({
 }) {
 
   return (
-    <div className="max-w-xl mx-auto mt-16 mb-16 rounded-xl shadow-md">
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-2xl">
-            Payment succeeded!
-          </CardTitle>
-        </CardHeader>
+    <main>
+      <div className="max-w-xl mx-auto w-full rounded-xl p-4 m-6">
+        <Card className="min-h-[60vh] flex justify-center pl-8 pr-8">
+          <CardHeader>
+            <CardTitle className="text-2xl">
+              Payment succeeded! 🎉
+            </CardTitle>
+          </CardHeader>
 
-        <CardContent className="space-y-4">
-          <p className="text-muted-foreground">
-            Thank you for your purchase
-          </p>
+          <CardContent className="space-y-4 flex flex-col justify-center gap-4">
+            <p className="text-muted-foreground">
+              Thank you for your purchase
+            </p>
 
-          <div className="bg-muted p-4 rounded-xl">
-            <p><strong>Ordernummer:</strong> #{params.orderNumber}</p>
-            <p><strong>Total:</strong> 899 kr</p>
-          </div>
+            <div className="bg-muted p-4 rounded-xl">
+              <div>
+                <p className="pb-2"><strong>Order Number:</strong> #{params.orderNumber}</p>
+                <p className="pb-2"><strong>Amount:</strong> 3</p>
+                <p className="pb-2"><strong>Order Date:</strong> 2026-01-14</p>
+                <p className="pb-2"><strong>Total:</strong> 899 kr</p>
+              </div>
+            </div>
 
-          <Button className="w-full hover:bg-zinc-800">
-            Continue shopping
-          </Button>
-        </CardContent>
-      </Card>
-    </div>
+            <div>
+              <Button className="p-4 w-full hover:bg-zinc-800 mt-auto">
+                Continue shopping
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </main>
   );
 }
