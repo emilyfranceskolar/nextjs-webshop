@@ -75,11 +75,14 @@ export default async function ProductPage({
         {products.map((product) => (
           <ProductCard
             key={product.id}
+            id={product.id}
             title={product.title}
             articleNumber={product.articleNumber}
             price={product.price}
             imageUrl={product.image}
             slug={product.slug}
+            category=""
+            description=""
           />
         ))}
       </section>

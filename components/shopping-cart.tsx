@@ -1,8 +1,8 @@
 "use client";
+import { useCartContext } from "@/app/providers/cart-provider";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { CartItem, products } from "@/data";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useState } from "react";
@@ -14,38 +14,19 @@ import {
 } from "react-icons/fi";
 
 export default function ShoppingCartList() {
-  const [items, setItems] = useState<CartItem[]>(
-    products.slice(0, 3).map((product) => ({ ...product, quantity: 1 })),
-  );
+  const { productsInCart, removeFromCart, updateQuantity } = useCartContext();
   const [isRemoving, setIsRemoving] = useState<string | null>(null);
 
-  const updateQuantity = (id: string, increment: boolean) => {
-    setItems((currentItems) =>
-      currentItems.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              quantity: Math.max(1, item.quantity + (increment ? 1 : -1)),
-            }
-          : item,
-      ),
-    );
-  };
-
-  const removeItem = (id: string) => {
+  const handleRemoveItem = (id: string) => {
     setIsRemoving(id);
     setTimeout(() => {
-      setItems((currentItems) => currentItems.filter((item) => item.id !== id));
+      removeFromCart(id);
       setIsRemoving(null);
     }, 300);
   };
 
-  const subtotal = items.reduce(
+  const subtotal = productsInCart.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0,
-  );
-  const savings = items.reduce(
-    (sum, item) => sum + (item.price - item.price) * item.quantity,
     0,
   );
   const total = subtotal;
@@ -55,15 +36,15 @@ export default function ShoppingCartList() {
       <div className="flex flex-col gap-2 mb-8 text-center">
         <h1 className="text-3xl font-bold sm:text-4xl">Your Shopping Cart</h1>
         <p className="text-muted-foreground">
-          {items.length} {items.length === 1 ? "item" : "items"} in your cart •{" "}
+          {productsInCart.length}{" "}
+          {productsInCart.length === 1 ? "item" : "items"} in your cart •{" "}
           <span className="text-foreground font-semibold">{subtotal} kr </span>
         </p>
       </div>
 
       <div className="flex flex-col gap-8 lg:flex-row">
         <div className="flex-1 flex flex-col gap-12">
-          {/* Cart Items */}
-          {items.length === 0 ? (
+          {productsInCart.length === 0 ? (
             <Card className="border-dashed">
               <CardContent className="flex flex-col items-center justify-center py-12 text-center">
                 <FiShoppingBag className="text-muted-foreground/50 mb-4 size-12" />
@@ -82,7 +63,7 @@ export default function ShoppingCartList() {
               </CardContent>
             </Card>
           ) : (
-            items.map((item) => (
+            productsInCart.map((item) => (
               <Card
                 key={item.id}
                 className={cn("gap-0 overflow-hidden py-0", {
@@ -94,7 +75,7 @@ export default function ShoppingCartList() {
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="h-36 w-full object-cover object-center"
+                      className="w-full object-cover"
                     />
                   </div>
 
@@ -109,7 +90,7 @@ export default function ShoppingCartList() {
                         variant="ghost"
                         size="icon"
                         className="size-8 text-muted-foreground hover:bg-destructive/10 hover:text-destructive cursor-pointer"
-                        onClick={() => removeItem(item.id)}
+                        onClick={() => handleRemoveItem(item.id)}
                       >
                         <FiTrash2 />
                       </Button>
@@ -120,7 +101,9 @@ export default function ShoppingCartList() {
                           variant="outline"
                           size="icon"
                           className="size-8 cursor-pointer"
-                          onClick={() => updateQuantity(item.id, false)}
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity - 1)
+                          }
                           disabled={item.quantity <= 1}
                         >
                           <FiMinusCircle />
@@ -132,7 +115,9 @@ export default function ShoppingCartList() {
                           variant="outline"
                           size="icon"
                           className="size-8 cursor-pointer"
-                          onClick={() => updateQuantity(item.id, false)}
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity + 1)
+                          }
                         >
                           <FiPlusCircle />
                         </Button>
@@ -182,7 +167,7 @@ export default function ShoppingCartList() {
                 <Button
                   size="lg"
                   className="h-10 px-8 mt-4 w-full cursor-pointer text-base font-medium"
-                  disabled={items.length === 0}
+                  disabled={productsInCart.length === 0}
                 >
                   <FiShoppingBag />
                   Proceed to Checkout
