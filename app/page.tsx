@@ -52,7 +52,7 @@ export default async function Home() {
               title={product.title}
               articleNumber={product.articleNumber}
               price={product.price}
-              image={product.image}
+              imageUrl={product.image}
               slug={product.slug}
               category={product.category}
               description={product.description}

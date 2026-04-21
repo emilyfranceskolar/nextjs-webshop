@@ -27,7 +27,7 @@ export default function Header() {
           href="/admin"
           className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
         >
-          <p>Admin</p>
+          <p data-cy="admin-link">Admin</p>
         </Link>
         <Link
           href="/cart"

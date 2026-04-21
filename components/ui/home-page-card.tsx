@@ -1,15 +1,15 @@
 "use client";
 import { Card } from "@/components/ui/card";
-import { useCart } from "@/hooks/use-cart";
+import { PlusIcon } from "lucide-react";
 import Link from "next/link";
-import { toast } from "sonner";
 import AddToCartButton from "../add-to-cart-button";
+import { Button } from "./button";
 
 export interface HomePageCardProps {
   id: string;
   title: string;
   articleNumber: number;
-  image: string;
+  imageUrl: string;
   price: number;
   slug: string;
   category: string | null;
@@ -20,35 +20,22 @@ export default function HomePageCard({
   id,
   title,
   articleNumber,
-  image,
+  imageUrl,
   price,
   slug,
   category,
   description,
 }: HomePageCardProps) {
-  const { addToCart } = useCart();
-
-  const handleAddToCart = () => {
-    addToCart({
-      id,
-      title,
-      articleNumber,
-      image,
-      price,
-      slug,
-      category,
-      description,
-    });
-    toast.success(`${title} added to cart!`, {
-      duration: 3000,
-      position: "top-right",
-    });
-  };
-
   return (
     <Card data-cy="product" className="p-0 relative">
       <Link href={`/product/${articleNumber}/${slug}`} className="block">
-        <img src={image} alt={title} className="w-full object-cover" />
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt={title}
+            className="w-full object-cover block"
+          />
+        )}
       </Link>
       <Link
         href={`/product/${articleNumber}/${slug}`}
@@ -63,11 +50,24 @@ export default function HomePageCard({
       >
         {price}kr
       </p>
+
+      <Link
+        data-cy="product-buy-button"
+        href={`/product/${articleNumber}/${slug}`}
+      >
+        <Button
+          variant="outline"
+          size="icon"
+          className="absolute top-2 right-2 p-4.5 sm:p-3 hover:cursor-pointer"
+        >
+          <PlusIcon />
+        </Button>
+      </Link>
       <AddToCartButton
         id={id}
         title={title}
         articleNumber={articleNumber}
-        image={image}
+        imageUrl={imageUrl}
         price={price}
         slug={slug}
         category={category}
