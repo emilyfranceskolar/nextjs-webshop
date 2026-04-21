@@ -5,9 +5,9 @@ import { db } from "@/prisma/db";
 export default async function ProductDetailPage({
   params,
 }: {
-  params: Promise<{ articleNumber: string; slug: string }>;
+  params: Promise<{ slug: string }>;
 }) {
-  const { articleNumber, slug } = await params;
+  const { slug } = await params;
   const product = await db.product.findUnique({ where: { slug } });
 
   if (!product) {
@@ -38,10 +38,10 @@ export default async function ProductDetailPage({
             </p>
 
             <AddToCartButton
-              id={product.id}
+              id={product.articleNumber}
               title={product.title}
               articleNumber={product.articleNumber}
-              image={product.image}
+              imageUrl={product.image}
               price={product.price}
               slug={product.slug}
               category={product.category}
@@ -66,7 +66,7 @@ export default async function ProductDetailPage({
               title="Care for your vintage items"
               content="You can machine wash most cotton & cotton blend products in 40 degrees celcius / 104 degrees fahrenheit. Wool products should preferably be hand washed. Machine wash at your own risk. Remember that the items we offer have been used previously and that some are more fragile (depending on age and condition). Always have that in mind before washing. Vintage leather products should hang in dry areas and should be conditioned regularly to avoid cracks. Note that we do not take responsibility for any product that got damaged when worn or washed."
             />
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-gray-500" data-cy="product-id">
               Article number: {product.articleNumber}
             </p>
           </div>

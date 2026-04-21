@@ -2,17 +2,12 @@ import { products } from "@/data";
 import { db } from "./db";
 
 async function main() {
-  await db.product.deleteMany({});
-
-  const existingProducts = await db.product.findMany({});
-  if (existingProducts.length === 0) {
-    for (const { id, ...product } of products) {
-      await db.product.upsert({
-        where: { articleNumber: product.articleNumber },
-        update: {},
-        create: product,
-      });
-    }
+  for (const { id, ...product } of products) {
+    await db.product.upsert({
+      where: { articleNumber: product.articleNumber },
+      update: {},
+      create: product,
+    });
   }
 }
 
