@@ -17,7 +17,7 @@ export function Form() {
 
   return (
     <form
-      className="grid gap-4 w-full max-w-lg m-8"
+      className="grid gap-10 w-full m-8"
       onSubmit={handleSubmit(saveCustomer)}
     >
       <ContactFormFields register={register} formState={formState} />

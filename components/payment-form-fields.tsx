@@ -11,12 +11,12 @@ import {
   FieldSet,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Customer } from "@/data/form";
 import { useState } from "react";
+import { UseFormRegister } from "react-hook-form";
 import { FiLock, FiSmartphone } from "react-icons/fi";
 import { PopoverPhone } from "./popover-info";
 import { SelectCountry } from "./select-country";
-import { Customer } from "@/data/form";
-import { UseFormRegister } from "react-hook-form";
 
 interface Props {
   register: UseFormRegister<Customer>;
@@ -25,7 +25,7 @@ interface Props {
 export function PaymentFormFields(props: Props) {
   const [sameAsShipping, setSameAsShipping] = useState(true);
   return (
-    <div className="w-full max-w-lg mt-4 rounded-lg border p-4">
+    <div className="w-full mt-4 rounded-lg border p-4">
       <FieldGroup>
         <FieldSet className="w-full">
           <FieldLegend>Payment Method</FieldLegend>
