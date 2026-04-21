@@ -1,4 +1,4 @@
-"use-client";
+"use client";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -15,8 +15,14 @@ import { useState } from "react";
 import { FiLock, FiSmartphone } from "react-icons/fi";
 import { PopoverPhone } from "./popover-info";
 import { SelectCountry } from "./select-country";
+import { Customer } from "@/data/form";
+import { UseFormRegister } from "react-hook-form";
 
-export function PaymentFormFields() {
+interface Props {
+  register: UseFormRegister<Customer>;
+}
+
+export function PaymentFormFields(props: Props) {
   const [sameAsShipping, setSameAsShipping] = useState(true);
   return (
     <div className="w-full max-w-lg mt-4 rounded-lg border p-4">
@@ -47,7 +53,7 @@ export function PaymentFormFields() {
                 />
               </Field>
               <Field>
-                <Input id="checkout-cvv" placeholder="Security Code" required />
+                <Input id="checkout-cvv" placeholder="Security Code" />
               </Field>
             </div>
             <Field>
