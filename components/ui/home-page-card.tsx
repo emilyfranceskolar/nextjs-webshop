@@ -51,18 +51,14 @@ export default function HomePageCard({
         {price}kr
       </p>
 
-      <Link
-        data-cy="product-buy-button"
-        href={`/product/${articleNumber}/${slug}`}
+      <Button
+        variant="outline"
+        size="icon"
+        className="absolute top-2 right-2 p-4.5 sm:p-3 hover:cursor-pointer"
       >
-        <Button
-          variant="outline"
-          size="icon"
-          className="absolute top-2 right-2 p-4.5 sm:p-3 hover:cursor-pointer"
-        >
-          <PlusIcon />
-        </Button>
-      </Link>
+        <PlusIcon />
+      </Button>
+
       <AddToCartButton
         id={id}
         title={title}
