@@ -25,7 +25,7 @@ export default async function AdminPage() {
               Image
             </div>
 
-            <div className="flex flex-col gap-2 px-2 py-4 rounded-xl h-full">
+            <div className="flex flex-col px-2 py-4 rounded-xl h-full">
               <div className="pl-2 pb-2 pt-2">
                 <p data-cy="product-id" className="font-bold text-sm text-stone-600 pb-2">New Product</p>
                 <p data-cy="product-title" className="font-bold text-sm pb-2 text-stone-600">Title</p>
