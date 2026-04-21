@@ -3,8 +3,8 @@
 import { PaymentForm } from "@/components/payment-form";
 import { PopoverPhone } from "@/components/popover-info";
 import { SelectCountry } from "@/components/select-country";
+import ShoppingCartList from "@/components/shopping-cart";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useRouter } from "next/navigation";
 import {
   Field,
   FieldGroup,
@@ -14,22 +14,20 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
-
+import { useRouter } from "next/navigation";
 
 export default function DeliveryPage() {
-  const router = useRouter()
+  const router = useRouter();
 
   const handlePayment = async () => {
-    const orderNumber = Math.floor(100000 + Math.random() * 900000)
+    const orderNumber = Math.floor(100000 + Math.random() * 900000);
 
-    router.push(`/confirmation/${orderNumber}`)
-  }
+    router.push(`/confirmation/${orderNumber}`);
+  };
 
   return (
-    <main className="grid grid-cols-[1fr_auto_1fr] gap-4 place-items-end">
-      <div className="grid gap-4 w-full max-w-lg m-8">
-        {/* <div className="grid gap-8 mt-4 rounded-lg border p-8"> */}
+    <main className="flex items-start gap-10 m-10">
+      <div className="grid gap-10 m-10 flex-1 px-25">
         <section>
           <Field>
             <FieldLegend className="text-4xl">Contact</FieldLegend>
@@ -121,14 +119,18 @@ export default function DeliveryPage() {
           </FieldSet>
         </section>
 
-        {/* </div> */}
         <PaymentForm />
-        <button onClick={handlePayment} className="bg-black text-white p-2 rounded-lg font-medium cursor-pointer">
+        <button
+          onClick={handlePayment}
+          className="bg-black text-white p-2 rounded-lg font-medium cursor-pointer"
+        >
           Pay now
         </button>
-      </div >
+      </div>
       <Separator orientation="vertical" className="max-w-lg" />
-      <p>Order information</p>
-    </main >
+      <div className="grid gap-4 m-8 flex-1 px-25">
+        <ShoppingCartList />
+      </div>
+    </main>
   );
 }

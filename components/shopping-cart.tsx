@@ -32,7 +32,7 @@ export default function ShoppingCartList() {
   const total = subtotal;
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+    <div className="mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex flex-col gap-2 mb-8 text-center">
         <h1 className="text-3xl font-bold sm:text-4xl">Your Shopping Cart</h1>
         <p className="text-muted-foreground">
@@ -42,7 +42,7 @@ export default function ShoppingCartList() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-8 lg:flex-row">
+      <div className="flex flex-col gap-8">
         <div className="flex-1 flex flex-col gap-12">
           {productsInCart.length === 0 ? (
             <Card className="border-dashed">
@@ -141,7 +141,7 @@ export default function ShoppingCartList() {
         </div>
 
         {/* Order Summary */}
-        <div className="flex flex-col gap-4 w-full lg:w-96">
+        <div className="flex flex-col gap-4 w-full">
           <Card className="sticky top-4 gap-0">
             <CardHeader className="pb-4">
               <CardTitle className="text-xl">Order Summary</CardTitle>
@@ -163,16 +163,6 @@ export default function ShoppingCartList() {
                   <p className="text-muted-foreground text-xs">includes Moms</p>
                 </div>
               </div>
-              <Link href="/delivery">
-                <Button
-                  size="lg"
-                  className="h-10 px-8 mt-4 w-full cursor-pointer text-base font-medium"
-                  disabled={productsInCart.length === 0}
-                >
-                  <FiShoppingBag />
-                  Proceed to Checkout
-                </Button>
-              </Link>
             </CardContent>
           </Card>
         </div>
