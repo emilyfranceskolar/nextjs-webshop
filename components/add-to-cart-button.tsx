@@ -16,7 +16,7 @@ export default function AddToCartButton({
   id,
   title,
   articleNumber,
-  image,
+  imageUrl,
   price,
   slug,
   category,
@@ -33,11 +33,12 @@ export default function AddToCartButton({
       id,
       title,
       articleNumber,
-      image,
+      image: imageUrl,
       price,
       slug,
       category,
       description,
+      quantity: 1,
     });
     toast.success(
       () => <div data-cy="added-to-cart-toast">{title} has been added!</div>,

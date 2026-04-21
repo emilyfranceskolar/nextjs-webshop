@@ -37,5 +37,25 @@ export function useCart() {
     });
   }, []);
 
-  return { productsInCart, addToCart, isLoaded };
+  const updateQuantity = useCallback((productId: string, quantity: number) => {
+    setProductsInCart((prevCart) =>
+      prevCart.map((product) =>
+        product.id === productId ? { ...product, quantity } : product,
+      ),
+    );
+  }, []);
+
+  const removeFromCart = useCallback((productId: string) => {
+    setProductsInCart((prevCart) =>
+      prevCart.filter((product) => product.id !== productId),
+    );
+  }, []);
+
+  return {
+    productsInCart,
+    addToCart,
+    updateQuantity,
+    removeFromCart,
+    isLoaded,
+  };
 }

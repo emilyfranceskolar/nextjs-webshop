@@ -14,9 +14,18 @@ model Product {
   id            String  @id @default(cuid())
   slug          String  @unique
   category      String?
-  articleNumber Int  @unique
+  articleNumber String  @unique
   title         String
   description   String
   image         String
   price         Float
+}
+
+model Order {
+  id            String  @id @default(cuid())
+  orderNumber   String  @unique
+  name          String
+  email         String
+  address       String
+  createdAt     DateTime @default(now())
 }

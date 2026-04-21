@@ -2,16 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import AddToCartButton from "../add-to-cart-button";
+import { HomePageCardProps } from "./home-page-card";
 
-export interface ProductCardProps {
-  title: string;
-  articleNumber: string;
-  price: number;
-  imageUrl: string;
-  slug: string;
-}
+interface ProductCardProps extends HomePageCardProps {}
 
 export default function ProductCard({
+  id,
   title,
   articleNumber,
   imageUrl,
@@ -41,14 +37,14 @@ export default function ProductCard({
         </Link>
 
         <AddToCartButton
-          id={articleNumber}
+          id={id}
           title={title}
           articleNumber={articleNumber}
-          image={imageUrl}
+          imageUrl={imageUrl}
           price={price}
           slug={slug}
-          category={null}
-          description={""}
+          category=""
+          description=""
           size="lg"
           buttonText="Add to Cart"
           className="flex-1 bg-black! text-white! hover:cursor-pointer"
