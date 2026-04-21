@@ -1,18 +1,6 @@
 "use client";
 
-import { PaymentForm } from "@/components/payment-form";
-import { PopoverPhone } from "@/components/popover-info";
-import { SelectCountry } from "@/components/select-country";
-import ShoppingCartList from "@/components/shopping-cart";
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Field,
-  FieldGroup,
-  FieldLegend,
-  FieldSet,
-} from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Form } from "@/components/form";
 import { Separator } from "@/components/ui/separator";
 import { useRouter } from "next/navigation";
 
@@ -26,111 +14,10 @@ export default function DeliveryPage() {
   };
 
   return (
-    <main className="flex items-start gap-10 m-10">
-      <div className="grid gap-10 m-10 flex-1 px-25">
-        <section>
-          <Field>
-            <FieldLegend className="text-4xl">Contact</FieldLegend>
-            <Input
-              id="input-field-username"
-              type="text"
-              placeholder="Email"
-              className="h-10 p-4"
-              autoComplete="on"
-            />
-            <Field orientation="horizontal" className="m-2">
-              <Checkbox id="terms-checkbox" name="terms-checkbox" />
-              <Label htmlFor="email-checkbox">
-                Email me with news and offers
-              </Label>
-            </Field>
-          </Field>
-        </section>
-
-        <section>
-          <FieldSet className="w-full">
-            <FieldLegend>Delivery</FieldLegend>
-            <SelectCountry />
-            <FieldGroup>
-              <div className="grid grid-cols-2 gap-4">
-                <Field>
-                  <Input
-                    id="first-name"
-                    type="text"
-                    placeholder="First Name"
-                    autoComplete="on"
-                  />
-                </Field>
-                <Field>
-                  <Input
-                    id="last-name"
-                    type="text"
-                    placeholder="Last Name"
-                    autoComplete="on"
-                  />
-                </Field>
-              </div>
-              <Field>
-                <Input
-                  id="address"
-                  type="text"
-                  placeholder="Address"
-                  autoComplete="on"
-                />
-              </Field>
-              <Field>
-                <Input
-                  id="address"
-                  type="text"
-                  placeholder="Apartment, suite, etc. (optional)"
-                  autoComplete="on"
-                />
-              </Field>
-              <div className="grid grid-cols-2 gap-4">
-                <Field>
-                  <Input
-                    id="city"
-                    type="text"
-                    placeholder="City"
-                    autoComplete="on"
-                  />
-                </Field>
-                <Field>
-                  <Input
-                    id="zip"
-                    type="text"
-                    placeholder="Postal Code"
-                    autoComplete="on"
-                  />
-                </Field>
-              </div>
-              <Field>
-                <div className="relative">
-                  <Input
-                    id="phone-nr"
-                    type="text"
-                    placeholder="Phone number"
-                    autoComplete="on"
-                  />
-                  <PopoverPhone />
-                </div>
-              </Field>
-            </FieldGroup>
-          </FieldSet>
-        </section>
-
-        <PaymentForm />
-        <button
-          onClick={handlePayment}
-          className="bg-black text-white p-2 rounded-lg font-medium cursor-pointer"
-        >
-          Pay now
-        </button>
-      </div>
+    <div className="grid grid-cols-[1fr_auto_1fr] gap-4 place-items-center">
+      <Form />
       <Separator orientation="vertical" className="max-w-lg" />
-      <div className="grid gap-4 m-8 flex-1 px-25">
-        <ShoppingCartList />
-      </div>
-    </main>
+      <p>Order information</p>
+    </div>
   );
 }
