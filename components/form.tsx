@@ -1,6 +1,7 @@
 "use client";
 
 import { Customer, customerSchema } from "@/data/form";
+import createOrder from "@/data/order";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -14,9 +15,10 @@ export function Form() {
     resolver: zodResolver(customerSchema),
   });
 
-  const saveCustomer = (customer: Customer) => {
+  const saveCustomer = async (customer: Customer) => {
     console.log("Save....", customer);
-    router.push("/confirmation/orderNumber");
+    const orderNumber = await createOrder(customer);
+    router.push(`/confirmation/${orderNumber}`);
   };
 
   return (
