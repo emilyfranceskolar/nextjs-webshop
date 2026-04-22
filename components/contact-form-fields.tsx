@@ -23,6 +23,7 @@ export default function ContactFormFields({ register, formState }: Props) {
           <Field>
             <FieldLegend className="text-4xl">Contact</FieldLegend>
             <Input
+              data-cy="customer-email"
               {...register("email")}
               id="email"
               type="text"
@@ -30,10 +31,13 @@ export default function ContactFormFields({ register, formState }: Props) {
               className={cn("h-10 p-4", {
                 "border-red-600 border-2": formState.errors.email,
               })}
-              autoComplete="on"
+              autoComplete="email"
             />
             {formState.errors.email && (
-              <p className="text-red-600 text-sm">
+              <p
+                data-cy="customer-email-error"
+                className="text-red-600 text-sm"
+              >
                 {formState.errors.email.message}
               </p>
             )}
@@ -51,6 +55,7 @@ export default function ContactFormFields({ register, formState }: Props) {
             <SelectCountry />
             <Field>
               <Input
+                data-cy="customer-name"
                 {...register("name")}
                 id="checkout-name"
                 type="text"
@@ -58,16 +63,20 @@ export default function ContactFormFields({ register, formState }: Props) {
                 className={cn("h-10 p-4", {
                   "border-red-600 border-2": formState.errors.name,
                 })}
-                autoComplete="on"
+                autoComplete="name"
               />
               {formState.errors.name && (
-                <p className="text-red-600 text-sm">
+                <p
+                  data-cy="customer-name-error"
+                  className="text-red-600 text-sm"
+                >
                   {formState.errors.name.message}
                 </p>
               )}
             </Field>
             <Field>
               <Input
+                data-cy="customer-address"
                 {...register("address")}
                 id="checkout-address"
                 type="text"
@@ -75,10 +84,13 @@ export default function ContactFormFields({ register, formState }: Props) {
                 className={cn("h-10 p-4", {
                   "border-red-600 border-2": formState.errors.address,
                 })}
-                autoComplete="on"
+                autoComplete="street-address"
               />
               {formState.errors.address && (
-                <p className="text-red-600 text-sm">
+                <p
+                  data-cy="customer-address-error"
+                  className="text-red-600 text-sm"
+                >
                   {formState.errors.address.message}
                 </p>
               )}
@@ -94,6 +106,7 @@ export default function ContactFormFields({ register, formState }: Props) {
             <div className="grid grid-cols-2 gap-4">
               <Field>
                 <Input
+                  data-cy="customer-city"
                   {...register("city")}
                   id="checkout-city"
                   type="text"
@@ -101,16 +114,20 @@ export default function ContactFormFields({ register, formState }: Props) {
                   className={cn("h-10 p-4", {
                     "border-red-600 border-2": formState.errors.city,
                   })}
-                  autoComplete="on"
+                  autoComplete="address-level2"
                 />
                 {formState.errors.city && (
-                  <p className="text-red-600 text-sm">
+                  <p
+                    data-cy="customer-city-error"
+                    className="text-red-600 text-sm"
+                  >
                     {formState.errors.city.message}
                   </p>
                 )}
               </Field>
               <Field>
                 <Input
+                  data-cy="customer-zipcode"
                   {...register("postalCode")}
                   id="checkout-zip"
                   type="text"
@@ -118,10 +135,13 @@ export default function ContactFormFields({ register, formState }: Props) {
                   className={cn("h-10 p-4", {
                     "border-red-600 border-2": formState.errors.postalCode,
                   })}
-                  autoComplete="on"
+                  autoComplete="postal-code"
                 />
                 {formState.errors.postalCode && (
-                  <p className="text-red-600 text-sm">
+                  <p
+                    data-cy="customer-zipcode-error"
+                    className="text-red-600 text-sm"
+                  >
                     {formState.errors.postalCode.message}
                   </p>
                 )}
@@ -130,6 +150,7 @@ export default function ContactFormFields({ register, formState }: Props) {
             <Field>
               <div className="relative">
                 <Input
+                  data-cy="customer-phone"
                   {...register("phoneNr")}
                   id="checkout-phone-nr"
                   type="text"
@@ -137,12 +158,15 @@ export default function ContactFormFields({ register, formState }: Props) {
                   className={cn("h-10 p-4", {
                     "border-red-600 border-2": formState.errors.phoneNr,
                   })}
-                  autoComplete="on"
+                  autoComplete="tel"
                 />
                 <PopoverPhone />
               </div>
               {formState.errors.phoneNr && (
-                <p className="text-red-600 text-sm">
+                <p
+                  data-cy="customer-phone-error"
+                  className="text-red-600 text-sm"
+                >
                   {formState.errors.phoneNr.message}
                 </p>
               )}

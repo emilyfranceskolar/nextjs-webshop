@@ -10,7 +10,7 @@ import {
 export function SelectCountry() {
   return (
     <Select>
-      <SelectTrigger className="w-full max-w-lg">
+      <SelectTrigger className="w-full">
         <SelectValue placeholder="Country/Region" />
       </SelectTrigger>
       <SelectContent>
