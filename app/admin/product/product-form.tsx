@@ -29,9 +29,11 @@ type ProductFormProps = {
 
 type ProductFormErrors = {
     title: boolean;
+    category: boolean;
     description: boolean;
     image: boolean;
     price: boolean;
+    articleNumber: boolean;
 };
 
 function isValidUrl(value: string | undefined) {
@@ -64,21 +66,27 @@ export function ProductForm({
 }: ProductFormProps) {
     const [errors, setErrors] = useState<ProductFormErrors>({
         title: false,
+        category: false,
         description: false,
         image: false,
         price: false,
+        articleNumber: false,
     });
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         const formData = new FormData(event.currentTarget);
         const title = formData.get("title")?.toString().trim() ?? "";
+        const category = formData.get("category")?.toString().trim() ?? "";
         const description = formData.get("description")?.toString().trim() ?? "";
         const image = formData.get("image")?.toString().trim() ?? "";
         const price = formData.get("price")?.toString().trim() ?? "";
+        const articleNumber = formData.get("articleNumber")?.toString().trim() ?? "";
 
         const nextErrors: ProductFormErrors = {
             title: title.length === 0,
+            category: category.length === 0,
             description: description.length === 0,
+            articleNumber: articleNumber.length === 0,
             image: !isValidUrl(image),
             price: !isValidPrice(price),
         };
@@ -104,8 +112,8 @@ export function ProductForm({
                     <p className="text-sm text-zinc-500">{formDescription}</p>
                 </div>
 
-                <Field className="space-y-1">
-                    <Label className="font-medium text-sm text-zinc-700">Title</Label>
+                <Field className="space-y-0.5">
+                    <Label className="font-semibold text-sm text-zinc-700">Title</Label>
                     <Input
                         data-cy="product-title"
                         name="title"
@@ -115,23 +123,28 @@ export function ProductForm({
                     />
 
                     {errors.title && (
-                        <p data-cy="product-title-error" className={`text-sm text-red-600 ${errors.title ? "" : "hidden"}`}>
+                        <p data-cy="product-title-error" className={`text-sm -mt-2.5 text-red-600 ${errors.title ? "" : "hidden"}`}>
                             Required
                         </p>
                     )}
                 </Field>
 
                 <Field className="space-y-1">
-                    <Label className="font-medium text-sm text-zinc-700">Category</Label>
+                    <Label className="font-semibold text-sm text-zinc-700">Category</Label>
                     <Input
                         name="category"
                         defaultValue={initialValues?.category ?? ""}
                         className="outline rounded-sm"
                     />
+                    {errors.category && (
+                        <p className={`text-sm -mt-2.5 text-red-600 ${errors.title ? "" : "hidden"}`}>
+                            Required
+                        </p>
+                    )}
                 </Field>
 
                 <Field className="space-y-1">
-                    <Label className="font-medium text-sm text-zinc-700">Description</Label>
+                    <Label className="font-semibold text-sm text-zinc-700">Description</Label>
                     <Input
                         data-cy="product-description"
                         name="description"
@@ -140,14 +153,14 @@ export function ProductForm({
                         className="outline rounded-sm"
                     />
                     {errors.description && (
-                        <p data-cy="product-description-error" className="text-sm text-red-600">
+                        <p data-cy="product-description-error" className="text-sm -mt-2.5 text-red-600">
                             Required
                         </p>
                     )}
                 </Field>
 
                 <Field className="space-y-1">
-                    <Label className="font-medium text-sm text-zinc-700">Image</Label>
+                    <Label className="font-semibold text-sm text-zinc-700">Image</Label>
                     <Input
                         type="url"
                         data-cy="product-image"
@@ -157,14 +170,14 @@ export function ProductForm({
                         className="outline rounded-sm"
                     />
                     {errors.image && (
-                        <p data-cy="product-image-error" className="text-sm text-red-600">
-                            Not valid
+                        <p data-cy="product-image-error" className="text-sm -mt-2.5 text-red-600">
+                            Required
                         </p>
                     )}
                 </Field>
 
                 <Field className="space-y-1">
-                    <Label className="font-medium text-sm text-zinc-700">Price</Label>
+                    <Label className="font-semibold text-sm text-zinc-700">Price</Label>
                     <Input
                         type="number"
                         min="1"
@@ -175,20 +188,25 @@ export function ProductForm({
                         className="outline rounded-sm"
                     />
                     {errors.price && (
-                        <p data-cy="product-price-error" className="text-sm text-red-600">
-                            Not valid
+                        <p data-cy="product-price-error" className="text-sm -mt-2.5 text-red-600">
+                            Required
                         </p>
                     )}
                 </Field>
 
                 <Field className="space-y-1">
-                    <Label className="font-medium text-sm text-zinc-700">Article Number</Label>
+                    <Label className="font-semibold text-sm text-zinc-700">Article Number</Label>
                     <Input
                         data-cy="product-id"
                         name="articleNumber"
                         defaultValue={initialValues?.articleNumber ?? ""}
                         className="outline rounded-sm"
                     />
+                    {errors.articleNumber && (
+                        <p className="text-sm -mt-2.5 text-red-600">
+                            Required
+                        </p>
+                    )}
                 </Field>
 
                 <input type="hidden" name="id" value={initialValues?.id ?? ""} />
