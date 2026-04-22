@@ -9,7 +9,7 @@ async function deleteProduct(formData: FormData) {
   "use server"
 
   const id = formData.get("id") as string
-  await db.product.delete({ where: { id } })
+  await db.product.deleteMany({ where: { id } })
   revalidatePath("/admin")
 }
 
