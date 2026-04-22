@@ -8,7 +8,7 @@ export default function DeliveryPage() {
   };
 
   return (
-    <div className="flex px-25 py-10 sm:flex-col md:flex-col gap-10">
+    <div className="flex justify-between px-25 py-10 gap-10 md:flex-row flex-col">
       <Form />
       <Separator orientation="vertical" className="w-full" />
       <ShoppingCartList />
