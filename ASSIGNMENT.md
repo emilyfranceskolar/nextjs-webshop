@@ -156,6 +156,6 @@ Ni ska vid presentationstillfället hålla i en muntlig presentation för klasse
 - [ ] Det går att lägga till produkter via admin sidan + ls
 - [ ] Det går att ta bort produkter via admin sidan + ls
 - [ ] Det går att redigera produkter via admin sidan + ls
-- [ ] Samtliga fält för adminsidans formulär ska ha valideringsregler
+- [x] Samtliga fält för adminsidans formulär ska ha valideringsregler
 
 _Gjorda krav ska kryssas för._
