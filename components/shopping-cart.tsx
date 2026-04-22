@@ -32,13 +32,15 @@ export default function ShoppingCartList() {
   const total = subtotal;
 
   return (
-    <div className="mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+    <div className="mx-auto w-full p-15">
       <div className="flex flex-col gap-2 mb-8 text-center">
         <h1 className="text-3xl font-bold sm:text-4xl">Your Shopping Cart</h1>
         <p className="text-muted-foreground">
           {productsInCart.length}{" "}
           {productsInCart.length === 1 ? "item" : "items"} in your cart •{" "}
-          <span data-cy="total-price" className="text-foreground font-semibold">{subtotal} kr </span>
+          <span data-cy="total-price" className="text-foreground font-semibold">
+            {subtotal} kr{" "}
+          </span>
         </p>
       </div>
 
@@ -64,7 +66,8 @@ export default function ShoppingCartList() {
             </Card>
           ) : (
             productsInCart.map((item) => (
-              <Card data-cy="cart-item"
+              <Card
+                data-cy="cart-item"
                 key={item.id}
                 className={cn("gap-0 overflow-hidden py-0", {
                   "opacity-50": isRemoving === item.id,
@@ -82,7 +85,10 @@ export default function ShoppingCartList() {
                   <div className="flex-1 p-4">
                     <div className="flex items-start justify-between">
                       <div>
-                        <h3 data-cy="product-title" className="text-foreground text-lg font-medium">
+                        <h3
+                          data-cy="product-title"
+                          className="text-foreground text-lg font-medium"
+                        >
                           {item.title}
                         </h3>
                       </div>
@@ -97,26 +103,30 @@ export default function ShoppingCartList() {
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <Button data-cy="decrease-quantity-button"
+                        <Button
+                          data-cy="decrease-quantity-button"
                           variant="outline"
                           size="icon"
                           className="size-8 cursor-pointer"
                           onClick={() => {
                             if (item.quantity > 1) {
-                              updateQuantity(item.id, item.quantity - 1)
+                              updateQuantity(item.id, item.quantity - 1);
                             } else {
                               handleRemoveItem(item.id);
                             }
-                          }
-                          }
+                          }}
                         >
                           <FiMinusCircle />
                         </Button>
-                        <span data-cy="product-quantity" className="w-8 text-center text-sm font-medium">
+                        <span
+                          data-cy="product-quantity"
+                          className="w-8 text-center text-sm font-medium"
+                        >
                           {item.quantity}
                         </span>
 
-                        <Button data-cy="increase-quantity-button"
+                        <Button
+                          data-cy="increase-quantity-button"
                           variant="outline"
                           size="icon"
                           className="size-8 cursor-pointer"
@@ -133,7 +143,10 @@ export default function ShoppingCartList() {
                         Quantity: {item.quantity}
                       </span>
                       <div className="text-start">
-                        <p data-cy="product-price" className="text-md font-medium">
+                        <p
+                          data-cy="product-price"
+                          className="text-md font-medium"
+                        >
                           {item.price * item.quantity} kr
                         </p>
                       </div>
