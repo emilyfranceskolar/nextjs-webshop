@@ -1,12 +1,12 @@
 "use client"
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { FieldGroup, Field, FieldLegend } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { FormEvent } from "react";
+
 
 type ProductFormValues = {
     id?: string;
@@ -42,7 +42,6 @@ function isValidUrl(value: string | undefined) {
     if (value.startsWith("/") && value.match(/\.(jpg|jpeg|png|webp)$/i)) {
         return true;
     }
-
     try {
         const url = new URL(value);
         return url.protocol === "http:" || url.protocol === "https:";
@@ -84,9 +83,9 @@ export function ProductForm({
 
         const nextErrors: ProductFormErrors = {
             title: title.length === 0,
-            category: category.length === 0,
+            category: false,
             description: description.length === 0,
-            articleNumber: articleNumber.length === 0,
+            articleNumber: false,
             image: !isValidUrl(image),
             price: !isValidPrice(price),
         };
@@ -137,7 +136,7 @@ export function ProductForm({
                         className="outline rounded-sm"
                     />
                     {errors.category && (
-                        <p className={`text-sm -mt-2.5 text-red-600 ${errors.title ? "" : "hidden"}`}>
+                        <p className={`text-sm -mt-2.5 text-red-600 ${errors.category ? "" : "hidden"}`}>
                             Required
                         </p>
                     )}
@@ -202,11 +201,6 @@ export function ProductForm({
                         defaultValue={initialValues?.articleNumber ?? ""}
                         className="outline rounded-sm"
                     />
-                    {errors.articleNumber && (
-                        <p className="text-sm -mt-2.5 text-red-600">
-                            Required
-                        </p>
-                    )}
                 </Field>
 
                 <input type="hidden" name="id" value={initialValues?.id ?? ""} />

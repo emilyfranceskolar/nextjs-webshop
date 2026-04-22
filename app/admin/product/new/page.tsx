@@ -10,13 +10,9 @@ async function createNewProduct(formData: FormData) {
   const title = formData.get("title") as string;
   const price = Number(formData.get("price"));
 
-  if (!title) {
-    throw new Error("Required");
+  if (!title || !price || price <= 0) {
+    return;
   }
-  if (!price || price <= 0) {
-    throw new Error("Invalid");
-  }
-
   const description = formData.get("description") as string;
   const image = formData.get("image") as string;
   const articleNumberValue = Number(formData.get("articleNumber"));
@@ -29,7 +25,6 @@ async function createNewProduct(formData: FormData) {
     },
   });
 
-  revalidatePath("/admin/product/new");
   redirect("/admin");
 }
 
