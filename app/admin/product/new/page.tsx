@@ -1,7 +1,5 @@
-import { Form } from "@/components/add-new-product-form";
+import ProductForm from "../product-form";
 import { db } from "@/prisma/db";
-import { redirect } from "next/navigation";
-
 
 async function createNewProduct(formData: FormData) {
   "use server"
@@ -20,7 +18,7 @@ async function createNewProduct(formData: FormData) {
 
   await db.product.create({
     data: {
-      title, price, description, image, slug, articleNumber,
+      title, price, description, image, slug, articleNumber
     },
   });
 
@@ -31,8 +29,8 @@ export default function NewProductPage() {
 
   return (
     <main className="min-h-screen grid bg-muted/30 md:grid-cols-2">
-      <div className="flex justify-center items-center space-y-4 text-stone-800 bg-white">
-        <Form action={createNewProduct} />
+      <div className="flex justify-center w-full items-center space-y-4 text-stone-800 bg-white">
+        <ProductForm action={createNewProduct} />
       </div>
 
       <div className="hidden h-screen md:block">

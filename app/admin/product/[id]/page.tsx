@@ -1,7 +1,7 @@
-import { Form } from "@/components/add-new-product-form";
+
 import { db } from "@/prisma/db";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import ProductForm from "../product-form";
 
 async function editProduct(formData: FormData) {
   "use server";
@@ -43,7 +43,7 @@ export default async function EditProductPage({
   return (
     <main className="min-h-screen grid bg-muted/30 md:grid-cols-2">
       <div className="flex flex-col flex-1 justify-center items-center text-stone-800 bg-white">
-        <Form
+        <ProductForm
           action={editProduct}
           initialValues={{
             id: product.id,

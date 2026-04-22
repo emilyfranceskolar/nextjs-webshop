@@ -2,19 +2,51 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { FieldGroup, Field, FieldLegend } from "@/components/ui/field";
+import { Field, FieldLegend } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { FormState, UseFormRegister } from "react-hook-form";
-import { ProductFormValues } from "@/data/form";
+import { FormState, useForm, UseFormRegister } from "react-hook-form";
+import { ProductFormValues, productSchema } from "@/data/form";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-interface Props {
+interface ProductFormProps {
+  initialValues?: ProductFormValues;
+  action: (formData: FormData) => Promise<void>;
+}
+
+interface ProductFormInputsProps {
   register: UseFormRegister<ProductFormValues>;
   formState: FormState<ProductFormValues>;
 }
+export default function ProductForm({ initialValues, action }: ProductFormProps) {
+  const router = useRouter();
+  const { register, handleSubmit, formState } = useForm<ProductFormValues>({
+    resolver: zodResolver(productSchema), defaultValues: initialValues,
+  });
 
-export default function ProductForm({ register, formState }: Props) {
+  const onSubmit = async (data: ProductFormValues) => {
+    const formData = new FormData();
+
+    Object.entries(data).forEach(([key, value]) => {
+      if (value !== undefined) {
+        formData.append(key, value.toString());
+      }
+    })
+    console.log("Save....", data);
+    await action(formData);
+    router.push("/admin");
+
+  };
+
+  return (
+    <form className="w-full mr-10 ml-10 max-w-md md:max-w-lg mx-auto" data-cy="product-form" onSubmit={handleSubmit(onSubmit)}>
+      <ProductFormInputs register={register} formState={formState} />
+    </form>
+  );
+}
+
+function ProductFormInputs({ register, formState }: ProductFormInputsProps) {
   return (
     <div className="w-full space-y-4">
       <input type="hidden" {...register("id")} />
@@ -25,8 +57,7 @@ export default function ProductForm({ register, formState }: Props) {
           {...register("title")}
           id="title"
           type="text"
-          placeholder="Title"
-          className={cn("h-12 w-full p-4", {
+          className={cn("h-10 w-full p-4", {
             "border-red-600 border-2": formState.errors.title,
           })}
           autoComplete="title" />
@@ -47,7 +78,6 @@ export default function ProductForm({ register, formState }: Props) {
           {...register("category")}
           id="category"
           type="text"
-          placeholder="Category"
           className={cn("h-10 p-4", {
             "border-red-600 border-2": formState.errors.category,
           })}
@@ -69,7 +99,6 @@ export default function ProductForm({ register, formState }: Props) {
           {...register("description")}
           id="description"
           type="text"
-          placeholder="Description"
           className={cn("h-10 p-4", {
             "border-red-600 border-2": formState.errors.description,
           })}
@@ -94,7 +123,6 @@ export default function ProductForm({ register, formState }: Props) {
           {...register("image")}
           id="image"
           type="text"
-          placeholder="Image URL"
           className={cn("h-10 p-4", {
             "border-red-600 border-2": formState.errors.image,
           })}
@@ -119,7 +147,6 @@ export default function ProductForm({ register, formState }: Props) {
           {...register("price")}
           id="price"
           type="number"
-          placeholder="Price"
           className={cn("h-10 p-4", {
             "border-red-600 border-2": formState.errors.price,
           })}
@@ -144,7 +171,6 @@ export default function ProductForm({ register, formState }: Props) {
           {...register("articleNumber")}
           id="articleNumber"
           type="text"
-          placeholder="Article Number"
           className={cn("h-10 p-4", {
             "border-red-600 border-2": formState.errors.articleNumber,
           })}
