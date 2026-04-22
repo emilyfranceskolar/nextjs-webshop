@@ -1,6 +1,5 @@
-import { ProductForm } from "@/app/admin/product/product-form";
+import { Form } from "@/components/add-new-product-form";
 import { db } from "@/prisma/db";
-import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 
@@ -25,7 +24,7 @@ async function createNewProduct(formData: FormData) {
     },
   });
 
-  redirect("/admin");
+  return;
 }
 
 export default function NewProductPage() {
@@ -33,12 +32,7 @@ export default function NewProductPage() {
   return (
     <main className="min-h-screen grid bg-muted/30 md:grid-cols-2">
       <div className="flex justify-center items-center space-y-4 text-stone-800 bg-white">
-        <ProductForm
-          action={createNewProduct}
-          submitLabel="Add"
-          formTitle="Add more products?"
-          formDescription="Fill in the details below"
-        />
+        <Form action={createNewProduct} />
       </div>
 
       <div className="hidden h-screen md:block">

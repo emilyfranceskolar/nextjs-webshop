@@ -1,4 +1,4 @@
-import { ProductForm } from "@/app/admin/product/product-form";
+import { Form } from "@/components/add-new-product-form";
 import { db } from "@/prisma/db";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -25,7 +25,7 @@ async function editProduct(formData: FormData) {
   });
 
   revalidatePath("/admin");
-  redirect("/admin");
+  return;
 }
 
 export default async function EditProductPage({
@@ -38,21 +38,20 @@ export default async function EditProductPage({
     where: { articleNumber: id },
   });
 
+  if (!product) return <p>Product not found!</p>;
+
   return (
     <main className="min-h-screen grid bg-muted/30 md:grid-cols-2">
       <div className="flex flex-col flex-1 justify-center items-center text-stone-800 bg-white">
-        <ProductForm
+        <Form
           action={editProduct}
-          submitLabel="Edit"
-          formTitle="Edit your product?"
-          formDescription="Change your details below"
           initialValues={{
-            id: product?.id,
+            id: product.id,
             title: product?.title,
             category: product?.category ?? "",
             description: product?.description,
             image: product?.image,
-            price: product?.price,
+            price: product?.price.toString(),
             articleNumber: product?.articleNumber,
             slug: product?.slug,
           }}
