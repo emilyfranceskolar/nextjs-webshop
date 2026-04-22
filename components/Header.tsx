@@ -1,9 +1,22 @@
 "use client";
 import { useCartContext } from "@/app/providers/cart-provider";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const { productsInCart, isLoaded } = useCartContext();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathName = usePathname();
+  const isHomePage = pathName === "/";
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const totalQuantity = productsInCart.reduce(
     (sum, product) => sum + (product.quantity || 1),
@@ -11,10 +24,16 @@ export default function Header() {
   );
 
   return (
-    <header className="flex items-center justify-between border-b-26 border-rose-900 px-8 py-10">
+    <header
+      className={`flex items-center justify-between border-rose-900 bg-white z-50 transition-all duration-300 ${
+        isHomePage ? "sticky top-0" : ""
+      } ${isScrolled ? "px-4 py-3 border-b-10" : "px-8 py-10 border-b-26"}`}
+    >
       <Link
         href="/"
-        className="bg-[url('/assets/images/worn-stories-logo.png')] bg-contain bg-no-repeat bg-center w-55 h-30 text-4xl text-black"
+        className={`bg-[url('/assets/images/worn-stories-logo.png')] bg-contain bg-no-repeat bg-center text-4xl text-black transition-all duration-300 ${
+          isScrolled ? "w-40 h-20" : "w-55 h-30"
+        }`}
       ></Link>
       <nav className="flex gap-8">
         <Link

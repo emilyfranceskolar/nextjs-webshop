@@ -20,7 +20,7 @@ export default function ProductCard({
         <img src={imageUrl} alt={title} className="relative w-full mt-0" />
       </Link>
       <Link href={`/product/${articleNumber}/${slug}`} className="block">
-        <CardHeader className="flex justify-between">
+        <CardHeader className="flex p-4 justify-between">
           <CardTitle data-cy="product-title">{title}</CardTitle>
           <p data-cy="product-price">{price}kr</p>
         </CardHeader>
