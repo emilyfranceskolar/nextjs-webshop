@@ -1,222 +1,205 @@
 "use client"
 
-import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { FieldGroup, Field, FieldLegend } from "@/components/ui/field";
+import { Field, FieldLegend } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { FormState, useForm, UseFormRegister } from "react-hook-form";
+import { ProductFormValues, productSchema } from "@/data/form";
+import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-
-type ProductFormValues = {
-    id?: string;
-    title?: string;
-    category?: string;
-    description?: string;
-    image?: string | number;
-    price?: string | number;
-    articleNumber?: string | number;
-    slug?: string;
-};
-
-type ProductFormProps = {
-    action: (formData: FormData) => Promise<void>;
-    submitLabel: string;
-    formTitle: string;
-    formDescription: string;
-    initialValues?: ProductFormValues;
-};
-
-type ProductFormErrors = {
-    title: boolean;
-    category: boolean;
-    description: boolean;
-    image: boolean;
-    price: boolean;
-    articleNumber: boolean;
-};
-
-function isValidUrl(value: string | undefined) {
-    if (!value) return false;
-
-    if (value.startsWith("/") && value.match(/\.(jpg|jpeg|png|webp)$/i)) {
-        return true;
-    }
-    try {
-        const url = new URL(value);
-        return url.protocol === "http:" || url.protocol === "https:";
-    } catch {
-        return false;
-    }
+interface ProductFormProps {
+  initialValues?: ProductFormValues;
+  action: (formData: FormData) => Promise<void>;
 }
 
-function isValidPrice(value: string | undefined) {
-    if (!value) return false;
-    const parsed = Number(value);
-    return !Number.isNaN(parsed) && parsed > 0;
+interface ProductFormInputsProps {
+  register: UseFormRegister<ProductFormValues>;
+  formState: FormState<ProductFormValues>;
+}
+export default function ProductForm({ initialValues, action }: ProductFormProps) {
+  const router = useRouter();
+  const { register, handleSubmit, formState } = useForm<ProductFormValues>({
+    resolver: zodResolver(productSchema), defaultValues: initialValues,
+  });
+
+  const onSubmit = async (data: ProductFormValues) => {
+    const formData = new FormData();
+
+    Object.entries(data).forEach(([key, value]) => {
+      if (value !== undefined) {
+        formData.append(key, value.toString());
+      }
+    })
+    console.log("Save....", data);
+    await action(formData);
+    router.push("/admin");
+
+  };
+
+  return (
+    <form className="w-full mr-10 ml-10 max-w-md md:max-w-lg mx-auto" data-cy="product-form" onSubmit={handleSubmit(onSubmit)}>
+      <ProductFormInputs register={register} formState={formState} />
+    </form>
+  );
 }
 
-export function ProductForm({
-    action,
-    submitLabel,
-    formTitle,
-    formDescription,
-    initialValues,
-}: ProductFormProps) {
-    const [errors, setErrors] = useState<ProductFormErrors>({
-        title: false,
-        category: false,
-        description: false,
-        image: false,
-        price: false,
-        articleNumber: false,
-    });
+function ProductFormInputs({ register, formState }: ProductFormInputsProps) {
+  return (
+    <div className="w-full space-y-4">
+      <input type="hidden" {...register("id")} />
+      <Field className="space-y-2 w-full">
+        <FieldLegend className="text-2xl font-bold text-zinc-800">Title</FieldLegend>
+        <Input
+          data-cy="product-title"
+          {...register("title")}
+          id="title"
+          type="text"
+          className={cn("h-10 w-full p-4", {
+            "border-red-600 border-2": formState.errors.title,
+          })}
+          autoComplete="title" />
+        {formState.errors.title && (
+          <p
+            data-cy="product-title-error"
+            className="text-red-600 text-sm"
+          >
+            {formState.errors.title.message}
+          </p>
+        )}
+      </Field>
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-        const formData = new FormData(event.currentTarget);
-        const title = formData.get("title")?.toString().trim() ?? "";
-        const category = formData.get("category")?.toString().trim() ?? "";
-        const description = formData.get("description")?.toString().trim() ?? "";
-        const image = formData.get("image")?.toString().trim() ?? "";
-        const price = formData.get("price")?.toString().trim() ?? "";
-        const articleNumber = formData.get("articleNumber")?.toString().trim() ?? "";
+      <Field>
+        <FieldLegend className="text-2xl font-bold text-zinc-800">Category</FieldLegend>
+        <Input
+          data-cy="product-category"
+          {...register("category")}
+          id="category"
+          type="text"
+          className={cn("h-10 p-4", {
+            "border-red-600 border-2": formState.errors.category,
+          })}
+          autoComplete="category" />
+        {formState.errors.category && (
+          <p
+            data-cy="product-category-error"
+            className="text-red-600 text-sm"
+          >
+            {formState.errors.category.message}
+          </p>
+        )}
+      </Field>
 
-        const nextErrors: ProductFormErrors = {
-            title: title.length === 0,
-            category: false,
-            description: description.length === 0,
-            articleNumber: false,
-            image: !isValidUrl(image),
-            price: !isValidPrice(price),
-        };
+      <Field>
+        <FieldLegend className="text-2xl font-bold text-zinc-800">Description</FieldLegend>
+        <Input
+          data-cy="product-description"
+          {...register("description")}
+          id="description"
+          type="text"
+          className={cn("h-10 p-4", {
+            "border-red-600 border-2": formState.errors.description,
+          })}
+          autoComplete="description" />
+        {formState.errors.description && (
+          <p
+            data-cy="product-description-error"
+            className="text-red-600 text-sm"
+          >
+            {formState.errors.description.message}
+          </p>
+        )}
+      </Field>
 
-        setErrors(nextErrors);
 
-        if (Object.values(nextErrors).some(Boolean)) {
-            event.preventDefault();
-        }
-    };
+      <Field>
+        <FieldLegend className="text-2xl font-bold text-zinc-800">
+          Image
+        </FieldLegend>
+        <Input
+          data-cy="product-image"
+          {...register("image")}
+          id="image"
+          type="text"
+          className={cn("h-10 p-4", {
+            "border-red-600 border-2": formState.errors.image,
+          })}
+          autoComplete="off" />
+        {formState.errors.image && (
+          <p
+            data-cy="product-image-error"
+            className="text-red-600 text-sm"
+          >
+            {formState.errors.image.message}
+          </p>
+        )}
+      </Field>
 
-    return (
-        <form
-            action={action}
-            data-cy="product-form"
-            className="w-full max-w-md"
-            onSubmit={handleSubmit}
-            noValidate
-        >
-            <FieldGroup>
-                <div>
-                    <FieldLegend className="text-2xl font-bold text-zinc-800">{formTitle}</FieldLegend>
-                    <p className="text-sm text-zinc-500">{formDescription}</p>
-                </div>
+      <Field>
+        <FieldLegend className="text-2xl font-bold text-zinc-800">
+          Price
+        </FieldLegend>
 
-                <Field className="space-y-0.5">
-                    <Label className="font-semibold text-sm text-zinc-700">Title</Label>
-                    <Input
-                        data-cy="product-title"
-                        name="title"
-                        defaultValue={initialValues?.title ?? ""}
-                        required
-                        className="outline rounded-sm p-2 border focus:ring-2 focus:ring-red-600"
-                    />
+        <Input
+          data-cy="product-price"
+          {...register("price")}
+          id="price"
+          type="number"
+          className={cn("h-10 p-4", {
+            "border-red-600 border-2": formState.errors.price,
+          })}
+          autoComplete="off" />
+        {formState.errors.price && (
+          <p
+            data-cy="product-price-error"
+            className="text-red-600 text-sm"
+          >
+            {formState.errors.price.message}
+          </p>
+        )}
+      </Field>
 
-                    {errors.title && (
-                        <p data-cy="product-title-error" className={`text-sm -mt-2.5 text-red-600 ${errors.title ? "" : "hidden"}`}>
-                            Required
-                        </p>
-                    )}
-                </Field>
+      <Field>
+        <FieldLegend className="text-2xl font-bold text-zinc-800">
+          Article Number
+        </FieldLegend>
 
-                <Field className="space-y-1">
-                    <Label className="font-semibold text-sm text-zinc-700">Category</Label>
-                    <Input
-                        name="category"
-                        defaultValue={initialValues?.category ?? ""}
-                        className="outline rounded-sm"
-                    />
-                    {errors.category && (
-                        <p className={`text-sm -mt-2.5 text-red-600 ${errors.category ? "" : "hidden"}`}>
-                            Required
-                        </p>
-                    )}
-                </Field>
+        <Input
+          data-cy="product-articleNumber"
+          {...register("articleNumber")}
+          id="articleNumber"
+          type="text"
+          className={cn("h-10 p-4", {
+            "border-red-600 border-2": formState.errors.articleNumber,
+          })}
+          autoComplete="off" />
+        {formState.errors.articleNumber && (
+          <p
+            data-cy="product-articleNumber-error"
+            className="text-red-600 text-sm"
+          >
+            {formState.errors.articleNumber.message}
+          </p>
+        )}
+      </Field>
 
-                <Field className="space-y-1">
-                    <Label className="font-semibold text-sm text-zinc-700">Description</Label>
-                    <Input
-                        data-cy="product-description"
-                        name="description"
-                        defaultValue={initialValues?.description ?? ""}
-                        required
-                        className="outline rounded-sm"
-                    />
-                    {errors.description && (
-                        <p data-cy="product-description-error" className="text-sm -mt-2.5 text-red-600">
-                            Required
-                        </p>
-                    )}
-                </Field>
-
-                <Field className="space-y-1">
-                    <Label className="font-semibold text-sm text-zinc-700">Image</Label>
-                    <Input
-                        type="url"
-                        data-cy="product-image"
-                        name="image"
-                        defaultValue={initialValues?.image ?? ""}
-                        required
-                        className="outline rounded-sm"
-                    />
-                    {errors.image && (
-                        <p data-cy="product-image-error" className="text-sm -mt-2.5 text-red-600">
-                            Required
-                        </p>
-                    )}
-                </Field>
-
-                <Field className="space-y-1">
-                    <Label className="font-semibold text-sm text-zinc-700">Price</Label>
-                    <Input
-                        type="number"
-                        min="1"
-                        data-cy="product-price"
-                        name="price"
-                        defaultValue={initialValues?.price ?? ""}
-                        required
-                        className="outline rounded-sm"
-                    />
-                    {errors.price && (
-                        <p data-cy="product-price-error" className="text-sm -mt-2.5 text-red-600">
-                            Required
-                        </p>
-                    )}
-                </Field>
-
-                <Field className="space-y-1">
-                    <Label className="font-semibold text-sm text-zinc-700">Article Number</Label>
-                    <Input
-                        data-cy="product-id"
-                        name="articleNumber"
-                        defaultValue={initialValues?.articleNumber ?? ""}
-                        className="outline rounded-sm"
-                    />
-                </Field>
-
-                <input type="hidden" name="id" value={initialValues?.id ?? ""} />
-                <input type="hidden" name="slug" value={initialValues?.slug ?? ""} />
-            </FieldGroup>
-
-            <Field className="pt-6 pb-6" orientation="horizontal">
-                <Link href="/admin">
-                    <Button type="button" variant="outline" className="rounded-full px-6">
-                        Cancel
-                    </Button>
-                </Link>
-                <Button type="submit" data-cy={submitLabel === "Add" ? "admin-add-product" : "admin-edit-product"} className="hover:bg-red-900 text-white rounded-full px-6">
-                    {submitLabel}
-                </Button>
-            </Field>
-        </form>
-    );
+      <Field className="pt-6 pb-6" orientation="horizontal">
+        <div className="flex gap-4">
+          <Button type="submit" variant="outline" className="rounded-full bg-black text-white">
+            Confirm
+          </Button>
+          <Link href="/admin">
+            <Button type="button" variant="outline" className="rounded-full">
+              Cancel
+            </Button>
+          </Link>
+        </div>
+        {/* <Button type="submit" data-cy={submitLabel === "Add" ? "admin-add-product" : "admin-edit-product"} className="hover:bg-red-900 text-white rounded-full px-6">
+      {submitLabel}
+    </Button> */}
+      </Field>
+    </div >
+  );
 }
