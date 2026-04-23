@@ -153,9 +153,9 @@ Ni ska vid presentationstillfället hålla i en muntlig presentation för klasse
 
 - [x] Det finns en admin-sida för produkthantering
 - [x] Det ska gå att se alla produkter på admin sidan
-- [ ] Det går att lägga till produkter via admin sidan + ls
-- [ ] Det går att ta bort produkter via admin sidan + ls
-- [ ] Det går att redigera produkter via admin sidan + ls
+- [x] Det går att lägga till produkter via admin sidan + ls
+- [x] Det går att ta bort produkter via admin sidan + ls
+- [x] Det går att redigera produkter via admin sidan + ls
 - [x] Samtliga fält för adminsidans formulär ska ha valideringsregler
 
 _Gjorda krav ska kryssas för._
