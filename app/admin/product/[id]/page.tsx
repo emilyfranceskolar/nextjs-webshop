@@ -42,7 +42,7 @@ export default async function EditProductPage({
 
   return (
     <main className="min-h-screen grid bg-muted/30 md:grid-cols-2">
-      <div className="flex flex-col flex-1 justify-center items-center text-stone-800 bg-white">
+      <div className="flex flex-col p-4 flex-1 justify-center items-center text-stone-800 bg-white">
         <ProductForm
           action={editProduct}
           initialValues={{

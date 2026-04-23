@@ -25,17 +25,19 @@ export default function Header() {
 
   return (
     <header
-      className={`flex items-center justify-between border-rose-900 bg-white z-50 transition-all duration-300 ${
-        isHomePage ? "sticky top-0" : ""
-      } ${isScrolled ? "px-4 py-3 border-b-10" : "px-8 py-10 border-b-26"}`}
+      className={`flex flex-wrap relative items-center justify-between border-rose-900 bg-white z-50 transition-all duration-300 ${isHomePage ? "sticky top-0" : ""
+        } ${isScrolled ? "justify-center items-center px-4 py-3 border-b-10" : "px-8 py-10 border-b-26"}`}
     >
-      <Link
-        href="/"
-        className={`bg-[url('/assets/images/worn-stories-logo.png')] bg-contain bg-no-repeat bg-center text-4xl text-black transition-all duration-300 ${
-          isScrolled ? "w-40 h-20" : "w-55 h-30"
-        }`}
-      ></Link>
-      <nav className="flex gap-8">
+      <div className="flex flex-1 justify-center items-center">
+
+        <Link
+          href="/"
+          className={`bg-[url('/assets/images/worn-stories-logo.png')] block bg-contain bg-no-repeat bg-center text-4xl text-black transition-all duration-300 ${isScrolled ? "w-40 h-20" : "w-55 h-30"
+            }`}
+        ></Link>
+      </div>
+
+      <nav className="flex justify-center flex-1 mt-6 gap-8 text-sm md:text-lg ">
         <Link
           href="/product"
           className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
@@ -46,7 +48,7 @@ export default function Header() {
           href="/admin"
           className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
         >
-          <p data-cy="admin-link">Admin</p>
+          <p data-cy=" admin-link">Admin</p>
         </Link>
         <Link
           href="/checkout"
