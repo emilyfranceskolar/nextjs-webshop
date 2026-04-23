@@ -54,7 +54,7 @@ export const products: Product[] = [
     image: "/assets/images/top-4.jpg",
     title: "Vintage T-shirt",
     description:
-      "Classic long sleeve top with a vintage touch. Soft fabric and relaxed fit make it ideal for layering or wearing on its own.",
+      "Classic T-shirt with a vintage touch. Soft fabric and relaxed fit make it ideal for layering or wearing on its own.",
     price: 350,
   },
   {
@@ -65,7 +65,7 @@ export const products: Product[] = [
     image: "/assets/images/top-5.jpg",
     title: "Vintage T-shirt",
     description:
-      "Comfortable hoodie with a vintage-inspired wash and relaxed fit. Designed for warmth and effortless streetwear style.",
+      "Comfortable T-shirt with a vintage-inspired wash and relaxed fit. Designed for effortless street wear style.",
     price: 275,
   },
   {
@@ -76,7 +76,7 @@ export const products: Product[] = [
     image: "/assets/images/top-6.jpg",
     title: "Vintage T-shirt",
     description:
-      "Timeless crewneck sweatshirt with a soft feel and worn-in look. A perfect blend of comfort and vintage style.",
+      "Timeless T-shirt with a soft feel and worn-in look. A perfect blend of comfort and vintage style.",
     price: 275,
   },
   {
@@ -98,7 +98,7 @@ export const products: Product[] = [
     image: "/assets/images/top-8.jpg",
     title: "Vintage T-shirt",
     description:
-      "Lightweight tank top with a vintage aesthetic. Designed for warm days with a relaxed and breathable fit.",
+      "Lightweight T-shirt with a classic vintage aesthetic. Designed for warm days with a relaxed and breathable fit.",
     price: 450,
   },
   {
@@ -107,9 +107,9 @@ export const products: Product[] = [
     category: "Bottoms",
     articleNumber: "889",
     image: "/assets/images/bottom-1.jpg",
-    title: "Vintage Jeans",
+    title: "Vintage Cargo Pants",
     description:
-      "Classic vintage-inspired jeans with a relaxed fit and authentic worn-in feel. Made from durable denim for everyday comfort and timeless style.",
+      "Classic cargo pants with a relaxed fit and authentic worn-in feel. Made from durable cotton for everyday comfort and timeless style.",
     price: 799,
   },
   {
@@ -118,9 +118,9 @@ export const products: Product[] = [
     category: "Bottoms",
     articleNumber: "890",
     image: "/assets/images/bottom-2.jpg",
-    title: "Vintage Sweatpants",
+    title: "Vintage Chinos",
     description:
-      "Soft vintage-style sweatpants with a relaxed silhouette and faded finish. Designed for comfort with a laid-back, retro vibe.",
+      "Soft vintage-style chinos with a relaxed silhouette and faded finish. Designed for comfort with a laid-back vibe.",
     price: 650,
   },
   {
@@ -129,9 +129,9 @@ export const products: Product[] = [
     category: "Bottoms",
     articleNumber: "891",
     image: "/assets/images/bottom-3.jpg",
-    title: "Vintage Shorts",
+    title: "Vintage Plaid Chinos",
     description:
-      "Lightweight vintage-inspired shorts with a worn-in look. Perfect for warm days with a relaxed fit and effortless style.",
+      "Lightweight vintage-inspired plaid chinos with a worn-in look. Perfect for warm days with a relaxed fit and effortless style.",
     price: 499,
   },
   {
@@ -140,9 +140,9 @@ export const products: Product[] = [
     category: "Bottoms",
     articleNumber: "892",
     image: "/assets/images/bottom-4.jpg",
-    title: "Vintage Cargo Pants",
+    title: "Vintage Jeans",
     description:
-      "Utility-inspired cargo pants with a vintage finish. Featuring multiple pockets and a relaxed fit for both function and style.",
+      "Classic vintage jeans with a vintage finish. Featuring patches and a relaxed fit for a rustic style.",
     price: 899,
   },
   {
@@ -151,9 +151,9 @@ export const products: Product[] = [
     category: "Bottoms",
     articleNumber: "893",
     image: "/assets/images/bottom-5.jpg",
-    title: "Vintage Denim Shorts",
+    title: "Vintage Denim Jeans",
     description:
-      "Timeless denim shorts with a vintage wash and slightly distressed details. Designed for a casual, effortless look.",
+      "Timeless denim jeans with a vintage wash and slightly distressed details. Designed for a casual, effortless look.",
     price: 550,
   },
   {
@@ -162,9 +162,9 @@ export const products: Product[] = [
     category: "Bottoms",
     articleNumber: "894",
     image: "/assets/images/bottom-6.jpg",
-    title: "Vintage Joggers",
+    title: "Vintage Cargo Pants",
     description:
-      "Comfortable vintage-style joggers with a soft feel and tapered fit. Perfect for everyday wear with a retro touch.",
+      "Comfortable vintage-style cargo pants with a soft feel and tapered fit. Perfect for everyday wear with a retro touch and feel.",
     price: 699,
   },
   {
@@ -173,9 +173,9 @@ export const products: Product[] = [
     category: "Bottoms",
     articleNumber: "895",
     image: "/assets/images/bottom-7.jpg",
-    title: "Vintage Linen Pants",
+    title: "Vintage Blue Jeans",
     description:
-      "Breathable linen pants with a vintage-inspired design. Lightweight and relaxed for a clean, effortless summer style.",
+      "Breathable jeans with a vintage-inspired design. Lightweight and relaxed for a clean, effortless summer style.",
     price: 750,
   },
   {
@@ -184,9 +184,9 @@ export const products: Product[] = [
     category: "Bottoms",
     articleNumber: "896",
     image: "/assets/images/bottom-8.jpg",
-    title: "Vintage Corduroy Pants",
+    title: "Vintage Blue Jeans",
     description:
-      "Retro corduroy pants with a soft texture and vintage feel. Designed with a relaxed fit for timeless everyday wear.",
+      "Retro jeans with a soft texture and vintage feel. Designed with a relaxed fit for timeless everyday wear.",
     price: 820,
   },
   {
@@ -195,9 +195,9 @@ export const products: Product[] = [
     category: "Shoes",
     articleNumber: "897",
     image: "/assets/images/shoe-1.jpg",
-    title: "Vintage Sneakers",
+    title: "Vintage 'All-Star' Sneakers",
     description:
-      "Retro-inspired sneakers with a classic silhouette and worn-in details. Designed for everyday comfort with a timeless streetwear feel.",
+      "Retro-inspired All-Star sneakers with a classic silhouette and worn-in details. Designed for everyday comfort with a timeless street wear feel.",
     price: 950,
   },
   {
@@ -217,9 +217,9 @@ export const products: Product[] = [
     category: "Shoes",
     articleNumber: "899",
     image: "/assets/images/shoe-3.jpg",
-    title: "Vintage Canvas Shoes",
+    title: "Vintage Boots",
     description:
-      "Lightweight canvas shoes with a faded vintage look. Perfect for casual wear with a relaxed and effortless style.",
+      "Lightweight boots with a faded vintage look. Perfect for casual wear with a relaxed and effortless style.",
     price: 699,
   },
   {
@@ -228,9 +228,9 @@ export const products: Product[] = [
     category: "Shoes",
     articleNumber: "900",
     image: "/assets/images/shoe-4.jpg",
-    title: "Vintage Running Shoes",
+    title: "Vintage 'All-Star' Shoes",
     description:
-      "Old-school running shoes inspired by retro designs. Comfortable cushioning meets a nostalgic athletic aesthetic.",
+      "Old-school shoes inspired by 'All-Star' design. Comfortable cushioning meets a nostalgic athletic aesthetic.",
     price: 999,
   },
   {
@@ -239,9 +239,9 @@ export const products: Product[] = [
     category: "Shoes",
     articleNumber: "901",
     image: "/assets/images/shoe-5.jpg",
-    title: "Vintage Loafers",
+    title: "Vintage Winter Boots",
     description:
-      "Classic loafers with a vintage touch. Sleek design combined with all-day comfort for a refined yet relaxed look.",
+      "Classic durable winter boots with a vintage touch. Classic design combined with warm layers for a relaxed and comfy look for colder weather.",
     price: 1100,
   },
   {
@@ -250,9 +250,9 @@ export const products: Product[] = [
     category: "Shoes",
     articleNumber: "902",
     image: "/assets/images/shoe-6.jpg",
-    title: "Vintage Sandals",
+    title: "Vintage Sneakers",
     description:
-      "Minimalist sandals with a vintage-inspired design. Lightweight and breathable for warm-weather comfort.",
+      "Minimalist sneakers with a vintage-inspired design. Lightweight and breathable for warm-weather comfort.",
     price: 550,
   },
   {
@@ -261,9 +261,9 @@ export const products: Product[] = [
     category: "Shoes",
     articleNumber: "903",
     image: "/assets/images/shoe-7.jpg",
-    title: "Vintage High-Tops",
+    title: "Vintage Cowboy Boots",
     description:
-      "Retro high-top sneakers with a classic silhouette and worn-in aesthetic. Perfect for a bold vintage street style.",
+      "Retro cowboy boots with a classic silhouette and worn-in aesthetic. Perfect for a bold vintage street style.",
     price: 1050,
   },
   {
@@ -272,9 +272,9 @@ export const products: Product[] = [
     category: "Shoes",
     articleNumber: "904",
     image: "/assets/images/shoe-8.jpg",
-    title: "Vintage Suede Shoes",
+    title: "Vintage Suede Boots",
     description:
-      "Soft suede shoes with a vintage finish. Designed for a clean yet relaxed look with subtle retro character.",
+      "Soft suede boots with a classic finish. Designed for a clean yet relaxed look with subtle retro character.",
     price: 980,
   },
 
@@ -284,9 +284,9 @@ export const products: Product[] = [
     category: "Accessories",
     articleNumber: "905",
     image: "/assets/images/accessory-1.jpg",
-    title: "Vintage Cap",
+    title: "Vintage Baseball Cap",
     description:
-      "Classic cap with a vintage wash and relaxed fit. A timeless accessory that adds a casual retro touch.",
+      "Classic cap with Korean War Veteran logo. A timeless accessory that adds a casual retro touch.",
     price: 299,
   },
   {
@@ -295,9 +295,9 @@ export const products: Product[] = [
     category: "Accessories",
     articleNumber: "906",
     image: "/assets/images/accessory-2.jpg",
-    title: "Vintage Beanie",
+    title: "Vintage Baseball Cap",
     description:
-      "Soft knit beanie with a vintage-inspired look. Designed for warmth and effortless everyday style.",
+      "Soft cap with a vintage-inspired look. Designed for a relaxed and effortless everyday style.",
     price: 249,
   },
   {
@@ -306,9 +306,9 @@ export const products: Product[] = [
     category: "Accessories",
     articleNumber: "907",
     image: "/assets/images/accessory-3.jpg",
-    title: "Vintage Sunglasses",
+    title: "Vintage Army Belt",
     description:
-      "Retro sunglasses with a timeless frame design. Perfect for adding a bold vintage edge to any outfit.",
+      "Retro army belt with a timeless design. Perfect for adding a bold vintage edge to any outfit.",
     price: 399,
   },
   {
@@ -317,9 +317,9 @@ export const products: Product[] = [
     category: "Accessories",
     articleNumber: "908",
     image: "/assets/images/accessory-4.jpg",
-    title: "Vintage Leather Belt",
+    title: "Vintage 'Tour de Franc' Cap",
     description:
-      "Classic leather belt with a worn-in vintage finish. Durable and versatile for everyday wear.",
+      "Classic bike styled cap with a 'Tour de Franc'-inspired fit. Perfect for daily use with a stylish feel.",
     price: 450,
   },
   {
@@ -330,7 +330,7 @@ export const products: Product[] = [
     image: "/assets/images/accessory-5.jpg",
     title: "Vintage Tote Bag",
     description:
-      "Spacious tote bag with a vintage-inspired design. Perfect for daily use with a relaxed and stylish feel.",
+      "Classic tote bag with a stylish and practical design. Adds a nice accessory details while you're out and about.",
     price: 550,
   },
   {
@@ -339,9 +339,9 @@ export const products: Product[] = [
     category: "Accessories",
     articleNumber: "910",
     image: "/assets/images/accessory-6.jpg",
-    title: "Vintage Scarf",
+    title: "Vintage Half-size Gloves",
     description:
-      "Lightweight scarf with a vintage pattern. Adds a subtle retro touch while keeping you comfortable.",
+      "Cotton half-size gloves with the perfect design for when you need to use your fingers. Add extra comfort and warmth on colder days.",
     price: 350,
   },
   {
@@ -350,9 +350,9 @@ export const products: Product[] = [
     category: "Accessories",
     articleNumber: "911",
     image: "/assets/images/accessory-7.jpg",
-    title: "Vintage Watch",
+    title: "Vintage Tote Bag",
     description:
-      "Classic watch with a vintage-inspired design. A timeless accessory that blends style and function.",
+      "Classic tote bag with a inspired week-end design. A timeless accessory that blends style and function.",
     price: 1200,
   },
   {
@@ -361,9 +361,9 @@ export const products: Product[] = [
     category: "Accessories",
     articleNumber: "912",
     image: "/assets/images/accessory-8.jpg",
-    title: "Vintage Backpack",
+    title: "Vintage 'Chevy' Baseball Cap",
     description:
-      "Durable backpack with a vintage aesthetic. Designed for everyday use with both style and practicality.",
+      "Durable cotton cap with a vintage aesthetic. Designed for everyday use with both style and practicality.",
     price: 799,
   },
 ];
