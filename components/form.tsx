@@ -1,25 +1,29 @@
 "use client";
 
 import { Customer, customerSchema } from "@/data/form";
-import createOrder from "@/data/order";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import ContactFormFields from "./contact-form-fields";
 import { PaymentFormFields } from "./payment-form-fields";
 import { Button } from "./ui/button";
-import ShoppingCartList from "./shopping-cart";
+import { useCartContext } from "@/app/providers/cart-provider";
 
 export function Form() {
-  const router = useRouter();
+  const { productsInCart } = useCartContext();
+
   const { register, handleSubmit, formState } = useForm<Customer>({
     resolver: zodResolver(customerSchema),
   });
 
   const saveCustomer = async (customer: Customer) => {
-    console.log("Save....", customer);
-    const orderNumber = await createOrder(customer);
-    router.push(`/confirmation/${orderNumber}`);
+    const orderNumber = Math.floor(1000000 + Math.random() * 90000).toString();
+    const order = {
+      orderNumber, customer, products: productsInCart,
+    };
+
+    localStorage.setItem("latestOrder", JSON.stringify(order));
+    localStorage.removeItem("cart");
+    window.location.href = `/confirmation/${orderNumber}`;
   };
 
   return (
@@ -39,4 +43,4 @@ export function Form() {
       </Button>
     </form>
   );
-}
+};

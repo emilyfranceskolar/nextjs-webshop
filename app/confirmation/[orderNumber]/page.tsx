@@ -1,12 +1,25 @@
+"use client"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Item } from "@/components/ui/item";
 
-export default function ConfirmationPage({
-  params,
-}: {
-  params: { orderNumber: string, amount: string, orderDate: Date, total: string, image: string, title: string, price: string };
+export default function ConfirmationPage({ params }: {
+  params: { orderNumber: string }
 }) {
+  const [order, setOrder] = useState<any>(null);
+
+  useEffect(() => {
+    const storedOrder = localStorage.getItem("latestOrder");
+    if (storedOrder) {
+      setOrder(JSON.parse(storedOrder));
+    }
+  }, []);
+
+  if (!order) {
+    return <div>Product not found..</div>
+  }
 
   return (
     <main>
@@ -24,15 +37,20 @@ export default function ConfirmationPage({
             </p>
 
             <div data-cy="product" className="bg-muted md:p-4 p-2 rounded-xl">
-              <div>
-                <p className="pb-2"><strong>Order Number:</strong> #{params.orderNumber}</p>
-                <p className="pb-2"><strong>Order Date:</strong> 2026-01-14</p>
-                {/* <img src={params.image} alt="Product Image">Product Image</img> */}
-                <p data-cy="product-title" className="pb-2"><strong>Title:</strong> {params.title}</p>
-                <p className="pb-2"><strong>Amount:</strong> {params.amount}</p>
-                <p data-cy="product-price" className="pb-2"><strong>Price:</strong> {params.price}</p>
-                <p className="pb-2"><strong>Total:</strong> {params.total}</p>
-              </div>
+              <p className="pb-2"><strong>Order Number:</strong> # {order.orderNumber}</p>
+              <p className="pb-2"><strong>Order Date:</strong> {new Date().toDateString()}</p>
+            </div>
+            {/* <img src={params.image} alt="Product Image">Product Image</img> */}
+            <div className="flex flex-col gap-3">
+
+              {order.products.map((item: any) => (
+                <div key={item.id}>
+                  <p data-cy="product-title" className="pb-2"><strong>Title:</strong> {item.title}</p>
+                  <p className="pb-2"><strong>Amount:</strong> {item.quantity}</p>
+                  <p data-cy="product-price" className="pb-2"><strong>Price:</strong> {item.price} kr</p>
+                  {/* <p className="pb-2"><strong>Total:</strong> {item.total}</p> */}
+                </div>
+              ))}
             </div>
 
             <Link href="/product">
