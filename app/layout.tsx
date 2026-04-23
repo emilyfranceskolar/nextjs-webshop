@@ -1,5 +1,5 @@
 import Footer from "@/components/footer";
-import Header from "@/components/Header";
+import Header from "@/components/header";
 import { cn } from "@/lib/utils";
 import { Geist, Inter } from "next/font/google";
 import type { Metadata } from "next/types";
