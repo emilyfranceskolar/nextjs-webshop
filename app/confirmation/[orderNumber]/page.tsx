@@ -42,16 +42,15 @@ export default function ConfirmationPage({ params }: {
             </div>
             {/* <img src={params.image} alt="Product Image">Product Image</img> */}
             <div className="flex flex-col gap-3">
-
               {order.products.map((item: any) => (
                 <div key={item.id}>
                   <p data-cy="product-title" className="pb-2"><strong>Title:</strong> {item.title}</p>
                   <p className="pb-2"><strong>Amount:</strong> {item.quantity}</p>
                   <p data-cy="product-price" className="pb-2"><strong>Price:</strong> {item.price} kr</p>
-                  {/* <p className="pb-2"><strong>Total:</strong> {item.total}</p> */}
                 </div>
               ))}
             </div>
+            <div className="text-lg"><p><strong>Total:</strong>{" "} {order.products.reduce((sum: number, item: any) => sum + item.price + item.quantity, 0)} {" "} kr</p></div>
 
             <Link href="/product">
               <Button className="p-4 w-full hover:bg-zinc-800 mt-auto">
