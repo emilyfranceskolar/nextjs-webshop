@@ -23,7 +23,7 @@ export default function ConfirmationPage({
               Thank you for your purchase
             </p>
 
-            <div data-cy="product" className="bg-muted p-4 rounded-xl">
+            <div data-cy="product" className="bg-muted md:p-4 p-2 rounded-xl">
               <div>
                 <p className="pb-2"><strong>Order Number:</strong> #{params.orderNumber}</p>
                 <p className="pb-2"><strong>Order Date:</strong> 2026-01-14</p>

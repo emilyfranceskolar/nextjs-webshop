@@ -6,7 +6,7 @@ import { Separator } from "./ui/separator";
 export default function Footer() {
   return (
     <main className="bg-[#f5efe6]">
-      <footer className="grid grid-cols-3 mx-auto items-center justify-between p-4 border-t-26 border-rose-900 px-6 py-8 justify-items-center pt-12 pb-12">
+      <footer className="grid grid-cols-3 text-xs mx-auto items-center justify-between p-4 border-t-26 border-rose-900 px-6 py-8 justify-items-center pt-12 pb-12">
         <section className="grid gap-6">
           <h2 className="font-bold mb-4">"Brand"</h2>
           <Link
