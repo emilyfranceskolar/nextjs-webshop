@@ -17,14 +17,13 @@ export default async function ProductPage({
       <h1 className="text-3xl font-bold m-10">
         {params.category || "Products"}
       </h1>
-      <nav>
+      <nav className="pl-4 pr-4 text-xs md:text-md lg:text-lg">
         <ul className="flex justify-evenly gap-3 font-xs sm:gap-10 font-md md:gap-15 font-lg lg:gap-25 font-xl">
           <li>
             <Link
               href="/product"
-              className={`text-black hover:underline ${
-                !params.category ? "font-bold" : ""
-              }`}
+              className={`text-black hover:underline ${!params.category ? "font-bold" : ""
+                }`}
             >
               ALL
             </Link>
@@ -32,9 +31,8 @@ export default async function ProductPage({
           <li>
             <Link
               href="/product?category=Tops"
-              className={`text-black hover:underline ${
-                params.category === "Tops" ? "font-bold" : ""
-              }`}
+              className={`text-black hover:underline ${params.category === "Tops" ? "font-bold" : ""
+                }`}
             >
               TOPS
             </Link>
@@ -42,9 +40,8 @@ export default async function ProductPage({
           <li>
             <Link
               href="/product?category=Bottoms"
-              className={`text-black hover:underline ${
-                params.category === "Bottoms" ? "font-bold" : ""
-              }`}
+              className={`text-black hover:underline ${params.category === "Bottoms" ? "font-bold" : ""
+                }`}
             >
               BOTTOMS
             </Link>
@@ -52,9 +49,8 @@ export default async function ProductPage({
           <li>
             <Link
               href="/product?category=Shoes"
-              className={`text-black hover:underline ${
-                params.category === "Shoes" ? "font-bold" : ""
-              }`}
+              className={`text-black hover:underline ${params.category === "Shoes" ? "font-bold" : ""
+                }`}
             >
               SHOES
             </Link>
@@ -62,9 +58,8 @@ export default async function ProductPage({
           <li>
             <Link
               href="/product?category=Accessories"
-              className={`text-black hover:underline ${
-                params.category === "Accessories" ? "font-bold" : ""
-              }`}
+              className={`text-black hover:underline ${params.category === "Accessories" ? "font-bold" : ""
+                }`}
             >
               ACCESSORIES
             </Link>

@@ -32,7 +32,7 @@ export default function ShoppingCartList() {
   const total = subtotal;
 
   return (
-    <div className="mx-auto w-full p-15">
+    <div className="mx-auto w-full p-8 lg:p-15">
       <div className="flex flex-col gap-2 mb-8 text-center">
         <h1 className="text-3xl font-bold sm:text-4xl">Your Shopping Cart</h1>
         <p className="text-muted-foreground">
@@ -45,7 +45,7 @@ export default function ShoppingCartList() {
       </div>
 
       <div className="flex flex-col gap-8">
-        <div className="flex-1 flex flex-col gap-12">
+        <div className="flex-1 flex flex-col gap-4 lg:gap-12">
           {productsInCart.length === 0 ? (
             <Card className="border-dashed">
               <CardContent className="flex flex-col items-center justify-center py-12 text-center">
@@ -138,7 +138,7 @@ export default function ShoppingCartList() {
                         </Button>
                       </div>
                     </div>
-                    <div className="mt-12 flex items-center justify-between">
+                    <div className="mt-4 md:mt-12 lg:mt-12 flex items-center justify-between">
                       <span className="w-24 text-start text-md font-medium">
                         Quantity: {item.quantity}
                       </span>
