@@ -32,8 +32,8 @@ export default function Header() {
 
         <Link
           href="/"
-          className={`bg-[url('/assets/images/worn-stories-logo.png')] block bg-contain bg-no-repeat bg-center md:bg-left text-4xl text-black transition-all duration-300 ${isScrolled ? "w-40 h-20" : "w-55 h-30"
-            }`}
+          className={`bg-[url('/assets/images/worn-stories-logo.png')] block bg-contain bg-no-repeat bg-center md:bg-left text-4xl text-black transition-all duration-300 ${isScrolled ? "w-40 h-20" : "w-56 h-32"
+            }`} aria-label="Home"
         ></Link>
       </div>
 
@@ -42,22 +42,25 @@ export default function Header() {
           href="/product"
           className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
         >
-          <p>Products</p>
+          Products
         </Link>
         <Link
           href="/admin"
+          data-cy="admin-link"
           className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
         >
-          <p data-cy="admin-link">Admin</p>
+          Admin
         </Link>
         <Link
           href="/checkout"
-          className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
           data-cy="cart-link"
+          className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
         >
-          <p data-cy="cart-items-count-badge">
-            Cart ({isLoaded ? totalQuantity : 0})
-          </p>
+          Cart (
+          <span data-cy="cart-items-count-badge">
+            {isLoaded ? totalQuantity : 0}
+          </span>
+          )
         </Link>
       </nav>
     </header>

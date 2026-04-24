@@ -28,4 +28,15 @@ model Order {
   email         String
   address       String
   createdAt     DateTime @default(now())
+  items         OrderItem[]
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   String
+  productId String
+  title     String
+  price     Float
+  quantity  Int
 }
