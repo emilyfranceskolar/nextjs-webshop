@@ -146,7 +146,7 @@ Ni ska vid presentationstillfället hålla i en muntlig presentation för klasse
 - [x] Det ska gå att ändra produkterna i kundvagnen (header + vyn + pris + ls).
 - [x] Det ska gå att ange leveransuppgifter i ett formulär.
 - [x] Samtliga fält för checkoutsidans formulär ska ha valideringsregler.
-- [?] Formulären vid utcheckningen ska gå att automatiskt fyllas i.
+- [x] Formulären vid utcheckningen ska gå att automatiskt fyllas i.
 - [x] Bekräftelsesidan ska visa orderdetaljer och leveransuppgifter
 
 **Admin**
