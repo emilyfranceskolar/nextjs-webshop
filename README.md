@@ -56,6 +56,6 @@ Testerna säkerställer att alla krav i uppgiften uppfylls.
 Projektet använder komponenter baserade på:
 
 - Tailwind CSS
-- Shadcn
+- Shadcn [Besök - Shadcn Dokumentation](https://ui.shadcn.com/)
 
 ## Tack för oss!
