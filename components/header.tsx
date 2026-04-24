@@ -39,8 +39,7 @@ export default function Header() {
 
       <nav className="flex justify-center flex-1 mt-6 gap-8 text-sm md:text-lg md:justify-end lg:justify-end ">
         <Link
-          href="/products"
-          data-cy="product-link"
+          href="/product"
           className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
         >
           Products
