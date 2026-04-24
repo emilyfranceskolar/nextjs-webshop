@@ -17,54 +17,49 @@ export default async function ProductPage({
       <h1 className="text-3xl font-bold m-10">
         {params.category || "Products"}
       </h1>
-      <nav>
+      <nav className="pl-4 pr-4 text-xs md:text-md lg:text-lg">
         <ul className="flex justify-evenly gap-3 font-xs sm:gap-10 font-md md:gap-15 font-lg lg:gap-25 font-xl">
           <li>
             <Link
-              href="/products"
-              className={`text-black hover:underline ${
-                !params.category ? "font-bold" : ""
-              }`}
+              href="/product"
+              className={`text-black hover:underline ${!params.category ? "font-bold" : ""
+                }`}
             >
               ALL
             </Link>
           </li>
           <li>
             <Link
-              href="/products?category=Tops"
-              className={`text-black hover:underline ${
-                params.category === "Tops" ? "font-bold" : ""
-              }`}
+              href="/product?category=Tops"
+              className={`text-black hover:underline ${params.category === "Tops" ? "font-bold" : ""
+                }`}
             >
               TOPS
             </Link>
           </li>
           <li>
             <Link
-              href="/products?category=Bottoms"
-              className={`text-black hover:underline ${
-                params.category === "Bottoms" ? "font-bold" : ""
-              }`}
+              href="/product?category=Bottoms"
+              className={`text-black hover:underline ${params.category === "Bottoms" ? "font-bold" : ""
+                }`}
             >
               BOTTOMS
             </Link>
           </li>
           <li>
             <Link
-              href="/products?category=Shoes"
-              className={`text-black hover:underline ${
-                params.category === "Shoes" ? "font-bold" : ""
-              }`}
+              href="/product?category=Shoes"
+              className={`text-black hover:underline ${params.category === "Shoes" ? "font-bold" : ""
+                }`}
             >
               SHOES
             </Link>
           </li>
           <li>
             <Link
-              href="/products?category=Accessories"
-              className={`text-black hover:underline ${
-                params.category === "Accessories" ? "font-bold" : ""
-              }`}
+              href="/product?category=Accessories"
+              className={`text-black hover:underline ${params.category === "Accessories" ? "font-bold" : ""
+                }`}
             >
               ACCESSORIES
             </Link>
@@ -75,11 +70,14 @@ export default async function ProductPage({
         {products.map((product) => (
           <ProductCard
             key={product.id}
+            id={product.id}
             title={product.title}
             articleNumber={product.articleNumber}
             price={product.price}
             imageUrl={product.image}
             slug={product.slug}
+            category=""
+            description=""
           />
         ))}
       </section>

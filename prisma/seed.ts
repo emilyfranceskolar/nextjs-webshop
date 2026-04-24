@@ -1,5 +1,5 @@
-import { products } from '@/data';
-import { db } from './db';
+import { products } from "@/data";
+import { db } from "./db";
 
 async function main() {
   for (const { id, ...product } of products) {

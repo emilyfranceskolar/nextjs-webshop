@@ -1,22 +1,41 @@
-import { Button } from "@/components/ui/button";
+"use client";
 import { Card } from "@/components/ui/card";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
-import { ProductCardProps } from "./product-page-card";
+import AddToCartButton from "../add-to-cart-button";
+import { Button } from "./button";
 
-export interface HomePageCardProps extends ProductCardProps {}
+export interface HomePageCardProps {
+  id: string;
+  title: string;
+  articleNumber: string;
+  imageUrl: string;
+  price: number;
+  slug: string;
+  category: string | null;
+  description: string;
+}
 
 export default function HomePageCard({
+  id,
   title,
   articleNumber,
   imageUrl,
   price,
   slug,
+  category,
+  description,
 }: HomePageCardProps) {
   return (
     <Card data-cy="product" className="p-0 relative">
       <Link href={`/product/${articleNumber}/${slug}`} className="block">
-        <img src={imageUrl} alt={title} className="w-full object-cover" />
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt={title}
+            className="w-full object-cover block"
+          />
+        )}
       </Link>
       <Link
         href={`/product/${articleNumber}/${slug}`}
@@ -37,13 +56,23 @@ export default function HomePageCard({
         size="icon"
         className="absolute top-2 right-2 p-4.5 sm:p-3 hover:cursor-pointer"
       >
-        <Link
-          data-cy="product-buy-button"
-          href="" //ändra länken sen
-        >
-          <PlusIcon />
-        </Link>
+        <PlusIcon />
       </Button>
+      <AddToCartButton
+        id={id}
+        title={title}
+        articleNumber={articleNumber}
+        imageUrl={imageUrl}
+        price={price}
+        slug={slug}
+        category={category}
+        description={description}
+        buttonText=""
+        variant="outline"
+        size="icon"
+        className="absolute top-2 right-2 p-4.5 sm:p-3 hover:cursor-pointer"
+        data-cy="product-buy-button"
+      />
     </Card>
   );
 }

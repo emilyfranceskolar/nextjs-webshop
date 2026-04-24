@@ -1,12 +1,13 @@
+import AddToCartButton from "@/components/add-to-cart-button";
 import DetailPageDropdown from "@/components/ui/detail-page-dropdown";
 import { db } from "@/prisma/db";
 
 export default async function ProductDetailPage({
   params,
 }: {
-  params: Promise<{ articleNumber: string; slug: string }>;
+  params: Promise<{ slug: string }>;
 }) {
-  const { articleNumber, slug } = await params;
+  const { slug } = await params;
   const product = await db.product.findUnique({ where: { slug } });
 
   if (!product) {
@@ -35,12 +36,20 @@ export default async function ProductDetailPage({
             <p className="text-xl font-semibold" data-cy="product-price">
               {product.price}kr
             </p>
-            <button
-              className="px-4 py-2 mb-10 mt-2 bg-[#ddd9cd] text-black rounded hover:bg-[#8b0836] hover:text-white  transition-all duration-300 cursor-pointer"
-              data-cy="product-buy-button"
-            >
-              Add to Cart
-            </button>
+
+            <AddToCartButton
+              id={product.articleNumber}
+              title={product.title}
+              articleNumber={product.articleNumber}
+              imageUrl={product.image}
+              price={product.price}
+              slug={product.slug}
+              category={product.category}
+              description={product.description}
+              buttonText="Add to Cart"
+              variant="default"
+              className="px-5 py-6 mb-10 mt-2 bg-[#ddd9cd] text-black rounded-xl hover:bg-[#8b0836] hover:text-white  transition-all duration-300 cursor-pointer"
+            />
 
             <DetailPageDropdown
               title="Shipping"
@@ -57,7 +66,7 @@ export default async function ProductDetailPage({
               title="Care for your vintage items"
               content="You can machine wash most cotton & cotton blend products in 40 degrees celcius / 104 degrees fahrenheit. Wool products should preferably be hand washed. Machine wash at your own risk. Remember that the items we offer have been used previously and that some are more fragile (depending on age and condition). Always have that in mind before washing. Vintage leather products should hang in dry areas and should be conditioned regularly to avoid cracks. Note that we do not take responsibility for any product that got damaged when worn or washed."
             />
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-gray-500" data-cy="product-id">
               Article number: {product.articleNumber}
             </p>
           </div>

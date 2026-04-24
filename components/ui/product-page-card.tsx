@@ -1,16 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
+import AddToCartButton from "../add-to-cart-button";
+import { HomePageCardProps } from "./home-page-card";
 
-export interface ProductCardProps {
-  title: string;
-  articleNumber: string;
-  price: number;
-  imageUrl: string;
-  slug: string;
-}
+interface ProductCardProps extends HomePageCardProps {}
 
 export default function ProductCard({
+  id,
   title,
   articleNumber,
   imageUrl,
@@ -23,7 +20,7 @@ export default function ProductCard({
         <img src={imageUrl} alt={title} className="relative w-full mt-0" />
       </Link>
       <Link href={`/product/${articleNumber}/${slug}`} className="block">
-        <CardHeader className="flex justify-between">
+        <CardHeader className="flex p-4 justify-between">
           <CardTitle data-cy="product-title">{title}</CardTitle>
           <p data-cy="product-price">{price}kr</p>
         </CardHeader>
@@ -38,19 +35,20 @@ export default function ProductCard({
             View Details
           </Button>
         </Link>
-        <Button
-          asChild
-          variant="default"
+
+        <AddToCartButton
+          id={id}
+          title={title}
+          articleNumber={articleNumber}
+          imageUrl={imageUrl}
+          price={price}
+          slug={slug}
+          category=""
+          description=""
           size="lg"
-          className="flex-1 !bg-black !text-white"
-        >
-          <Link
-            data-cy="product-buy-button"
-            href="/cart" //ändra länken sen
-          >
-            Add to Cart
-          </Link>
-        </Button>
+          buttonText="Add to Cart"
+          className="flex-1 bg-black! text-white! hover:cursor-pointer"
+        />
       </CardFooter>
     </Card>
   );
