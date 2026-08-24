@@ -18,7 +18,7 @@ export default async function Home() {
       <section className="relative md:w-full lg:w-full overflow-hidden">
         <h1 className="absolute hidden md:flex justify-center w-full text-center text-[8rem] font-bold text-white top-15">
           Every Item <br />
-          Tells A Story
+          Tells A Story One
         </h1>
         <img
           src="/assets/images/greeter.jpg"
