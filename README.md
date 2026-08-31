@@ -2,10 +2,13 @@
 
 ### Beskrivning
 
-#### Worn Stories - Second Hand
+#### Rebrand av Worn Stories till -> Glajjan ??
 
 Webbshop byggd med **Next.js, React, TypeScript och Shadcn**.
-Applikationen innehåller både kundflöde (produkter, kundvagn, checkout) och en admin-del där produkter ändras, läggas till eller tas bort.
+Applikationen innehåller både kundflöde (produkter, kundvagn, checkout), och en admin-del där produkter ändras, läggas till eller tas bort. För att kunna komma åt
+admin-panelen så måste man vara inloggad som just admin. Det ska också gå att logga in som kund och därefter kunna följa genomförda köp (order/ordrar).
+
+Vår frontend är även kopplad till en backend som är skriven med Next.js och en SQLlite databas.
 
 Projektet är utvecklat som en del av Javascript Fördjupning!
 
