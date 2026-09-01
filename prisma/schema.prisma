@@ -7,7 +7,6 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
 }
 
 model Product {
@@ -22,18 +21,18 @@ model Product {
 }
 
 model Order {
-  id            String  @id @default(cuid())
-  orderNumber   String  @unique
-  name          String
-  email         String
-  address       String
-  createdAt     DateTime @default(now())
-  items         OrderItem[]
+  id          String      @id @default(cuid())
+  orderNumber String      @unique
+  name        String
+  email       String
+  address     String
+  createdAt   DateTime    @default(now())
+  items       OrderItem[]
 }
 
 model OrderItem {
-  id        String  @id @default(cuid())
-  order     Order   @relation(fields: [orderId], references: [id])
+  id        String @id @default(cuid())
+  order     Order  @relation(fields: [orderId], references: [id])
   orderId   String
   productId String
   title     String
