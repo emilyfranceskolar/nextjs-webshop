@@ -12,7 +12,7 @@ datasource db {
 model Product {
   id            String  @id @default(cuid())
   slug          String  @unique
-  category      String?
+  categories      ProductCategory[]
   articleNumber String  @unique
   title         String
   description   String
