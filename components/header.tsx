@@ -3,6 +3,7 @@ import { useCartContext } from "@/app/providers/cart-provider";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import AccountPanel from "./account-panel";
 
 export default function Header() {
   const { productsInCart, isLoaded } = useCartContext();
@@ -45,13 +46,6 @@ export default function Header() {
           Products
         </Link>
         <Link
-          href="/admin"
-          data-cy="admin-link"
-          className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
-        >
-          Admin
-        </Link>
-        <Link
           href="/checkout"
           data-cy="cart-link"
           className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
@@ -62,6 +56,7 @@ export default function Header() {
           </span>
           )
         </Link>
+        <AccountPanel />
       </nav>
     </header>
   );
