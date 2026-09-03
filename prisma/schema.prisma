@@ -7,6 +7,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
 
 model Product {
@@ -20,6 +21,11 @@ model Product {
   price         Float
 }
 
+enum OrderStatus {
+  PENDING
+  SHIPPED
+}
+
 model Order {
   id          String      @id @default(cuid())
   orderNumber String      @unique
@@ -27,6 +33,10 @@ model Order {
   email       String
   address     String
   createdAt   DateTime    @default(now())
+
+  status      OrderStatus @default(PENDING)
+  shippedAt   DateTime?
+
   items       OrderItem[]
 }
 
