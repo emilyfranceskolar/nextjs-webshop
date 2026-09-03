@@ -17,6 +17,13 @@ export default async function AdminPage() {
   const products = await db.product.findMany({});
   return (
     <main className="grid">
+      {/* Link to admin orders page */}
+      <div className="flex justify-end px-6 pt-6">
+        <Link href="/admin/orders">
+          <Button variant="outline">View orders</Button>
+        </Link>
+      </div>
+      
       <p className="text-3xl font-bold m-10 text-center">Our products</p>
       <section className="grid gap-4 items-stretch pl-6 pr-6 pb-6 sm:grid-cols-2 xl:grid-cols-3">
         <Link href="/admin/product/new">
@@ -27,10 +34,30 @@ export default async function AdminPage() {
 
             <div className="flex flex-col px-2 py-4 rounded-xl h-full">
               <div className="pl-2 pb-2 pt-2">
-                <p data-cy="product-id" className="font-bold text-sm text-stone-600 pb-2">New Product</p>
-                <p data-cy="product-title" className="font-bold text-sm pb-2 text-stone-600">Title</p>
-                <p data-cy="product-price" className="text-sm pb-2 text-stone-600">0kr</p>
-                <p data-cy="product-description" className="text-sm max-w-xs pb-6 text-stone-600">No description</p>
+                <p
+                  data-cy="product-id"
+                  className="font-bold text-sm text-stone-600 pb-2"
+                >
+                  New Product
+                </p>
+                <p
+                  data-cy="product-title"
+                  className="font-bold text-sm pb-2 text-stone-600"
+                >
+                  Title
+                </p>
+                <p
+                  data-cy="product-price"
+                  className="text-sm pb-2 text-stone-600"
+                >
+                  0kr
+                </p>
+                <p
+                  data-cy="product-description"
+                  className="text-sm max-w-xs pb-6 text-stone-600"
+                >
+                  No description
+                </p>
               </div>
               <div className="flex gap-2">
                 <Button data-cy="admin-add-product" variant="outline">
@@ -43,7 +70,11 @@ export default async function AdminPage() {
         </Link>
 
         {products.map((product) => (
-          <article key={product.id} data-cy="product" className="flex flex-wrap gap-2 px-2 py-2 border h-full rounded-xl">
+          <article
+            key={product.id}
+            data-cy="product"
+            className="flex flex-wrap gap-2 px-2 py-2 border h-full rounded-xl"
+          >
             {product.image && (
               <img
                 className="object-cover rounded-lg w-24 h-28"
@@ -54,20 +85,38 @@ export default async function AdminPage() {
 
             <div className="flex flex-col">
               <div className="pl-2 pb-2">
-                <p data-cy="product-id" className="font-bold text-sm pb-2">{product.articleNumber}</p>
-                <p data-cy="product-title" className="font-bold text-sm pb-2">{product.title}</p>
-                <p data-cy="product-price" className="text-sm pb-2">{product.price}kr</p>
-                <p data-cy="product-description" className="text-sm max-w-xs pb-2">{product.description}</p>
+                <p data-cy="product-id" className="font-bold text-sm pb-2">
+                  {product.articleNumber}
+                </p>
+                <p data-cy="product-title" className="font-bold text-sm pb-2">
+                  {product.title}
+                </p>
+                <p data-cy="product-price" className="text-sm pb-2">
+                  {product.price}kr
+                </p>
+                <p
+                  data-cy="product-description"
+                  className="text-sm max-w-xs pb-2"
+                >
+                  {product.description}
+                </p>
               </div>
 
               <Dialog>
                 <div className="flex gap-2">
                   <Link href={`/admin/product/${product.articleNumber}`}>
-                    <Button variant="outline" data-cy="admin-edit-product">Edit product</Button>
+                    <Button variant="outline" data-cy="admin-edit-product">
+                      Edit product
+                    </Button>
                   </Link>
 
                   <DialogTrigger asChild>
-                    <Button variant="outline" data-cy="admin-remove-product" className="hover:bg-red-200">Delete product
+                    <Button
+                      variant="outline"
+                      data-cy="admin-remove-product"
+                      className="hover:bg-red-200"
+                    >
+                      Delete product
                     </Button>
                   </DialogTrigger>
                 </div>
@@ -77,7 +126,9 @@ export default async function AdminPage() {
                     <input type="hidden" name="id" value={product.id} />
 
                     <DialogHeader>
-                      <DialogTitle className="p-6 whitespace-nowrap">Are you sure you want to delete the product?</DialogTitle>
+                      <DialogTitle className="p-6 whitespace-nowrap">
+                        Are you sure you want to delete the product?
+                      </DialogTitle>
                     </DialogHeader>
 
                     <DialogFooter>
@@ -85,10 +136,13 @@ export default async function AdminPage() {
                         <Button variant="outline">No</Button>
                       </DialogClose>
 
-                      <Button type="submit" data-cy="confirm-delete-button" className="">
+                      <Button
+                        type="submit"
+                        data-cy="confirm-delete-button"
+                        className=""
+                      >
                         Yes
                       </Button>
-
                     </DialogFooter>
                   </form>
                 </DialogContent>
@@ -97,6 +151,6 @@ export default async function AdminPage() {
           </article>
         ))}
       </section>
-    </main >
+    </main>
   );
 }
