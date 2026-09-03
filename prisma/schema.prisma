@@ -7,13 +7,14 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
+
 }
 
 model Product {
   id            String  @id @default(cuid())
   slug          String  @unique
-  category      String?
+  categories      ProductCategory[]
   articleNumber String  @unique
   title         String
   description   String
@@ -39,4 +40,23 @@ model OrderItem {
   title     String
   price     Float
   quantity  Int
+}
+
+model Category {
+  id       String            @id @default(cuid())
+  name     String            @unique
+  slug     String            @unique
+  products ProductCategory[]
+}
+
+// kopplingstabell: en produkt kan ha flera kategorier,och en kategori kan innehålla flera produkter
+
+model ProductCategory {
+  productId  String
+  categoryId String
+
+  product  Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([productId, categoryId])
 }
