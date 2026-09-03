@@ -81,7 +81,7 @@ export default async function AdminOrdersPage() {
                   {order.items.map((item) => (
                     <div key={item.id}>
                       <p>
-                        {item.title} × {item.quantity}s
+                        {item.title} × {item.quantity}
                       </p>
 
                       <p>{item.price * item.quantity} kr</p>
@@ -104,5 +104,7 @@ export default async function AdminOrdersPage() {
         </div>
       )}
     </main>
+
+    
   );
 }
