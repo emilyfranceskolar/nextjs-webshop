@@ -263,15 +263,17 @@ export default function AccountPanel() {
             </>
           )}
 
-          <div className="mt-8 border-t border-zinc-200 pt-6">
-            <Link
-              href="/admin"
-              data-cy="admin-link"
-              className="text-sm font-medium text-zinc-700 underline underline-offset-4 hover:text-black"
-            >
-              Admin
-            </Link>
-          </div>
+          {session?.user.role === "admin" && (
+            <div className="mt-8 border-t border-zinc-200 pt-6">
+              <Link
+                href="/admin"
+                data-cy="admin-link"
+                className="text-sm font-medium text-zinc-700 underline underline-offset-4 hover:text-black"
+              >
+                Admin
+              </Link>
+            </div>
+          )}
         </div>
       </SheetContent>
     </Sheet>

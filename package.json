@@ -12,6 +12,7 @@
     "lint": "next lint",
     "push": "prisma db push",
     "seed": "prisma db seed",
+    "make-admin": "tsx scripts/promote-admin.ts",
     "studio": "prisma studio"
   },
   "dependencies": {
