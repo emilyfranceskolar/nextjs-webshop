@@ -51,11 +51,16 @@ export function useCart() {
     );
   }, []);
 
+  const clearCart = useCallback(() => {
+    setProductsInCart([]);
+  }, []);
+
   return {
     productsInCart,
     addToCart,
     updateQuantity,
     removeFromCart,
+    clearCart,
     isLoaded,
   };
 }
