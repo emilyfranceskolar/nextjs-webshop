@@ -9,7 +9,17 @@ export default async function ProductPage({
 }) {
   const params = await searchParams;
   const products = await db.product.findMany({
-    where: params.category ? { category: params.category } : undefined,
+    where: params.category
+      ? {
+        categories: {
+          some: {
+            category: {
+              name: params.category,
+            },
+          },
+        },
+      }
+      : undefined,
   });
 
   return (
