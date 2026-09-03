@@ -12,10 +12,10 @@ datasource db {
 }
 
 model Product {
-  id            String  @id @default(cuid())
-  slug          String  @unique
-  categories      ProductCategory[]
-  articleNumber String  @unique
+  id            String            @id @default(cuid())
+  slug          String            @unique
+  categories    ProductCategory[]
+  articleNumber String            @unique
   title         String
   description   String
   image         String
@@ -70,7 +70,7 @@ model Session {
 }
 
 model Account {
-  id                    String   @id
+  id                    String    @id
   accountId             String
   providerId            String
   issuer                String
@@ -82,9 +82,9 @@ model Account {
   refreshTokenExpiresAt DateTime?
   scope                 String?
   password              String?
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
-  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([issuer, accountId])
 }
@@ -96,4 +96,22 @@ model Verification {
   expiresAt  DateTime
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+}
+
+// kopplingstabell: en produkt kan ha flera kategorier,och en kategori kan innehålla flera produkter
+model ProductCategory {
+  productId  String
+  categoryId String
+
+  product  Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([productId, categoryId])
+}
+
+model Category {
+  id       String            @id @default(cuid())
+  name     String            @unique
+  slug     String            @unique
+  products ProductCategory[]
 }
