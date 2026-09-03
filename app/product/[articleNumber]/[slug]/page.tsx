@@ -8,7 +8,14 @@ export default async function ProductDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = await db.product.findUnique({ where: { slug } });
+  const product = await db.product.findUnique({
+    where: { slug },
+    include: {
+      categories: {
+        include: { category: true },
+      },
+    },
+  });
 
   if (!product) {
     return <p>Product not found</p>;
@@ -44,7 +51,7 @@ export default async function ProductDetailPage({
               imageUrl={product.image}
               price={product.price}
               slug={product.slug}
-              category={product.category}
+              category={product.categories[0]?.category.name ?? ""}
               description={product.description}
               buttonText="Add to Cart"
               variant="default"

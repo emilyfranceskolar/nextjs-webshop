@@ -3,13 +3,15 @@
  * OBS: Kan utökas men inte ändras pga cypress.
  **/
 
-import { Product as PrismaProduct } from "@prisma/client";
+import type { Product as PrismaProduct } from "@/generated/prisma";
 
 export interface CartItem extends PrismaProduct {
   quantity: number;
 }
 
-export type Product = PrismaProduct;
+export type Product = PrismaProduct & {
+  category: string;
+};
 
 /* Lägg till era produkter här */
 export const products: Product[] = [

@@ -4,7 +4,13 @@ import { db } from "@/prisma/db";
 import Link from "next/link";
 
 export default async function Home() {
-  const product = await db.product.findMany({});
+  const product = await db.product.findMany({
+    include: {
+      categories: {
+        include: { category: true },
+      },
+    },
+  });
   const categories = ["Tops", "Bottoms", "Shoes", "Accessories"];
   const categoryImages: Record<string, string> = {
     Tops: "/assets/images/top-1.jpg",
@@ -54,7 +60,7 @@ export default async function Home() {
               price={product.price}
               imageUrl={product.image}
               slug={product.slug}
-              category={product.category}
+              category={product.categories[0]?.category.name ?? ""}
               description={product.description}
             />
           ))}
