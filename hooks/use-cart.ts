@@ -1,6 +1,6 @@
 "use client";
 
-import type { Product } from "@/generated/prisma";
+import type { Product } from "@/generated/client";
 import { useCallback, useEffect, useState } from "react";
 
 export type CartProduct = Product & { quantity: number };

@@ -1,9 +1,15 @@
 import { db } from "@/prisma/db";
+import { isAdmin } from "@/lib/admin";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import ProductForm from "../product-form";
 
 async function editProduct(formData: FormData) {
   "use server";
+
+  if (!(await isAdmin())) {
+    throw new Error("Unauthorized");
+  }
   const id = formData.get("id") as string;
   const title = formData.get("title")?.toString().trim() || "";
   const price = Number(formData.get("price"));
@@ -48,6 +54,10 @@ export default async function EditProductPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  if (!(await isAdmin())) {
+    redirect("/");
+  }
+
   const { id } = await params;
   const product = await db.product.findUnique({
     where: { articleNumber: id },

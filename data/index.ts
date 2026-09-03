@@ -3,7 +3,7 @@
  * OBS: Kan utökas men inte ändras pga cypress.
  **/
 
-import type { Product as PrismaProduct } from "@/generated/prisma";
+import type { Product as PrismaProduct } from "@/generated/client";
 
 export interface CartItem extends PrismaProduct {
   quantity: number;
