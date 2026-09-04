@@ -42,8 +42,8 @@ export default function Header() {
         <Link
           href="/product"
           className={`underline-offset-8 decoration-2 transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose-900 ${pathName === "/product"
-              ? "text-rose-900 underline decoration-rose-900"
-              : "text-zinc-600 hover:text-rose-900 hover:underline decoration-rose-900"
+            ? "text-rose-900 underline decoration-rose-900"
+            : "text-zinc-600 hover:text-rose-900 hover:underline decoration-rose-900"
             }`}
         >
           Products
@@ -51,7 +51,10 @@ export default function Header() {
         <Link
           href="/checkout"
           data-cy="cart-link"
-          className="text-zinc-600 transition-colors hover:text-rose-900 hover:underline underline-offset-8 decoration-2 decoration-rose-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose-900"
+          className={`underline-offset-8 decoration-2 transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose-900 ${pathName === "/checkout"
+              ? "text-rose-900 underline decoration-rose-900"
+              : "text-zinc-600 hover:text-rose-900 hover:underline decoration-rose-900"
+            }`}
         >
           Cart (
           <span data-cy="cart-items-count-badge">
