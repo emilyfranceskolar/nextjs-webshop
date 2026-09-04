@@ -1,10 +1,15 @@
-
 import { db } from "@/prisma/db";
+import { isAdmin } from "@/lib/admin";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import ProductForm from "../product-form";
 
 async function editProduct(formData: FormData) {
   "use server";
+
+  if (!(await isAdmin())) {
+    throw new Error("Unauthorized");
+  }
   const id = formData.get("id") as string;
   const title = formData.get("title")?.toString().trim() || "";
   const price = Number(formData.get("price"));
@@ -13,6 +18,17 @@ async function editProduct(formData: FormData) {
   const category = formData.get("category")?.toString().trim() || "";
   const slug = formData.get("slug")?.toString().trim() || "";
 
+  const categoryRecord = category
+    ? await db.category.upsert({
+        where: { name: category },
+        update: {},
+        create: {
+          name: category,
+          slug: category.toLowerCase(),
+        },
+      })
+    : null;
+
   await db.product.update({
     where: { id },
     data: {
@@ -20,7 +36,12 @@ async function editProduct(formData: FormData) {
       price,
       description,
       image,
-      category,
+      categories: {
+        deleteMany: {},
+        ...(categoryRecord
+          ? { create: { categoryId: categoryRecord.id } }
+          : {}),
+      },
     },
   });
 
@@ -33,9 +54,18 @@ export default async function EditProductPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  if (!(await isAdmin())) {
+    redirect("/");
+  }
+
   const { id } = await params;
   const product = await db.product.findUnique({
     where: { articleNumber: id },
+    include: {
+      categories: {
+        include: { category: true },
+      },
+    },
   });
 
   if (!product) return <p>Product not found!</p>;
@@ -48,7 +78,7 @@ export default async function EditProductPage({
           initialValues={{
             id: product.id,
             title: product?.title,
-            category: product?.category ?? "",
+            category: product.categories[0]?.category.name ?? "",
             description: product?.description,
             image: product?.image,
             price: product?.price.toString(),

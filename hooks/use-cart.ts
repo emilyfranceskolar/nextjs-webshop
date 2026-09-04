@@ -1,6 +1,6 @@
 "use client";
 
-import { Product } from "@prisma/client";
+import type { Product } from "@/generated/client";
 import { useCallback, useEffect, useState } from "react";
 
 export type CartProduct = Product & { quantity: number };
@@ -51,11 +51,16 @@ export function useCart() {
     );
   }, []);
 
+  const clearCart = useCallback(() => {
+    setProductsInCart([]);
+  }, []);
+
   return {
     productsInCart,
     addToCart,
     updateQuantity,
     removeFromCart,
+    clearCart,
     isLoaded,
   };
 }

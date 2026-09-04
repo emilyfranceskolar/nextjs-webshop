@@ -19,7 +19,6 @@ export default function AddToCartButton({
   imageUrl,
   price,
   slug,
-  category,
   description,
   buttonText,
   variant,
@@ -36,7 +35,6 @@ export default function AddToCartButton({
       image: imageUrl,
       price,
       slug,
-      category,
       description,
       quantity: 1,
     });

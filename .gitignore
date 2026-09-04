@@ -5,6 +5,7 @@ prisma/dev.db
 
 # dependencies
 /node_modules
+/generated
 /.pnp
 .pnp.js
 .yarn/install-state.gz
