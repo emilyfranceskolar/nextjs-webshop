@@ -49,10 +49,10 @@ export default function AccountPanel() {
       view === "sign-in"
         ? await authClient.signIn.email({ email, password })
         : await authClient.signUp.email({
-            name: String(formData.get("name")),
-            email,
-            password,
-          });
+          name: String(formData.get("name")),
+          email,
+          password,
+        });
 
     setIsSubmitting(false);
 
@@ -108,6 +108,7 @@ export default function AccountPanel() {
           size="icon-lg"
           aria-label="Open account menu"
           data-cy="account-menu-button"
+          className={isOpen ? "text-rose-900 bg-rose-50 hover:bg-rose-100" : "text-zinc-700 hover:text-rose-900 hover:bg-rose-50"}
         >
           <CircleUserRound className="size-6" />
         </Button>
