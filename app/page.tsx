@@ -28,7 +28,7 @@ export default async function Home() {
         </h1>
         <img
           src="/assets/images/hero-image.jpg"
-          alt="Greeter"
+          alt="Hero-image"
           className="md:object-cover lg:object-cover overflow-hidden w-full md:h-240 lg:h-240"
         />
         <button className="absolute py-3 px-10 rounded-lg text-white font-bold bg-[#526E67] lg:bottom-50 left-1/2 -translate-x-1/2 translate-y-1/2 hover:cursor-pointer hover:bg-[#ddd9cd] hover:text-black transition-all duration-300">
