@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -19,10 +19,14 @@ interface ProductFormInputsProps {
   register: UseFormRegister<ProductFormValues>;
   formState: FormState<ProductFormValues>;
 }
-export default function ProductForm({ initialValues, action }: ProductFormProps) {
+export default function ProductForm({
+  initialValues,
+  action,
+}: ProductFormProps) {
   const router = useRouter();
   const { register, handleSubmit, formState } = useForm<ProductFormValues>({
-    resolver: zodResolver(productSchema), defaultValues: initialValues,
+    resolver: zodResolver(productSchema),
+    defaultValues: initialValues,
   });
 
   const onSubmit = async (data: ProductFormValues) => {
@@ -32,15 +36,18 @@ export default function ProductForm({ initialValues, action }: ProductFormProps)
       if (value !== undefined) {
         formData.append(key, value.toString());
       }
-    })
+    });
     console.log("Save....", data);
     await action(formData);
     router.push("/admin");
-
   };
 
   return (
-    <form className="w-full mr-10 ml-10 max-w-md md:max-w-lg mx-auto" data-cy="product-form" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="w-full mr-10 ml-10 max-w-md md:max-w-lg mx-auto"
+      data-cy="product-form"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <ProductFormInputs register={register} formState={formState} />
     </form>
   );
@@ -51,7 +58,9 @@ function ProductFormInputs({ register, formState }: ProductFormInputsProps) {
     <div className="w-full space-y-4">
       <input type="hidden" {...register("id")} />
       <Field className="space-y-2 w-full">
-        <FieldLegend className="text-2xl font-bold text-zinc-800">Title</FieldLegend>
+        <FieldLegend className="text-2xl font-bold text-zinc-800">
+          Title
+        </FieldLegend>
         <Input
           data-cy="product-title"
           {...register("title")}
@@ -60,19 +69,19 @@ function ProductFormInputs({ register, formState }: ProductFormInputsProps) {
           className={cn("h-10 w-full p-4", {
             "border-red-600 border-2": formState.errors.title,
           })}
-          autoComplete="title" />
+          autoComplete="title"
+        />
         {formState.errors.title && (
-          <p
-            data-cy="product-title-error"
-            className="text-red-600 text-sm"
-          >
+          <p data-cy="product-title-error" className="text-red-600 text-sm">
             {formState.errors.title.message}
           </p>
         )}
       </Field>
 
       <Field>
-        <FieldLegend className="text-2xl font-bold text-zinc-800">Category</FieldLegend>
+        <FieldLegend className="text-2xl font-bold text-zinc-800">
+          Category
+        </FieldLegend>
         <Input
           data-cy="product-category"
           {...register("category")}
@@ -81,19 +90,19 @@ function ProductFormInputs({ register, formState }: ProductFormInputsProps) {
           className={cn("h-10 p-4", {
             "border-red-600 border-2": formState.errors.category,
           })}
-          autoComplete="category" />
+          autoComplete="category"
+        />
         {formState.errors.category && (
-          <p
-            data-cy="product-category-error"
-            className="text-red-600 text-sm"
-          >
+          <p data-cy="product-category-error" className="text-red-600 text-sm">
             {formState.errors.category.message}
           </p>
         )}
       </Field>
 
       <Field>
-        <FieldLegend className="text-2xl font-bold text-zinc-800">Description</FieldLegend>
+        <FieldLegend className="text-2xl font-bold text-zinc-800">
+          Description
+        </FieldLegend>
         <Input
           data-cy="product-description"
           {...register("description")}
@@ -102,7 +111,8 @@ function ProductFormInputs({ register, formState }: ProductFormInputsProps) {
           className={cn("h-10 p-4", {
             "border-red-600 border-2": formState.errors.description,
           })}
-          autoComplete="description" />
+          autoComplete="description"
+        />
         {formState.errors.description && (
           <p
             data-cy="product-description-error"
@@ -112,7 +122,6 @@ function ProductFormInputs({ register, formState }: ProductFormInputsProps) {
           </p>
         )}
       </Field>
-
 
       <Field>
         <FieldLegend className="text-2xl font-bold text-zinc-800">
@@ -126,12 +135,10 @@ function ProductFormInputs({ register, formState }: ProductFormInputsProps) {
           className={cn("h-10 p-4", {
             "border-red-600 border-2": formState.errors.image,
           })}
-          autoComplete="off" />
+          autoComplete="off"
+        />
         {formState.errors.image && (
-          <p
-            data-cy="product-image-error"
-            className="text-red-600 text-sm"
-          >
+          <p data-cy="product-image-error" className="text-red-600 text-sm">
             {formState.errors.image.message}
           </p>
         )}
@@ -150,17 +157,38 @@ function ProductFormInputs({ register, formState }: ProductFormInputsProps) {
           className={cn("h-10 p-4", {
             "border-red-600 border-2": formState.errors.price,
           })}
-          autoComplete="off" />
+          autoComplete="off"
+        />
         {formState.errors.price && (
-          <p
-            data-cy="product-price-error"
-            className="text-red-600 text-sm"
-          >
+          <p data-cy="product-price-error" className="text-red-600 text-sm">
             {formState.errors.price.message}
           </p>
         )}
       </Field>
+      {/* stock input for admin inventory management */}
+      <Field>
+        <FieldLegend className="text-2xl font-bold text-zinc-800">
+          Stock
+        </FieldLegend>
+        <Input
+          data-cy="product-stock"
+          {...register("stock")}
+          id="stock"
+          type="number"
+          min="0"
+          step="1"
+          className={cn("h-10 p-4", {
+            "border-red-600 border-2": formState.errors.stock,
+          })}
+          autoComplete="off"
+        />
 
+        {formState.errors.stock && (
+          <p data-cy="product-stock-error" className="text-red-600 text-sm">
+            {formState.errors.stock.message}
+          </p>
+        )}
+      </Field>
       <Field>
         <FieldLegend className="text-2xl font-bold text-zinc-800">
           Article Number
@@ -174,7 +202,8 @@ function ProductFormInputs({ register, formState }: ProductFormInputsProps) {
           className={cn("h-10 p-4", {
             "border-red-600 border-2": formState.errors.articleNumber,
           })}
-          autoComplete="off" />
+          autoComplete="off"
+        />
         {formState.errors.articleNumber && (
           <p
             data-cy="product-articleNumber-error"
@@ -187,7 +216,11 @@ function ProductFormInputs({ register, formState }: ProductFormInputsProps) {
 
       <Field className="pt-6 pb-6" orientation="horizontal">
         <div className="flex gap-4">
-          <Button type="submit" variant="outline" className="rounded-full bg-black text-white">
+          <Button
+            type="submit"
+            variant="outline"
+            className="rounded-full bg-black text-white"
+          >
             Confirm
           </Button>
           <Link href="/admin">
@@ -200,6 +233,6 @@ function ProductFormInputs({ register, formState }: ProductFormInputsProps) {
       {submitLabel}
     </Button> */}
       </Field>
-    </div >
+    </div>
   );
 }
