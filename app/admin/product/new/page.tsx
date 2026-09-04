@@ -78,7 +78,7 @@ export default async function NewProductPage() {
       <div className="hidden h-screen md:block">
         <img
           src="/assets/images/image-new-productpage.jpg"
-          alt="Clothes in store"
+          alt="Eyeglasses in store"
           className="object-cover w-full h-full"
         />
       </div>

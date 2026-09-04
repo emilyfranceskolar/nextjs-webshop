@@ -91,7 +91,7 @@ export default async function EditProductPage({
       <div className="hidden h-screen md:block">
         <img
           src={product?.image}
-          alt="Clothes in store"
+          alt="Eyeglasses in store"
           className="object-cover w-full h-full"
         />
       </div>
