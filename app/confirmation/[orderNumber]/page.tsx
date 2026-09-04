@@ -89,7 +89,7 @@ export default function ConfirmationPage({ params }: {
             </div>
 
             <Link href="/product">
-              <Button className="p-4 w-full hover:bg-zinc-800 mt-auto">
+              <Button className="p-4 w-full hover:bg-[#ddd9cd] hover:text-zinc-800 mt-auto">
                 Continue shopping
               </Button>
             </Link>

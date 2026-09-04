@@ -62,7 +62,7 @@ export const products: Product[] = [
   {
     id: "5",
     slug: "melbourne-black",
-    category: "Bestseller",
+    category: "Sunglasses",
     articleNumber: "116",
     image: "/assets/images/Melbourne_black_1.webp",
     title: "Melbourne Black",
