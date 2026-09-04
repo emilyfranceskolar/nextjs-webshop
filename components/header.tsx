@@ -41,7 +41,10 @@ export default function Header() {
       <nav className="flex justify-center flex-1 mt-6 gap-8 text-sm md:text-lg md:justify-end lg:justify-end ">
         <Link
           href="/product"
-          className="text-zinc-600 transition-colors hover:text-rose-900 hover:underline underline-offset-8 decoration-2 decoration-rose-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose-900"
+          className={`underline-offset-8 decoration-2 transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose-900 ${pathName === "/product"
+              ? "text-rose-900 underline decoration-rose-900"
+              : "text-zinc-600 hover:text-rose-900 hover:underline decoration-rose-900"
+            }`}
         >
           Products
         </Link>
