@@ -110,7 +110,7 @@ export default function AccountPanel() {
           data-cy="account-menu-button"
           className={isOpen ? "text-rose-900 bg-rose-50 hover:bg-rose-100" : "text-zinc-700 hover:text-rose-900 hover:bg-rose-50"}
         >
-          <CircleUserRound className="size-6" />
+          <CircleUserRound className="size-6 relative -top-1" />
         </Button>
       </SheetTrigger>
 
@@ -173,7 +173,7 @@ export default function AccountPanel() {
 
               <Button
                 type="button"
-                className="h-11 w-full bg-[#8b0836] hover:bg-[#6f062b]"
+                className="h-11 w-full bg-[#526E67] hover:bg-[#7C9A92]"
                 onClick={handleSignOut}
               >
                 Sign out
@@ -237,7 +237,7 @@ export default function AccountPanel() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="h-11 w-full bg-[#8b0836] hover:bg-[#6f062b]"
+                  className="h-11 w-full bg-[#526E67] hover:bg-[#7C9A92]"
                 >
                   {isSubmitting
                     ? "Please wait..."
