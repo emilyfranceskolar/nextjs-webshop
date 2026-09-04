@@ -11,12 +11,13 @@ export default async function Home() {
       },
     },
   });
-  const categories = ["Tops", "Bottoms", "Shoes", "Accessories"];
+  const categories = ["Bestseller", "Reading Glasses", "Sunglasses", "Sale"];
+
   const categoryImages: Record<string, string> = {
-    BestSeller: "/assets/images/top-1.jpg",
-    ReadingGlasses: "/assets/images/bottom-1.jpg",
-    SunGlasses: "/assets/images/shoe-1.jpg",
-    Sale: "/assets/images/accessory-1.jpg",
+    Bestseller: "/assets/images/Bilbao_Meadow_Green.jpg",
+    "Reading Glasses": "/assets/images/Paris_Crystal_Clear.jpg",
+    Sunglasses: "/assets/images/Cartagena_tortoise_1.webp",
+    Sale: "/assets/images/Vienna_Yellow_Amber.jpg",
   };
 
   return (
@@ -38,9 +39,9 @@ export default async function Home() {
         </button>
       </section>
       <h2 className="text-2xl md:text-4xl md:p-4">Shop by Category</h2>
-      <section className="w-full flex justify-evenly gap-8 overflow-x-auto p-2">
+      <section className="grid w-full grid-cols-2 gap-2 p-2 md:grid-cols-4">
         {categories.map((category) => (
-          <Link href={`/product?category=${category}`} key={category}>
+          <Link className="flex-1 min-w-0" href={`/product?category=${category}`} key={category}>
             <CategoryCard
               category={category}
               image={categoryImages[category]}

@@ -40,38 +40,38 @@ export default async function ProductPage({
           </li>
           <li>
             <Link
-              href="/product?category=Tops"
-              className={`text-black hover:underline ${params.category === "Tops" ? "font-bold" : ""
+              href="/product?category=Bestseller"
+              className={`text-black hover:underline ${params.category === "Bestseller" ? "font-bold" : ""
                 }`}
             >
-              TOPS
+              BESTSELLER
             </Link>
           </li>
           <li>
             <Link
-              href="/product?category=Bottoms"
-              className={`text-black hover:underline ${params.category === "Bottoms" ? "font-bold" : ""
+              href="/product?category=Reading Glasses"
+              className={`text-black hover:underline ${params.category === "Reading Glasses" ? "font-bold" : ""
                 }`}
             >
-              BOTTOMS
+              READING GLASSES
             </Link>
           </li>
           <li>
             <Link
-              href="/product?category=Shoes"
-              className={`text-black hover:underline ${params.category === "Shoes" ? "font-bold" : ""
+              href="/product?category=Sunglasses"
+              className={`text-black hover:underline ${params.category === "Sunglasses" ? "font-bold" : ""
                 }`}
             >
-              SHOES
+              SUNGLASSES
             </Link>
           </li>
           <li>
             <Link
-              href="/product?category=Accessories"
-              className={`text-black hover:underline ${params.category === "Accessories" ? "font-bold" : ""
+              href="/product?category=Sale"
+              className={`text-black hover:underline ${params.category === "Sale" ? "font-bold" : ""
                 }`}
             >
-              ACCESSORIES
+              SALE
             </Link>
           </li>
         </ul>
