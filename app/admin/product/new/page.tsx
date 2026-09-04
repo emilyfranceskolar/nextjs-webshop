@@ -13,7 +13,17 @@ async function createNewProduct(formData: FormData) {
   const title = formData.get("title") as string;
   const price = Number(formData.get("price"));
 
-  if (!title || !price || price <= 0) {
+ 
+  // stock for admin inventory management
+  const stock = Number(formData.get("stock"));
+
+  if (
+    !title ||
+    !price ||
+    price <= 0 ||
+    !Number.isInteger(stock) ||
+    stock < 0
+  ) {
     return;
   }
   const description = formData.get("description") as string;
@@ -31,6 +41,7 @@ async function createNewProduct(formData: FormData) {
     data: {
       title,
       price,
+      stock,
       description,
       image,
       slug,
