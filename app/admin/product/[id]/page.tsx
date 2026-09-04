@@ -13,6 +13,15 @@ async function editProduct(formData: FormData) {
   const id = formData.get("id") as string;
   const title = formData.get("title")?.toString().trim() || "";
   const price = Number(formData.get("price"));
+
+  // stock for admin inventory management
+  const stock = Number(formData.get("stock"));
+
+  // stock validation for admin inventory management
+  if (!Number.isInteger(stock) || stock < 0) {
+    return;
+  }
+
   const description = formData.get("description")?.toString().trim() || "";
   const image = formData.get("image")?.toString().trim() || "";
   const category = formData.get("category")?.toString().trim() || "";
@@ -34,6 +43,10 @@ async function editProduct(formData: FormData) {
     data: {
       title,
       price,
+
+      // update stock in database
+      stock,
+
       description,
       image,
       categories: {
@@ -82,6 +95,10 @@ export default async function EditProductPage({
             description: product?.description,
             image: product?.image,
             price: product?.price.toString(),
+
+            // load current stock into edit form
+            stock: product.stock.toString(),
+
             articleNumber: product?.articleNumber,
             slug: product?.slug,
           }}
