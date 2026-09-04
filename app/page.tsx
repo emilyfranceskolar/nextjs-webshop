@@ -13,25 +13,25 @@ export default async function Home() {
   });
   const categories = ["Tops", "Bottoms", "Shoes", "Accessories"];
   const categoryImages: Record<string, string> = {
-    Tops: "/assets/images/top-1.jpg",
-    Bottoms: "/assets/images/bottom-1.jpg",
-    Shoes: "/assets/images/shoe-1.jpg",
-    Accessories: "/assets/images/accessory-1.jpg",
+    BestSeller: "/assets/images/top-1.jpg",
+    ReadingGlasses: "/assets/images/bottom-1.jpg",
+    SunGlasses: "/assets/images/shoe-1.jpg",
+    Sale: "/assets/images/accessory-1.jpg",
   };
 
   return (
-    <main className="grid gap-8 place-items-center">
+    <main className="grid gap-8 place-items-center bg-[#fafaf8;]">
       <section className="relative md:w-full lg:w-full overflow-hidden">
-        <h1 className="absolute hidden md:flex justify-center w-full text-center text-[8rem] font-bold text-white top-15">
-          Every Item <br />
-          Tells A Story.
+        <h1 className="absolute hidden md:flex justify-center w-full text-center text-[6rem] font-bold text-white top-15">
+          Your next pair <br />
+          of Glajjan
         </h1>
         <img
-          src="/assets/images/greeter.jpg"
-          alt="Greeter"
+          src="/assets/images/hero-image.jpg"
+          alt="Hero-image"
           className="md:object-cover lg:object-cover overflow-hidden w-full md:h-240 lg:h-240"
         />
-        <button className="absolute py-3 px-10 rounded-lg text-white font-bold bg-[#8b0836] lg:bottom-50 left-1/2 -translate-x-1/2 translate-y-1/2 hover:cursor-pointer hover:bg-[#ddd9cd] hover:text-black transition-all duration-300">
+        <button className="absolute py-3 px-10 rounded-lg text-white font-bold bg-[#526E67] lg:bottom-50 left-1/2 -translate-x-1/2 translate-y-1/2 hover:cursor-pointer hover:bg-[#ddd9cd] hover:text-black transition-all duration-300">
           <Link href="/product" className="text-lg">
             Shop Now
           </Link>
@@ -49,7 +49,7 @@ export default async function Home() {
         ))}
       </section>
       <section className="grid gap-8 place-items-center">
-        <h2 className="text-xl md:text-3xl font-bold m-4">All Products</h2>
+        <h2 className="text-xl md:text-3xl m-4">All Products</h2>
         <section className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-2 mb-4">
           {product.map((product) => (
             <HomePageCard

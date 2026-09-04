@@ -15,8 +15,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 /* Beskriv din hemsida för sökmotorerna */
 export const metadata: Metadata = {
-  title: "Worn Stories",
-  description: "Dina favoritprodukter online till en bra pris...",
+  title: "Glajjan",
+  description: "Dina favoritglajjor online till en bra pris...",
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {

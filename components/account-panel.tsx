@@ -49,10 +49,10 @@ export default function AccountPanel() {
       view === "sign-in"
         ? await authClient.signIn.email({ email, password })
         : await authClient.signUp.email({
-            name: String(formData.get("name")),
-            email,
-            password,
-          });
+          name: String(formData.get("name")),
+          email,
+          password,
+        });
 
     setIsSubmitting(false);
 
@@ -109,7 +109,7 @@ export default function AccountPanel() {
           aria-label="Open account menu"
           data-cy="account-menu-button"
         >
-          <CircleUserRound className="size-6" />
+          <CircleUserRound className="size-6 relative -top-1" />
         </Button>
       </SheetTrigger>
 
@@ -172,7 +172,7 @@ export default function AccountPanel() {
 
               <Button
                 type="button"
-                className="h-11 w-full bg-[#8b0836] hover:bg-[#6f062b]"
+                className="h-11 w-full bg-[#526E67] hover:bg-[#7C9A92]"
                 onClick={handleSignOut}
               >
                 Sign out
@@ -236,7 +236,7 @@ export default function AccountPanel() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="h-11 w-full bg-[#8b0836] hover:bg-[#6f062b]"
+                  className="h-11 w-full bg-[#526E67] hover:bg-[#7C9A92]"
                 >
                   {isSubmitting
                     ? "Please wait..."
