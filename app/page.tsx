@@ -11,12 +11,13 @@ export default async function Home() {
       },
     },
   });
-  const categories = ["Tops", "Bottoms", "Shoes", "Accessories"];
+  const categories = ["Bestseller", "Reading Glasses", "Sunglasses", "Sale"];
+
   const categoryImages: Record<string, string> = {
-    BestSeller: "/assets/images/top-1.jpg",
-    ReadingGlasses: "/assets/images/bottom-1.jpg",
-    SunGlasses: "/assets/images/shoe-1.jpg",
-    Sale: "/assets/images/accessory-1.jpg",
+    Bestseller: "/assets/images/Bilbao_Meadow_Green.jpg",
+    "Reading Glasses": "/assets/images/Paris_Crystal_Clear.jpg",
+    Sunglasses: "/assets/images/Melbourne_black_1.webp",
+    Sale: "/assets/images/Vienna_Yellow_Amber.jpg",
   };
 
   return (
