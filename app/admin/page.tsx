@@ -1,167 +1,58 @@
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { db } from "@/prisma/db";
-import { isAdmin } from "@/lib/admin";
-import { Plus } from "lucide-react";
-import { revalidatePath } from "next/cache";
+
+
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
-async function deleteProduct(formData: FormData) {
-  "use server";
-
-  if (!(await isAdmin())) {
-    throw new Error("Unauthorized");
-  }
-
-  const id = formData.get("id") as string;
-  await db.product.deleteMany({ where: { id } });
-  revalidatePath("/admin");
-}
-
-export default async function AdminPage() {
-  if (!(await isAdmin())) {
-    redirect("/");
-  }
-
-  const products = await db.product.findMany({});
+export default function AdminPage() {
   return (
-    <main className="grid">
-      <p className="text-3xl font-bold m-10 text-center">Our products</p>
-      <section className="grid gap-4 items-stretch pl-6 pr-6 pb-6 sm:grid-cols-2 xl:grid-cols-3">
-        <Link href="/admin/product/new">
-          <div className="flex flex-wrap gap-2 px-2 py-2 border rounded-xl w-full hover:bg-muted/50 transition h-full">
-            <div className="w-24 h-28 rounded-lg border-2 border-dashed flex items-center justify-center text-sm text-muted-foreground">
-              Image
-            </div>
+    <div>
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+        <p className="mt-2 text-gray-500">
+          Manage your webshop from one place.
+        </p>
+      </div>
 
-            <div className="flex flex-col px-2 py-4 rounded-xl h-full">
-              <div className="pl-2 pb-2 pt-2">
-                <p
-                  data-cy="product-id"
-                  className="font-bold text-sm text-stone-600 pb-2"
-                >
-                  New Product
-                </p>
-                <p
-                  data-cy="product-title"
-                  className="font-bold text-sm pb-2 text-stone-600"
-                >
-                  Title
-                </p>
-                <p
-                  data-cy="product-price"
-                  className="text-sm pb-2 text-stone-600"
-                >
-                  0kr
-                </p>
-                <p
-                  data-cy="product-description"
-                  className="text-sm max-w-xs pb-6 text-stone-600"
-                >
-                  No description
-                </p>
-              </div>
-              <div className="flex gap-2">
-                <Button data-cy="admin-add-product" variant="outline">
-                  <Plus className="mr-2 h-4 w-4" />
-                  Add new product
-                </Button>
-              </div>
-            </div>
-          </div>
-        </Link>
+      <section className="grid gap-6 md:grid-cols-3">
+        {/* Products */}
+        <div className="rounded-xl border bg-white p-6 shadow-sm">
+          <p className="text-sm text-gray-500">Products</p>
 
-        {products.map((product) => (
-          <article
-            key={product.id}
-            data-cy="product"
-            className="flex flex-wrap gap-2 px-2 py-2 border h-full rounded-xl"
+          <h2 className="mt-2 text-2xl font-bold">Products</h2>
+
+          <Link
+            href="/admin/product"
+            className="mt-4 inline-block font-medium hover:underline"
           >
-            {product.image && (
-              <img
-                className="object-cover rounded-lg w-24 h-28"
-                src={product.image}
-                alt={product.title}
-              />
-            )}
+            Manage products →
+          </Link>
+        </div>
 
-            <div className="flex flex-col">
-              <div className="pl-2 pb-2">
-                <p data-cy="product-id" className="font-bold text-sm pb-2">
-                  {product.articleNumber}
-                </p>
-                <p data-cy="product-title" className="font-bold text-sm pb-2">
-                  {product.title}
-                </p>
-                <p data-cy="product-price" className="text-sm pb-2">
-                  {product.price}kr
-                </p>
-                <p
-                  data-cy="product-description"
-                  className="text-sm max-w-xs pb-2"
-                >
-                  {product.description}
-                </p>
-              </div>
+        {/* Orders */}
+        <div className="rounded-xl border bg-white p-6 shadow-sm">
+          <p className="text-sm text-gray-500">Orders</p>
 
-              <Dialog>
-                <div className="flex gap-2">
-                  <Link href={`/admin/product/${product.articleNumber}`}>
-                    <Button variant="outline" data-cy="admin-edit-product">
-                      Edit product
-                    </Button>
-                  </Link>
+          <h2 className="mt-2 text-2xl font-bold">Orders</h2>
 
-                  <DialogTrigger asChild>
-                    <Button
-                      variant="outline"
-                      data-cy="admin-remove-product"
-                      className="hover:bg-red-200"
-                    >
-                      Delete product
-                    </Button>
-                  </DialogTrigger>
-                </div>
+          <Link
+            href="/admin/orders"
+            className="mt-4 inline-block font-medium hover:underline"
+          >
+            Manage orders →
+          </Link>
+        </div>
 
-                <DialogContent className="sm:max-w-200">
-                  <form action={deleteProduct}>
-                    <input type="hidden" name="id" value={product.id} />
+        {/* Users */}
+        <div className="rounded-xl border bg-white p-6 shadow-sm">
+          <p className="text-sm text-gray-500">Users</p>
 
-                    <DialogHeader>
-                      <DialogTitle className="p-6 whitespace-nowrap">
-                        Are you sure you want to delete the product?
-                      </DialogTitle>
-                    </DialogHeader>
+          <h2 className="mt-2 text-2xl font-bold">Users</h2>
 
-                    <DialogFooter>
-                      <DialogClose asChild>
-                        <Button variant="outline">No</Button>
-                      </DialogClose>
-
-                      <Button
-                        type="submit"
-                        data-cy="confirm-delete-button"
-                        className=""
-                      >
-                        Yes
-                      </Button>
-                    </DialogFooter>
-                  </form>
-                </DialogContent>
-              </Dialog>
-            </div>
-          </article>
-        ))}
+          <p className="mt-4 text-sm text-gray-400">
+            User management coming later
+          </p>
+        </div>
       </section>
-    </main>
+    </div>
   );
 }
+
