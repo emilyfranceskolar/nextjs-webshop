@@ -35,7 +35,7 @@ export default async function AdminOrdersPage() {
           {orders.map((order) => (
             <Card key={order.id} data-cy="admin-order" className="min-w-0">
               <CardHeader className="pb-6">
-                <CardTitle className="break-words">
+                <CardTitle className="wrap-break-word">
                   Order #{order.orderNumber}
                 </CardTitle>
 
@@ -45,7 +45,7 @@ export default async function AdminOrdersPage() {
               </CardHeader>
 
               <CardContent className="space-y-1">
-                <div className="space-y-2 break-words">
+                <div className="space-y-2 wrap-break-word">
                   <p>
                     <strong>Customer:</strong> {order.name}
                   </p>
@@ -70,7 +70,7 @@ export default async function AdminOrdersPage() {
                         key={item.id}
                         className="flex flex-wrap justify-between gap-2"
                       >
-                        <span className="min-w-0 break-words">
+                        <span className="min-w-0 wrap-break-word">
                           {item.title} × {item.quantity}
                         </span>
 
