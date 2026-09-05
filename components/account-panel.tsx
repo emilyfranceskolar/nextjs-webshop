@@ -268,6 +268,7 @@ export default function AccountPanel() {
               <Link
                 href="/admin"
                 data-cy="admin-link"
+                onClick={() => setIsOpen(false)}
                 className="text-sm font-medium text-zinc-700 underline underline-offset-4 hover:text-black"
               >
                 Admin
