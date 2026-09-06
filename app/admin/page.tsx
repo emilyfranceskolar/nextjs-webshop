@@ -1,8 +1,10 @@
 
-
+import { db } from "@/prisma/db";
 import Link from "next/link";
 
-export default function AdminPage() {
+export default async function AdminPage() {
+  const productCount = await db.product.count();
+  const orderCount = await db.order.count();
   return (
     <div>
       <div className="mb-8">
@@ -17,7 +19,7 @@ export default function AdminPage() {
         <div className="rounded-xl border bg-white p-6 shadow-sm">
           <p className="text-sm text-gray-500">Products</p>
 
-          <h2 className="mt-2 text-2xl font-bold">Products</h2>
+          <h2 className="mt-2 text-3xl font-bold">{productCount}</h2>
 
           <Link
             href="/admin/product"
@@ -31,7 +33,7 @@ export default function AdminPage() {
         <div className="rounded-xl border bg-white p-6 shadow-sm">
           <p className="text-sm text-gray-500">Orders</p>
 
-          <h2 className="mt-2 text-2xl font-bold">Orders</h2>
+         <h2 className="mt-2 text-3xl font-bold">{orderCount}</h2>
 
           <Link
             href="/admin/orders"
