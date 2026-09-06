@@ -20,13 +20,13 @@ async function editProduct(formData: FormData) {
 
   const categoryRecord = category
     ? await db.category.upsert({
-        where: { name: category },
-        update: {},
-        create: {
-          name: category,
-          slug: category.toLowerCase(),
-        },
-      })
+      where: { name: category },
+      update: {},
+      create: {
+        name: category,
+        slug: category.toLowerCase(),
+      },
+    })
     : null;
 
   await db.product.update({
@@ -90,8 +90,8 @@ export default async function EditProductPage({
 
       <div className="hidden h-screen md:block">
         <img
-          src={product?.image}
-          alt="Clothes in store"
+          src={product.image}
+          alt="Glajjan"
           className="object-cover w-full h-full"
         />
       </div>

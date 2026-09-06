@@ -18,7 +18,7 @@ export type Customer = z.infer<typeof customerSchema>;
 export const productSchema = z.object({
   id: z.string().optional(),
   title: z.string().min(1, "Required"),
-  category: z.string().optional(),
+  category: z.array(z.string()).optional(),
   description: z.string().min(1, "Required"),
   image: z
     .string()

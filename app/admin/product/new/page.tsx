@@ -66,8 +66,8 @@ export default async function NewProductPage() {
 
       <div className="hidden h-screen md:block">
         <img
-          src="/assets/images/image-new-productpage.jpg"
-          alt="Clothes in store"
+          src="https://www.nividas.com/cdn/shop/files/Untitled_1500_x_1500_px_3.png?v=1775653649&width=720"
+          alt="Girl with Melbourne Shiny Black"
           className="object-cover w-full h-full"
         />
       </div>

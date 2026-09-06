@@ -72,24 +72,69 @@ function ProductFormInputs({ register, formState }: ProductFormInputsProps) {
       </Field>
 
       <Field>
-        <FieldLegend className="text-2xl font-bold text-zinc-800">Category</FieldLegend>
-        <Input
-          data-cy="product-category"
-          {...register("category")}
-          id="category"
-          type="text"
-          className={cn("h-10 p-4", {
-            "border-red-600 border-2": formState.errors.category,
-          })}
-          autoComplete="category" />
-        {formState.errors.category && (
-          <p
-            data-cy="product-category-error"
-            className="text-red-600 text-sm"
-          >
-            {formState.errors.category.message}
-          </p>
-        )}
+        <FieldLegend className="text-2xl font-bold text-zinc-800">Category
+        </FieldLegend>
+
+        <div className="gap-6">
+          <label className="flex items-center gap-2">
+            <input
+              data-cy="product-category"
+              {...register("category")}
+              type="checkbox"
+              id="category"
+              value="Bestseller"
+              className={cn("", {
+                "border-red-600 border-2": formState.errors.category,
+              })}
+              autoComplete="category" />
+            Bestseller
+          </label>
+
+          <label className="flex items-center gap-2">
+            <input
+              data-cy="product-category"
+              {...register("category")}
+              type="checkbox"
+              value="Reading Glasses"
+              className={cn("", {
+                "border-red-600 border-2": formState.errors.category,
+              })}
+              autoComplete="category" />
+            Reading Glasses
+          </label>
+          <label className="flex items-center gap-2">
+            <input
+              data-cy="product-category"
+              {...register("category")}
+              type="checkbox"
+              value="Sunglasses"
+              className={cn("", {
+                "border-red-600 border-2": formState.errors.category,
+              })}
+              autoComplete="category" />
+            Sunglasses
+          </label>
+          <label className="flex items-center gap-2">
+            <input
+              data-cy="product-category"
+              {...register("category")}
+              type="checkbox"
+              value="Sale"
+              className={cn("", {
+                "border-red-600 border-2": formState.errors.category,
+              })}
+              autoComplete="category" />
+            Sale
+          </label>
+          {formState.errors.category && (
+            <p
+              data-cy="product-category-error"
+              className="text-red-600 text-sm"
+            >
+              {formState.errors.category.message}
+            </p>
+          )}
+        </div>
       </Field>
 
       <Field>
