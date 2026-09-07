@@ -22,7 +22,10 @@ interface ProductFormInputsProps {
 export default function ProductForm({ initialValues, action }: ProductFormProps) {
   const router = useRouter();
   const { register, handleSubmit, formState } = useForm<ProductFormValues>({
-    resolver: zodResolver(productSchema), defaultValues: initialValues,
+    resolver: zodResolver(productSchema), defaultValues: {
+      ...initialValues,
+      category: initialValues?.category ?? [],
+    },
   });
 
   const onSubmit = async (data: ProductFormValues) => {
