@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+// validering och schemat för customer form
 export const customerSchema = z.object({
   email: z.email({ error: "Enter an email" }),
   name: z.string().min(1, { error: "Enter a first name" }),
@@ -15,32 +16,52 @@ export const customerSchema = z.object({
 
 export type Customer = z.infer<typeof customerSchema>;
 
+// validering och schemat för bilder
+export const imageSchema = z
+  .string()
+  .min(1, "Required")
+  .refine((value) => {
+    if (value.startsWith("/") && value.match(/\.(jpg|jpeg|png|webp)$/i)) {
+      return true;
+    }
+    try {
+      const url = new URL(value);
+      return url.protocol === "http:" || url.protocol === "https:";
+    } catch {
+      return false;
+    }
+  }, "Invalid image URL");
+
+export type Image = z.infer<typeof imageSchema>;
+
+// validering och schemat för priset
+export const priceSchema = z
+  .string()
+  .min(1, "Required")
+  .refine((val) => {
+    const parsed = Number(val);
+    return !Number.isNaN(parsed) && parsed > 0;
+  }, "Invalid price");
+
+export type Price = z.infer<typeof priceSchema>;
+
+// schemat för create product
+export const createProductSchema = z.object({
+  title: z.string().min(1, "Required"),
+  description: z.string().min(1, "Required"),
+  image: imageSchema,
+  price: priceSchema,
+  slug: z.string().min(1, "Required"),
+  articleNumber: z.string().min(1, "Required"),
+});
+
 export const productSchema = z.object({
   id: z.string().optional(),
   title: z.string().min(1, "Required"),
   category: z.string().optional(),
   description: z.string().min(1, "Required"),
-  image: z
-    .string()
-    .min(1, "Required")
-    .refine((value) => {
-      if (value.startsWith("/") && value.match(/\.(jpg|jpeg|png|webp)$/i)) {
-        return true;
-      }
-      try {
-        const url = new URL(value);
-        return url.protocol === "http:" || url.protocol === "https:";
-      } catch {
-        return false;
-      }
-    }, "Invalid image URL"),
-  price: z
-    .string()
-    .min(1, "Required")
-    .refine((val) => {
-      const parsed = Number(val);
-      return !Number.isNaN(parsed) && parsed > 0;
-    }, "Invalid price"),
+  image: imageSchema,
+  price: priceSchema,
   articleNumber: z.string().optional(),
   slug: z.string().optional(),
 });
