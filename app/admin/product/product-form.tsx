@@ -29,10 +29,15 @@ export default function ProductForm({ initialValues, action }: ProductFormProps)
     const formData = new FormData();
 
     Object.entries(data).forEach(([key, value]) => {
-      if (value !== undefined) {
+      if (Array.isArray(value)) {
+        value.forEach((item) => {
+          formData.append(key, item);
+        });
+      } else if (value !== undefined) {
         formData.append(key, value.toString());
       }
-    })
+    });
+
     console.log("Save....", data);
     await action(formData);
     router.push("/admin");

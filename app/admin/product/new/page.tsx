@@ -18,7 +18,7 @@ async function createNewProduct(formData: FormData) {
   }
   const description = formData.get("description") as string;
   const image = formData.get("image") as string;
-  const category = formData.get("category")?.toString().trim() || "";
+  const categories = formData.getAll("category");
   const articleNumberValue = Number(formData.get("articleNumber"));
   const articleNumber = (
     articleNumberValue > 0
@@ -35,18 +35,19 @@ async function createNewProduct(formData: FormData) {
       image,
       slug,
       articleNumber,
-      ...(category && {
-        categories: {
-          create: {
-            category: {
-              connectOrCreate: {
-                where: { name: category },
-                create: { name: category, slug: category.toLowerCase() },
+      categories: {
+        create: categories.map((category) => ({
+          category: {
+            connectOrCreate: {
+              where: { name: category.toString() },
+              create: {
+                name: category.toString(),
+                slug: category.toString().toLowerCase(),
               },
             },
           },
-        },
-      }),
+        })),
+      },
     },
   });
 
