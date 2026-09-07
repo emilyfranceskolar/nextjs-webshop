@@ -15,6 +15,7 @@ import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import AdminNavigation from "./admin-navigation";
+import ProductPrice from "@/components/product-price";
 
 async function deleteProduct(formData: FormData) {
   "use server";
@@ -104,9 +105,11 @@ export default async function AdminPage() {
                 <p data-cy="product-title" className="font-bold text-sm pb-2">
                   {product.title}
                 </p>
-                <p data-cy="product-price" className="text-sm pb-2">
-                  {product.price}kr
-                </p>
+                <ProductPrice
+                  price={product.price}
+                  salePrice={product.salePrice}
+                  className="text-sm pb-2"
+                />
                 <p
                   data-cy="product-description"
                   className="text-sm max-w-xs pb-2"

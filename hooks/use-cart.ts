@@ -29,7 +29,9 @@ export function useCart() {
 
       if (existingProduct) {
         return prevCart.map((p) =>
-          p.id === product.id ? { ...p, quantity: (p.quantity || 1) + 1 } : p,
+          p.id === product.id
+            ? { ...product, quantity: (p.quantity || 1) + 1 }
+            : p,
         );
       }
 

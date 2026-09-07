@@ -2,6 +2,8 @@ import ProductForm from "../product-form";
 import { db } from "@/prisma/db";
 import { isAdmin } from "@/lib/admin";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import { readProductForm } from "../product-data";
 
 async function createNewProduct(formData: FormData) {
   "use server";
@@ -10,16 +12,9 @@ async function createNewProduct(formData: FormData) {
     throw new Error("Unauthorized");
   }
 
-  const title = formData.get("title") as string;
-  const price = Number(formData.get("price"));
-
-  if (!title || !price || price <= 0) {
-    return;
-  }
-  const description = formData.get("description") as string;
-  const image = formData.get("image") as string;
-  const category = formData.get("category")?.toString().trim() || "";
-  const articleNumberValue = Number(formData.get("articleNumber"));
+  const values = await readProductForm(formData);
+  const { title, price, salePrice, description, image, categoryIds } = values;
+  const articleNumberValue = Number(values.articleNumber);
   const articleNumber = (
     articleNumberValue > 0
       ? articleNumberValue
@@ -31,26 +26,16 @@ async function createNewProduct(formData: FormData) {
     data: {
       title,
       price,
+      salePrice,
       description,
       image,
       slug,
       articleNumber,
-      ...(category && {
-        categories: {
-          create: {
-            category: {
-              connectOrCreate: {
-                where: { name: category },
-                create: { name: category, slug: category.toLowerCase() },
-              },
-            },
-          },
-        },
-      }),
+      categories: { create: categoryIds.map((categoryId) => ({ categoryId })) },
     },
   });
 
-  return;
+  revalidatePath("/", "layout");
 }
 
 export default async function NewProductPage() {
@@ -58,10 +43,12 @@ export default async function NewProductPage() {
     redirect("/");
   }
 
+  const categories = await db.category.findMany({ orderBy: { name: "asc" } });
+
   return (
     <main className="min-h-screen grid bg-muted/30 md:grid-cols-2">
       <div className="flex justify-center w-full items-center space-y-4 text-stone-800 bg-white">
-        <ProductForm action={createNewProduct} />
+        <ProductForm action={createNewProduct} categories={categories} />
       </div>
 
       <div className="hidden h-screen md:block">

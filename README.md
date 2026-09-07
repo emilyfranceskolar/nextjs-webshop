@@ -115,6 +115,28 @@ Exempel på kategorier:
 
 Detta hanteras genom en relation mellan produkter och kategorier i databasen.
 
+När en ny produkt skapas väljer admin en eller flera befintliga kategorier.
+I **Edit product** skriver admin kategorin i ett textfält, som tidigare.
+När kategorin är **Sale** visas **Regular price (kr)** och **Sale price (kr)**. Reapriset måste vara
+större än noll och lägre än ordinarie pris. Ordinarie pris visas rött och
+överstruket bredvid reapriset. Kundvagn och nya orders använder reapriset.
+När kategorin ändras från Sale och produkten sparas tas reapriset bort.
+
+Efter att ha hämtat ändringen för reapriser, stoppa utvecklingsservern och kör:
+
+```bash
+npx prisma db push
+npx prisma generate
+npm run dev
+```
+
+Befintliga produkter behåller sina priser. För produkter som redan har kategorin
+Sale behöver admin fylla i både det riktiga ordinarie priset och reapriset.
+Ingen seedning behövs. Om ett pris ändras medan en produkt ligger i kundvagnen
+behöver kunden ta bort produkten och lägga till den igen före beställning.
+
+Kör tester för reapriser och kategorival med `npm run test:sale`.
+
 ---
 
 ### Testning
