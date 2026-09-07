@@ -14,6 +14,7 @@ import { Plus } from "lucide-react";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import AdminNavigation from "./admin-navigation";
 
 async function deleteProduct(formData: FormData) {
   "use server";
@@ -34,7 +35,8 @@ export default async function AdminPage() {
 
   const products = await db.product.findMany({});
   return (
-    <main className="grid">
+    <main className="grid pt-6">
+      <AdminNavigation currentPage="products" />
       <p className="text-3xl font-bold m-10 text-center">Our products</p>
       <section className="grid gap-4 items-stretch pl-6 pr-6 pb-6 sm:grid-cols-2 xl:grid-cols-3">
         <Link href="/admin/product/new">
