@@ -1,4 +1,4 @@
-import { productSchema } from "@/data/form";
+import { createProductSchema } from "@/data/form";
 import { db } from "@/prisma/db";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const body = await request.json();
 
-  const result = productSchema.safeParse(body);
+  const result = createProductSchema.safeParse(body);
 
   if (!result.success) {
     return NextResponse.json(
@@ -23,5 +23,6 @@ export async function POST(request: NextRequest) {
   const newProduct = await db.product.create({
     data: result.data,
   });
+
   return NextResponse.json(newProduct, { status: 201 });
 }

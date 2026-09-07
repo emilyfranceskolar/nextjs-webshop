@@ -36,7 +36,7 @@ export type Image = z.infer<typeof imageSchema>;
 
 // validering och schemat för priset
 export const priceSchema = z
-  .string()
+  .number()
   .min(1, "Required")
   .refine((val) => {
     const parsed = Number(val);
