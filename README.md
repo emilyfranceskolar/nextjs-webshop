@@ -4,7 +4,7 @@
 
 Glajjan är en rebrand av det tidigare projektet Worn Stories, där vi har gått från kläder till glasögon.
 
-Webbshoppen är byggd med **Next.js, React, TypeScript och Shadcn** och innehåller både ett kundflöde och en admin-del.
+Webbshoppen är byggd med Next.js, React, TypeScript och Shadcn och innehåller både ett kundflöde och en admin-del.
 
 Som kund kan man bläddra bland produkter, filtrera efter kategori, lägga produkter i kundvagnen och genomföra ett köp. Det går även att skapa ett konto och se sina tidigare beställningar.
 
@@ -76,10 +76,10 @@ Admin-panelen är skyddad och kan endast nås av användare med admin-behörighe
 - **Next.js**
 - **React**
 - **TypeScript**
-- **Prisma**
 - **SQLite**
-- **Better Auth**
+- **Prisma**
 - **React Hook Form**
+- **Better Auth**
 - **Zod**
 - **Tailwind CSS**
 - **Shadcn/ui**
@@ -89,7 +89,7 @@ Admin-panelen är skyddad och kan endast nås av användare med admin-behörighe
 
 ### Databas
 
-Projektet använder **Prisma** som ORM och **SQLite** som SQL-databas.
+Projektet använder Prisma som ORM och SQLite som SQL-databas.
 
 Databasen används bland annat för att lagra:
 
@@ -123,15 +123,18 @@ Projektet använder **Cypress** för end-to-end-tester.
 
 Testerna används för att kontrollera att webbshoppen fungerar som den ska och att projektets krav uppfylls.
 
+### Testkonton
+
+##### Kund
+
+Epost: test@glajjan.se
+Lösenord: Testglajjan1234!
+
+```bash
+make-admin -- test@glajjan.se
+```
+
 ---
-
-### Kravspecifikation
-
-1. Alla sidor ska vara responsiva.
-2. Arbetet ska implementeras med NextJs
-3. Backenden ska ha validering på samtliga endpoints.
-4. Skapa ett ER diagram
-5.
 
 ### Designspråk
 
@@ -154,6 +157,50 @@ Kör seed: `npm run seed`
 Starta utvecklingsservern: `npm run dev`
 Sedan klicka dig in på: http://localhost:3000
 
-### Tack för oss! 🕶️
+---
 
-Glajjan – Your next pair of Glajjan.
+### Krav för Godkänt
+
+- [ ] Git & GitHub har använts
+- [ ] Projektmappen innehåller en README.md fil - (läs ovan för mer info)
+- [ ] Uppgiften lämnas in i tid!
+- [ ] Ett designsystem/komponentbibliotek används nästintill helt uteslutande för att bygga sidan (ex: MUI, ChakraUI, Mantine, etc).
+
+**Home**
+
+- [ ] Ska ha en övergripande layout med header, main & footer.
+- [ ] Startsidan ska lista samtliga produkter.
+- [ ] Det ska gå att lägga till produkter i kundvagnen (header + toast + ls).
+- [ ] Det ska gå att klicka på en produkt och komma till en detaljsida.
+- [ ] Sidan ska vara responsiv och gå att använda på mobil, tablet & desktop.
+
+**Produkt**
+
+- [ ] Ska ha en övergripande layout med header, main & footer.
+- [ ] Detaljsidan ska visa all info om en produkt.
+- [ ] Det ska gå att lägga till produkten i kundvagnen (header + toast + ls).
+- [ ] Sidan ska vara responsiv och gå att använda på mobil, tablet & desktop.
+
+**Kundvagn & Checkout**
+
+- [ ] Ska ha en övergripande layout med header, main & footer.
+- [ ] Det ska gå att gå till checkoutsidan och se innehållet i kundvagnen (knapp & url).
+- [ ] Det ska gå att se det totala priset i kundvagnen.
+- [ ] Det ska gå att ändra produkterna i kundvagnen (header + vyn + pris + ls).
+- [ ] Det ska gå att ange leveransuppgifter i ett formulär.
+- [ ] Samtliga fält för checkoutsidans formulär ska ha valideringsregler.
+- [ ] Formulären vid utcheckningen ska gå att automatiskt fyllas i.
+- [ ] Bekräftelsesidan ska visa orderdetaljer och leveransuppgifter
+
+**Admin**
+
+- [ ] Det finns en admin-sida för produkthantering
+- [ ] Det ska gå att se alla produkter på admin sidan
+- [ ] Det går att lägga till produkter via admin sidan + ls
+- [ ] Det går att ta bort produkter via admin sidan + ls
+- [ ] Det går att redigera produkter via admin sidan + ls
+- [ ] Samtliga fält för adminsidans formulär ska ha valideringsregler
+
+## Glajjan – Your next pair of Glajjan.
+
+### Tack för oss! 🔥
