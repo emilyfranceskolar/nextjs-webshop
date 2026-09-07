@@ -4,7 +4,9 @@ import Link from "next/link";
 import AddToCartButton from "../add-to-cart-button";
 import { HomePageCardProps } from "./home-page-card";
 
-interface ProductCardProps extends HomePageCardProps {}
+interface ProductCardProps extends HomePageCardProps {
+  stock: number;
+}
 
 export default function ProductCard({
   id,
@@ -13,6 +15,8 @@ export default function ProductCard({
   imageUrl,
   price,
   slug,
+  stock,
+
 }: ProductCardProps) {
   return (
     <Card data-cy="product" className="p-0">
@@ -25,6 +29,11 @@ export default function ProductCard({
           <p data-cy="product-price">{price}kr</p>
         </CardHeader>
       </Link>
+
+      <p className="px-4 pb-2 text-red-600 font-semibold">
+        {stock === 0 ? "Slut i lager" : stock <= 5 ? "Endast några kvar i lager" : "I lager"}
+      </p>
+
       <CardFooter className="flex gap-2 justify-between">
         <Link className="flex-1" href={`/product/${articleNumber}/${slug}`}>
           <Button
@@ -45,9 +54,12 @@ export default function ProductCard({
           slug={slug}
           category=""
           description=""
+          stock={stock}
+          disabled={stock === 0}
           size="lg"
           buttonText="Add to Cart"
           className="flex-1 bg-black! text-white! hover:cursor-pointer"
+
         />
       </CardFooter>
     </Card>

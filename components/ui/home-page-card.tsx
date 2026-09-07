@@ -1,9 +1,9 @@
 "use client";
 import { Card } from "@/components/ui/card";
-import { PlusIcon } from "lucide-react";
+
 import Link from "next/link";
 import AddToCartButton from "../add-to-cart-button";
-import { Button } from "./button";
+
 
 export interface HomePageCardProps {
   id: string;
@@ -14,6 +14,7 @@ export interface HomePageCardProps {
   slug: string;
   category: string | null;
   description: string;
+  stock: number;
 }
 
 export default function HomePageCard({
@@ -25,6 +26,7 @@ export default function HomePageCard({
   slug,
   category,
   description,
+  stock,
 }: HomePageCardProps) {
   return (
     <Card data-cy="product" className="p-0 relative">
@@ -51,13 +53,7 @@ export default function HomePageCard({
         {price}kr
       </p>
 
-      <Button
-        variant="outline"
-        size="icon"
-        className="absolute top-2 right-2 p-4.5 sm:p-3 hover:cursor-pointer"
-      >
-        <PlusIcon />
-      </Button>
+
       <AddToCartButton
         id={id}
         title={title}
@@ -67,6 +63,8 @@ export default function HomePageCard({
         slug={slug}
         category={category}
         description={description}
+        stock={stock}
+        disabled={stock === 0}
         buttonText=""
         variant="outline"
         size="icon"
