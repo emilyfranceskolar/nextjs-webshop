@@ -33,7 +33,16 @@ export default async function AdminPage() {
     redirect("/");
   }
 
-  const products = await db.product.findMany({});
+  const products = await db.product.findMany({
+    include: {
+      categories: {
+        include: {
+          category: true,
+        },
+      },
+    },
+  });
+
   return (
     <main className="grid pt-6">
       <AdminNavigation currentPage="products" />
@@ -104,9 +113,35 @@ export default async function AdminPage() {
                 <p data-cy="product-title" className="font-bold text-sm pb-2">
                   {product.title}
                 </p>
+
+                {/* category name for each product */}
+                <p
+                  data-cy="product-category"
+                  className="text-sm text-zinc-500 pb-2"
+                >
+                  Category:{" "}
+                  {product.categories
+                    .map((item) => item.category.name)
+                    .join(", ") || "No category"}
+                </p>
+
                 <p data-cy="product-price" className="text-sm pb-2">
                   {product.price}kr
                 </p>
+
+                {/* stock balance for admin */}
+                <p
+                  data-cy="product-stock"
+                  className="text-sm font-semibold text-red-600 pb-2"
+                >
+                  Stock: {product.stock}
+                </p>
+                {/* <p data-cy="product-title" className="font-bold text-sm pb-2">
+                  {product.title}
+                </p> */}
+                {/* <p data-cy="product-price" className="text-sm pb-2">
+                  {product.price}kr
+                </p> */}
                 <p
                   data-cy="product-description"
                   className="text-sm max-w-xs pb-2"
