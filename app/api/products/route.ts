@@ -2,14 +2,28 @@ import { createProductSchema } from "@/data/form";
 import { db } from "@/prisma/db";
 import { NextRequest, NextResponse } from "next/server";
 
-//list products
+//hämta alla produkter
 export async function GET(request: NextRequest) {
-  const products = await db.product.findMany();
+  const products = await db.product.findMany({
+    include: {
+      categories: {
+        include: {
+          category: true,
+        },
+      },
+    },
+  });
+
   //
-  return NextResponse.json(products);
+  const productsWithCategories = products.map((product) => ({
+    ...product,
+    categories: product.categories.map((item) => item.category),
+  }));
+  //returnera enkel data för UI:n
+  return NextResponse.json(productsWithCategories);
 }
 
-//create products
+//skapar en produkt
 export async function POST(request: NextRequest) {
   const body = await request.json();
 
@@ -36,7 +50,7 @@ export async function POST(request: NextRequest) {
         },
       },
     },
-    /*obs! 👇🏽 är samma som rad 18-37 med ovanför är en spread av normala fält in i Prisma data 
+    /*obs! 👇🏽 är samma som rad 18-37 med ovanför är en spread av normala fält in i Prisma data
     data: {
       title: productData.title,
       description: productData.description,
