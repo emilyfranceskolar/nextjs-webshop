@@ -22,8 +22,29 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  const { category, ...productData } = result.data;
+
+  //skapa denna produkt, hitta den existerande kategori med samma slug, skapa en link mellan dem
   const newProduct = await db.product.create({
-    data: result.data,
+    data: {
+      ...productData,
+      categories: {
+        create: {
+          category: {
+            connect: { slug: category },
+          },
+        },
+      },
+    },
+    /*obs! 👇🏽 är samma som rad 18-37 med ovanför är en spread av normala fält in i Prisma data 
+    data: {
+      title: productData.title,
+      description: productData.description,
+      image: productData.image,
+      price: productData.price,
+      slug: productData.slug,
+      articleNumber: productData.articleNumber,
+    }, */
   });
 
   return NextResponse.json(newProduct, { status: 201 });

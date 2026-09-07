@@ -1,0 +1,19 @@
+### Hämta alla posts 
+GET http://localhost:3000/api/products
+
+### Skapa en produkt
+# price är float och måste skrivas som ett num istället för en string
+POST http://localhost:3000/api/products
+Content-Type: application/json
+
+{
+  "title": "Testing title nr2",
+  "category": "bestseller",
+  "description": "Lorem testing, Lorem testing",
+  "image": "/assets/images/Kingston_tortoise_1.webp",
+  "price": 899,
+  "slug": "testing-title nr2",
+  "articleNumber": "112233"
+}
+
+
