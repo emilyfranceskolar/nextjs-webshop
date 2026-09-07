@@ -48,6 +48,7 @@ export type Price = z.infer<typeof priceSchema>;
 // schemat för create product
 export const createProductSchema = z.object({
   title: z.string().min(1, "Required"),
+  category: z.string().min(1, "Required"),
   description: z.string().min(1, "Required"),
   image: imageSchema,
   price: priceSchema,
@@ -58,7 +59,7 @@ export const createProductSchema = z.object({
 export const productSchema = z.object({
   id: z.string().optional(),
   title: z.string().min(1, "Required"),
-  category: z.string().optional(),
+  category: z.string().min(1, "Required"),
   description: z.string().min(1, "Required"),
   image: imageSchema,
   price: priceSchema,
