@@ -22,6 +22,7 @@ export default async function ProductPage({
       : undefined,
   });
 
+
   return (
     <main className="grid gap-4 place-items-center select-none">
       <h1 className="text-3xl font-bold m-10">
@@ -86,8 +87,10 @@ export default async function ProductPage({
             price={product.price}
             imageUrl={product.image}
             slug={product.slug}
+            stock={product.stock}
             category=""
             description=""
+
           />
         ))}
       </section>

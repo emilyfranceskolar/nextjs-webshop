@@ -10,6 +10,7 @@ interface AddToCartButtonProps extends HomePageCardProps {
   variant?: "default" | "outline";
   size?: "icon" | "lg" | null;
   className: string;
+  disabled?: boolean;
 }
 
 export default function AddToCartButton({
@@ -20,14 +21,32 @@ export default function AddToCartButton({
   price,
   slug,
   description,
+  stock,
+  disabled,
   buttonText,
   variant,
   size,
   className,
+
 }: HomePageCardProps & AddToCartButtonProps) {
-  const { addToCart } = useCartContext();
+  const { addToCart, productsInCart } = useCartContext();
 
   const handleAddToCart = () => {
+
+    if (disabled || stock === 0) {
+      toast.error("Produkten är slut i lager");
+      return;
+
+    }
+
+    const existingProduct = productsInCart.find((p) => p.id === id);
+
+    if (existingProduct && existingProduct.quantity >= stock) {
+      toast.error(`Endast ${stock} st finns i lager`);
+      return;
+    }
+
+
     addToCart({
       id,
       title,
@@ -36,6 +55,7 @@ export default function AddToCartButton({
       price,
       slug,
       description,
+      stock,
       quantity: 1,
     });
     toast.success(
@@ -52,7 +72,7 @@ export default function AddToCartButton({
       variant={variant}
       size={size}
       onClick={handleAddToCart}
-      data-cy="product-buy-button"
+      disabled={disabled || stock === 0} data-cy="product-buy-button"
     >
       <PlusIcon />
       {buttonText}

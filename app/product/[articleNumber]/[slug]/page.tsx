@@ -44,6 +44,19 @@ export default async function ProductDetailPage({
               {product.price}kr
             </p>
 
+            {product.stock === 0 ? (
+              <p className="text-red-600 font-semibold">
+                Slut i lager
+              </p>
+            ) : product.stock <= 5 ? (
+              <p className="text-orange-500 font-semibold">
+                Endast några kvar i lager
+              </p>
+            ) : (
+              <p className="text-green-600 font-semibold">
+                I lager
+              </p>
+            )}
             <AddToCartButton
               id={product.articleNumber}
               title={product.title}
@@ -53,6 +66,8 @@ export default async function ProductDetailPage({
               slug={product.slug}
               category={product.categories[0]?.category.name ?? ""}
               description={product.description}
+              stock={product.stock}
+              disabled={product.stock === 0}
               buttonText="Add to Cart"
               variant="default"
               className="px-5 py-6 mb-10 mt-2 bg-[#ddd9cd] text-black rounded-xl hover:bg-[#526E67] hover:text-white  transition-all duration-300 cursor-pointer"
