@@ -1,5 +1,9 @@
-### Hämta alla posts 
+###Hämta alla produkter
 GET http://localhost:3000/api/products
+
+
+###Hämta en specifik produkt  avänder samma som ovanför + produktNr
+GET http://localhost:3000/api/products/115
 
 ### Skapa en produkt
 # price är float och måste skrivas som ett num istället för en string
@@ -16,4 +20,4 @@ Content-Type: application/json
   "articleNumber": "112233"
 }
 
-
+### Hämta en specifik produkt 
