@@ -33,7 +33,7 @@ export const imageSchema = z
 export type Image = z.infer<typeof imageSchema>;
 
 // validering och schemat för priset coerce för att tvinga input att bli ett nummer
-export const priceSchema = z.coerce.number().min(1, "Price must be at least 1");
+export const priceSchema = z.coerce.number().min(1, "Required");
 export type Price = z.infer<typeof priceSchema>;
 
 // The same four choices as main, independent of local test data.
@@ -59,8 +59,8 @@ export const productSchema = z.object({
     (value) => (value === "" ? undefined : value),
     z.coerce.number().positive().optional(),
   ),
-  articleNumber: z.string().optional(),
-  slug: z.string().min(1, "Required"),
+  articleNumber: z.string().min(1, "Required"),
+  slug: z.string().optional(),
 });
 
 // schemat för skapa produkt = samma som productSchema minus id
