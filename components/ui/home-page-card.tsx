@@ -14,6 +14,7 @@ export interface HomePageCardProps {
   slug: string;
   category: string | null;
   description: string;
+  stock: number;
 }
 
 export default function HomePageCard({
@@ -26,6 +27,7 @@ export default function HomePageCard({
   slug,
   category,
   description,
+  stock,
 }: HomePageCardProps) {
   return (
     <Card data-cy="product" className="p-0 relative h-full bg-[#f1f0ec]">
@@ -52,6 +54,7 @@ export default function HomePageCard({
         <ProductPrice price={price} salePrice={salePrice} />
       </div>
 
+
       <AddToCartButton
         id={id}
         title={title}
@@ -62,6 +65,8 @@ export default function HomePageCard({
         slug={slug}
         category={category}
         description={description}
+        stock={stock}
+        disabled={stock === 0}
         buttonText=""
         variant="outline"
         size="icon"

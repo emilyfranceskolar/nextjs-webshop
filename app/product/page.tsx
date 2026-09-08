@@ -106,8 +106,10 @@ export default async function ProductPage({
             salePrice={product.salePrice}
             imageUrl={product.image}
             slug={product.slug}
+            stock={product.stock}
             category=""
             description=""
+
           />
         ))}
       </section>

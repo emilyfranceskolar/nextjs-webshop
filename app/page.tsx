@@ -68,6 +68,7 @@ export default async function Home() {
               slug={product.slug}
               category={product.categories[0]?.category.name ?? ""}
               description={product.description}
+              stock={product.stock}
             />
           ))}
         </section>

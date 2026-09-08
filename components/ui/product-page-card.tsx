@@ -5,7 +5,9 @@ import AddToCartButton from "../add-to-cart-button";
 import { HomePageCardProps } from "./home-page-card";
 import ProductPrice from "../product-price";
 
-interface ProductCardProps extends HomePageCardProps {}
+interface ProductCardProps extends HomePageCardProps {
+  stock: number;
+}
 
 export default function ProductCard({
   id,
@@ -15,6 +17,8 @@ export default function ProductCard({
   price,
   salePrice,
   slug,
+  stock,
+
 }: ProductCardProps) {
   return (
     <Card data-cy="product" className="p-0 h-full">
@@ -34,7 +38,11 @@ export default function ProductCard({
           <ProductPrice price={price} salePrice={salePrice} />
         </CardHeader>
       </Link>
-      <CardFooter className="mt-auto flex flex-wrap gap-2 justify-between">
+      <p className="px-4 pb-2 text-red-600 font-semibold">
+  {stock === 0 ? "Out of stock" : stock <= 5 ? "Only a few left in stock" : "In stock"}
+</p>
+
+<CardFooter className="mt-auto flex flex-wrap gap-2 justify-between">
         <Link className="flex-1" href={`/product/${articleNumber}/${slug}`}>
           <Button
             variant="outline"
@@ -55,9 +63,12 @@ export default function ProductCard({
           slug={slug}
           category=""
           description=""
+          stock={stock}
+          disabled={stock === 0}
           size="lg"
           buttonText="Add to Cart"
           className="flex-1 bg-black! text-white! hover:cursor-pointer"
+
         />
       </CardFooter>
     </Card>
