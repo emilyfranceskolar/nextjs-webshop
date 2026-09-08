@@ -193,17 +193,18 @@ test("cart totals use discounted prices and quantities", () => {
   );
 });
 
-test("sale display shows the regular price in red and crossed out", () => {
+test("sale display shows the sale price in red and the regular price in black and crossed out", () => {
   const html = renderToStaticMarkup(
     createElement(ProductPrice, { price: 899, salePrice: 699 }),
   );
-  assert.match(html, /data-cy="product-price">699 kr/);
+  assert.match(html, /data-cy="product-price" class="text-red-600">699 kr/);
   assert.match(html, /data-cy="product-sale-badge"[^>]*>Sale<\/span>/);
-  assert.match(html, /<del[^>]*class="text-red-600">899 kr<\/del>/);
+  assert.match(html, /<del[^>]*class="text-black">899 kr<\/del>/);
   const regular = renderToStaticMarkup(
     createElement(ProductPrice, { price: 899 }),
   );
   assert.doesNotMatch(regular, /<del|product-sale-badge/);
+  assert.match(regular, /data-cy="product-price" class="text-black">899 kr/);
   const invalid = renderToStaticMarkup(
     createElement(ProductPrice, { price: 899, salePrice: 999 }),
   );

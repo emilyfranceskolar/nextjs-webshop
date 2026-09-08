@@ -17,7 +17,12 @@ export default function ProductPrice({
     <span
       className={cn("inline-flex flex-wrap items-baseline gap-x-2", className)}
     >
-      <span data-cy="product-price">{currentPrice} kr</span>
+      <span
+        data-cy="product-price"
+        className={currentPrice < price ? "text-red-600" : "text-black"}
+      >
+        {currentPrice} kr
+      </span>
       {currentPrice < price && (
         <>
           <span
@@ -27,7 +32,7 @@ export default function ProductPrice({
             Sale
           </span>
           <span className="sr-only">Regular price:</span>
-          <del data-cy="product-regular-price" className="text-red-600">
+          <del data-cy="product-regular-price" className="text-black">
             {price} kr
           </del>
         </>
