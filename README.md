@@ -120,8 +120,8 @@ checkboxar: Bestseller, Reading Glasses, Sunglasses och Sale. Befintliga giltiga
 kategorier är förvalda i **Edit product**. Gamla testkategorier visas inte som val.
 Om en produkt har en sådan kategori visas en förklaring innan admin sparar nya kategorival.
 När **Sale** är markerat visas **Regular price (kr)** och **Sale price (kr)**. Reapriset måste vara
-större än noll och lägre än ordinarie pris. Ordinarie pris visas rött och
-överstruket bredvid reapriset, tillsammans med en **Sale**-markering. Detta visas
+större än noll och lägre än ordinarie pris. Reapriset visas rött och ordinarie pris
+svart och överstruket bredvid, tillsammans med en **Sale**-markering. Detta visas
 även i produktlistan, Sale-kategorin och på produktens detaljsida.
 Kundvagn och nya orders använder reapriset.
 När Sale avmarkeras och produkten sparas tas reapriset bort. Övriga valda kategorier behålls.
