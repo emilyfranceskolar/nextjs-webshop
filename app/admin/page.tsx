@@ -45,13 +45,12 @@ export default async function AdminPage() {
     },
   });
 
-    include: { categories: { include: { category: true } } },
-  });
   const missingSalePrices = products.filter(
     (product) =>
       product.categories.some(({ category }) => category.name === "Sale") &&
       getProductPrice(product) === product.price,
   );
+
   return (
     <main className="grid pt-6">
       <AdminNavigation currentPage="products" />
