@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const body = await request.json();
 
-  const result = createProductSchema.safeParse(body);
+  const result = createProductSchema().safeParse(body);
 
   if (!result.success) {
     return NextResponse.json(
@@ -43,11 +43,11 @@ export async function POST(request: NextRequest) {
     data: {
       ...productData,
       categories: {
-        create: {
+        create: category.map((categoryName) => ({
           category: {
-            connect: { slug: category },
+            connect: { name: categoryName },
           },
-        },
+        })),
       },
     },
     /*obs! 👇🏽 är samma som rad 18-37 med ovanför är en spread av normala fält in i Prisma data
