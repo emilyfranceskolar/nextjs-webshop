@@ -3,6 +3,7 @@ import HomePageCard from "@/components/ui/home-page-card";
 import { db } from "@/prisma/db";
 import Link from "next/link";
 
+//server komponent
 export default async function Home() {
   const product = await db.product.findMany({
     include: {
@@ -41,7 +42,11 @@ export default async function Home() {
       <h2 className="text-2xl md:text-4xl md:p-4">Shop by Category</h2>
       <section className="grid w-full grid-cols-2 gap-2 p-2 md:grid-cols-4">
         {categories.map((category) => (
-          <Link className="flex-1 min-w-0" href={`/product?category=${category}`} key={category}>
+          <Link
+            className="flex-1 min-w-0"
+            href={`/product?category=${category}`}
+            key={category}
+          >
             <CategoryCard
               category={category}
               image={categoryImages[category]}
