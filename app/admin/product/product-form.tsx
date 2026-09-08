@@ -257,7 +257,6 @@ function ProductFormInputs({
           </p>
         )}
       </Field>
-
       {onSale && (
         <Field>
           <FieldLegend className="text-2xl font-bold text-zinc-800">

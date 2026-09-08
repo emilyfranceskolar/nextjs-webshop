@@ -11,13 +11,13 @@ async function editProduct(formData: FormData) {
   if (!(await isAdmin())) {
     throw new Error("Unauthorized");
   }
-  // const { id, title, price, salePrice, description, image, category } =
-  //   await readProductForm(formData);
 
   const { id, title, price, salePrice, stock, description, image, category } =
     await readProductForm(formData);
 
-  if (!id) throw new Error("Product ID is required");
+  if (!id) {
+    throw new Error("Product ID is required");
+  }
 
   await db.product.update({
     where: { id },
@@ -46,7 +46,6 @@ async function editProduct(formData: FormData) {
   });
 
   revalidatePath("/", "layout");
-  return;
 }
 
 export default async function EditProductPage({
@@ -59,16 +58,21 @@ export default async function EditProductPage({
   }
 
   const { id } = await params;
+
   const product = await db.product.findUnique({
     where: { articleNumber: id },
     include: {
       categories: {
-        include: { category: true },
+        include: {
+          category: true,
+        },
       },
     },
   });
 
-  if (!product) return <p>Product not found!</p>;
+  if (!product) {
+    return <p>Product not found!</p>;
+  }
 
   return (
     <main className="min-h-screen grid bg-muted/30 md:grid-cols-2">
@@ -77,15 +81,15 @@ export default async function EditProductPage({
           action={editProduct}
           initialValues={{
             id: product.id,
-            title: product?.title,
+            title: product.title,
             category: product.categories.map((item) => item.category.name),
-            description: product?.description,
-            image: product?.image,
-            price: product?.price.toString(),
+            description: product.description,
+            image: product.image,
+            price: product.price.toString(),
             salePrice: product.salePrice?.toString() ?? "",
             stock: product.stock.toString(),
-            articleNumber: product?.articleNumber,
-            slug: product?.slug,
+            articleNumber: product.articleNumber,
+            slug: product.slug,
           }}
         />
       </div>
