@@ -1,9 +1,8 @@
 "use client";
 import { Card } from "@/components/ui/card";
-import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 import AddToCartButton from "../add-to-cart-button";
-import { Button } from "./button";
+import ProductPrice from "../product-price";
 
 export interface HomePageCardProps {
   id: string;
@@ -11,9 +10,11 @@ export interface HomePageCardProps {
   articleNumber: string;
   imageUrl: string;
   price: number;
+  salePrice?: number | null;
   slug: string;
   category: string | null;
   description: string;
+  stock: number;
 }
 
 export default function HomePageCard({
@@ -22,51 +23,50 @@ export default function HomePageCard({
   articleNumber,
   imageUrl,
   price,
+  salePrice,
   slug,
   category,
   description,
+  stock,
 }: HomePageCardProps) {
   return (
-    <Card data-cy="product" className="p-0 relative">
-      <Link href={`/product/${articleNumber}/${slug}`} className="block">
+    <Card data-cy="product" className="p-0 relative h-full bg-[#f1f0ec]">
+      <Link
+        href={`/product/${articleNumber}/${slug}`}
+        className="block aspect-[3/4] overflow-hidden"
+      >
         {imageUrl && (
           <img
             src={imageUrl}
             alt={title}
-            className="w-full object-cover block"
+            className="h-full w-full object-contain block"
           />
         )}
       </Link>
-      <Link
-        href={`/product/${articleNumber}/${slug}`}
-        className="absolute bottom-4 left-4 text-md text-stone-600 font-semibold hover:underline"
-        data-cy="product-title"
-      >
-        {title}
-      </Link>
-      <p
-        data-cy="product-price"
-        className="absolute bottom-3.5 right-4 text-stone-600 text-md font-semibold"
-      >
-        {price}kr
-      </p>
+      <div className="flex flex-wrap items-baseline justify-between gap-2 p-4 text-stone-600 font-semibold">
+        <Link
+          href={`/product/${articleNumber}/${slug}`}
+          className="hover:underline"
+          data-cy="product-title"
+        >
+          {title}
+        </Link>
+        <ProductPrice price={price} salePrice={salePrice} />
+      </div>
 
-      <Button
-        variant="outline"
-        size="icon"
-        className="absolute top-2 right-2 p-4.5 sm:p-3 hover:cursor-pointer"
-      >
-        <PlusIcon />
-      </Button>
+
       <AddToCartButton
         id={id}
         title={title}
         articleNumber={articleNumber}
         imageUrl={imageUrl}
         price={price}
+        salePrice={salePrice}
         slug={slug}
         category={category}
         description={description}
+        stock={stock}
+        disabled={stock === 0}
         buttonText=""
         variant="outline"
         size="icon"

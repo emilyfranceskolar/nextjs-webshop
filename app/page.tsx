@@ -64,10 +64,12 @@ export default async function Home() {
               title={product.title}
               articleNumber={product.articleNumber}
               price={product.price}
+              salePrice={product.salePrice}
               imageUrl={product.image}
               slug={product.slug}
               category={product.categories[0]?.category.name ?? ""}
               description={product.description}
+              stock={product.stock}
             />
           ))}
         </section>

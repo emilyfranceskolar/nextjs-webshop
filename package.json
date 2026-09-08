@@ -13,6 +13,7 @@
     "push": "prisma db push",
     "seed": "prisma db seed",
     "make-admin": "tsx scripts/promote-admin.ts",
+    "test:sale": "tsx --test tests/product-sale.test.ts",
     "studio": "prisma studio"
   },
   "dependencies": {
