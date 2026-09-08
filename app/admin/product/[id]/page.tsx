@@ -3,6 +3,7 @@ import { isAdmin } from "@/lib/admin";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import ProductForm from "../product-form";
+import { readProductForm } from "../product-data";
 
 async function editProduct(formData: FormData) {
   "use server";
@@ -10,22 +11,16 @@ async function editProduct(formData: FormData) {
   if (!(await isAdmin())) {
     throw new Error("Unauthorized");
   }
-  const id = formData.get("id") as string;
-  const title = formData.get("title")?.toString().trim() || "";
-  const price = Number(formData.get("price"));
+  const { id, title, price, salePrice, description, image, category } =
+    await readProductForm(formData);
 
-  // stock for admin inventory management
+  if (!id) throw new Error("Product ID is required");
+
   const stock = Number(formData.get("stock"));
 
-  // stock validation for admin inventory management
   if (!Number.isInteger(stock) || stock < 0) {
     return;
   }
-
-  const description = formData.get("description")?.toString().trim() || "";
-  const image = formData.get("image")?.toString().trim() || "";
-  const categories = formData.getAll("category");
-  const slug = formData.get("slug")?.toString().trim() || "";
 
   await db.product.update({
     where: { id },
@@ -36,11 +31,12 @@ async function editProduct(formData: FormData) {
       // update stock in database
       stock,
 
+      salePrice,
       description,
       image,
       categories: {
         deleteMany: {},
-        create: categories.map((category) => ({
+        create: category.map((category) => ({
           category: {
             connectOrCreate: {
               where: { name: category.toString() },
@@ -55,7 +51,7 @@ async function editProduct(formData: FormData) {
     },
   });
 
-  revalidatePath("/admin");
+  revalidatePath("/", "layout");
   return;
 }
 
@@ -92,10 +88,8 @@ export default async function EditProductPage({
             description: product?.description,
             image: product?.image,
             price: product?.price.toString(),
-
-            // load current stock into edit form
-            stock: product.stock.toString(),
-
+              stock: product.stock.toString(),
+                salePrice: product.salePrice?.toString() ?? "",
             articleNumber: product?.articleNumber,
             slug: product?.slug,
           }}

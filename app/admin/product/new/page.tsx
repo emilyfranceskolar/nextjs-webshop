@@ -1,20 +1,21 @@
 import ProductForm from "../product-form";
+import { readProductForm } from "../product-data";
 import { db } from "@/prisma/db";
 import { isAdmin } from "@/lib/admin";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 async function createNewProduct(formData: FormData) {
   "use server";
 
   if (!(await isAdmin())) {
     throw new Error("Unauthorized");
-  }
+  )
+  
+  const values = await readProductForm(formData);
+  const { title, price, salePrice, description, image, category } = values;
+  const articleNumberValue = Number(values.articleNumber);
 
-  const title = formData.get("title") as string;
-  const price = Number(formData.get("price"));
-
- 
-  // stock for admin inventory management
   const stock = Number(formData.get("stock"));
 
   if (
@@ -26,10 +27,7 @@ async function createNewProduct(formData: FormData) {
   ) {
     return;
   }
-  const description = formData.get("description") as string;
-  const image = formData.get("image") as string;
-  const categories = formData.getAll("category");
-  const articleNumberValue = Number(formData.get("articleNumber"));
+    
   const articleNumber = (
     articleNumberValue > 0
       ? articleNumberValue
@@ -42,12 +40,13 @@ async function createNewProduct(formData: FormData) {
       title,
       price,
       stock,
+      salePrice,
       description,
       image,
       slug,
       articleNumber,
       categories: {
-        create: categories.map((category) => ({
+        create: category.map((category) => ({
           category: {
             connectOrCreate: {
               where: { name: category.toString() },
@@ -62,7 +61,7 @@ async function createNewProduct(formData: FormData) {
     },
   });
 
-  return;
+  revalidatePath("/", "layout");
 }
 
 export default async function NewProductPage() {
