@@ -20,9 +20,7 @@ async function main() {
       },
       update: {
         ...product,
-         // set stock to 3 for seeded products
-        stock: 3,
-        
+
         categories: {
           deleteMany: {},
           create: {
@@ -32,10 +30,8 @@ async function main() {
       },
       create: {
         ...product,
-         // set stock to 3 for seeded products
-        stock: 3,
-        
-       categories: {
+
+        categories: {
           create: {
             categoryId: categoryRecord.id,
           },
