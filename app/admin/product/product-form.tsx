@@ -208,7 +208,7 @@ function ProductFormInputs({
         <Input
           data-cy="product-price"
           {...register("price", {
-            setValueAs: (value) => (value === "" ? undefined : Number(value)),
+            setValueAs: (value) => (value === "" ? 0 : Number(value)),
           })}
           id="price"
           type="number"

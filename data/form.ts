@@ -57,7 +57,7 @@ export const productSchema = z.object({
   price: priceSchema,
   salePrice: z.preprocess(
     (value) => (value === "" ? undefined : value),
-    z.coerce.number().positive().optional(),
+    z.number().positive().optional(),
   ),
   articleNumber: z.string().min(1, "Required"),
   slug: z.string().optional(),
