@@ -207,7 +207,9 @@ function ProductFormInputs({
 
         <Input
           data-cy="product-price"
-          {...register("price", { valueAsNumber: true })}
+          {...register("price", {
+            setValueAs: (value) => (value === "" ? undefined : Number(value)),
+          })}
           id="price"
           type="number"
           min="0.01"
@@ -234,7 +236,9 @@ function ProductFormInputs({
             type="number"
             min="0.01"
             step="0.01"
-            {...register("salePrice", { valueAsNumber: true })}
+            {...register("salePrice", {
+              setValueAs: (value) => (value === "" ? undefined : Number(value)),
+            })}
             data-cy="product-sale-price"
             aria-invalid={!!formState.errors.salePrice}
             className="h-10 p-4"

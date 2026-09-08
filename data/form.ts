@@ -33,7 +33,7 @@ export const imageSchema = z
 export type Image = z.infer<typeof imageSchema>;
 
 // validering och schemat för priset coerce för att tvinga input att bli ett nummer
-export const priceSchema = z.number().min(1, "Required");
+export const priceSchema = z.number({ error: "Required" }).min(1, "Required");
 export type Price = z.infer<typeof priceSchema>;
 
 // The same four choices as main, independent of local test data.
@@ -63,7 +63,7 @@ export const productSchema = z.object({
   slug: z.string().optional(),
 });
 
-// schemat för skapa produkt = samma som productSchema minus id
+// schemat för skapa produkt = samma som productSchema minus idInvalid input: expected number, received NaN
 // export const createProductSchema = productSchema.omit({ id: true });
 
 export type ProductFormValues = z.infer<typeof productSchema>;
