@@ -41,7 +41,11 @@ export default async function Home() {
       <h2 className="text-2xl md:text-4xl md:p-4">Shop by Category</h2>
       <section className="grid w-full grid-cols-2 gap-2 p-2 md:grid-cols-4">
         {categories.map((category) => (
-          <Link className="flex-1 min-w-0" href={`/product?category=${category}`} key={category}>
+          <Link
+            className="flex-1 min-w-0"
+            href={`/product?category=${category}`}
+            key={category}
+          >
             <CategoryCard
               category={category}
               image={categoryImages[category]}
@@ -59,6 +63,7 @@ export default async function Home() {
               title={product.title}
               articleNumber={product.articleNumber}
               price={product.price}
+              salePrice={product.salePrice}
               imageUrl={product.image}
               slug={product.slug}
               category={product.categories[0]?.category.name ?? ""}

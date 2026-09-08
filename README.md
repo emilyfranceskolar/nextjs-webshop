@@ -115,6 +115,34 @@ Exempel på kategorier:
 
 Detta hanteras genom en relation mellan produkter och kategorier i databasen.
 
+När en produkt skapas eller redigeras väljer admin en eller flera kategorier med
+checkboxar: Bestseller, Reading Glasses, Sunglasses och Sale. Befintliga giltiga
+kategorier är förvalda i **Edit product**. Gamla testkategorier visas inte som val.
+Om en produkt har en sådan kategori visas en förklaring innan admin sparar nya kategorival.
+När **Sale** är markerat visas **Regular price (kr)** och **Sale price (kr)**. Reapriset måste vara
+större än noll och lägre än ordinarie pris. Ordinarie pris visas rött och
+överstruket bredvid reapriset, tillsammans med en **Sale**-markering. Detta visas
+även i produktlistan, Sale-kategorin och på produktens detaljsida.
+Kundvagn och nya orders använder reapriset.
+När Sale avmarkeras och produkten sparas tas reapriset bort. Övriga valda kategorier behålls.
+
+Efter att ha hämtat ändringen för reapriser, stoppa utvecklingsservern och kör:
+
+```bash
+npx prisma db push
+npx prisma generate
+npm run dev
+```
+
+Befintliga produkter behåller sina priser. För produkter som redan har kategorin
+Sale behöver admin fylla i både det riktiga ordinarie priset och reapriset.
+Sale-listan visar bara produkter med ett giltigt reapris. Admin visar länkar till
+Sale-produkter som saknar detta. De finns fortfarande kvar under alla produkter.
+Ingen seedning behövs. Om ett pris ändras medan en produkt ligger i kundvagnen
+behöver kunden ta bort produkten och lägga till den igen före beställning.
+
+Kör tester för reapriser och kategorival med `npm run test:sale`.
+
 ---
 
 ### Testning

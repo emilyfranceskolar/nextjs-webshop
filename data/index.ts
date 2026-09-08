@@ -9,7 +9,8 @@ export interface CartItem extends PrismaProduct {
   quantity: number;
 }
 
-export type Product = PrismaProduct & {
+export type Product = Omit<PrismaProduct, "salePrice"> & {
+  salePrice?: number | null;
   category: string;
 };
 

@@ -4,10 +4,12 @@ import { auth } from "@/lib/auth";
 import { db } from "@/prisma/db";
 import { headers } from "next/headers";
 import { customerSchema, type Customer } from "./form";
+import { getProductPrice } from "@/lib/product-price";
 
 type CartItem = {
   id: string;
   quantity: number;
+  price: number;
 };
 
 export default async function createOrder(
@@ -49,6 +51,16 @@ export default async function createOrder(
   const productsById = new Map(
     products.map((product) => [product.id, product]),
   );
+  // Never place an order for a different price than the customer has seen.
+  if (
+    cartItems.some(
+      (item) => item.price !== getProductPrice(productsById.get(item.id)!),
+    )
+  ) {
+    throw new Error(
+      "A product price has changed. Remove it from your cart and add it again before ordering.",
+    );
+  }
   const orderNumber = Math.floor(100000 + Math.random() * 900000).toString();
 
   const order = await db.order.create({
@@ -65,7 +77,7 @@ export default async function createOrder(
           return {
             productId: product.id,
             title: product.title,
-            price: product.price,
+            price: getProductPrice(product),
             quantity: item.quantity,
           };
         }),

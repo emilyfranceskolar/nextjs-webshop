@@ -1,6 +1,7 @@
 import AddToCartButton from "@/components/add-to-cart-button";
 import DetailPageDropdown from "@/components/ui/detail-page-dropdown";
 import { db } from "@/prisma/db";
+import ProductPrice from "@/components/product-price";
 
 export default async function ProductDetailPage({
   params,
@@ -40,9 +41,11 @@ export default async function ProductDetailPage({
             <p className="mb-5" data-cy="product-description">
               {product.description}
             </p>
-            <p className="text-xl font-semibold" data-cy="product-price">
-              {product.price}kr
-            </p>
+            <ProductPrice
+              price={product.price}
+              salePrice={product.salePrice}
+              className="text-xl font-semibold"
+            />
 
             {product.stock === 0 ? (
               <p className="text-red-600 font-semibold">
@@ -63,6 +66,7 @@ export default async function ProductDetailPage({
               articleNumber={product.articleNumber}
               imageUrl={product.image}
               price={product.price}
+              salePrice={product.salePrice}
               slug={product.slug}
               category={product.categories[0]?.category.name ?? ""}
               description={product.description}

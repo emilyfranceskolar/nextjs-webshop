@@ -15,10 +15,22 @@ export const customerSchema = z.object({
 
 export type Customer = z.infer<typeof customerSchema>;
 
+// The same four choices as main, independent of local test data.
+export const productCategoryNames = [
+  "Bestseller",
+  "Reading Glasses",
+  "Sunglasses",
+  "Sale",
+];
+
+export function isSaleCategory(names: string[]) {
+  return names.includes("Sale");
+}
+
 export const productSchema = z.object({
   id: z.string().optional(),
   title: z.string().min(1, "Required"),
-  category: z.string().optional(),
+  category: z.array(z.string()).min(1, "Select at least one category"),
   description: z.string().min(1, "Required"),
   image: z
     .string()
@@ -39,10 +51,38 @@ export const productSchema = z.object({
     .min(1, "Required")
     .refine((val) => {
       const parsed = Number(val);
-      return !Number.isNaN(parsed) && parsed > 0;
+      return Number.isFinite(parsed) && parsed > 0;
     }, "Invalid price"),
+  salePrice: z.string().optional(),
   articleNumber: z.string().optional(),
   slug: z.string().optional(),
 });
 
 export type ProductFormValues = z.infer<typeof productSchema>;
+
+// Validate the same category choices and prices in the browser and server actions.
+export function createProductSchema() {
+  return productSchema.superRefine((product, context) => {
+    if (product.category.some((name) => !productCategoryNames.includes(name))) {
+      context.addIssue({
+        code: "custom",
+        path: ["category"],
+        message: "Select an existing category",
+      });
+    }
+    const salePrice = Number(product.salePrice);
+    if (
+      isSaleCategory(product.category) &&
+      (!Number.isFinite(salePrice) ||
+        salePrice <= 0 ||
+        salePrice >= Number(product.price))
+    ) {
+      context.addIssue({
+        code: "custom",
+        path: ["salePrice"],
+        message:
+          "Enter a sale price greater than 0 and lower than the regular price",
+      });
+    }
+  });
+}

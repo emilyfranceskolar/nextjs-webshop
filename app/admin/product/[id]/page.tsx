@@ -3,6 +3,7 @@ import { isAdmin } from "@/lib/admin";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import ProductForm from "../product-form";
+import { readProductForm } from "../product-data";
 
 async function editProduct(formData: FormData) {
   "use server";
@@ -10,42 +11,36 @@ async function editProduct(formData: FormData) {
   if (!(await isAdmin())) {
     throw new Error("Unauthorized");
   }
-  const id = formData.get("id") as string;
-  const title = formData.get("title")?.toString().trim() || "";
-  const price = Number(formData.get("price"));
-  const description = formData.get("description")?.toString().trim() || "";
-  const image = formData.get("image")?.toString().trim() || "";
-  const category = formData.get("category")?.toString().trim() || "";
-  const slug = formData.get("slug")?.toString().trim() || "";
-
-  const categoryRecord = category
-    ? await db.category.upsert({
-        where: { name: category },
-        update: {},
-        create: {
-          name: category,
-          slug: category.toLowerCase(),
-        },
-      })
-    : null;
+  const { id, title, price, salePrice, description, image, category } =
+    await readProductForm(formData);
+  if (!id) throw new Error("Product ID is required");
 
   await db.product.update({
     where: { id },
     data: {
       title,
       price,
+      salePrice,
       description,
       image,
       categories: {
         deleteMany: {},
-        ...(categoryRecord
-          ? { create: { categoryId: categoryRecord.id } }
-          : {}),
+        create: category.map((category) => ({
+          category: {
+            connectOrCreate: {
+              where: { name: category.toString() },
+              create: {
+                name: category.toString(),
+                slug: category.toString().toLowerCase(),
+              },
+            },
+          },
+        })),
       },
     },
   });
 
-  revalidatePath("/admin");
+  revalidatePath("/", "layout");
   return;
 }
 
@@ -78,10 +73,11 @@ export default async function EditProductPage({
           initialValues={{
             id: product.id,
             title: product?.title,
-            category: product.categories[0]?.category.name ?? "",
+            category: product.categories.map((item) => item.category.name),
             description: product?.description,
             image: product?.image,
             price: product?.price.toString(),
+            salePrice: product.salePrice?.toString() ?? "",
             articleNumber: product?.articleNumber,
             slug: product?.slug,
           }}
@@ -90,8 +86,8 @@ export default async function EditProductPage({
 
       <div className="hidden h-screen md:block">
         <img
-          src={product?.image}
-          alt="Clothes in store"
+          src={product.image}
+          alt="Glajjan"
           className="object-cover w-full h-full"
         />
       </div>
