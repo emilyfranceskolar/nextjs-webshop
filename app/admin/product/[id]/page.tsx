@@ -15,19 +15,8 @@ async function editProduct(formData: FormData) {
   const price = Number(formData.get("price"));
   const description = formData.get("description")?.toString().trim() || "";
   const image = formData.get("image")?.toString().trim() || "";
-  const category = formData.get("category")?.toString().trim() || "";
+  const categories = formData.getAll("category");
   const slug = formData.get("slug")?.toString().trim() || "";
-
-  const categoryRecord = category
-    ? await db.category.upsert({
-        where: { name: category },
-        update: {},
-        create: {
-          name: category,
-          slug: category.toLowerCase(),
-        },
-      })
-    : null;
 
   await db.product.update({
     where: { id },
@@ -38,9 +27,17 @@ async function editProduct(formData: FormData) {
       image,
       categories: {
         deleteMany: {},
-        ...(categoryRecord
-          ? { create: { categoryId: categoryRecord.id } }
-          : {}),
+        create: categories.map((category) => ({
+          category: {
+            connectOrCreate: {
+              where: { name: category.toString() },
+              create: {
+                name: category.toString(),
+                slug: category.toString().toLowerCase(),
+              },
+            },
+          },
+        })),
       },
     },
   });
@@ -78,7 +75,7 @@ export default async function EditProductPage({
           initialValues={{
             id: product.id,
             title: product?.title,
-            category: product.categories[0]?.category.name ?? "",
+            category: product.categories.map((item) => item.category.name),
             description: product?.description,
             image: product?.image,
             price: product?.price.toString(),
@@ -90,8 +87,8 @@ export default async function EditProductPage({
 
       <div className="hidden h-screen md:block">
         <img
-          src={product?.image}
-          alt="Clothes in store"
+          src={product.image}
+          alt="Glajjan"
           className="object-cover w-full h-full"
         />
       </div>
