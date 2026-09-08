@@ -34,15 +34,16 @@ export default function AddToCartButton({
   const handleAddToCart = () => {
 
     if (disabled || stock === 0) {
-      toast.error("Produkten är slut i lager");
+      toast.error("The product is out of stock.");
       return;
 
     }
 
-    const existingProduct = productsInCart.find((p) => p.id === id);
+    const existingProduct = productsInCart.find(
+      (p) => p.id === id);
 
     if (existingProduct && existingProduct.quantity >= stock) {
-      toast.error(`Endast ${stock} st finns i lager`);
+      toast.error(`Only ${stock} pcs in stock`);
       return;
     }
 

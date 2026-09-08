@@ -31,7 +31,7 @@ export default function ProductCard({
       </Link>
 
       <p className="px-4 pb-2 text-red-600 font-semibold">
-        {stock === 0 ? "Slut i lager" : stock <= 5 ? "Endast några kvar i lager" : "I lager"}
+        {stock === 0 ? "Out of stock" : stock <= 5 ? "Only a few left in stock" : "In stock"}
       </p>
 
       <CardFooter className="flex gap-2 justify-between">

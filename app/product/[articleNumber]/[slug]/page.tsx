@@ -46,19 +46,19 @@ export default async function ProductDetailPage({
 
             {product.stock === 0 ? (
               <p className="text-red-600 font-semibold">
-                Slut i lager
+                Out of stock
               </p>
             ) : product.stock <= 5 ? (
               <p className="text-orange-500 font-semibold">
-                Endast några kvar i lager
+                Only a few left in stock
               </p>
             ) : (
               <p className="text-green-600 font-semibold">
-                I lager
+                In stock
               </p>
             )}
             <AddToCartButton
-              id={product.articleNumber}
+              id={product.id}
               title={product.title}
               articleNumber={product.articleNumber}
               imageUrl={product.image}
