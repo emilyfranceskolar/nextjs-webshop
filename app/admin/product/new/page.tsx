@@ -1,7 +1,9 @@
 import ProductForm from "../product-form";
+import { readProductForm } from "../product-data";
 import { db } from "@/prisma/db";
 import { isAdmin } from "@/lib/admin";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 async function createNewProduct(formData: FormData) {
   "use server";
@@ -10,44 +12,33 @@ async function createNewProduct(formData: FormData) {
     throw new Error("Unauthorized");
   }
 
-  const title = formData.get("title") as string;
-  const price = Number(formData.get("price"));
+  const values = await readProductForm(formData);
 
- 
-  // stock for admin inventory management
-  const stock = Number(formData.get("stock"));
+  const { title, price, salePrice, stock, description, image, category } =
+    values;
 
-  if (
-    !title ||
-    !price ||
-    price <= 0 ||
-    !Number.isInteger(stock) ||
-    stock < 0
-  ) {
-    return;
-  }
-  const description = formData.get("description") as string;
-  const image = formData.get("image") as string;
-  const categories = formData.getAll("category");
-  const articleNumberValue = Number(formData.get("articleNumber"));
+  const articleNumberValue = Number(values.articleNumber);
+
   const articleNumber = (
     articleNumberValue > 0
       ? articleNumberValue
       : Math.floor(Math.random() * 10000)
   ).toString();
+
   const slug = `${title.toLowerCase().replace(/\s+/g, "-")}-${Date.now()}`;
 
   await db.product.create({
     data: {
       title,
       price,
+      salePrice,
       stock,
       description,
       image,
       slug,
       articleNumber,
       categories: {
-        create: categories.map((category) => ({
+        create: category.map((category) => ({
           category: {
             connectOrCreate: {
               where: { name: category.toString() },
@@ -62,7 +53,7 @@ async function createNewProduct(formData: FormData) {
     },
   });
 
-  return;
+  revalidatePath("/", "layout");
 }
 
 export default async function NewProductPage() {

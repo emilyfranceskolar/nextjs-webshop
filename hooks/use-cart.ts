@@ -28,22 +28,31 @@ export function useCart() {
       const existingProduct = prevCart.find((p) => p.id === product.id);
 
       if (existingProduct) {
-        return prevCart.map((p) =>
-          p.id === product.id ? { ...p, quantity: (p.quantity || 1) + 1 } : p,
-        );
-      }
+        if (existingProduct.quantity >= product.stock) {
+    return prevCart;
+  }
 
-      return [...prevCart, { ...product, quantity: 1 }];
-    });
-  }, []);
+  return prevCart.map((p) =>
+    p.id === product.id
+      ? { ...p, quantity: p.quantity + 1 }
+      : p,
+  );
+  }
+  return [...prevCart, { ...product, quantity: 1 }];
+  });
+}, []);
+
+
 
   const updateQuantity = useCallback((productId: string, quantity: number) => {
     setProductsInCart((prevCart) =>
       prevCart.map((product) =>
-        product.id === productId ? { ...product, quantity } : product,
-      ),
-    );
-  }, []);
+        product.id === productId ? { ...product, quantity: Math.min(Math.max(quantity, 1), product.stock),
+          }
+        : product,
+    ),
+  );
+}, []);
 
   const removeFromCart = useCallback((productId: string) => {
     setProductsInCart((prevCart) =>

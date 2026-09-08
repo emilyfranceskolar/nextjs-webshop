@@ -9,7 +9,8 @@ export interface CartItem extends PrismaProduct {
   quantity: number;
 }
 
-export type Product = PrismaProduct & {
+export type Product = Omit<PrismaProduct, "salePrice"> & {
+  salePrice?: number | null;
   category: string;
 };
 
@@ -37,7 +38,7 @@ export const products: Product[] = [
     description:
       "A bold tortoise frame designed to add character while keeping a classic feel.",
     price: 949,
-    stock: 5,
+    stock: 3,
   },
   {
     id: "3",
@@ -61,7 +62,7 @@ export const products: Product[] = [
     description:
       "A warm brown frame with a sophisticated shape and a relaxed everyday feel.",
     price: 929,
-    stock: 5,
+    stock: 10,
   },
   {
     id: "5",
@@ -73,7 +74,7 @@ export const products: Product[] = [
     description:
       "A clean black frame with a modern silhouette made for effortless everyday wear.",
     price: 899,
-    stock: 5,
+    stock: 15,
   },
   {
     id: "6",
@@ -85,7 +86,7 @@ export const products: Product[] = [
     description:
       "A sleek black frame with a timeless shape that works from city streets to sunny days.",
     price: 949,
-    stock: 5,
+    stock: 20,
   },
   {
     id: "7",
@@ -97,7 +98,7 @@ export const products: Product[] = [
     description:
       "A bold black frame with a refined silhouette and effortless summer style.",
     price: 979,
-    stock: 5,
+    stock: 12,
   },
   {
     id: "8",
@@ -109,7 +110,7 @@ export const products: Product[] = [
     description:
       "A classic tortoise frame combining a warm pattern with a sophisticated modern shape.",
     price: 949,
-    stock: 5,
+    stock: 50,
   },
   {
     id: "9",
@@ -121,7 +122,7 @@ export const products: Product[] = [
     description:
       "A confident black frame with a bold shape, now available at a special price.",
     price: 699,
-    stock: 5,
+    stock: 0,
   },
   {
     id: "10",
@@ -133,7 +134,7 @@ export const products: Product[] = [
     description:
       "A sleek black frame with a classic silhouette, available now at a reduced price.",
     price: 649,
-    stock: 5,
+    stock: 1,
   },
   {
     id: "11",
@@ -145,7 +146,7 @@ export const products: Product[] = [
     description:
       "A timeless tortoise frame with a soft, elegant shape at a special price.",
     price: 679,
-    stock: 5,
+    stock: 40,
   },
 
   {
@@ -158,7 +159,7 @@ export const products: Product[] = [
     description:
       "A comfortable reading frame with soft brown tones and a modern everyday shape.",
     price: 399,
-    stock: 5,
+    stock: 4,
   },
   {
     id: "13",
@@ -170,7 +171,7 @@ export const products: Product[] = [
     description:
       "A distinctive reading frame with a subtle camo finish and a comfortable fit.",
     price: 429,
-    stock: 5,
+    stock: 2,
   },
   {
     id: "14",
@@ -182,7 +183,7 @@ export const products: Product[] = [
     description:
       "A fresh green frame with a relaxed shape designed for comfortable reading.",
     price: 399,
-    stock: 5,
+    stock: 80,
   },
   {
     id: "15",
@@ -194,7 +195,7 @@ export const products: Product[] = [
     description:
       "A classic tortoise frame with a timeless look and comfortable everyday fit.",
     price: 419,
-    stock: 5,
+    stock: 18,
   },
   {
     id: "16",
@@ -206,7 +207,7 @@ export const products: Product[] = [
     description:
       "A lightweight transparent-grey frame with a clean and understated design.",
     price: 389,
-    stock: 5,
+    stock: 9,
   },
   {
     id: "17",
@@ -218,7 +219,7 @@ export const products: Product[] = [
     description:
       "A soft transparent frame with warm tones and a minimal modern appearance.",
     price: 389,
-    stock: 5,
+    stock: 45,
   },
   {
     id: "18",
@@ -230,7 +231,7 @@ export const products: Product[] = [
     description:
       "A subtle transparent-brown frame combining modern style with everyday comfort.",
     price: 429,
-    stock: 5,
+    stock: 4,
   },
   {
     id: "19",
@@ -242,7 +243,7 @@ export const products: Product[] = [
     description:
       "A clean crystal-clear frame with a lightweight feel and timeless silhouette.",
     price: 399,
-    stock: 5,
+    stock: 70,
   },
   {
     id: "20",
@@ -254,7 +255,7 @@ export const products: Product[] = [
     description:
       "A sophisticated grey frame with warm sepia tones and a comfortable fit.",
     price: 419,
-    stock: 5,
+    stock: 6,
   },
   {
     id: "21",
@@ -266,7 +267,7 @@ export const products: Product[] = [
     description:
       "A warm tortoise reading frame with a classic shape and effortless style.",
     price: 429,
-    stock: 5,
+    stock: 100,
   },
   {
     id: "22",
@@ -278,7 +279,7 @@ export const products: Product[] = [
     description:
       "A soft amber frame that adds a warm touch to a clean and modern design.",
     price: 419,
-    stock: 5,
+    stock: 50,
   },
   {
     id: "23",
@@ -290,7 +291,7 @@ export const products: Product[] = [
     description:
       "A minimal clear frame designed for a light, clean and contemporary look.",
     price: 399,
-    stock: 5,
+    stock: 19,
   },
   {
     id: "24",
@@ -302,7 +303,7 @@ export const products: Product[] = [
     description:
       "A refined grey frame with soft tones and a comfortable shape for everyday use.",
     price: 409,
-    stock: 5,
+    stock: 0,
   },
   {
     id: "25",
@@ -314,6 +315,6 @@ export const products: Product[] = [
     description:
       "A warm amber frame with a refined silhouette and a modern everyday feel.",
     price: 419,
-    stock: 5,
+    stock: 22,
   },
 ];

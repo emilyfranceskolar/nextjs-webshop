@@ -11,6 +11,7 @@ import ContactFormFields from "./contact-form-fields";
 import { PaymentFormFields } from "./payment-form-fields";
 import { Button } from "./ui/button";
 import { useCartContext } from "@/app/providers/cart-provider";
+import { getProductPrice } from "@/lib/product-price";
 
 export function Form() {
   const router = useRouter();
@@ -39,11 +40,16 @@ export function Form() {
     setIsPlacingOrder(true);
 
     try {
-      const orderNumber = await createOrder(customer, productsInCart);
+      const orderProducts = productsInCart.map((product) => ({
+        ...product,
+        price: getProductPrice(product),
+        salePrice: null,
+      }));
+      const orderNumber = await createOrder(customer, orderProducts);
       const order = {
         orderNumber,
         customer: { ...customer, email: session.user.email },
-        products: productsInCart,
+        products: orderProducts,
       };
 
       localStorage.setItem("latestOrder", JSON.stringify(order));

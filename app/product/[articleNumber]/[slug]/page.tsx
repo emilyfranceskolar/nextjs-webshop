@@ -1,6 +1,7 @@
 import AddToCartButton from "@/components/add-to-cart-button";
 import DetailPageDropdown from "@/components/ui/detail-page-dropdown";
 import { db } from "@/prisma/db";
+import ProductPrice from "@/components/product-price";
 
 export default async function ProductDetailPage({
   params,
@@ -40,19 +41,37 @@ export default async function ProductDetailPage({
             <p className="mb-5" data-cy="product-description">
               {product.description}
             </p>
-            <p className="text-xl font-semibold" data-cy="product-price">
-              {product.price}kr
-            </p>
+            <ProductPrice
+              price={product.price}
+              salePrice={product.salePrice}
+              className="text-xl font-semibold"
+            />
 
+            {product.stock === 0 ? (
+              <p className="text-red-600 font-semibold">
+                Out of stock
+              </p>
+            ) : product.stock <= 5 ? (
+              <p className="text-orange-500 font-semibold">
+                Only a few left in stock
+              </p>
+            ) : (
+              <p className="text-green-600 font-semibold">
+                In stock
+              </p>
+            )}
             <AddToCartButton
-              id={product.articleNumber}
+              id={product.id}
               title={product.title}
               articleNumber={product.articleNumber}
               imageUrl={product.image}
               price={product.price}
+              salePrice={product.salePrice}
               slug={product.slug}
               category={product.categories[0]?.category.name ?? ""}
               description={product.description}
+              stock={product.stock}
+              disabled={product.stock === 0}
               buttonText="Add to Cart"
               variant="default"
               className="px-5 py-6 mb-10 mt-2 bg-[#ddd9cd] text-black rounded-xl hover:bg-[#526E67] hover:text-white  transition-all duration-300 cursor-pointer"
