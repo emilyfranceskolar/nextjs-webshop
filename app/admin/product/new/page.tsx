@@ -1,9 +1,9 @@
 import ProductForm from "../product-form";
+import { readProductForm } from "../product-data";
 import { db } from "@/prisma/db";
 import { isAdmin } from "@/lib/admin";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { readProductForm } from "../product-data";
 
 async function createNewProduct(formData: FormData) {
   "use server";
@@ -13,7 +13,7 @@ async function createNewProduct(formData: FormData) {
   }
 
   const values = await readProductForm(formData);
-  const { title, price, salePrice, description, image, categoryIds } = values;
+  const { title, price, salePrice, description, image, category } = values;
   const articleNumberValue = Number(values.articleNumber);
   const articleNumber = (
     articleNumberValue > 0
@@ -31,7 +31,19 @@ async function createNewProduct(formData: FormData) {
       image,
       slug,
       articleNumber,
-      categories: { create: categoryIds.map((categoryId) => ({ categoryId })) },
+      categories: {
+        create: category.map((category) => ({
+          category: {
+            connectOrCreate: {
+              where: { name: category.toString() },
+              create: {
+                name: category.toString(),
+                slug: category.toString().toLowerCase(),
+              },
+            },
+          },
+        })),
+      },
     },
   });
 
@@ -53,8 +65,8 @@ export default async function NewProductPage() {
 
       <div className="hidden h-screen md:block">
         <img
-          src="/assets/images/image-new-productpage.jpg"
-          alt="Clothes in store"
+          src="https://www.nividas.com/cdn/shop/files/Untitled_1500_x_1500_px_3.png?v=1775653649&width=720"
+          alt="Girl with Melbourne Shiny Black"
           className="object-cover w-full h-full"
         />
       </div>

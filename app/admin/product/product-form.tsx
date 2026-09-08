@@ -9,6 +9,7 @@ import {
   ProductFormValues,
   ProductCategoryOption,
   createProductSchema,
+  getProductCategoryNames,
   isSaleCategory,
 } from "@/data/form";
 import { cn } from "@/lib/utils";
@@ -16,14 +17,12 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 interface ProductFormProps {
-  categoryAsText?: boolean;
   categories: ProductCategoryOption[];
   initialValues?: ProductFormValues;
   action: (formData: FormData) => Promise<void>;
 }
 
 interface ProductFormInputsProps {
-  categoryAsText: boolean;
   categories: ProductCategoryOption[];
   onSale: boolean;
   register: UseFormRegister<ProductFormValues>;
@@ -33,33 +32,33 @@ export default function ProductForm({
   initialValues,
   action,
   categories,
-  categoryAsText = false,
 }: ProductFormProps) {
   const router = useRouter();
   const { register, handleSubmit, formState, watch, setError } =
     useForm<ProductFormValues>({
-      resolver: zodResolver(createProductSchema(categories, categoryAsText)),
-      defaultValues: { categoryIds: [], salePrice: "", ...initialValues },
+      resolver: zodResolver(createProductSchema(categories)),
+      defaultValues: {
+        salePrice: "",
+        ...initialValues,
+        category: initialValues?.category ?? [],
+      },
     });
-  const selectedCategoryIds = watch("categoryIds");
-  const categoryName = watch("category");
-  const onSale = categoryAsText
-    ? categoryName?.trim().toLowerCase() === "sale"
-    : categories.some(
-        (category) =>
-          isSaleCategory(category) && selectedCategoryIds.includes(category.id),
-      );
+
+  const onSale = isSaleCategory(watch("category"), categories);
 
   const onSubmit = async (data: ProductFormValues) => {
     const formData = new FormData();
 
     Object.entries(data).forEach(([key, value]) => {
       if (Array.isArray(value)) {
-        value.forEach((id) => formData.append(key, id));
+        value.forEach((item) => {
+          formData.append(key, item);
+        });
       } else if (value !== undefined) {
         formData.append(key, value.toString());
       }
     });
+
     try {
       await action(formData);
       router.push("/admin");
@@ -72,7 +71,7 @@ export default function ProductForm({
 
   return (
     <form
-      className="w-full max-w-lg mx-auto p-4"
+      className="w-full mr-10 ml-10 max-w-md md:max-w-lg mx-auto"
       data-cy="product-form"
       onSubmit={handleSubmit(onSubmit)}
     >
@@ -80,7 +79,6 @@ export default function ProductForm({
         register={register}
         formState={formState}
         categories={categories}
-        categoryAsText={categoryAsText}
         onSale={onSale}
       />
     </form>
@@ -91,7 +89,6 @@ function ProductFormInputs({
   register,
   formState,
   categories,
-  categoryAsText,
   onSale,
 }: ProductFormInputsProps) {
   return (
@@ -118,68 +115,34 @@ function ProductFormInputs({
         )}
       </Field>
 
-      {categoryAsText ? (
-        <Field>
-          <FieldLegend className="text-2xl font-bold text-zinc-800">
-            <label htmlFor="category">Category</label>
-          </FieldLegend>
-          <Input
-            id="category"
-            type="text"
-            {...register("category")}
-            data-cy="product-category"
-            className="h-10 p-4"
-            autoComplete="category"
-          />
+      <Field>
+        <FieldLegend className="text-2xl font-bold text-zinc-800">
+          Category
+        </FieldLegend>
+
+        <div className="gap-6">
+          {getProductCategoryNames(categories).map((category) => (
+            <label key={category} className="flex items-center gap-2">
+              <input
+                data-cy="product-category"
+                {...register("category")}
+                type="checkbox"
+                value={category}
+                aria-invalid={!!formState.errors.category}
+              />
+              {category}
+            </label>
+          ))}
           {formState.errors.category && (
             <p
               data-cy="product-category-error"
               className="text-red-600 text-sm"
-              role="alert"
             >
               {formState.errors.category.message}
             </p>
           )}
-        </Field>
-      ) : (
-        <fieldset className="space-y-3">
-          <legend className="text-2xl font-bold text-zinc-800">
-            Categories
-          </legend>
-          <p className="text-sm text-muted-foreground">
-            Select one or more categories.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            {categories.map((category) => (
-              <label
-                key={category.id}
-                className="flex items-center gap-2 rounded-lg border p-3 cursor-pointer"
-              >
-                <input
-                  type="checkbox"
-                  value={category.id}
-                  {...register("categoryIds")}
-                  data-cy="product-category"
-                  className="size-4 accent-black"
-                />
-                {category.name}
-              </label>
-            ))}
-          </div>
-          {categories.length === 0 && (
-            <p className="text-sm">No categories available.</p>
-          )}
-          {formState.errors.categoryIds && (
-            <p
-              data-cy="product-category-error"
-              className="text-red-600 text-sm"
-              role="alert"
-            >
-              {formState.errors.categoryIds.message}
-            </p>
-          )}
-        </fieldset>
-      )}
+        </div>
+      </Field>
 
       <Field>
         <FieldLegend className="text-2xl font-bold text-zinc-800">
@@ -316,10 +279,7 @@ function ProductFormInputs({
         <div className="flex gap-4">
           <Button
             type="submit"
-            disabled={
-              formState.isSubmitting ||
-              (!categoryAsText && categories.length === 0)
-            }
+            disabled={formState.isSubmitting}
             variant="outline"
             className="rounded-full bg-black text-white"
           >

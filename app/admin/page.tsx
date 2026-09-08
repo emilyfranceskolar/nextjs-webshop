@@ -41,41 +41,40 @@ export default async function AdminPage() {
       <p className="text-3xl font-bold m-10 text-center">Our products</p>
       <section className="grid gap-4 items-stretch pl-6 pr-6 pb-6 sm:grid-cols-2 xl:grid-cols-3">
         <Link href="/admin/product/new">
-          <div className="flex flex-wrap gap-2 px-2 py-2 border rounded-xl w-full hover:bg-muted/50 transition h-full">
+          <div className="flex flex-wrap gap-2 px-2 py-2 border rounded-xl w-full h-50 hover:bg-muted/50 transition">
             <div className="w-24 h-28 rounded-lg border-2 border-dashed flex items-center justify-center text-sm text-muted-foreground">
               Image
             </div>
 
-            <div className="flex flex-col px-2 py-4 rounded-xl h-full">
-              <div className="pl-2 pb-2 pt-2">
-                <p
-                  data-cy="product-id"
-                  className="font-bold text-sm text-stone-600 pb-2"
-                >
-                  New Product
-                </p>
-                <p
-                  data-cy="product-title"
-                  className="font-bold text-sm pb-2 text-stone-600"
-                >
-                  Title
-                </p>
-                <p
-                  data-cy="product-price"
-                  className="text-sm pb-2 text-stone-600"
-                >
-                  0kr
-                </p>
-                <p
-                  data-cy="product-description"
-                  className="text-sm max-w-xs pb-6 text-stone-600"
-                >
-                  No description
-                </p>
-              </div>
+            <div className="flex flex-col px-2 py-4 rounded-xl">
+              <p
+                data-cy="product-id"
+                className="font-bold text-sm text-stone-600 pb-2"
+              >
+                New Product
+              </p>
+              <p
+                data-cy="product-title"
+                className="font-bold text-sm pb-2 text-stone-600"
+              >
+                Title
+              </p>
+              <p
+                data-cy="product-price"
+                className="text-sm pb-2 text-stone-600"
+              >
+                0kr
+              </p>
+              <p
+                data-cy="product-description"
+                className="text-sm max-w-xs pb-4 text-stone-600"
+              >
+                No description
+              </p>
+
               <div className="flex gap-2">
                 <Button data-cy="admin-add-product" variant="outline">
-                  <Plus className="mr-2 h-4 w-4" />
+                  <Plus className="h-4 w-4" />
                   Add new product
                 </Button>
               </div>
@@ -87,7 +86,7 @@ export default async function AdminPage() {
           <article
             key={product.id}
             data-cy="product"
-            className="flex flex-wrap gap-2 px-2 py-2 border h-full rounded-xl"
+            className="flex flex-wrap gap-2 px-2 py-2 border h-50 rounded-xl"
           >
             {product.image && (
               <img

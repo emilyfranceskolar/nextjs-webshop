@@ -115,12 +115,14 @@ Exempel på kategorier:
 
 Detta hanteras genom en relation mellan produkter och kategorier i databasen.
 
-När en ny produkt skapas väljer admin en eller flera befintliga kategorier.
-I **Edit product** skriver admin kategorin i ett textfält, som tidigare.
-När kategorin är **Sale** visas **Regular price (kr)** och **Sale price (kr)**. Reapriset måste vara
+När en produkt skapas eller redigeras väljer admin en eller flera kategorier med
+checkboxar. Befintliga kategorier är förvalda i **Edit product**.
+När **Sale** är markerat visas **Regular price (kr)** och **Sale price (kr)**. Reapriset måste vara
 större än noll och lägre än ordinarie pris. Ordinarie pris visas rött och
-överstruket bredvid reapriset. Kundvagn och nya orders använder reapriset.
-När kategorin ändras från Sale och produkten sparas tas reapriset bort.
+överstruket bredvid reapriset, tillsammans med en **Sale**-markering. Detta visas
+även i produktlistan, Sale-kategorin och på produktens detaljsida.
+Kundvagn och nya orders använder reapriset.
+När Sale avmarkeras och produkten sparas tas reapriset bort. Övriga valda kategorier behålls.
 
 Efter att ha hämtat ändringen för reapriser, stoppa utvecklingsservern och kör:
 

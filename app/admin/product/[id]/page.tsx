@@ -11,8 +11,8 @@ async function editProduct(formData: FormData) {
   if (!(await isAdmin())) {
     throw new Error("Unauthorized");
   }
-  const { id, title, price, salePrice, description, image, categoryIds } =
-    await readProductForm(formData, true);
+  const { id, title, price, salePrice, description, image, category } =
+    await readProductForm(formData);
   if (!id) throw new Error("Product ID is required");
 
   await db.product.update({
@@ -25,7 +25,17 @@ async function editProduct(formData: FormData) {
       image,
       categories: {
         deleteMany: {},
-        create: categoryIds.map((categoryId) => ({ categoryId })),
+        create: category.map((category) => ({
+          category: {
+            connectOrCreate: {
+              where: { name: category.toString() },
+              create: {
+                name: category.toString(),
+                slug: category.toString().toLowerCase(),
+              },
+            },
+          },
+        })),
       },
     },
   });
@@ -63,12 +73,10 @@ export default async function EditProductPage({
         <ProductForm
           action={editProduct}
           categories={categories}
-          categoryAsText
           initialValues={{
             id: product.id,
             title: product?.title,
-            categoryIds: product.categories.map(({ categoryId }) => categoryId),
-            category: product.categories[0]?.category.name ?? "",
+            category: product.categories.map((item) => item.category.name),
             description: product?.description,
             image: product?.image,
             price: product?.price.toString(),
@@ -81,8 +89,8 @@ export default async function EditProductPage({
 
       <div className="hidden h-screen md:block">
         <img
-          src={product?.image}
-          alt="Clothes in store"
+          src={product.image}
+          alt="Glajjan"
           className="object-cover w-full h-full"
         />
       </div>

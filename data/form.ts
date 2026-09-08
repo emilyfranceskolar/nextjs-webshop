@@ -17,18 +17,41 @@ export type Customer = z.infer<typeof customerSchema>;
 
 export type ProductCategoryOption = { id: string; name: string; slug: string };
 
-export function isSaleCategory(category: ProductCategoryOption) {
-  return (
-    category.slug.toLowerCase() === "sale" ||
-    category.name.toLowerCase() === "sale"
+// Keep main's checkbox choices available even before they exist in the database.
+const defaultCategoryNames = [
+  "Bestseller",
+  "Reading Glasses",
+  "Sunglasses",
+  "Sale",
+];
+
+export function getProductCategoryNames(categories: ProductCategoryOption[]) {
+  return [
+    ...new Set([
+      ...defaultCategoryNames,
+      ...categories.map(({ name }) => name),
+    ]),
+  ];
+}
+
+export function isSaleCategory(
+  names: string[],
+  categories: ProductCategoryOption[],
+) {
+  return names.some(
+    (name) =>
+      name.toLowerCase() === "sale" ||
+      categories.some(
+        (category) =>
+          category.name === name && category.slug.toLowerCase() === "sale",
+      ),
   );
 }
 
 export const productSchema = z.object({
   id: z.string().optional(),
   title: z.string().min(1, "Required"),
-  categoryIds: z.array(z.string().min(1)),
-  category: z.string().trim().optional(),
+  category: z.array(z.string()).min(1, "Select at least one category"),
   description: z.string().min(1, "Required"),
   image: z
     .string()
@@ -58,41 +81,20 @@ export const productSchema = z.object({
 
 export type ProductFormValues = z.infer<typeof productSchema>;
 
-// Use the database categories for the same validation in the form and on the server.
-export function createProductSchema(
-  categories: ProductCategoryOption[],
-  categoryAsText = false,
-) {
+// Validate the same category choices and prices in the browser and server actions.
+export function createProductSchema(categories: ProductCategoryOption[]) {
+  const categoryNames = getProductCategoryNames(categories);
   return productSchema.superRefine((product, context) => {
-    if (!categoryAsText && product.categoryIds.length === 0) {
+    if (product.category.some((name) => !categoryNames.includes(name))) {
       context.addIssue({
         code: "custom",
-        path: ["categoryIds"],
-        message: "Select at least one category",
-      });
-    }
-    if (
-      !categoryAsText &&
-      product.categoryIds.some(
-        (id) => !categories.some((category) => category.id === id),
-      )
-    ) {
-      context.addIssue({
-        code: "custom",
-        path: ["categoryIds"],
+        path: ["category"],
         message: "Select an existing category",
       });
     }
-    const onSale = categoryAsText
-      ? product.category?.toLowerCase() === "sale"
-      : categories.some(
-          (category) =>
-            isSaleCategory(category) &&
-            product.categoryIds.includes(category.id),
-        );
     const salePrice = Number(product.salePrice);
     if (
-      onSale &&
+      isSaleCategory(product.category, categories) &&
       (!Number.isFinite(salePrice) ||
         salePrice <= 0 ||
         salePrice >= Number(product.price))
