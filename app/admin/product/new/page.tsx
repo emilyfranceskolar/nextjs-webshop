@@ -28,7 +28,7 @@ async function createNewProduct(formData: FormData) {
   }
   const description = formData.get("description") as string;
   const image = formData.get("image") as string;
-  const category = formData.get("category")?.toString().trim() || "";
+  const categories = formData.getAll("category");
   const articleNumberValue = Number(formData.get("articleNumber"));
   const articleNumber = (
     articleNumberValue > 0
@@ -46,18 +46,19 @@ async function createNewProduct(formData: FormData) {
       image,
       slug,
       articleNumber,
-      ...(category && {
-        categories: {
-          create: {
-            category: {
-              connectOrCreate: {
-                where: { name: category },
-                create: { name: category, slug: category.toLowerCase() },
+      categories: {
+        create: categories.map((category) => ({
+          category: {
+            connectOrCreate: {
+              where: { name: category.toString() },
+              create: {
+                name: category.toString(),
+                slug: category.toString().toLowerCase(),
               },
             },
           },
-        },
-      }),
+        })),
+      },
     },
   });
 
@@ -77,8 +78,8 @@ export default async function NewProductPage() {
 
       <div className="hidden h-screen md:block">
         <img
-          src="/assets/images/image-new-productpage.jpg"
-          alt="Eyeglasses in store"
+          src="https://www.nividas.com/cdn/shop/files/Untitled_1500_x_1500_px_3.png?v=1775653649&width=720"
+          alt="Girl with Melbourne Shiny Black"
           className="object-cover w-full h-full"
         />
       </div>
