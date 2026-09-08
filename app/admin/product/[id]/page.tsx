@@ -77,7 +77,7 @@ export default async function EditProductPage({
             description: product?.description,
             image: product?.image,
             price: product.price,
-            salePrice: product.salePrice?.toString() ?? "",
+            salePrice: product.salePrice ?? undefined,
             articleNumber: product?.articleNumber,
             slug: product?.slug,
           }}

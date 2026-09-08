@@ -33,7 +33,7 @@ export const imageSchema = z
 export type Image = z.infer<typeof imageSchema>;
 
 // validering och schemat för priset coerce för att tvinga input att bli ett nummer
-export const priceSchema = z.coerce.number().min(1, "Required");
+export const priceSchema = z.number().min(1, "Required");
 export type Price = z.infer<typeof priceSchema>;
 
 // The same four choices as main, independent of local test data.
@@ -67,6 +67,7 @@ export const productSchema = z.object({
 // export const createProductSchema = productSchema.omit({ id: true });
 
 export type ProductFormValues = z.infer<typeof productSchema>;
+export type ProductFormInput = z.input<typeof productSchema>;
 
 // Validate the same category choices and prices in the browser and server actions.
 export function createProductSchema() {
