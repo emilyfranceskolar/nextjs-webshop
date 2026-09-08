@@ -1,7 +1,9 @@
 import ProductForm from "../product-form";
+import { readProductForm } from "../product-data";
 import { db } from "@/prisma/db";
 import { isAdmin } from "@/lib/admin";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 async function createNewProduct(formData: FormData) {
   "use server";
@@ -10,16 +12,9 @@ async function createNewProduct(formData: FormData) {
     throw new Error("Unauthorized");
   }
 
-  const title = formData.get("title") as string;
-  const price = Number(formData.get("price"));
-
-  if (!title || !price || price <= 0) {
-    return;
-  }
-  const description = formData.get("description") as string;
-  const image = formData.get("image") as string;
-  const categories = formData.getAll("category");
-  const articleNumberValue = Number(formData.get("articleNumber"));
+  const values = await readProductForm(formData);
+  const { title, price, salePrice, description, image, category } = values;
+  const articleNumberValue = Number(values.articleNumber);
   const articleNumber = (
     articleNumberValue > 0
       ? articleNumberValue
@@ -31,12 +26,13 @@ async function createNewProduct(formData: FormData) {
     data: {
       title,
       price,
+      salePrice,
       description,
       image,
       slug,
       articleNumber,
       categories: {
-        create: categories.map((category) => ({
+        create: category.map((category) => ({
           category: {
             connectOrCreate: {
               where: { name: category.toString() },
@@ -51,7 +47,7 @@ async function createNewProduct(formData: FormData) {
     },
   });
 
-  return;
+  revalidatePath("/", "layout");
 }
 
 export default async function NewProductPage() {

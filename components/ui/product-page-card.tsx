@@ -3,6 +3,7 @@ import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import AddToCartButton from "../add-to-cart-button";
 import { HomePageCardProps } from "./home-page-card";
+import ProductPrice from "../product-price";
 
 interface ProductCardProps extends HomePageCardProps {}
 
@@ -12,20 +13,28 @@ export default function ProductCard({
   articleNumber,
   imageUrl,
   price,
+  salePrice,
   slug,
 }: ProductCardProps) {
   return (
-    <Card data-cy="product" className="p-0">
-      <Link href={`/product/${articleNumber}/${slug}`} className="block">
-        <img src={imageUrl} alt={title} className="relative w-full mt-0" />
+    <Card data-cy="product" className="p-0 h-full">
+      <Link
+        href={`/product/${articleNumber}/${slug}`}
+        className="block aspect-[3/4] overflow-hidden bg-[#f1f0ec]"
+      >
+        <img
+          src={imageUrl}
+          alt={title}
+          className="h-full w-full object-contain"
+        />
       </Link>
       <Link href={`/product/${articleNumber}/${slug}`} className="block">
-        <CardHeader className="flex p-4 justify-between">
+        <CardHeader className="flex flex-wrap gap-2 p-4 justify-between">
           <CardTitle data-cy="product-title">{title}</CardTitle>
-          <p data-cy="product-price">{price}kr</p>
+          <ProductPrice price={price} salePrice={salePrice} />
         </CardHeader>
       </Link>
-      <CardFooter className="flex gap-2 justify-between">
+      <CardFooter className="mt-auto flex flex-wrap gap-2 justify-between">
         <Link className="flex-1" href={`/product/${articleNumber}/${slug}`}>
           <Button
             variant="outline"
@@ -42,6 +51,7 @@ export default function ProductCard({
           articleNumber={articleNumber}
           imageUrl={imageUrl}
           price={price}
+          salePrice={salePrice}
           slug={slug}
           category=""
           description=""

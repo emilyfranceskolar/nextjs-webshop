@@ -3,6 +3,7 @@ import { isAdmin } from "@/lib/admin";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import ProductForm from "../product-form";
+import { readProductForm } from "../product-data";
 
 async function editProduct(formData: FormData) {
   "use server";
@@ -10,24 +11,21 @@ async function editProduct(formData: FormData) {
   if (!(await isAdmin())) {
     throw new Error("Unauthorized");
   }
-  const id = formData.get("id") as string;
-  const title = formData.get("title")?.toString().trim() || "";
-  const price = Number(formData.get("price"));
-  const description = formData.get("description")?.toString().trim() || "";
-  const image = formData.get("image")?.toString().trim() || "";
-  const categories = formData.getAll("category");
-  const slug = formData.get("slug")?.toString().trim() || "";
+  const { id, title, price, salePrice, description, image, category } =
+    await readProductForm(formData);
+  if (!id) throw new Error("Product ID is required");
 
   await db.product.update({
     where: { id },
     data: {
       title,
       price,
+      salePrice,
       description,
       image,
       categories: {
         deleteMany: {},
-        create: categories.map((category) => ({
+        create: category.map((category) => ({
           category: {
             connectOrCreate: {
               where: { name: category.toString() },
@@ -42,7 +40,7 @@ async function editProduct(formData: FormData) {
     },
   });
 
-  revalidatePath("/admin");
+  revalidatePath("/", "layout");
   return;
 }
 
@@ -79,6 +77,7 @@ export default async function EditProductPage({
             description: product?.description,
             image: product?.image,
             price: product?.price.toString(),
+            salePrice: product.salePrice?.toString() ?? "",
             articleNumber: product?.articleNumber,
             slug: product?.slug,
           }}
