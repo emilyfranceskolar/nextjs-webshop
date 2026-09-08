@@ -1,9 +1,9 @@
-import { db } from "@/prisma/db";
 import { isAdmin } from "@/lib/admin";
+import { db } from "@/prisma/db";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import ProductForm from "../product-form";
 import { readProductForm } from "../product-data";
+import ProductForm from "../product-form";
 
 async function editProduct(formData: FormData) {
   "use server";
@@ -76,7 +76,7 @@ export default async function EditProductPage({
             category: product.categories.map((item) => item.category.name),
             description: product?.description,
             image: product?.image,
-            price: product?.price.toString(),
+            price: product.price,
             salePrice: product.salePrice?.toString() ?? "",
             articleNumber: product?.articleNumber,
             slug: product?.slug,

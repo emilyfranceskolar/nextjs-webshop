@@ -32,14 +32,9 @@ export const imageSchema = z
   }, "Invalid image URL");
 export type Image = z.infer<typeof imageSchema>;
 
-// validering och schemat för priset
-export const priceSchema = z
-  .number()
-  .min(1, "Required")
-  .refine((val) => {
-    const parsed = Number(val);
-    return !Number.isNaN(parsed) && parsed > 0;
-  }, "Invalid price");
+// validering och schemat för priset coerce för att tvinga input att bli ett nummer
+export const priceSchema = z.coerce.number().min(1, "Price must be at least 1");
+
 export type Price = z.infer<typeof priceSchema>;
 
 // The same four choices as main, independent of local test data.
