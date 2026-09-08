@@ -7,9 +7,8 @@ import { Input } from "@/components/ui/input";
 import { FormState, useForm, UseFormRegister } from "react-hook-form";
 import {
   ProductFormValues,
-  ProductCategoryOption,
   createProductSchema,
-  getProductCategoryNames,
+  productCategoryNames,
   isSaleCategory,
 } from "@/data/form";
 import { cn } from "@/lib/utils";
@@ -17,13 +16,11 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 interface ProductFormProps {
-  categories: ProductCategoryOption[];
   initialValues?: ProductFormValues;
   action: (formData: FormData) => Promise<void>;
 }
 
 interface ProductFormInputsProps {
-  categories: ProductCategoryOption[];
   onSale: boolean;
   register: UseFormRegister<ProductFormValues>;
   formState: FormState<ProductFormValues>;
@@ -31,20 +28,22 @@ interface ProductFormInputsProps {
 export default function ProductForm({
   initialValues,
   action,
-  categories,
 }: ProductFormProps) {
   const router = useRouter();
   const { register, handleSubmit, formState, watch, setError } =
     useForm<ProductFormValues>({
-      resolver: zodResolver(createProductSchema(categories)),
+      resolver: zodResolver(createProductSchema()),
       defaultValues: {
         salePrice: "",
         ...initialValues,
-        category: initialValues?.category ?? [],
+        category:
+          initialValues?.category.filter((name) =>
+            productCategoryNames.includes(name),
+          ) ?? [],
       },
     });
 
-  const onSale = isSaleCategory(watch("category"), categories);
+  const onSale = isSaleCategory(watch("category"));
 
   const onSubmit = async (data: ProductFormValues) => {
     const formData = new FormData();
@@ -75,10 +74,17 @@ export default function ProductForm({
       data-cy="product-form"
       onSubmit={handleSubmit(onSubmit)}
     >
+      {initialValues?.category.some(
+        (name) => !productCategoryNames.includes(name),
+      ) && (
+        <p role="status" className="mb-4 text-sm text-amber-800">
+          This product has an unsupported category. Select from the four
+          categories below; saving will replace the old category selection.
+        </p>
+      )}
       <ProductFormInputs
         register={register}
         formState={formState}
-        categories={categories}
         onSale={onSale}
       />
     </form>
@@ -88,7 +94,6 @@ export default function ProductForm({
 function ProductFormInputs({
   register,
   formState,
-  categories,
   onSale,
 }: ProductFormInputsProps) {
   return (
@@ -121,7 +126,7 @@ function ProductFormInputs({
         </FieldLegend>
 
         <div className="gap-6">
-          {getProductCategoryNames(categories).map((category) => (
+          {productCategoryNames.map((category) => (
             <label key={category} className="flex items-center gap-2">
               <input
                 data-cy="product-category"

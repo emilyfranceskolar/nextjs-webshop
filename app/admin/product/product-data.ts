@@ -1,20 +1,11 @@
-import {
-  createProductSchema,
-  isSaleCategory,
-  type ProductCategoryOption,
-} from "@/data/form";
-import { db } from "@/prisma/db";
+import { createProductSchema, isSaleCategory } from "@/data/form";
 
 export async function readProductForm(formData: FormData) {
-  const categories = await db.category.findMany();
-  return parseProductForm(formData, categories);
+  return parseProductForm(formData);
 }
 
-export function parseProductForm(
-  formData: FormData,
-  categories: ProductCategoryOption[],
-) {
-  const values = createProductSchema(categories).parse({
+export function parseProductForm(formData: FormData) {
+  const values = createProductSchema().parse({
     ...Object.fromEntries(formData),
     category: [...new Set(formData.getAll("category"))],
   });
@@ -22,7 +13,7 @@ export function parseProductForm(
     ...values,
     price: Number(values.price),
     // Removing Sale also removes the discount.
-    salePrice: isSaleCategory(values.category, categories)
+    salePrice: isSaleCategory(values.category)
       ? Number(values.salePrice)
       : null,
   };

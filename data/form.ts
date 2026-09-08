@@ -15,37 +15,16 @@ export const customerSchema = z.object({
 
 export type Customer = z.infer<typeof customerSchema>;
 
-export type ProductCategoryOption = { id: string; name: string; slug: string };
-
-// Keep main's checkbox choices available even before they exist in the database.
-const defaultCategoryNames = [
+// The same four choices as main, independent of local test data.
+export const productCategoryNames = [
   "Bestseller",
   "Reading Glasses",
   "Sunglasses",
   "Sale",
 ];
 
-export function getProductCategoryNames(categories: ProductCategoryOption[]) {
-  return [
-    ...new Set([
-      ...defaultCategoryNames,
-      ...categories.map(({ name }) => name),
-    ]),
-  ];
-}
-
-export function isSaleCategory(
-  names: string[],
-  categories: ProductCategoryOption[],
-) {
-  return names.some(
-    (name) =>
-      name.toLowerCase() === "sale" ||
-      categories.some(
-        (category) =>
-          category.name === name && category.slug.toLowerCase() === "sale",
-      ),
-  );
+export function isSaleCategory(names: string[]) {
+  return names.includes("Sale");
 }
 
 export const productSchema = z.object({
@@ -82,10 +61,9 @@ export const productSchema = z.object({
 export type ProductFormValues = z.infer<typeof productSchema>;
 
 // Validate the same category choices and prices in the browser and server actions.
-export function createProductSchema(categories: ProductCategoryOption[]) {
-  const categoryNames = getProductCategoryNames(categories);
+export function createProductSchema() {
   return productSchema.superRefine((product, context) => {
-    if (product.category.some((name) => !categoryNames.includes(name))) {
+    if (product.category.some((name) => !productCategoryNames.includes(name))) {
       context.addIssue({
         code: "custom",
         path: ["category"],
@@ -94,7 +72,7 @@ export function createProductSchema(categories: ProductCategoryOption[]) {
     }
     const salePrice = Number(product.salePrice);
     if (
-      isSaleCategory(product.category, categories) &&
+      isSaleCategory(product.category) &&
       (!Number.isFinite(salePrice) ||
         salePrice <= 0 ||
         salePrice >= Number(product.price))

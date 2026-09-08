@@ -55,12 +55,10 @@ export default async function NewProductPage() {
     redirect("/");
   }
 
-  const categories = await db.category.findMany({ orderBy: { name: "asc" } });
-
   return (
     <main className="min-h-screen grid bg-muted/30 md:grid-cols-2">
       <div className="flex justify-center w-full items-center space-y-4 text-stone-800 bg-white">
-        <ProductForm action={createNewProduct} categories={categories} />
+        <ProductForm action={createNewProduct} />
       </div>
 
       <div className="hidden h-screen md:block">
