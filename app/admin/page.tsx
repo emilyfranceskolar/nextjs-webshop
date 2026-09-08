@@ -104,53 +104,45 @@ export default async function AdminPage() {
               />
             )}
 
-            <div className="flex flex-col">
-              <div className="pl-2 pb-2">
-                <p data-cy="product-id" className="font-bold text-sm pb-2">
+            <div className="flex min-w-0 flex-1 flex-col">
+              <div className="space-y-2">
+                <p data-cy="product-id" className="text-sm">
+                  <span className="font-bold">Article Number:</span>{" "}
                   {product.articleNumber}
                 </p>
-                <p data-cy="product-title" className="font-bold text-sm pb-2">
-                  {product.title}
+
+                <p data-cy="product-title" className="text-sm">
+                  <span className="font-bold">Title:</span> {product.title}
                 </p>
 
                 {/* category name for each product */}
-                <p
-                  data-cy="product-category"
-                  className="text-sm text-zinc-500 pb-2"
-                >
-                  Category:{" "}
+                <p data-cy="product-category" className="text-sm">
+                  <span className="font-bold">Category:</span>{" "}
                   {product.categories
                     .map((item) => item.category.name)
                     .join(", ") || "No category"}
                 </p>
 
-                <p data-cy="product-price" className="text-sm pb-2">
-                  {product.price}kr
+                <p data-cy="product-price" className="text-sm">
+                  <span className="font-bold">Price:</span> {product.price}kr
                 </p>
 
                 {/* stock balance for admin */}
                 <p
                   data-cy="product-stock"
-                  className="text-sm font-semibold text-red-600 pb-2"
+                  className="text-sm font-semibold text-red-600"
                 >
                   Stock: {product.stock}
                 </p>
-                {/* <p data-cy="product-title" className="font-bold text-sm pb-2">
-                  {product.title}
-                </p> */}
-                {/* <p data-cy="product-price" className="text-sm pb-2">
-                  {product.price}kr
-                </p> */}
-                <p
-                  data-cy="product-description"
-                  className="text-sm max-w-xs pb-2"
-                >
+
+                <p data-cy="product-description" className="max-w-xs text-sm">
+                  <span className="font-bold">Description:</span>{" "}
                   {product.description}
                 </p>
               </div>
 
               <Dialog>
-                <div className="flex gap-2">
+                <div className="mt-auto flex gap-2 pt-4">
                   <Link href={`/admin/product/${product.articleNumber}`}>
                     <Button variant="outline" data-cy="admin-edit-product">
                       Edit product
@@ -183,11 +175,7 @@ export default async function AdminPage() {
                         <Button variant="outline">No</Button>
                       </DialogClose>
 
-                      <Button
-                        type="submit"
-                        data-cy="confirm-delete-button"
-                        className=""
-                      >
+                      <Button type="submit" data-cy="confirm-delete-button">
                         Yes
                       </Button>
                     </DialogFooter>
