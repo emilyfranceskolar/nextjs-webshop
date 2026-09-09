@@ -27,7 +27,7 @@ export default function ProductPrice({
         <>
           <span
             data-cy="product-sale-badge"
-            className="rounded bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-700"
+            className="rounded-lg bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-700"
           >
             Sale
           </span>

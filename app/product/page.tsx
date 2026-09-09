@@ -13,14 +13,14 @@ export default async function ProductPage({
   const products = await db.product.findMany({
     where: params.category
       ? {
-          categories: {
-            some: {
-              category: {
-                name: params.category,
-              },
+        categories: {
+          some: {
+            category: {
+              name: params.category,
             },
           },
-        }
+        },
+      }
       : undefined,
   });
 
@@ -40,9 +40,8 @@ export default async function ProductPage({
           <li>
             <Link
               href="/product"
-              className={`text-black hover:underline ${
-                !params.category ? "font-bold" : ""
-              }`}
+              className={`text-black hover:underline ${!params.category ? "font-bold" : ""
+                }`}
             >
               ALL
             </Link>
@@ -50,9 +49,8 @@ export default async function ProductPage({
           <li>
             <Link
               href="/product?category=Bestseller"
-              className={`text-black hover:underline ${
-                params.category === "Bestseller" ? "font-bold" : ""
-              }`}
+              className={`text-black hover:underline ${params.category === "Bestseller" ? "font-bold" : ""
+                }`}
             >
               BESTSELLER
             </Link>
@@ -60,9 +58,8 @@ export default async function ProductPage({
           <li>
             <Link
               href="/product?category=Reading Glasses"
-              className={`text-black hover:underline ${
-                params.category === "Reading Glasses" ? "font-bold" : ""
-              }`}
+              className={`text-black hover:underline ${params.category === "Reading Glasses" ? "font-bold" : ""
+                }`}
             >
               READING GLASSES
             </Link>
@@ -70,9 +67,8 @@ export default async function ProductPage({
           <li>
             <Link
               href="/product?category=Sunglasses"
-              className={`text-black hover:underline ${
-                params.category === "Sunglasses" ? "font-bold" : ""
-              }`}
+              className={`text-black hover:underline ${params.category === "Sunglasses" ? "font-bold" : ""
+                }`}
             >
               SUNGLASSES
             </Link>
@@ -80,9 +76,8 @@ export default async function ProductPage({
           <li>
             <Link
               href="/product?category=Sale"
-              className={`text-black hover:underline ${
-                params.category === "Sale" ? "font-bold" : ""
-              }`}
+              className={`text-black hover:underline ${params.category === "Sale" ? "font-bold" : ""
+                }`}
             >
               SALE
             </Link>
