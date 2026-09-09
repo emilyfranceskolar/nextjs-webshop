@@ -32,7 +32,6 @@ export default function ProductForm({
   action,
 }: ProductFormProps) {
   const router = useRouter();
-<<<<<<< HEAD
   const { register, handleSubmit, formState, watch, setError } = useForm<
     ProductFormInput,
     unknown,
@@ -48,21 +47,6 @@ export default function ProductForm({
         ) ?? [],
     },
   });
-=======
-
-  const { register, handleSubmit, formState, watch, setError } =
-    useForm<ProductFormValues>({
-      resolver: zodResolver(createProductSchema()),
-      defaultValues: {
-        salePrice: "",
-        ...initialValues,
-        category:
-          initialValues?.category.filter((name) =>
-            productCategoryNames.includes(name),
-          ) ?? [],
-      },
-    });
->>>>>>> main
 
   const onSale = isSaleCategory(watch("category"));
 
