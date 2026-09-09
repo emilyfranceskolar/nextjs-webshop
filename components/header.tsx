@@ -1,6 +1,6 @@
 "use client";
 import { useCartContext } from "@/app/providers/cart-provider";
-import { Glasses, Handbag } from "lucide-react";
+import { Handbag, Search } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -50,13 +50,16 @@ export default function Header() {
           href="/product"
           className={`flex items-center bg-zinc-50 hover:bg-zinc-200 px-4 py-2 rounded-sm shadow-sm ${pathName === "/product"}`}
         >
-          <Glasses size={24} />
+          <Search size={24} />
+          {/* <HatGlasses size={24} />
+          <Glasses size={24} /> */}
         </Link>
+        <AccountPanel />
         <Link
           href="/checkout"
           data-cy="cart-link"
           aria-label={`Shopping cart with ${isLoaded ? totalQuantity : 0} items`}
-          className={`flex items-center gap-1 bg-zinc-50 hover:bg-zinc-200  px-4 py-2 rounded-sm shadow-sm ${pathName === "/checkout"}`}
+          className={`flex items-center gap-1 bg-zinc-50 hover:bg-zinc-200 px-4 py-2 rounded-sm shadow-sm ${pathName === "/checkout"}`}
         >
           <Handbag size={24} /> (
           <span
@@ -67,7 +70,6 @@ export default function Header() {
           </span>
           )
         </Link>
-        <AccountPanel />
       </nav>
     </header>
   );
