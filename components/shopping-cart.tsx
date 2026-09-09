@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+import { getProductPrice } from "@/lib/product-price";
+import ProductPrice from "./product-price";
 import Link from "next/link";
 import { useState } from "react";
 import {
@@ -26,7 +28,7 @@ export default function ShoppingCartList() {
   };
 
   const subtotal = productsInCart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+    (sum, item) => sum + getProductPrice(item) * item.quantity,
     0,
   );
   const total = subtotal;
@@ -143,12 +145,15 @@ export default function ShoppingCartList() {
                         Quantity: {item.quantity}
                       </span>
                       <div className="text-start">
-                        <p
-                          data-cy="product-price"
+                        <ProductPrice
+                          price={item.price * item.quantity}
+                          salePrice={
+                            item.salePrice != null
+                              ? item.salePrice * item.quantity
+                              : null
+                          }
                           className="text-md font-medium"
-                        >
-                          {item.price * item.quantity} kr
-                        </p>
+                        />
                       </div>
                     </div>
                   </div>

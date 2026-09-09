@@ -14,6 +14,9 @@ import { Plus } from "lucide-react";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import AdminNavigation from "./admin-navigation";
+import ProductPrice from "@/components/product-price";
+import { getProductPrice } from "@/lib/product-price";
 
 async function deleteProduct(formData: FormData) {
   "use server";
@@ -32,50 +35,100 @@ export default async function AdminPage() {
     redirect("/");
   }
 
-  const products = await db.product.findMany({});
-  return (
-    <main className="grid">
-      <p className="text-3xl font-bold m-10 text-center">Our products</p>
-      <section className="grid gap-4 items-stretch pl-6 pr-6 pb-6 sm:grid-cols-2 xl:grid-cols-3">
-        <Link href="/admin/product/new">
-          <div className="flex flex-wrap gap-2 px-2 py-2 border rounded-xl w-full hover:bg-muted/50 transition h-full">
-            <div className="w-24 h-28 rounded-lg border-2 border-dashed flex items-center justify-center text-sm text-muted-foreground">
-              Image
-            </div>
+  const products = await db.product.findMany({
+    include: {
+      categories: {
+        include: {
+          category: true,
+        },
+      },
+    },
+  });
 
-            <div className="flex flex-col px-2 py-4 rounded-xl h-full">
-              <div className="pl-2 pb-2 pt-2">
-                <p
-                  data-cy="product-id"
-                  className="font-bold text-sm text-stone-600 pb-2"
+  const missingSalePrices = products.filter(
+    (product) =>
+      product.categories.some(({ category }) => category.name === "Sale") &&
+      getProductPrice(product) === product.price,
+  );
+
+  return (
+    <main className="grid pt-6">
+      <AdminNavigation currentPage="products" />
+
+      <p className="text-3xl font-bold m-10 text-center">Our products</p>
+
+      {missingSalePrices.length > 0 && (
+        <aside className="mx-6 mb-6 rounded-lg bg-amber-50 p-4 text-amber-900">
+          <p>These products need a valid sale price to appear in Sale:</p>
+
+          <ul className="mt-2 list-inside list-disc">
+            {missingSalePrices.map((product) => (
+              <li key={product.id}>
+                <Link
+                  className="underline"
+                  href={`/admin/product/${product.articleNumber}`}
                 >
-                  New Product
-                </p>
-                <p
-                  data-cy="product-title"
-                  className="font-bold text-sm pb-2 text-stone-600"
-                >
-                  Title
-                </p>
-                <p
-                  data-cy="product-price"
-                  className="text-sm pb-2 text-stone-600"
-                >
-                  0kr
-                </p>
-                <p
-                  data-cy="product-description"
-                  className="text-sm max-w-xs pb-6 text-stone-600"
-                >
-                  No description
-                </p>
-              </div>
-              <div className="flex gap-2">
-                <Button data-cy="admin-add-product" variant="outline">
-                  <Plus className="mr-2 h-4 w-4" />
-                  Add new product
-                </Button>
-              </div>
+                  Edit {product.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )}
+
+      <section className="grid gap-4 items-stretch pl-6 pr-6 pb-6 sm:grid-cols-2 xl:grid-cols-3">
+        <Link href="/admin/product/new" className="flex flex-wrap gap-4 p-4 border rounded-xl w-full min-h-[280px] bg-muted/50 transition">
+          <div className="w-24 h-28 rounded-lg border-2 border-dashed flex items-center justify-center text-sm text-muted-foreground">
+            Image
+          </div>
+
+          <div className="flex flex-col rounded-xl flex-1">
+            <p
+              data-cy="product-id"
+              className="font-bold text-sm text-stone-600 pb-2"
+            >
+              Article Number:
+            </p>
+
+            <p
+              data-cy="product-title"
+              className="text-sm pb-2 text-stone-600"
+            >
+              <span className="font-bold">Title:</span>
+            </p>
+
+            <p
+              data-cy="product-category"
+              className="text-sm pb-2 text-stone-600"
+            >
+              <span className="font-bold">Category:</span>
+            </p>
+
+            <p
+              data-cy="product-price"
+              className="text-sm pb-2 text-stone-600"
+            >
+              <span className="font-bold">Price:</span>
+            </p>
+
+            <p
+              data-cy="product-stock"
+              className="text-sm max-w-xs pb-2 text-stone-600"
+            >
+              <span className="font-bold">Stock:</span>
+            </p>
+            <p
+              data-cy="product-description"
+              className="text-sm max-w-xs pb-4 text-stone-600"
+            >
+              <span className="font-bold">Description:</span>
+            </p>
+
+            <div className="flex mt-auto gap-2 text-white">
+              <Button data-cy="admin-add-product" className="bg-[#526E67] hover:bg-[#7C9A92] hover:text-white" variant="outline">
+                <Plus className="h-4 w-4" />
+                Add new product
+              </Button>
             </div>
           </div>
         </Link>
@@ -84,7 +137,7 @@ export default async function AdminPage() {
           <article
             key={product.id}
             data-cy="product"
-            className="flex flex-wrap gap-2 px-2 py-2 border h-full rounded-xl"
+            className="relative flex gap-4 rounded-xl border p-4 min-h-[280px]"
           >
             {product.image && (
               <img
@@ -94,27 +147,49 @@ export default async function AdminPage() {
               />
             )}
 
-            <div className="flex flex-col">
-              <div className="pl-2 pb-2">
-                <p data-cy="product-id" className="font-bold text-sm pb-2">
+            <div className="flex min-w-0 flex-1 flex-col">
+              <div className="space-y-2">
+                <p data-cy="product-id" className="text-sm">
+                  <span className="font-bold">Article Number:</span>{" "}
                   {product.articleNumber}
                 </p>
-                <p data-cy="product-title" className="font-bold text-sm pb-2">
-                  {product.title}
+
+                <p data-cy="product-title" className="text-sm">
+                  <span className="font-bold">Title:</span> {product.title}
                 </p>
-                <p data-cy="product-price" className="text-sm pb-2">
-                  {product.price}kr
+
+                <p data-cy="product-category" className="text-sm">
+                  <span className="font-bold">Category:</span>{" "}
+                  {product.categories
+                    .map((item) => item.category.name)
+                    .join(", ") || "No category"}
                 </p>
+
+                <div className="flex items-center gap-1 text-sm">
+                  <span className="font-bold">Price:</span>
+
+                  <ProductPrice
+                    price={product.price}
+                    salePrice={product.salePrice}
+                  />
+                </div>
+
                 <p
-                  data-cy="product-description"
-                  className="text-sm max-w-xs pb-2"
+                  data-cy="product-stock"
+                  className={`text-sm font-semibold ${product.stock <= 2 ? "text-red-600" : "text-black"
+                    }`}
                 >
+                  Stock: {product.stock}
+                </p>
+
+                <p data-cy="product-description" className="max-w-xs text-sm">
+                  <span className="font-bold">Description:</span>{" "}
                   {product.description}
                 </p>
               </div>
 
               <Dialog>
-                <div className="flex gap-2">
+                <div className="mt-auto flex gap-2 pt-4">
                   <Link href={`/admin/product/${product.articleNumber}`}>
                     <Button variant="outline" data-cy="admin-edit-product">
                       Edit product
@@ -147,11 +222,7 @@ export default async function AdminPage() {
                         <Button variant="outline">No</Button>
                       </DialogClose>
 
-                      <Button
-                        type="submit"
-                        data-cy="confirm-delete-button"
-                        className=""
-                      >
+                      <Button type="submit" data-cy="confirm-delete-button">
                         Yes
                       </Button>
                     </DialogFooter>
@@ -162,6 +233,6 @@ export default async function AdminPage() {
           </article>
         ))}
       </section>
-    </main>
+    </main >
   );
 }

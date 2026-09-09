@@ -6,12 +6,12 @@ export interface CategoryCardProps {
 
 export function CategoryCard({ category, image }: CategoryCardProps) {
   return (
-    <Card className="relative mx-auto w-full min-w-84 pt-0 hover:bg-stone-100">
+    <Card className="relative mx-auto w-full pt-0 hover:bg-stone-100">
       <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
       <img
         src={image}
         alt={category}
-        className="relative z-20 aspect-video w-full object-cover"
+        className="relative z-20 aspect-video w-full object-cover flex items-center"
       />
       <CardHeader className="text-center">
         <CardTitle>{category}</CardTitle>

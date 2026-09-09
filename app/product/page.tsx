@@ -1,6 +1,7 @@
 import ProductCard from "@/components/ui/product-page-card";
 import { db } from "@/prisma/db";
 import Link from "next/link";
+import { getProductPrice } from "@/lib/product-price";
 
 export default async function ProductPage({
   searchParams,
@@ -22,6 +23,12 @@ export default async function ProductPage({
       : undefined,
   });
 
+  // Legacy Sale products may not have a discount yet. Keep them in All Products.
+  const visibleProducts =
+    params.category === "Sale"
+      ? products.filter((product) => getProductPrice(product) < product.price)
+      : products;
+
   return (
     <main className="grid gap-4 place-items-center select-none">
       <h1 className="text-3xl font-bold m-10">
@@ -40,54 +47,64 @@ export default async function ProductPage({
           </li>
           <li>
             <Link
-              href="/product?category=Tops"
-              className={`text-black hover:underline ${params.category === "Tops" ? "font-bold" : ""
+              href="/product?category=Bestseller"
+              className={`text-black hover:underline ${params.category === "Bestseller" ? "font-bold" : ""
                 }`}
             >
-              TOPS
+              BESTSELLER
             </Link>
           </li>
           <li>
             <Link
-              href="/product?category=Bottoms"
-              className={`text-black hover:underline ${params.category === "Bottoms" ? "font-bold" : ""
+              href="/product?category=Reading Glasses"
+              className={`text-black hover:underline ${params.category === "Reading Glasses" ? "font-bold" : ""
                 }`}
             >
-              BOTTOMS
+              READING GLASSES
             </Link>
           </li>
           <li>
             <Link
-              href="/product?category=Shoes"
-              className={`text-black hover:underline ${params.category === "Shoes" ? "font-bold" : ""
+              href="/product?category=Sunglasses"
+              className={`text-black hover:underline ${params.category === "Sunglasses" ? "font-bold" : ""
                 }`}
             >
-              SHOES
+              SUNGLASSES
             </Link>
           </li>
           <li>
             <Link
-              href="/product?category=Accessories"
-              className={`text-black hover:underline ${params.category === "Accessories" ? "font-bold" : ""
+              href="/product?category=Sale"
+              className={`text-black hover:underline ${params.category === "Sale" ? "font-bold" : ""
                 }`}
             >
-              ACCESSORIES
+              SALE
             </Link>
           </li>
         </ul>
       </nav>
-      <section className="grid gap-4 p-5 pb-10 pt-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {products.map((product) => (
+      {visibleProducts.length === 0 && (
+        <p className="py-10">
+          {params.category === "Sale"
+            ? "No products are on sale right now."
+            : "No products found."}
+        </p>
+      )}
+      <section className="grid w-full gap-4 p-5 pb-10 pt-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {visibleProducts.map((product) => (
           <ProductCard
             key={product.id}
             id={product.id}
             title={product.title}
             articleNumber={product.articleNumber}
             price={product.price}
+            salePrice={product.salePrice}
             imageUrl={product.image}
             slug={product.slug}
+            stock={product.stock}
             category=""
             description=""
+
           />
         ))}
       </section>
