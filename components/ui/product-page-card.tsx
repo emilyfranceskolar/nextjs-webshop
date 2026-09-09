@@ -24,7 +24,7 @@ export default function ProductCard({
     <Card data-cy="product" className="p-0 h-full">
       <Link
         href={`/product/${articleNumber}/${slug}`}
-        className="block aspect-[3/4] overflow-hidden bg-[#f1f0ec]"
+        className="block h-[300px] sm:h-auto sm:aspect-[3/4] overflow-hidden bg-[#f1f0ec]"
       >
         <img
           src={imageUrl}
@@ -39,10 +39,10 @@ export default function ProductCard({
         </CardHeader>
       </Link>
       <p className="px-4 pb-2 text-red-600 font-semibold">
-  {stock === 0 ? "Out of stock" : stock <= 5 ? "Only a few left in stock" : "In stock"}
-</p>
+        {stock === 0 ? "Out of stock" : stock <= 5 ? "Only a few left in stock" : "In stock"}
+      </p>
 
-<CardFooter className="mt-auto flex flex-wrap gap-2 justify-between">
+      <CardFooter className="mt-auto flex flex-wrap gap-2 justify-between">
         <Link className="flex-1" href={`/product/${articleNumber}/${slug}`}>
           <Button
             variant="outline"

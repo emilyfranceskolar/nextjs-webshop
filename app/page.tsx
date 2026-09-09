@@ -1,5 +1,5 @@
 import { CategoryCard } from "@/components/category-card";
-import HomePageCard from "@/components/ui/home-page-card";
+import ProductGrid from "@/components/product-grid";
 import { db } from "@/prisma/db";
 import Link from "next/link";
 
@@ -55,23 +55,21 @@ export default async function Home() {
       </section>
       <section className="grid gap-8 place-items-center">
         <h2 className="text-xl md:text-3xl m-4">All Products</h2>
-        <section className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-2 mb-4">
-          {product.map((product) => (
-            <HomePageCard
-              key={product.id}
-              id={product.id.toString()}
-              title={product.title}
-              articleNumber={product.articleNumber}
-              price={product.price}
-              salePrice={product.salePrice}
-              imageUrl={product.image}
-              slug={product.slug}
-              category={product.categories[0]?.category.name ?? ""}
-              description={product.description}
-              stock={product.stock}
-            />
-          ))}
-        </section>
+
+        <ProductGrid
+          products={product.map((product) => ({
+            id: product.id.toString(),
+            title: product.title,
+            articleNumber: product.articleNumber,
+            price: product.price,
+            salePrice: product.salePrice,
+            imageUrl: product.image,
+            slug: product.slug,
+            category: product.categories[0]?.category.name ?? "",
+            description: product.description,
+            stock: product.stock,
+          }))}
+        />
       </section>
     </main>
   );

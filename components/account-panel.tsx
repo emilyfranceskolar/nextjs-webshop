@@ -109,7 +109,7 @@ export default function AccountPanel() {
           aria-label="Open account menu"
           data-cy="account-menu-button"
         >
-          <CircleUserRound className="size-6 relative -top-1" />
+          <CircleUserRound className="size-6 relative -top-2 sm:-top-1" />
         </Button>
       </SheetTrigger>
 
