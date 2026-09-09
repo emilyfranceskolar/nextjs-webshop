@@ -54,7 +54,9 @@ export default function Header() {
           {/* <HatGlasses size={24} />
           <Glasses size={24} /> */}
         </Link>
+
         <AccountPanel />
+
         <Link
           href="/checkout"
           data-cy="cart-link"
