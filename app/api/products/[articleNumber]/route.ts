@@ -33,6 +33,13 @@ export async function PUT(request: NextRequest, { params }: Params) {
   if (error) return error;
 
   const { articleNumber } = await params;
+  const product = await db.product.findUnique({
+    where: { articleNumber },
+  });
+
+  if (!product) {
+    return NextResponse.json({ message: "Product not found" }, { status: 404 });
+  }
   const body = await request.json();
   const updated = await db.product.update({
     where: { articleNumber },
@@ -40,11 +47,23 @@ export async function PUT(request: NextRequest, { params }: Params) {
   });
   return NextResponse.json(updated);
 }
+
+//radera en specifik produkt
 export async function DELETE(request: NextRequest, { params }: Params) {
   const error = await require_isLoggedIn_IsAdmin();
   if (error) return error;
 
   const { articleNumber } = await params;
+
+  const product = await db.product.findUnique({
+    where: { articleNumber },
+  });
+
+  if (!product) {
+    return NextResponse.json({ message: "Product not found" }, { status: 404 });
+  }
+
   await db.product.delete({ where: { articleNumber } });
+
   return new NextResponse(null, { status: 204 });
 }
