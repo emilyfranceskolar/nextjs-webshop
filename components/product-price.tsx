@@ -15,7 +15,7 @@ export default function ProductPrice({
   const currentPrice = getProductPrice({ price, salePrice });
   return (
     <span
-      className={cn("inline-flex flex-wrap items-baseline gap-x-2", className)}
+      className={cn("inline-flex flex-wrap items-center gap-1 sm:gap-2", className)}
     >
       <span
         data-cy="product-price"

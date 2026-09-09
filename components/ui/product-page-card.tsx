@@ -24,29 +24,31 @@ export default function ProductCard({
     <Card data-cy="product" className="p-0 h-full">
       <Link
         href={`/product/${articleNumber}/${slug}`}
-        className="block h-[300px] sm:h-auto sm:aspect-[3/4] overflow-hidden bg-[#f1f0ec]"
+        className="block h-[180px] sm:h-auto sm:aspect-[3/4] overflow-hidden bg-[#f1f0ec]"
       >
         <img
           src={imageUrl}
           alt={title}
-          className="h-full w-full object-contain"
+          className="sm:h-full w-full object-contain"
         />
       </Link>
+
       <Link href={`/product/${articleNumber}/${slug}`} className="block">
-        <CardHeader className="flex flex-wrap gap-2 p-4 justify-between">
-          <CardTitle data-cy="product-title">{title}</CardTitle>
+        <CardHeader className="flex flex-wrap gap-3 p-2 justify-between sm:p-4">
+          <CardTitle data-cy="product-title" className="text-sm sm:text-base">{title}</CardTitle>
           <ProductPrice price={price} salePrice={salePrice} />
         </CardHeader>
       </Link>
-      <p className="px-4 pb-2 text-red-600 font-semibold">
+
+      <p className="px-2 pb-2 sm:px-4 sm:text-sm text-red-600 font-semibold">
         {stock === 0 ? "Out of stock" : stock <= 5 ? "Only a few left in stock" : "In stock"}
       </p>
 
-      <CardFooter className="mt-auto flex flex-wrap gap-2 justify-between">
+      <CardFooter className="mt-auto p-2 flex flex-wrap sm:gap-2 sm:p-4 justify-between">
         <Link className="flex-1" href={`/product/${articleNumber}/${slug}`}>
           <Button
             variant="outline"
-            size="lg"
+            size="sm"
             className="w-full hover:cursor-pointer"
           >
             View Details

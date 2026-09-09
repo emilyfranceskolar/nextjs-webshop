@@ -90,7 +90,8 @@ export default async function ProductPage({
             : "No products found."}
         </p>
       )}
-      <section className="grid w-full gap-4 p-5 pb-10 pt-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+
+      <section className="grid w-full gap-4 p-5 pb-10 pt-10 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {visibleProducts.map((product) => (
           <ProductCard
             key={product.id}
