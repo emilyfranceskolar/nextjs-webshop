@@ -77,47 +77,58 @@ export default async function AdminPage() {
       )}
 
       <section className="grid gap-4 items-stretch pl-6 pr-6 pb-6 sm:grid-cols-2 xl:grid-cols-3">
-        <Link href="/admin/product/new">
-          <div className="flex flex-wrap gap-2 px-2 py-2 border rounded-xl w-full h-50 hover:bg-muted/50 transition">
-            <div className="w-24 h-28 rounded-lg border-2 border-dashed flex items-center justify-center text-sm text-muted-foreground">
-              Image
-            </div>
+        <Link href="/admin/product/new" className="flex flex-wrap gap-4 p-4 border rounded-xl w-full min-h-[280px] bg-muted/50 transition">
+          <div className="w-24 h-28 rounded-lg border-2 border-dashed flex items-center justify-center text-sm text-muted-foreground">
+            Image
+          </div>
 
-            <div className="flex flex-col px-2 py-4 rounded-xl">
-              <p
-                data-cy="product-id"
-                className="font-bold text-sm text-stone-600 pb-2"
-              >
-                New Product
-              </p>
+          <div className="flex flex-col rounded-xl flex-1">
+            <p
+              data-cy="product-id"
+              className="font-bold text-sm text-stone-600 pb-2"
+            >
+              Article Number:
+            </p>
 
-              <p
-                data-cy="product-title"
-                className="font-bold text-sm pb-2 text-stone-600"
-              >
-                Title
-              </p>
+            <p
+              data-cy="product-title"
+              className="text-sm pb-2 text-stone-600"
+            >
+              <span className="font-bold">Title:</span>
+            </p>
 
-              <p
-                data-cy="product-price"
-                className="text-sm pb-2 text-stone-600"
-              >
-                0kr
-              </p>
+            <p
+              data-cy="product-category"
+              className="text-sm pb-2 text-stone-600"
+            >
+              <span className="font-bold">Category:</span>
+            </p>
 
-              <p
-                data-cy="product-description"
-                className="text-sm max-w-xs pb-4 text-stone-600"
-              >
-                No description
-              </p>
+            <p
+              data-cy="product-price"
+              className="text-sm pb-2 text-stone-600"
+            >
+              <span className="font-bold">Price:</span>
+            </p>
 
-              <div className="flex gap-2">
-                <Button data-cy="admin-add-product" variant="outline">
-                  <Plus className="h-4 w-4" />
-                  Add new product
-                </Button>
-              </div>
+            <p
+              data-cy="product-stock"
+              className="text-sm max-w-xs pb-2 text-stone-600"
+            >
+              <span className="font-bold">Stock:</span>
+            </p>
+            <p
+              data-cy="product-description"
+              className="text-sm max-w-xs pb-4 text-stone-600"
+            >
+              <span className="font-bold">Description:</span>
+            </p>
+
+            <div className="flex mt-auto gap-2 text-white">
+              <Button data-cy="admin-add-product" className="bg-[#526E67] hover:bg-[#7C9A92] hover:text-white" variant="outline">
+                <Plus className="h-4 w-4" />
+                Add new product
+              </Button>
             </div>
           </div>
         </Link>
@@ -126,7 +137,7 @@ export default async function AdminPage() {
           <article
             key={product.id}
             data-cy="product"
-            className="flex gap-4 rounded-xl border p-4 min-h-[280px]"
+            className="relative flex gap-4 rounded-xl border p-4 min-h-[280px]"
           >
             {product.image && (
               <img
@@ -165,9 +176,8 @@ export default async function AdminPage() {
 
                 <p
                   data-cy="product-stock"
-                  className={`text-sm font-semibold ${
-                    product.stock <= 2 ? "text-red-600" : "text-black"
-                  }`}
+                  className={`text-sm font-semibold ${product.stock <= 2 ? "text-red-600" : "text-black"
+                    }`}
                 >
                   Stock: {product.stock}
                 </p>
@@ -223,6 +233,6 @@ export default async function AdminPage() {
           </article>
         ))}
       </section>
-    </main>
+    </main >
   );
 }
