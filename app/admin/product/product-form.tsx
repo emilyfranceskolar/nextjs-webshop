@@ -79,11 +79,11 @@ export default function ProductForm({
       {initialValues?.category.some(
         (name) => !productCategoryNames.includes(name),
       ) && (
-        <p role="status" className="mb-4 text-sm text-amber-800">
-          This product has an unsupported category. Select from the four
-          categories below; saving will replace the old category selection.
-        </p>
-      )}
+          <p role="status" className="mb-4 text-sm text-amber-800">
+            This product has an unsupported category. Select from the four
+            categories below; saving will replace the old category selection.
+          </p>
+        )}
 
       <ProductFormInputs
         register={register}
@@ -328,13 +328,13 @@ function ProductFormInputs({
             type="submit"
             disabled={formState.isSubmitting}
             variant="outline"
-            className="rounded-full bg-black text-white"
+            className="rounded-lg bg-black text-white"
           >
             {formState.isSubmitting ? "Saving..." : "Confirm"}
           </Button>
 
           <Link href="/admin">
-            <Button type="button" variant="outline" className="rounded-full">
+            <Button type="button" variant="outline" className="rounded-lg">
               Cancel
             </Button>
           </Link>
