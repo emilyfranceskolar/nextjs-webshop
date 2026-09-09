@@ -1,23 +1,13 @@
-import { auth } from "@/lib/auth";
+import { require_isLoggedIn_IsAdmin } from "@/lib/admin";
 import { db } from "@/prisma/db";
-import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 type Params = { params: Promise<{ articleNumber: string }> };
 
 //hämta en specifik produkt
 export async function GET(request: NextRequest, { params }: Params) {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session) {
-    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-  }
-
-  if (session.user.role !== "admin") {
-    return NextResponse.json({ message: "Förbidden" }, { status: 403 });
-  }
+  const error = await require_isLoggedIn_IsAdmin();
+  if (error) return error;
 
   const { articleNumber } = await params;
 
@@ -36,5 +26,25 @@ export async function GET(request: NextRequest, { params }: Params) {
     return NextResponse.json({ message: "Not found" }, { status: 404 });
   return NextResponse.json(product);
 }
-export async function PUT(request: NextRequest) {}
-export async function DELETE(request: NextRequest) {}
+
+//uppdatera en specifik produkt
+export async function PUT(request: NextRequest, { params }: Params) {
+  const error = await require_isLoggedIn_IsAdmin();
+  if (error) return error;
+
+  const { articleNumber } = await params;
+  const body = await request.json();
+  const updated = await db.product.update({
+    where: { articleNumber },
+    data: body,
+  });
+  return NextResponse.json(updated);
+}
+export async function DELETE(request: NextRequest, { params }: Params) {
+  const error = await require_isLoggedIn_IsAdmin();
+  if (error) return error;
+
+  const { articleNumber } = await params;
+  await db.product.delete({ where: { articleNumber } });
+  return new NextResponse(null, { status: 204 });
+}

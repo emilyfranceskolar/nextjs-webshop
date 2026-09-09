@@ -18,7 +18,6 @@ export async function GET(request: NextRequest) {
     },
   });
 
-  //
   const productsWithCategories = products.map((product) => ({
     ...product,
     categories: product.categories.map((item) => item.category),

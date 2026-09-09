@@ -4,7 +4,7 @@ Origin: http://localhost:3000
 Content-Type: application/json
 
 {
-  "email": "name@icloud.com",
+  "email": "emilyfranceskolar@gmail.com",
   "password": "12345678"
 }
 
@@ -14,3 +14,25 @@ GET http://localhost:3000/api/products
 
 ###Hämta en specifik produkt  avänder samma som ovanför + produktNr
 GET http://localhost:3000/api/products/115
+
+
+###Skapa en ny produkt 
+POST http://localhost:3000/api/products
+
+
+###Uppdatera en produkt
+PUT http://localhost:3000/api/products/999
+Content-Type: application/json
+
+{
+  "title": "Updated product title",
+  "description": "Updated product description",
+  "price": 149.99,
+  "stock": 25,
+  "salePrice": 129.99,
+  "slug": "updated-product-title"
+}
+
+
+###Radera en produkt
+DELETE http://localhost:3000/api/products/999
