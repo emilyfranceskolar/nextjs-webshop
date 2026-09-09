@@ -26,38 +26,39 @@ export default function Header() {
 
   return (
     <header
-      className={`relative z-50 flex flex-wrap items-center md:justify-between lg:justify-between bg-white transition-all duration-300 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-2.5 border-bg-[#526e67] ${isHomePage ? "sticky top-0" : ""
-        } ${isScrolled
+      className={`relative z-50 flex flex-wrap items-center md:justify-between lg:justify-between bg-white transition-all duration-300 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-2.5 border-bg-[#526e67] ${
+        isHomePage ? "sticky top-0" : ""
+      } ${
+        isScrolled
           ? "justify-center items-center px-4 py-3 border-b-10"
           : "px-10 py-4 border-b-26"
-        }`}
+      }`}
     >
       <div className="flex flex-1 justify-center items-center md:justify-start lg:justify-start">
-
         <Link
           href="/"
-          className={`bg-[url('/assets/images/glajjan-logo1.png')] block bg-contain bg-no-repeat bg-center md:bg-left text-4xl text-black transition-all duration-300 ${isScrolled ? "w-40 h-20" : "w-66 h-42"
-            }`} aria-label="Home"
+          className={`bg-[url('/assets/images/glajjan-logo1.png')] block bg-contain bg-no-repeat bg-center md:bg-left text-4xl text-black transition-all duration-300 ${
+            isScrolled ? "w-40 h-20" : "w-66 h-42"
+          }`}
+          aria-label="Home"
         ></Link>
       </div>
 
       <nav className="flex justify-center flex-1 mt-6 gap-8 text-sm md:text-lg md:justify-end lg:justify-end ">
         <Link
           href="/product"
-          className={`underline-offset-8 decoration-2 transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose-900 ${pathName === "/product"
-            ? "text-rose-900 underline decoration-rose-900"
-            : "text-zinc-600 hover:text-rose-900 hover:underline decoration-rose-900"
-            }`}
+          className={`className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500" ${
+            pathName === "/product"
+          }`}
         >
           Products
         </Link>
         <Link
           href="/checkout"
           data-cy="cart-link"
-          className={`underline-offset-8 decoration-2 transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose-900 ${pathName === "/checkout"
-              ? "text-rose-900 underline decoration-rose-900"
-              : "text-zinc-600 hover:text-rose-900 hover:underline decoration-rose-900"
-            }`}
+          className={`className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500" ${
+            pathName === "/checkout"
+          }`}
         >
           Cart (
           <span data-cy="cart-items-count-badge">
