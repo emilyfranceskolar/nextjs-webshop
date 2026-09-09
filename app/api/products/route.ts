@@ -1,9 +1,13 @@
 import { createProductSchema } from "@/data/form";
+import { require_isLoggedIn_IsAdmin } from "@/lib/admin";
 import { db } from "@/prisma/db";
 import { NextRequest, NextResponse } from "next/server";
 
 //hämta alla produkter
 export async function GET(request: NextRequest) {
+  const error = await require_isLoggedIn_IsAdmin();
+  if (error) return error;
+
   const products = await db.product.findMany({
     include: {
       categories: {
@@ -25,6 +29,9 @@ export async function GET(request: NextRequest) {
 
 //skapar en produkt
 export async function POST(request: NextRequest) {
+  const error = await require_isLoggedIn_IsAdmin();
+  if (error) return error;
+
   const body = await request.json();
 
   const result = createProductSchema().safeParse(body);
