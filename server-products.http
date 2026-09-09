@@ -4,7 +4,7 @@ Origin: http://localhost:3000
 Content-Type: application/json
 
 {
-  "email": "myname@icloud.com",
+  "email": "emilyfranceskolar@gmail.com",
   "password": "12345678"
 }
 
@@ -12,27 +12,27 @@ Content-Type: application/json
 GET http://localhost:3000/api/products/
 
 
-###Hämta en specifik produkt, avänder samma som ovanför + produktNr
-GET http://localhost:3000/api/products/115
+###Hämta en specifik produkt -  samma som ovanför + (en articleNr behövs i slutet)
+GET http://localhost:3000/api/products/136
 
 
-###Skapa en ny produkt 
+###Skapa en ny produkt (måste följa det som finns i form.ts)
 POST http://localhost:3000/api/products
 Content-Type: application/json
 
 {
-  "title": "Test product",
-  "description": "This is a test product created via API",
-  "image": "/assets/images/Paris_Sepia_Grey.jpg",
-  "price": 499,
-  "salePrice": 349,
-  "articleNumber": "TEST-1001",
-  "category": ["Bestseller", "Sale"]
+  "title": "Latest New product",
+  "description": "This is the latest create product",
+  "image": "https://unsplash.com/photos/gold-colored-framed-hippie-sunglasses-on-white-surface-1-nx1QR5dTE",
+  "price": 699,
+  "stock": 5,
+  "articleNumber": "445667",
+  "category": ["Sunglasses"]
 }
 
 
-###Uppdatera en produkt
-PUT http://localhost:3000/api/products/TEST-1001
+###Uppdatera en produkt (en articleNr behövs i slutet)
+PUT http://localhost:3000/api/products/445667
 Content-Type: application/json
 
 {
@@ -40,5 +40,5 @@ Content-Type: application/json
 }
 
 
-###Radera en produkt
-DELETE http://localhost:3000/api/products/TEST-1001
+###Radera en produkt (en articleNr behövs i slutet)
+DELETE http://localhost:3000/api/products/
