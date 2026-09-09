@@ -26,11 +26,13 @@ interface ProductFormInputsProps {
   register: UseFormRegister<ProductFormInput>;
   formState: FormState<ProductFormInput>;
 }
+
 export default function ProductForm({
   initialValues,
   action,
 }: ProductFormProps) {
   const router = useRouter();
+<<<<<<< HEAD
   const { register, handleSubmit, formState, watch, setError } = useForm<
     ProductFormInput,
     unknown,
@@ -46,6 +48,21 @@ export default function ProductForm({
         ) ?? [],
     },
   });
+=======
+
+  const { register, handleSubmit, formState, watch, setError } =
+    useForm<ProductFormValues>({
+      resolver: zodResolver(createProductSchema()),
+      defaultValues: {
+        salePrice: "",
+        ...initialValues,
+        category:
+          initialValues?.category.filter((name) =>
+            productCategoryNames.includes(name),
+          ) ?? [],
+      },
+    });
+>>>>>>> main
 
   const onSale = isSaleCategory(watch("category"));
 
@@ -86,6 +103,7 @@ export default function ProductForm({
           categories below; saving will replace the old category selection.
         </p>
       )}
+
       <ProductFormInputs
         register={register}
         formState={formState}
@@ -103,10 +121,12 @@ function ProductFormInputs({
   return (
     <div className="w-full space-y-4">
       <input type="hidden" {...register("id")} />
+
       <Field className="space-y-2 w-full">
         <FieldLegend className="text-2xl font-bold text-zinc-800">
           Title
         </FieldLegend>
+
         <Input
           data-cy="product-title"
           {...register("title")}
@@ -117,6 +137,7 @@ function ProductFormInputs({
           })}
           autoComplete="title"
         />
+
         {formState.errors.title && (
           <p data-cy="product-title-error" className="text-red-600 text-sm">
             {formState.errors.title.message}
@@ -142,6 +163,7 @@ function ProductFormInputs({
               {category}
             </label>
           ))}
+
           {formState.errors.category && (
             <p
               data-cy="product-category-error"
@@ -157,6 +179,7 @@ function ProductFormInputs({
         <FieldLegend className="text-2xl font-bold text-zinc-800">
           Description
         </FieldLegend>
+
         <Input
           data-cy="product-description"
           {...register("description")}
@@ -167,6 +190,7 @@ function ProductFormInputs({
           })}
           autoComplete="description"
         />
+
         {formState.errors.description && (
           <p
             data-cy="product-description-error"
@@ -181,6 +205,7 @@ function ProductFormInputs({
         <FieldLegend className="text-2xl font-bold text-zinc-800">
           Image
         </FieldLegend>
+
         <Input
           data-cy="product-image"
           {...register("image")}
@@ -191,6 +216,7 @@ function ProductFormInputs({
           })}
           autoComplete="off"
         />
+
         {formState.errors.image && (
           <p data-cy="product-image-error" className="text-red-600 text-sm">
             {formState.errors.image.message}
@@ -219,6 +245,7 @@ function ProductFormInputs({
           })}
           autoComplete="off"
         />
+
         {formState.errors.price && (
           <p data-cy="product-price-error" className="text-red-600 text-sm">
             {formState.errors.price.message}
@@ -226,11 +253,37 @@ function ProductFormInputs({
         )}
       </Field>
 
+      {/* stock input for admin inventory management */}
+      <Field>
+        <FieldLegend className="text-2xl font-bold text-zinc-800">
+          Stock
+        </FieldLegend>
+
+        <Input
+          data-cy="product-stock"
+          {...register("stock")}
+          id="stock"
+          type="number"
+          min="0"
+          step="1"
+          className={cn("h-10 p-4", {
+            "border-red-600 border-2": formState.errors.stock,
+          })}
+          autoComplete="off"
+        />
+
+        {formState.errors.stock && (
+          <p data-cy="product-stock-error" className="text-red-600 text-sm">
+            {formState.errors.stock.message}
+          </p>
+        )}
+      </Field>
       {onSale && (
         <Field>
           <FieldLegend className="text-2xl font-bold text-zinc-800">
             <label htmlFor="salePrice">Sale price (kr)</label>
           </FieldLegend>
+
           <Input
             id="salePrice"
             type="number"
@@ -243,9 +296,11 @@ function ProductFormInputs({
             aria-invalid={!!formState.errors.salePrice}
             className="h-10 p-4"
           />
+
           <p className="text-sm text-muted-foreground">
             The regular price will be shown crossed out beside the sale price.
           </p>
+
           {formState.errors.salePrice && (
             <p
               data-cy="product-sale-price-error"
@@ -273,6 +328,7 @@ function ProductFormInputs({
           })}
           autoComplete="off"
         />
+
         {formState.errors.articleNumber && (
           <p
             data-cy="product-articleNumber-error"
@@ -288,6 +344,7 @@ function ProductFormInputs({
           {formState.errors.root.message}
         </p>
       )}
+
       <Field className="pt-6 pb-6" orientation="horizontal">
         <div className="flex gap-4">
           <Button
@@ -298,15 +355,13 @@ function ProductFormInputs({
           >
             {formState.isSubmitting ? "Saving..." : "Confirm"}
           </Button>
+
           <Link href="/admin">
             <Button type="button" variant="outline" className="rounded-full">
               Cancel
             </Button>
           </Link>
         </div>
-        {/* <Button type="submit" data-cy={submitLabel === "Add" ? "admin-add-product" : "admin-edit-product"} className="hover:bg-red-900 text-white rounded-full px-6">
-      {submitLabel}
-    </Button> */}
       </Field>
     </div>
   );

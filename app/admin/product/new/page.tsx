@@ -13,13 +13,18 @@ async function createNewProduct(formData: FormData) {
   }
 
   const values = await readProductForm(formData);
-  const { title, price, salePrice, description, image, category } = values;
+
+  const { title, price, salePrice, stock, description, image, category } =
+    values;
+
   const articleNumberValue = Number(values.articleNumber);
+
   const articleNumber = (
     articleNumberValue > 0
       ? articleNumberValue
       : Math.floor(Math.random() * 10000)
   ).toString();
+
   const slug = `${title.toLowerCase().replace(/\s+/g, "-")}-${Date.now()}`;
 
   await db.product.create({
@@ -27,6 +32,7 @@ async function createNewProduct(formData: FormData) {
       title,
       price,
       salePrice,
+      stock,
       description,
       image,
       slug,
