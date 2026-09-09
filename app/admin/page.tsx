@@ -36,20 +36,31 @@ export default async function AdminPage() {
   }
 
   const products = await db.product.findMany({
-    include: { categories: { include: { category: true } } },
+    include: {
+      categories: {
+        include: {
+          category: true,
+        },
+      },
+    },
   });
+
   const missingSalePrices = products.filter(
     (product) =>
       product.categories.some(({ category }) => category.name === "Sale") &&
       getProductPrice(product) === product.price,
   );
+
   return (
     <main className="grid pt-6">
       <AdminNavigation currentPage="products" />
+
       <p className="text-3xl font-bold m-10 text-center">Our products</p>
+
       {missingSalePrices.length > 0 && (
         <aside className="mx-6 mb-6 rounded-lg bg-amber-50 p-4 text-amber-900">
           <p>These products need a valid sale price to appear in Sale:</p>
+
           <ul className="mt-2 list-inside list-disc">
             {missingSalePrices.map((product) => (
               <li key={product.id}>
@@ -64,6 +75,7 @@ export default async function AdminPage() {
           </ul>
         </aside>
       )}
+
       <section className="grid gap-4 items-stretch pl-6 pr-6 pb-6 sm:grid-cols-2 xl:grid-cols-3">
         <Link href="/admin/product/new">
           <div className="flex flex-wrap gap-2 px-2 py-2 border rounded-xl w-full h-50 hover:bg-muted/50 transition">
@@ -78,18 +90,21 @@ export default async function AdminPage() {
               >
                 New Product
               </p>
+
               <p
                 data-cy="product-title"
                 className="font-bold text-sm pb-2 text-stone-600"
               >
                 Title
               </p>
+
               <p
                 data-cy="product-price"
                 className="text-sm pb-2 text-stone-600"
               >
                 0kr
               </p>
+
               <p
                 data-cy="product-description"
                 className="text-sm max-w-xs pb-4 text-stone-600"
@@ -111,7 +126,7 @@ export default async function AdminPage() {
           <article
             key={product.id}
             data-cy="product"
-            className="flex flex-wrap gap-2 px-2 py-2 border h-50 rounded-xl"
+            className="flex gap-4 rounded-xl border p-4 min-h-[280px]"
           >
             {product.image && (
               <img
@@ -121,29 +136,50 @@ export default async function AdminPage() {
               />
             )}
 
-            <div className="flex flex-col">
-              <div className="pl-2 pb-2">
-                <p data-cy="product-id" className="font-bold text-sm pb-2">
+            <div className="flex min-w-0 flex-1 flex-col">
+              <div className="space-y-2">
+                <p data-cy="product-id" className="text-sm">
+                  <span className="font-bold">Article Number:</span>{" "}
                   {product.articleNumber}
                 </p>
-                <p data-cy="product-title" className="font-bold text-sm pb-2">
-                  {product.title}
+
+                <p data-cy="product-title" className="text-sm">
+                  <span className="font-bold">Title:</span> {product.title}
                 </p>
-                <ProductPrice
-                  price={product.price}
-                  salePrice={product.salePrice}
-                  className="text-sm pb-2"
-                />
+
+                <p data-cy="product-category" className="text-sm">
+                  <span className="font-bold">Category:</span>{" "}
+                  {product.categories
+                    .map((item) => item.category.name)
+                    .join(", ") || "No category"}
+                </p>
+
+                <div className="flex items-center gap-1 text-sm">
+                  <span className="font-bold">Price:</span>
+
+                  <ProductPrice
+                    price={product.price}
+                    salePrice={product.salePrice}
+                  />
+                </div>
+
                 <p
-                  data-cy="product-description"
-                  className="text-sm max-w-xs pb-2"
+                  data-cy="product-stock"
+                  className={`text-sm font-semibold ${
+                    product.stock <= 2 ? "text-red-600" : "text-black"
+                  }`}
                 >
+                  Stock: {product.stock}
+                </p>
+
+                <p data-cy="product-description" className="max-w-xs text-sm">
+                  <span className="font-bold">Description:</span>{" "}
                   {product.description}
                 </p>
               </div>
 
               <Dialog>
-                <div className="flex gap-2">
+                <div className="mt-auto flex gap-2 pt-4">
                   <Link href={`/admin/product/${product.articleNumber}`}>
                     <Button variant="outline" data-cy="admin-edit-product">
                       Edit product
@@ -176,11 +212,7 @@ export default async function AdminPage() {
                         <Button variant="outline">No</Button>
                       </DialogClose>
 
-                      <Button
-                        type="submit"
-                        data-cy="confirm-delete-button"
-                        className=""
-                      >
+                      <Button type="submit" data-cy="confirm-delete-button">
                         Yes
                       </Button>
                     </DialogFooter>

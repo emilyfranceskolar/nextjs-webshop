@@ -20,6 +20,7 @@ async function main() {
       },
       update: {
         ...product,
+
         categories: {
           deleteMany: {},
           create: {
@@ -29,6 +30,7 @@ async function main() {
       },
       create: {
         ...product,
+
         categories: {
           create: {
             categoryId: categoryRecord.id,

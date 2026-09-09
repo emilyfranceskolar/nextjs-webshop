@@ -26,7 +26,7 @@ export const products: Product[] = [
     description:
       "A timeless tortoise frame with a refined shape and an effortless everyday look.",
     price: 899,
-     stock: 0,
+    stock: 5,
   },
   {
     id: "2",
