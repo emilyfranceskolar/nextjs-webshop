@@ -55,6 +55,13 @@ export const productSchema = z.object({
   description: z.string().min(1, "Required"),
   image: imageSchema,
   price: priceSchema,
+  stock: z
+    .number({ error: "Required" })
+    .min(1, "Required")
+    .refine((value) => {
+      const parsed = Number(value);
+      return Number.isInteger(parsed) && parsed >= 0;
+    }, "Stock must be 0 or greater"),
   salePrice: z.preprocess(
     (value) => (value === "" ? undefined : value),
     z.number().positive().optional(),

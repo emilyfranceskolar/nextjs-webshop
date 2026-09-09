@@ -86,6 +86,7 @@ export default async function EditProductPage({
             description: product?.description,
             image: product?.image,
             price: product.price,
+            stock: product.stock,
             salePrice: product.salePrice ?? undefined,
             articleNumber: product?.articleNumber,
             slug: product?.slug,
