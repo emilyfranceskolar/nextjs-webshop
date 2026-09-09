@@ -29,7 +29,7 @@ export default function ProductCard({
         <img
           src={imageUrl}
           alt={title}
-          className="sm:h-full w-full object-contain"
+          className="h-full w-full object-contain"
         />
       </Link>
 
@@ -42,9 +42,10 @@ export default function ProductCard({
 
       <p className="px-2 pb-2 sm:px-4 sm:text-sm text-red-600 font-semibold">
         {stock === 0 ? "Out of stock" : stock <= 5 ? "Only a few left in stock" : "In stock"}
+
       </p>
 
-      <CardFooter className="mt-auto p-2 flex flex-wrap sm:gap-2 sm:p-4 justify-between">
+      <CardFooter className="mt-auto p-2 flex flex-wrap gap-3 sm:p-4 justify-between">
         <Link className="flex-1" href={`/product/${articleNumber}/${slug}`}>
           <Button
             variant="outline"
@@ -67,9 +68,8 @@ export default function ProductCard({
           description=""
           stock={stock}
           disabled={stock === 0}
-          size="lg"
           buttonText="Add to Cart"
-          className="flex-1 bg-black! text-white! hover:cursor-pointer"
+          className="flex-1 bg-[#526E67]! text-white! hover:cursor-pointer hover:bg-[#7C9A92]!"
 
         />
       </CardFooter>
