@@ -34,9 +34,14 @@ export default function ProductCard({
       </Link>
 
       <Link href={`/product/${articleNumber}/${slug}`} className="block">
-        <CardHeader className="flex flex-wrap gap-2 p-4 justify-between">
-          <CardTitle data-cy="product-title">{title}</CardTitle>
-          <ProductPrice price={price} salePrice={salePrice} />
+        <CardHeader className="flex items-center justify-between gap-3 px-0 pb-0 pt-2">
+          <CardTitle data-cy="product-title" className="line-clamp-1 text-[10px] font-normal uppercase leading-none tracking-tight">
+            {title}
+          </CardTitle>
+
+          <div className="shrink-0 text-[10px] leading-none">
+            <ProductPrice price={price} salePrice={salePrice} />
+          </div>
         </CardHeader>
       </Link>
       <p className="px-4 pb-2 text-red-600 font-semibold">
