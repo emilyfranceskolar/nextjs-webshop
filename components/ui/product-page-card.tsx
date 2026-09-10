@@ -21,10 +21,10 @@ export default function ProductCard({
 
 }: ProductCardProps) {
   return (
-    <Card data-cy="product" className="relative flex h-full flex-col border-0 bg-transparent p-0 shadow-none">
+    <Card data-cy="relative flex h-full flex-col overflow-visible rounded-none border-0 bg-transparent p-0 shadow-none">
       <Link
         href={`/product/${articleNumber}/${slug}`}
-        className="block aspect-[3/4] overflow-hidden bg-[#f3f3f1]"
+        className="group relative block aspect-square overflow-hidden bg-[#f3f3f1]"
       >
         <img
           src={imageUrl}
