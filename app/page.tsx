@@ -77,6 +77,31 @@ export default async function Home() {
           ))}
         </section>
       </section>
+      <section
+        aria-label="The Glajjan perspective"
+        className="relative isolate flex min-h-[32rem] w-full items-end overflow-hidden bg-[#526E67] md:min-h-[42rem]"
+      >
+        <img
+          src="/assets/images/hero-image.jpg"
+          alt="A woman wearing tortoiseshell sunglasses in the sunshine"
+          loading="lazy"
+          width={5472}
+          height={3648}
+          className="absolute inset-0 -z-20 h-full w-full object-cover object-[60%_center] md:object-center"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-gradient-to-t from-black/75 via-black/10 to-transparent"
+        />
+        <figure className="max-w-lg p-6 text-white sm:p-10 md:max-w-2xl md:p-16">
+          <blockquote className="text-3xl leading-tight font-medium tracking-tight text-balance md:text-5xl">
+            &ldquo;Life looks better through a pair that feels like you.&rdquo;
+          </blockquote>
+          <figcaption className="mt-5 text-sm font-semibold tracking-[0.2em] uppercase">
+            The Glajjan perspective
+          </figcaption>
+        </figure>
+      </section>
     </main>
   );
 }
