@@ -1,4 +1,3 @@
-import { CategoryCard } from "@/components/category-card";
 import HomePageCard from "@/components/ui/home-page-card";
 import { db } from "@/prisma/db";
 import Link from "next/link";
@@ -11,13 +10,13 @@ export default async function Home() {
       },
     },
   });
-  const categories = ["Bestseller", "Reading Glasses", "Sunglasses", "Sale"];
+  const categories = ["Bestseller", "Sunglasses", "Sale", "Reading Glasses"];
 
   const categoryImages: Record<string, string> = {
-    Bestseller: "/assets/images/Bilbao_Meadow_Green.jpg",
-    "Reading Glasses": "/assets/images/Paris_Crystal_Clear.jpg",
-    Sunglasses: "/assets/images/Cartagena_tortoise_1.webp",
-    Sale: "/assets/images/Vienna_Yellow_Amber.jpg",
+    Bestseller: "/assets/images/Female_HP_1.webp",
+    Sunglasses: "/assets/images/Male_HP_1.webp",
+    Sale: "/assets/images/Female_HP_2.webp",
+    "Reading Glasses": "/assets/images/Male_HP_2.webp",
   };
 
   return (
@@ -39,21 +38,30 @@ export default async function Home() {
           href="/product"
           className="absolute bottom-12 left-1/2 -translate-x-1/2 rounded-lg bg-[#526E67] px-10 py-3 text-lg font-bold whitespace-nowrap text-white transition-all duration-300 hover:cursor-pointer hover:bg-[#ddd9cd] hover:text-black lg:bottom-50"
         >
-          Shop Now
+          SHOP NOW
         </Link>
       </section>
-      <h2 className="text-2xl md:text-4xl md:p-4">Shop by Category</h2>
-      <section className="grid w-full grid-cols-2 gap-2 p-2 md:grid-cols-4">
+      <section
+        aria-label="Shop by collection"
+        className="-mt-8 grid w-full grid-cols-1 md:grid-cols-2"
+      >
         {categories.map((category) => (
           <Link
-            className="flex-1 min-w-0"
-            href={`/product?category=${category}`}
+            className="group relative flex min-h-[480px] min-w-0 items-end overflow-hidden bg-stone-100 p-6 focus-visible:outline-4 focus-visible:-outline-offset-4 focus-visible:outline-white md:min-h-[800px]"
+            href={`/product?category=${encodeURIComponent(category)}`}
             key={category}
           >
-            <CategoryCard
-              category={category}
-              image={categoryImages[category]}
+            <img
+              src={categoryImages[category]}
+              alt=""
+              loading="lazy"
+              width={1200}
+              height={1200}
+              className="absolute inset-0 h-full w-full object-cover"
             />
+            <span className="relative mb-3 inline-flex min-h-11 items-center bg-black px-5 py-3 text-sm font-bold tracking-[0.2em] text-white uppercase transition-colors group-hover:bg-[#526E67] group-focus-visible:bg-[#526E67]">
+              {category}
+            </span>
           </Link>
         ))}
       </section>
