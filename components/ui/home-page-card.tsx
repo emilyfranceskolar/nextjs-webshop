@@ -30,10 +30,10 @@ export default function HomePageCard({
   stock,
 }: HomePageCardProps) {
   return (
-    <Card data-cy="product" className="p-0 relative h-full bg-[#f1f0ec]">
+    <Card data-cy="product" className="relative h-full bg-white p-0">
       <Link
         href={`/product/${articleNumber}/${slug}`}
-        className="block aspect-[3/4] overflow-hidden"
+        className="block aspect-[3/4] overflow-hidden bg-[#f1f0ec]"
       >
         {imageUrl && (
           <img
