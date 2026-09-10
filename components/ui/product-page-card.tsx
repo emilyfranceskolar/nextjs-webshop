@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import AddToCartButton from "../add-to-cart-button";
 import { HomePageCardProps } from "./home-page-card";
@@ -21,7 +21,7 @@ export default function ProductCard({
 
 }: ProductCardProps) {
   return (
-    <Card data-cy="relative flex h-full flex-col overflow-visible rounded-none border-0 bg-transparent p-0 shadow-none">
+    <article data-cy="product" className="relative h-full">
       <Link
         href={`/product/${articleNumber}/${slug}`}
         className="group relative block aspect-square overflow-hidden bg-[#f3f3f1]"
@@ -78,6 +78,6 @@ export default function ProductCard({
           />
         </div>
       </CardFooter>
-    </Card>
+    </article>
   );
 }
