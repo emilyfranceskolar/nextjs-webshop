@@ -8,7 +8,7 @@ export default function Footer() {
     <main className="bg-[#fafaf8;]">
       <footer className="grid grid-cols-3 text-xs mx-auto items-center justify-between p-4 border-t-26 border-[#526e67]-900 px-6 py-8 justify-items-center pt-12 pb-12">
         <section className="grid gap-6">
-          <h2 className="font-bold mb-4">"Brand"</h2>
+          <h2 className="font-bold mb-4">&quot;Brand&quot;</h2>
           <Link
             href="/aboutus"
             className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"

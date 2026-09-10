@@ -1,4 +1,4 @@
-import HomePageCard from "@/components/ui/home-page-card";
+import ProductSlider from "@/components/product-slider";
 import { db } from "@/prisma/db";
 import Link from "next/link";
 
@@ -10,6 +10,19 @@ export default async function Home() {
       },
     },
   });
+  const sliderProducts = product.map((product) => ({
+    id: product.id.toString(),
+    title: product.title,
+    articleNumber: product.articleNumber,
+    price: product.price,
+    salePrice: product.salePrice,
+    imageUrl: product.image,
+    slug: product.slug,
+    category: product.categories[0]?.category.name ?? "",
+    description: product.description,
+    stock: product.stock,
+  }));
+  const midpoint = Math.ceil(sliderProducts.length / 2);
   const categories = ["Bestseller", "Sunglasses", "Sale", "Reading Glasses"];
 
   const categoryImages: Record<string, string> = {
@@ -20,7 +33,7 @@ export default async function Home() {
   };
 
   return (
-    <main className="grid gap-8 place-items-center bg-[#fafaf8;]">
+    <main className="grid gap-8 place-items-center bg-[#fafaf8]">
       <section className="relative h-dvh w-full overflow-hidden">
         <video
           autoPlay
@@ -65,25 +78,34 @@ export default async function Home() {
           </Link>
         ))}
       </section>
-      <section className="grid gap-8 place-items-center">
-        <h2 className="text-xl md:text-3xl m-4">All Products</h2>
-        <section className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-2 mb-4">
-          {product.map((product) => (
-            <HomePageCard
-              key={product.id}
-              id={product.id.toString()}
-              title={product.title}
-              articleNumber={product.articleNumber}
-              price={product.price}
-              salePrice={product.salePrice}
-              imageUrl={product.image}
-              slug={product.slug}
-              category={product.categories[0]?.category.name ?? ""}
-              description={product.description}
-              stock={product.stock}
-            />
-          ))}
+      <section
+        aria-labelledby="all-products-heading"
+        className="grid min-w-0 w-full gap-8"
+      >
+        <h2
+          id="all-products-heading"
+          className="m-4 text-center text-xl md:text-3xl"
+        >
+          All Products
+        </h2>
+        <ProductSlider
+          products={sliderProducts.slice(0, midpoint)}
+          label="All products, slider 1"
+        />
+        <section aria-label="Archive stock clearance" className="w-full">
+          <img
+            src="/assets/images/SITE_BANNERS_9.webp"
+            alt="Archive stock clearance — selected frames from SEK 349. Sunglasses resting in sunlit water."
+            width={2752}
+            height={1536}
+            loading="lazy"
+            className="block h-auto w-full"
+          />
         </section>
+        <ProductSlider
+          products={sliderProducts.slice(midpoint)}
+          label="All products, slider 2"
+        />
       </section>
       <section
         aria-label="The Glajjan perspective"
