@@ -32,6 +32,7 @@ export default function ProductCard({
           className="h-full w-full object-contain p-7 transition-transform duration-300 group-hover:scale-105"
         />
       </Link>
+
       <Link href={`/product/${articleNumber}/${slug}`} className="block">
         <CardHeader className="flex flex-wrap gap-2 p-4 justify-between">
           <CardTitle data-cy="product-title">{title}</CardTitle>
@@ -53,23 +54,24 @@ export default function ProductCard({
           </Button>
         </Link>
 
-        <AddToCartButton
-          id={id}
-          title={title}
-          articleNumber={articleNumber}
-          imageUrl={imageUrl}
-          price={price}
-          salePrice={salePrice}
-          slug={slug}
-          category=""
-          description=""
-          stock={stock}
-          disabled={stock === 0}
-          size="lg"
-          buttonText="Add to Cart"
-          className="flex-1 bg-black! text-white! hover:cursor-pointer"
-
-        />
+        <div className="absolute right-2 top-2 z-10">
+          <AddToCartButton
+            id={id}
+            title={title}
+            articleNumber={articleNumber}
+            imageUrl={imageUrl}
+            price={price}
+            salePrice={salePrice}
+            slug={slug}
+            category=""
+            description=""
+            stock={stock}
+            disabled={stock === 0}
+            size="lg"
+            buttonText="Add to Cart"
+            className="h-6 w-6 rounded-none bg-white! p-0 text-black! shadow-sm hover:bg-neutral-100!"
+          />
+        </div>
       </CardFooter>
     </Card>
   );
