@@ -132,6 +132,50 @@ export default async function Home() {
           </figcaption>
         </figure>
       </section>
+      <section
+        id="about-glajjan"
+        aria-labelledby="about-glajjan-heading"
+        className="w-full px-6 py-12 md:px-12 md:py-20"
+      >
+        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <div className="max-w-lg">
+            <p className="mb-5 text-xs font-semibold tracking-[0.2em] text-[#526E67] uppercase">
+              A little about Glajjan
+            </p>
+            <h2
+              id="about-glajjan-heading"
+              className="text-4xl leading-tight font-medium tracking-tight text-balance md:text-5xl"
+            >
+              Based in Göteborg.
+              <br />A pair for your everyday.
+            </h2>
+            <p className="mt-6 max-w-md text-base leading-relaxed text-stone-600">
+              We’re Glajjan, an eyewear company based in Göteborg. We believe
+              finding your next pair should feel simple, personal, and fun. From
+              quiet reading moments to sunny days out, find frames that feel
+              like you.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 items-start gap-3 md:gap-5">
+            <img
+              src="/assets/images/photo-1574258495973-f010dfbb5371.jpg"
+              alt="Tortoiseshell and metal reading glasses resting on a book"
+              width={5184}
+              height={3456}
+              loading="lazy"
+              className="aspect-[3/4] w-full object-cover object-[60%_center]"
+            />
+            <img
+              src="/assets/images/Bilbao_Meadow_Green.jpg"
+              alt="Round reading glasses in meadow green"
+              width={1200}
+              height={1600}
+              loading="lazy"
+              className="mt-10 aspect-[3/4] w-full object-cover md:mt-16"
+            />
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
