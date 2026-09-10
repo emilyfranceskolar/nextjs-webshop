@@ -1,5 +1,6 @@
 "use client";
 import { useCartContext } from "@/app/providers/cart-provider";
+import { Handbag, Search } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -26,40 +27,51 @@ export default function Header() {
 
   return (
     <header
-      className={`relative z-50 flex flex-wrap items-center md:justify-between lg:justify-between bg-white transition-all duration-300 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-2.5 border-bg-[#526e67] ${isHomePage ? "sticky top-0" : ""
-        } ${isScrolled
+      className={`relative z-50 flex flex-wrap items-center md:justify-between lg:justify-between bg-white transition-all duration-300 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-2.5 border-bg-[#526e67] ${
+        isHomePage ? "sticky top-0" : ""
+      } ${
+        isScrolled
           ? "justify-center items-center px-4 py-3 border-b-10"
           : "px-10 py-4 border-b-26"
-        }`}
+      }`}
     >
       <div className="flex flex-1 justify-center items-center md:justify-start lg:justify-start">
-
         <Link
           href="/"
-          className={`bg-[url('/assets/images/glajjan-logo1.png')] block bg-contain bg-no-repeat bg-center md:bg-left text-4xl text-black transition-all duration-300 ${isScrolled ? "w-40 h-20" : "w-66 h-42"
-            }`} aria-label="Home"
+          className={`bg-[url('/assets/images/glajjan-logo1.png')] block bg-contain bg-no-repeat bg-center md:bg-left text-4xl text-black transition-all duration-300 ${
+            isScrolled ? "w-40 h-20" : "w-66 h-42"
+          }`}
+          aria-label="Home"
         ></Link>
       </div>
 
       <nav className="flex justify-center flex-1 mt-6 gap-8 text-sm md:text-lg md:justify-end lg:justify-end ">
         <Link
           href="/product"
-          className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
+          className={`flex items-center bg-zinc-50 hover:bg-zinc-200 px-4 py-2 rounded-sm shadow-sm ${pathName === "/product"}`}
         >
-          Products
+          <Search size={24} />
+          {/* <HatGlasses size={24} />
+          <Glasses size={24} /> */}
         </Link>
+
+        <AccountPanel />
+
         <Link
           href="/checkout"
           data-cy="cart-link"
-          className="text-zinc-600 hover:underline underline-offset-8 decoration-2 decoration-zinc-500"
+          aria-label={`Shopping cart with ${isLoaded ? totalQuantity : 0} items`}
+          className={`flex items-center gap-1 bg-zinc-50 hover:bg-zinc-200 px-4 py-2 rounded-sm shadow-sm ${pathName === "/checkout"}`}
         >
-          Cart (
-          <span data-cy="cart-items-count-badge">
+          <Handbag size={24} /> (
+          <span
+            data-cy="cart-items-count-badge"
+            className="text-sm font-medium"
+          >
             {isLoaded ? totalQuantity : 0}
           </span>
           )
         </Link>
-        <AccountPanel />
       </nav>
     </header>
   );

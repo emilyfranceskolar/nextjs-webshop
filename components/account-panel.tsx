@@ -11,7 +11,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { authClient } from "@/lib/auth-client";
-import { CircleUserRound } from "lucide-react";
+import { UserRound } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
@@ -103,14 +103,9 @@ export default function AccountPanel() {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon-lg"
-          aria-label="Open account menu"
-          data-cy="account-menu-button"
-        >
-          <CircleUserRound className="size-6 relative -top-2 sm:-top-1" />
-        </Button>
+        <div className="flex items-center relative bg-zinc-50 hover:bg-zinc-200 px-4 py-2 rounded-sm shadow-sm">
+          <UserRound size={24} />
+        </div>
       </SheetTrigger>
 
       <SheetContent className="w-full gap-0 overflow-y-auto p-0 sm:max-w-md">
