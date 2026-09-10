@@ -33,13 +33,13 @@ export default function HomePageCard({
     <Card data-cy="product" className="relative h-full rounded-sm bg-white p-0">
       <Link
         href={`/product/${articleNumber}/${slug}`}
-        className="block aspect-square overflow-hidden bg-[#f1f0ec]"
+        className="group block aspect-square overflow-hidden bg-[#f1f0ec]"
       >
         {imageUrl && (
           <img
             src={imageUrl}
             alt={title}
-            className="h-full w-full object-contain block"
+            className="block h-full w-full object-contain transition-transform duration-300 ease-out group-hover:scale-105"
           />
         )}
       </Link>
