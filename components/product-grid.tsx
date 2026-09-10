@@ -33,7 +33,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
       </section>
 
       {products.length > 4 && (
-        <button onClick={() => setShowAll(!showAll)} className="mb-8 rounded-lg bg-[#526E67] px-8 py-3 font-semibold text-white transition hover:bg-[#7C9A92] hover:text-black">
+        <button onClick={() => setShowAll(!showAll)} className="mb-8 rounded-lg bg-[#526E67] px-6 py-2 font-semibold text-white transition hover:bg-[#7C9A92] hover:text-black hover:cursor-pointer">
           {showAll ? "Show less" : "Show More"}
         </button>
       )}
