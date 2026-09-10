@@ -22,21 +22,25 @@ export default async function Home() {
 
   return (
     <main className="grid gap-8 place-items-center bg-[#fafaf8;]">
-      <section className="relative md:w-full lg:w-full overflow-hidden">
-        <h1 className="absolute hidden md:flex justify-center w-full text-center text-[6rem] font-bold text-white top-15">
-          Your next pair <br />
-          of Glajjan
-        </h1>
-        <img
-          src="/assets/images/hero-image.jpg"
-          alt="Hero-image"
-          className="md:object-cover lg:object-cover overflow-hidden w-full md:h-240 lg:h-240"
+      <section className="relative h-dvh w-full overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls={false}
+          disablePictureInPicture
+          aria-hidden="true"
+          tabIndex={-1}
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+          src="/assets/videos/1a42a2272c314240b3c559b3b9dedef4.mp4"
         />
-        <button className="absolute py-3 px-10 rounded-lg text-white font-bold bg-[#526E67] lg:bottom-50 left-1/2 -translate-x-1/2 translate-y-1/2 hover:cursor-pointer hover:bg-[#ddd9cd] hover:text-black transition-all duration-300">
-          <Link href="/product" className="text-lg">
-            Shop Now
-          </Link>
-        </button>
+        <Link
+          href="/product"
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 rounded-lg bg-[#526E67] px-10 py-3 text-lg font-bold whitespace-nowrap text-white transition-all duration-300 hover:cursor-pointer hover:bg-[#ddd9cd] hover:text-black lg:bottom-50"
+        >
+          Shop Now
+        </Link>
       </section>
       <h2 className="text-2xl md:text-4xl md:p-4">Shop by Category</h2>
       <section className="grid w-full grid-cols-2 gap-2 p-2 md:grid-cols-4">
