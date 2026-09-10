@@ -21,15 +21,15 @@ export default function ProductCard({
 
 }: ProductCardProps) {
   return (
-    <Card data-cy="product" className="p-0 h-full">
+    <Card data-cy="product" className="relative flex h-full flex-col border-0 bg-transparent p-0 shadow-none">
       <Link
         href={`/product/${articleNumber}/${slug}`}
-        className="block aspect-[3/4] overflow-hidden bg-[#f1f0ec]"
+        className="block aspect-[3/4] overflow-hidden bg-[#f3f3f1]"
       >
         <img
           src={imageUrl}
           alt={title}
-          className="h-full w-full object-contain"
+          className="h-full w-full object-contain p-7 transition-transform duration-300 group-hover:scale-105"
         />
       </Link>
       <Link href={`/product/${articleNumber}/${slug}`} className="block">
@@ -39,10 +39,10 @@ export default function ProductCard({
         </CardHeader>
       </Link>
       <p className="px-4 pb-2 text-red-600 font-semibold">
-  {stock === 0 ? "Out of stock" : stock <= 5 ? "Only a few left in stock" : "In stock"}
-</p>
+        {stock === 0 ? "Out of stock" : stock <= 5 ? "Only a few left in stock" : "In stock"}
+      </p>
 
-<CardFooter className="mt-auto flex flex-wrap gap-2 justify-between">
+      <CardFooter className="mt-auto flex flex-wrap gap-2 justify-between">
         <Link className="flex-1" href={`/product/${articleNumber}/${slug}`}>
           <Button
             variant="outline"
