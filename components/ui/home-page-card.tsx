@@ -43,6 +43,16 @@ export default function HomePageCard({
           />
         )}
       </Link>
+
+      {(category === "Bestseller" || category === "Sale") && (
+        <span
+          className={`absolute left-2 top-2 z-10 bg-white px-2 py-1 text-[10px] font-medium uppercase leading-none rounded-sm  shadow-sm ${category === "Sale" ? "text-red-600" : "text-black"
+            }`}
+        >
+          {category}
+        </span>
+      )}
+
       <div className="flex items-center justify-between gap-3 px-0 pb-0 pt-2 text-xs text-stone-700">
         <Link
           href={`/product/${articleNumber}/${slug}`}
