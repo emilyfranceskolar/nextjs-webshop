@@ -30,10 +30,10 @@ export default function HomePageCard({
   stock,
 }: HomePageCardProps) {
   return (
-    <Card data-cy="product" className="relative h-full bg-white p-0">
+    <Card data-cy="product" className="relative h-full rounded-sm bg-white p-0">
       <Link
         href={`/product/${articleNumber}/${slug}`}
-        className="block aspect-[3/4] overflow-hidden bg-[#f1f0ec]"
+        className="block aspect-square overflow-hidden bg-[#f1f0ec]"
       >
         {imageUrl && (
           <img
@@ -53,7 +53,7 @@ export default function HomePageCard({
         </span>
       )}
 
-      <div className="flex items-center justify-between gap-3 px-0 pb-0 pt-2 text-xs text-stone-700">
+      <div className="flex items-center justify-between gap-3 px-3 pb-3 pt-3 text-xs text-stone-700">
         <Link
           href={`/product/${articleNumber}/${slug}`}
           className="line-clamp-1 min-w-0 uppercase tracking-tight hover:underline"
