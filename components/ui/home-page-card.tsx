@@ -43,15 +43,19 @@ export default function HomePageCard({
           />
         )}
       </Link>
-      <div className="flex flex-wrap items-baseline justify-between gap-2 p-4 text-stone-600 font-semibold">
+      <div className="flex items-center justify-between gap-3 px-0 pb-0 pt-2 text-xs text-stone-700">
         <Link
           href={`/product/${articleNumber}/${slug}`}
-          className="hover:underline"
+          className="line-clamp-1 min-w-0 uppercase tracking-tight hover:underline"
           data-cy="product-title"
         >
           {title}
         </Link>
-        <ProductPrice price={price} salePrice={salePrice} />
+
+        <div className="shrink-0">
+          <ProductPrice price={price} salePrice={salePrice} />
+        </div>
+
       </div>
 
 
