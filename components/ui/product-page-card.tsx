@@ -24,7 +24,7 @@ export default function ProductCard({
     <article data-cy="product" className="relative h-full">
       <Link
         href={`/product/${articleNumber}/${slug}`}
-        className="group relative block aspect-square overflow-hidden bg-[#f3f3f1]"
+        className="group block aspect-[4/5] overflow-hidden bg-[#f3f3f1]"
       >
         <img
           src={imageUrl}
