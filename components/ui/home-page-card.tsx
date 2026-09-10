@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import AddToCartButton from "../add-to-cart-button";
 import ProductPrice from "../product-price";
+import ProductSaleBadge from "../product-sale-badge";
 
 export interface HomePageCardProps {
   id: string;
@@ -31,6 +32,11 @@ export default function HomePageCard({
 }: HomePageCardProps) {
   return (
     <Card data-cy="product" className="p-0 relative h-full bg-[#f1f0ec]">
+      <ProductSaleBadge
+        price={price}
+        salePrice={salePrice}
+        className="top-14"
+      />
       <Link
         href={`/product/${articleNumber}/${slug}`}
         className="block aspect-[3/4] overflow-hidden"
@@ -43,17 +49,21 @@ export default function HomePageCard({
           />
         )}
       </Link>
-      <div className="flex flex-wrap items-baseline justify-between gap-2 p-4 text-stone-600 font-semibold">
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 p-4 text-stone-600 font-semibold">
         <Link
           href={`/product/${articleNumber}/${slug}`}
-          className="hover:underline"
+          className="min-w-0 hover:underline"
           data-cy="product-title"
         >
           {title}
         </Link>
-        <ProductPrice price={price} salePrice={salePrice} />
+        <ProductPrice
+          price={price}
+          salePrice={salePrice}
+          variant="card"
+          className="max-w-32 justify-self-end"
+        />
       </div>
-
 
       <AddToCartButton
         id={id}
