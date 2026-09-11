@@ -1,6 +1,6 @@
 "use client";
 import { useCartContext } from "@/app/providers/cart-provider";
-import { Handbag, Package } from "lucide-react";
+import { Handbag } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -46,9 +46,9 @@ export default function Header() {
       <nav className="flex justify-center flex-1 mt-6 gap-8 text-sm md:text-lg md:justify-end lg:justify-end ">
         <Link
           href="/product"
-          className={`flex items-center gap-1 bg-zinc-50 hover:bg-[#f1f1ef] p-2 rounded-lg shadow-sm text-sm tracking-[0.15em] ${pathName === "/product font-serif"}`}
+          className={`flex items-center gap-1 bg-zinc-50 hover:bg-[#f1f1ef] p-2 rounded-lg shadow-sm text-lg tracking-[0.15em] ${pathName === "/product font-serif"}`}
         >
-          <Package size={20} />
+          {/* <Package size={24} /> */}
           PRODUCTS
         </Link>
 
@@ -58,9 +58,9 @@ export default function Header() {
           href="/checkout"
           data-cy="cart-link"
           aria-label={`Shopping cart with ${isLoaded ? totalQuantity : 0} items`}
-          className={`flex items-center gap-1 bg-zinc-50 hover:bg-[#f1f1ef] p-2 rounded-lg shadow-sm text-sm tracking-[0.15em] ${pathName === "/checkout"} font-serif`}
+          className={`flex items-center gap-1 bg-zinc-50 hover:bg-[#f1f1ef] p-2 rounded-lg ${pathName === "/checkout"}`}
         >
-          <Handbag size={20} />
+          <Handbag size={24} />
           {/* CART */}
           <span
             data-cy="cart-items-count-badge"
