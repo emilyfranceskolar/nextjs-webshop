@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import AddToCartButton from "../add-to-cart-button";
 import ProductPrice from "../product-price";
+import ProductSaleBadge from "../product-sale-badge";
 
 export interface HomePageCardProps {
   id: string;
@@ -30,7 +31,8 @@ export default function HomePageCard({
   stock,
 }: HomePageCardProps) {
   return (
-    <Card data-cy="product" className="relative h-full rounded-sm bg-white p-0">
+    <Card data-cy="product" className="p-0 relative h-full bg-[#f1f0ec]">
+      <ProductSaleBadge price={price} salePrice={salePrice} />
       <Link
         href={`/product/${articleNumber}/${slug}`}
         className="group block aspect-square overflow-hidden bg-[#f1f0ec]"
@@ -43,31 +45,21 @@ export default function HomePageCard({
           />
         )}
       </Link>
-
-      {(category === "Bestseller" || category === "Sale") && (
-        <span
-          className={`absolute left-2 top-2 z-10 bg-white px-2 py-1 text-[10px] font-medium uppercase leading-none rounded-sm  shadow-sm ${category === "Sale" ? "text-red-600" : "text-black"
-            }`}
-        >
-          {category}
-        </span>
-      )}
-
-      <div className="flex items-center justify-between gap-3 px-3 pb-3 pt-3 text-xs text-stone-700">
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 p-4 text-stone-600 font-semibold">
         <Link
           href={`/product/${articleNumber}/${slug}`}
-          className="line-clamp-1 min-w-0 uppercase tracking-tight hover:underline"
+          className="min-w-0 hover:underline"
           data-cy="product-title"
         >
           {title}
         </Link>
-
-        <div className="shrink-0">
-          <ProductPrice price={price} salePrice={salePrice} />
-        </div>
-
+        <ProductPrice
+          price={price}
+          salePrice={salePrice}
+          variant="card"
+          className="max-w-32 justify-self-end"
+        />
       </div>
-
 
       <AddToCartButton
         id={id}
