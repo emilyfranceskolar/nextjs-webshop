@@ -79,11 +79,11 @@ export default function ProductForm({
       {initialValues?.category.some(
         (name) => !productCategoryNames.includes(name),
       ) && (
-          <p role="status" className="mb-4 text-sm text-amber-800">
-            This product has an unsupported category. Select from the four
-            categories below; saving will replace the old category selection.
-          </p>
-        )}
+        <p role="status" className="mb-4 text-sm text-amber-800">
+          This product has an unsupported category. Select from the four
+          categories below; saving will replace the old category selection.
+        </p>
+      )}
 
       <ProductFormInputs
         register={register}
@@ -192,6 +192,7 @@ function ProductFormInputs({
           {...register("image")}
           id="image"
           type="text"
+          placeholder="Image URL or /assets/images/image.jpg" //a dd placeholder URL or local image path
           className={cn("h-10 p-4", {
             "border-red-600 border-2": formState.errors.image,
           })}
