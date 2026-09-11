@@ -21,7 +21,7 @@ export default function DetailPageDropdown({
         <ChevronDownIcon className="transition-transform mb-4 group-data-[state=open]:rotate-180"></ChevronDownIcon>
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <p className="text-left mb-4">{content}</p>
+        <p className="text-left mb-4 whitespace-pre-line">{content}</p>
       </CollapsibleContent>
     </Collapsible>
   );
