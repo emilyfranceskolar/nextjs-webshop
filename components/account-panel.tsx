@@ -49,10 +49,10 @@ export default function AccountPanel() {
       view === "sign-in"
         ? await authClient.signIn.email({ email, password })
         : await authClient.signUp.email({
-          name: String(formData.get("name")),
-          email,
-          password,
-        });
+            name: String(formData.get("name")),
+            email,
+            password,
+          });
 
     setIsSubmitting(false);
 
@@ -103,8 +103,9 @@ export default function AccountPanel() {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <div className="flex items-center relative bg-zinc-50 hover:bg-[#f1f1ef] p-2 rounded-lg shadow-sm">
-          <UserRound size={20} />
+        <div className="flex items-center gap-1 relative bg-zinc-50 hover:bg-[#f1f1ef] p-2 rounded-lg shadow-sm  text-sm tracking-[0.15em] font-serif">
+          <UserRound size={24} />
+          ACCOUNT
         </div>
       </SheetTrigger>
 
