@@ -45,9 +45,10 @@ export default function Header() {
       <nav className="flex justify-center flex-1 mt-6 gap-8 text-sm md:text-lg md:justify-end lg:justify-end ">
         <Link
           href="/product"
-          className={`flex items-center bg-zinc-50 hover:bg-zinc-200 px-4 py-2 rounded-sm shadow-sm ${pathName === "/product"}`}
-        >
-          <Search size={24} />
+          className={`flex items-center bg-zinc-50 hover:bg-[#f1f1ef] p-2 rounded-lg shadow-sm text-sm tracking-[0.15em] ${pathName === "/product font-serif"}`}
+        >PRODUCTS
+
+          {/* <Search size={24} /> */}
           {/* <HatGlasses size={24} />
           <Glasses size={24} /> */}
         </Link>
@@ -58,16 +59,16 @@ export default function Header() {
           href="/checkout"
           data-cy="cart-link"
           aria-label={`Shopping cart with ${isLoaded ? totalQuantity : 0} items`}
-          className={`flex items-center gap-1 bg-zinc-50 hover:bg-zinc-200 px-4 py-2 rounded-sm shadow-sm ${pathName === "/checkout"}`}
+          className={`flex items-center gap-1 bg-zinc-50 hover:bg-[#f1f1ef] p-2 rounded-lg shadow-sm ${pathName === "/checkout"}`}
         >
-          <Handbag size={24} /> (
+          <Handbag size={20} />
+
           <span
             data-cy="cart-items-count-badge"
-            className="text-sm font-medium"
+            className="flex h-5 min-w-5 items-center justify-center rounded-full bg-[#e1e1d4] px-1 text-xs font-medium text-black"
           >
             {isLoaded ? totalQuantity : 0}
           </span>
-          )
         </Link>
       </nav>
     </header>
