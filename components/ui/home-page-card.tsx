@@ -39,13 +39,13 @@ export default function HomePageCard({
       />
       <Link
         href={`/product/${articleNumber}/${slug}`}
-        className="block aspect-[3/4] overflow-hidden"
+        className="group block aspect-square overflow-hidden bg-[#f1f0ec]"
       >
         {imageUrl && (
           <img
             src={imageUrl}
             alt={title}
-            className="h-full w-full object-contain block"
+            className="block h-full w-full object-contain transition-transform duration-300 ease-out group-hover:scale-105"
           />
         )}
       </Link>
@@ -80,7 +80,7 @@ export default function HomePageCard({
         buttonText=""
         variant="outline"
         size="icon"
-        className="absolute top-2 right-2 p-4.5 sm:p-3 hover:cursor-pointer"
+        className="absolute right-2 top-2 h-6 w-6 rounded-sm border border-neutral-200 bg-white! p-0 text-black! shadow-sm hover:bg-neutral-100! hover:cursor-pointer"
         data-cy="product-buy-button"
       />
     </Card>
