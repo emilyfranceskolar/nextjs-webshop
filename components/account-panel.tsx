@@ -104,8 +104,8 @@ export default function AccountPanel() {
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <div className="flex items-center gap-1 relative bg-zinc-50 hover:bg-[#f1f1ef] p-2 rounded-lg shadow-sm  text-sm tracking-[0.15em] font-serif">
-          <UserRound size={24} />
-          ACCOUNT
+          <UserRound size={20} />
+          {/* ACCOUNT */}
         </div>
       </SheetTrigger>
 

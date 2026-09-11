@@ -48,7 +48,7 @@ export default function Header() {
           href="/product"
           className={`flex items-center gap-1 bg-zinc-50 hover:bg-[#f1f1ef] p-2 rounded-lg shadow-sm text-sm tracking-[0.15em] ${pathName === "/product font-serif"}`}
         >
-          <Package size={24} />
+          <Package size={20} />
           PRODUCTS
         </Link>
 
@@ -60,8 +60,8 @@ export default function Header() {
           aria-label={`Shopping cart with ${isLoaded ? totalQuantity : 0} items`}
           className={`flex items-center gap-1 bg-zinc-50 hover:bg-[#f1f1ef] p-2 rounded-lg shadow-sm text-sm tracking-[0.15em] ${pathName === "/checkout"} font-serif`}
         >
-          <Handbag size={24} />
-          CART
+          <Handbag size={20} />
+          {/* CART */}
           <span
             data-cy="cart-items-count-badge"
             className="flex h-5 min-w-5 items-center justify-center rounded-full bg-[#e1e1d4] px-1 text-xs font-medium text-black"
