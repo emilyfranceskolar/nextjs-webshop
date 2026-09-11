@@ -1,25 +1,32 @@
-"use client"
+"use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { Separator } from "@/components/ui/separator";
 
-export default function ConfirmationPage({ params }: {
-  params: { orderNumber: string }
-}) {
-  const [order, setOrder] = useState<any>(null);
+const subscribeToHydration = () => () => {};
 
-  useEffect(() => {
-    const storedOrder = localStorage.getItem("latestOrder");
-    if (storedOrder) {
-      setOrder(JSON.parse(storedOrder));
+export default function ConfirmationPage() {
+  const isLoaded = useSyncExternalStore(
+    subscribeToHydration,
+    () => true,
+    () => false,
+  );
+  const [order] = useState<any>(() => {
+    if (typeof window === "undefined") return null;
+    try {
+      return JSON.parse(localStorage.getItem("latestOrder") ?? "null");
+    } catch {
+      return null;
     }
-  }, []);
+  });
 
-  if (!order) {
-    return <div className="p-6 text-lg">Loading..</div>
+  if (!isLoaded) {
+    return <div className="p-6 text-lg">Loading..</div>;
   }
+
+  if (!order) return <div className="p-6 text-lg">No recent order found.</div>;
 
   return (
     <main>
@@ -33,7 +40,10 @@ export default function ConfirmationPage({ params }: {
 
           <CardContent className="space-y-4 flex flex-col justify-center gap-4">
             <div className="text-muted-foreground flex flex-col gap-2">
-              <p >Thank you for your purchase! Your order is being prepared and will be on its way soon.</p>
+              <p>
+                Thank you for your purchase! Your order is being prepared and
+                will be on its way soon.
+              </p>
               <p>
                 <strong>Order Number:</strong> #{" "}
                 <span className="font-bold text-stone-700">
@@ -48,7 +58,10 @@ export default function ConfirmationPage({ params }: {
               </p>
             </div>
 
-            <div data-cy="product" className="text-base bg-muted md:p-4 p-4 rounded-xl">
+            <div
+              data-cy="product"
+              className="text-base bg-muted md:p-4 p-4 rounded-xl"
+            >
               <div className="pb-2">
                 <div className="mb-4 text-xs md:text-base flex flex-col gap-0.5">
                   <p className="flex justify-between">
@@ -78,14 +91,30 @@ export default function ConfirmationPage({ params }: {
               <div className="flex flex-col gap-2 mt-4 text-xs md:text-base">
                 {order.products.map((item: any) => (
                   <div key={item.id}>
-                    <p data-cy="product-title" className="pb-2"><strong>Title:</strong> {item.title}</p>
-                    <p className="pb-2"><strong>Amount:</strong> {item.quantity}</p>
-                    <p data-cy="product-price" className="pb-2"><strong>Price:</strong> {item.price} kr</p>
+                    <p data-cy="product-title" className="pb-2">
+                      <strong>Title:</strong> {item.title}
+                    </p>
+                    <p className="pb-2">
+                      <strong>Amount:</strong> {item.quantity}
+                    </p>
+                    <p data-cy="product-price" className="pb-2">
+                      <strong>Price:</strong> {item.price} kr
+                    </p>
                   </div>
                 ))}
               </div>
               <Separator />
-              <div className="text-lg pt-4 pb-2"><p><strong>Total:</strong>{" "} {order.products.reduce((sum: number, item: any) => sum + item.price * item.quantity, 0)} {" "} kr</p></div>
+              <div className="text-lg pt-4 pb-2">
+                <p>
+                  <strong>Total:</strong>{" "}
+                  {order.products.reduce(
+                    (sum: number, item: any) =>
+                      sum + item.price * item.quantity,
+                    0,
+                  )}{" "}
+                  kr
+                </p>
+              </div>
             </div>
 
             <Link href="/product">
@@ -96,8 +125,6 @@ export default function ConfirmationPage({ params }: {
           </CardContent>
         </Card>
       </div>
-
-
     </main>
   );
 }

@@ -176,7 +176,7 @@ export function PaymentFormFields(props: Props) {
             </div>
             <p className="text-xs">
               By providing your phone number, you agree to create a Shop account
-              subject to Shop's
+              subject to Shop&apos;s
               <a
                 href="https://www.shopify.com/se/legal/privacy/consumers"
                 target="_blank"
