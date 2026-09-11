@@ -32,11 +32,7 @@ export default function HomePageCard({
 }: HomePageCardProps) {
   return (
     <Card data-cy="product" className="p-0 relative h-full bg-[#f1f0ec]">
-      <ProductSaleBadge
-        price={price}
-        salePrice={salePrice}
-        className="top-14"
-      />
+      <ProductSaleBadge price={price} salePrice={salePrice} />
       <Link
         href={`/product/${articleNumber}/${slug}`}
         className="group block aspect-square overflow-hidden bg-[#f1f0ec]"

@@ -49,7 +49,7 @@ export default async function Home() {
         />
         <Link
           href="/product"
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 rounded-lg bg-[#526E67] px-10 py-3 text-lg font-bold whitespace-nowrap text-white transition-all duration-300 hover:cursor-pointer hover:bg-[#ddd9cd] hover:text-black lg:bottom-50"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 rounded-lg bg-[#526E67] px-10 py-3 text-lg font-bold whitespace-nowrap text-white transition-all duration-300 hover:cursor-pointer hover:bg-[#ddd9cd] hover:text-black lg:bottom-12"
         >
           SHOP NOW
         </Link>
