@@ -30,28 +30,42 @@ export default function HomePageCard({
   stock,
 }: HomePageCardProps) {
   return (
-    <Card data-cy="product" className="p-0 relative h-full bg-[#f1f0ec]">
+    <Card data-cy="product" className="relative h-full rounded-sm bg-white p-0">
       <Link
         href={`/product/${articleNumber}/${slug}`}
-        className="block aspect-[3/4] overflow-hidden"
+        className="group block aspect-square overflow-hidden bg-[#f1f0ec]"
       >
         {imageUrl && (
           <img
             src={imageUrl}
             alt={title}
-            className="h-full w-full object-contain block"
+            className="block h-full w-full object-contain transition-transform duration-300 ease-out group-hover:scale-105"
           />
         )}
       </Link>
-      <div className="flex flex-wrap items-baseline justify-between gap-2 p-4 text-stone-600 font-semibold">
+
+      {(category === "Bestseller" || category === "Sale") && (
+        <span
+          className={`absolute left-2 top-2 z-10 bg-white px-2 py-1 text-[10px] font-medium uppercase leading-none rounded-sm  shadow-sm ${category === "Sale" ? "text-red-600" : "text-black"
+            }`}
+        >
+          {category}
+        </span>
+      )}
+
+      <div className="flex items-center justify-between gap-3 px-3 pb-3 pt-3 text-xs text-stone-700">
         <Link
           href={`/product/${articleNumber}/${slug}`}
-          className="hover:underline"
+          className="line-clamp-1 min-w-0 uppercase tracking-tight hover:underline"
           data-cy="product-title"
         >
           {title}
         </Link>
-        <ProductPrice price={price} salePrice={salePrice} />
+
+        <div className="shrink-0">
+          <ProductPrice price={price} salePrice={salePrice} />
+        </div>
+
       </div>
 
 
@@ -70,7 +84,7 @@ export default function HomePageCard({
         buttonText=""
         variant="outline"
         size="icon"
-        className="absolute top-2 right-2 p-4.5 sm:p-3 hover:cursor-pointer"
+        className="absolute right-2 top-2 h-6 w-6 rounded-sm border border-neutral-200 bg-white! p-0 text-black! shadow-sm hover:bg-neutral-100! hover:cursor-pointer"
         data-cy="product-buy-button"
       />
     </Card>
