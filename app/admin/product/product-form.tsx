@@ -192,12 +192,16 @@ function ProductFormInputs({
           {...register("image")}
           id="image"
           type="text"
-          placeholder="Image URL or /assets/images/image.jpg" //a dd placeholder URL or local image path
+          placeholder="Image URL or /assets/images/filename"
           className={cn("h-10 p-4", {
             "border-red-600 border-2": formState.errors.image,
           })}
           autoComplete="off"
         />
+
+        <p className="text-sm text-muted-foreground">
+          Supported formats: JPG, JPEG, PNG, WEBP
+        </p>
 
         {formState.errors.image && (
           <p data-cy="product-image-error" className="text-red-600 text-sm">
