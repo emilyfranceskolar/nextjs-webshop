@@ -4,7 +4,12 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Field, FieldLegend } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { FormState, useForm, UseFormRegister } from "react-hook-form";
+import {
+  FormState,
+  useForm,
+  UseFormRegister,
+  UseFormSetValue,
+} from "react-hook-form";
 import {
   ProductFormValues,
   createProductSchema,
@@ -24,6 +29,7 @@ interface ProductFormInputsProps {
   onSale: boolean;
   register: UseFormRegister<ProductFormValues>;
   formState: FormState<ProductFormValues>;
+  setValue: UseFormSetValue<ProductFormValues>;
 }
 
 export default function ProductForm({
@@ -32,7 +38,7 @@ export default function ProductForm({
 }: ProductFormProps) {
   const router = useRouter();
 
-  const { register, handleSubmit, formState, watch, setError } =
+  const { register, handleSubmit, formState, watch, setError, setValue } =
     useForm<ProductFormValues>({
       resolver: zodResolver(createProductSchema()),
       defaultValues: {
@@ -89,6 +95,7 @@ export default function ProductForm({
         register={register}
         formState={formState}
         onSale={onSale}
+        setValue={setValue}
       />
     </form>
   );
@@ -98,7 +105,38 @@ function ProductFormInputs({
   register,
   formState,
   onSale,
+  setValue,
 }: ProductFormInputsProps) {
+  // Runs when the user selects an image
+  const handleImageUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    // Get the first selected file
+    const file = event.target.files?.[0];
+    if (!file) {
+      return;
+    }
+
+    const uploadData = new FormData();
+    uploadData.append("file", file);
+
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      body: uploadData,
+    });
+
+    if (!response.ok) {
+      return;
+    }
+    // Get the saved image path from the server
+    const data = await response.json();
+    // Put the uploaded image path into the Image field
+    setValue("image", data.imageUrl, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+  };
+
   return (
     <div className="w-full space-y-4">
       <input type="hidden" {...register("id")} />
@@ -187,16 +225,34 @@ function ProductFormInputs({
           Image
         </FieldLegend>
 
-        <Input
-          data-cy="product-image"
-          {...register("image")}
-          id="image"
-          type="text"
-          placeholder="Image URL or /assets/images/filename"
-          className={cn("h-10 p-4", {
-            "border-red-600 border-2": formState.errors.image,
-          })}
-          autoComplete="off"
+        <div className="relative">
+          <Input
+            data-cy="product-image"
+            {...register("image")}
+            id="image"
+            type="text"
+            placeholder="Image URL or /assets/images/filename"
+            className={cn("h-10 p-4 pr-24", {
+              "border-red-600 border-2": formState.errors.image,
+            })}
+            autoComplete="off"
+          />
+
+          {/* Opens the hidden file picker */}
+          <label
+            htmlFor="image-upload"
+            className="absolute right-1 top-1/2 -translate-y-1/2 cursor-pointer rounded-md bg-black px-3 py-1.5 text-sm text-white"
+          >
+            Upload
+          </label>
+        </div>
+        {/* Hidden file input used by the Upload button */}
+        <input
+          id="image-upload"
+          type="file"
+          accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+          onChange={handleImageUpload}
+          className="hidden"
         />
 
         <p className="text-sm text-muted-foreground">
