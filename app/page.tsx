@@ -2,6 +2,7 @@ import ProductSlider from "@/components/product-slider";
 import { db } from "@/prisma/db";
 import Link from "next/link";
 
+//server komponent
 export default async function Home() {
   const product = await db.product.findMany({
     include: {

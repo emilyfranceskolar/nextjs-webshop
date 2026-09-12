@@ -1,19 +1,20 @@
 "use client";
 
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Field, FieldLegend } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { FormState, useForm, UseFormRegister } from "react-hook-form";
 import {
-  ProductFormValues,
   createProductSchema,
-  productCategoryNames,
   isSaleCategory,
+  productCategoryNames,
+  ProductFormInput,
+  ProductFormValues,
 } from "@/data/form";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { FormState, useForm, UseFormRegister } from "react-hook-form";
 
 interface ProductFormProps {
   initialValues?: ProductFormValues;
@@ -22,8 +23,8 @@ interface ProductFormProps {
 
 interface ProductFormInputsProps {
   onSale: boolean;
-  register: UseFormRegister<ProductFormValues>;
-  formState: FormState<ProductFormValues>;
+  register: UseFormRegister<ProductFormInput>;
+  formState: FormState<ProductFormInput>;
 }
 
 export default function ProductForm({
@@ -31,19 +32,21 @@ export default function ProductForm({
   action,
 }: ProductFormProps) {
   const router = useRouter();
-
-  const { register, handleSubmit, formState, watch, setError } =
-    useForm<ProductFormValues>({
-      resolver: zodResolver(createProductSchema()),
-      defaultValues: {
-        salePrice: "",
-        ...initialValues,
-        category:
-          initialValues?.category.filter((name) =>
-            productCategoryNames.includes(name),
-          ) ?? [],
-      },
-    });
+  const { register, handleSubmit, formState, watch, setError } = useForm<
+    ProductFormInput,
+    unknown,
+    ProductFormValues
+  >({
+    resolver: zodResolver(createProductSchema()),
+    defaultValues: {
+      salePrice: undefined,
+      ...initialValues,
+      category:
+        initialValues?.category.filter((name) =>
+          productCategoryNames.includes(name),
+        ) ?? [],
+    },
+  });
 
   const onSale = isSaleCategory(watch("category"));
 
@@ -214,7 +217,9 @@ function ProductFormInputs({
 
         <Input
           data-cy="product-price"
-          {...register("price")}
+          {...register("price", {
+            setValueAs: (value) => (value === "" ? 0 : Number(value)),
+          })}
           id="price"
           type="number"
           min="0.01"
@@ -268,7 +273,9 @@ function ProductFormInputs({
             type="number"
             min="0.01"
             step="0.01"
-            {...register("salePrice")}
+            {...register("salePrice", {
+              setValueAs: (value) => (value === "" ? undefined : Number(value)),
+            })}
             data-cy="product-sale-price"
             aria-invalid={!!formState.errors.salePrice}
             className="h-10 p-4"

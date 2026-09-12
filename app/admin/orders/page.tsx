@@ -1,8 +1,8 @@
-import { db } from "@/prisma/db";
-import { isAdmin } from "@/lib/admin";
-import { redirect } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import AdminNavigation from "../admin-navigation";
+import { isAdmin } from "@/lib/admin";
+import { db } from "@/prisma/db";
+import { redirect } from "next/navigation";
+import AdminNavigation from "../../../components/admin-navigation";
 
 const currency = new Intl.NumberFormat("en-GB", {
   style: "currency",

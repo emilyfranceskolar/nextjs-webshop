@@ -1,0 +1,44 @@
+### Se om man är inloggad
+POST http://localhost:3000/api/auth/sign-in/email
+Origin: http://localhost:3000
+Content-Type: application/json
+
+{
+  "email": "emilyfranceskolar@gmail.com",
+  "password": "12345678"
+}
+
+###Hämta alla produkter för adminvyn, alla nedan kräver att man är inloggad!
+GET http://localhost:3000/api/products/
+
+
+###Hämta en specifik produkt -  samma som ovanför + (en articleNr behövs i slutet)
+GET http://localhost:3000/api/products/136
+
+
+###Skapa en ny produkt (måste följa det som finns i form.ts)
+POST http://localhost:3000/api/products
+Content-Type: application/json
+
+{
+  "title": "Latest New product",
+  "description": "This is the latest create product",
+  "image": "https://unsplash.com/photos/gold-colored-framed-hippie-sunglasses-on-white-surface-1-nx1QR5dTE",
+  "price": 699,
+  "stock": 5,
+  "articleNumber": "445667",
+  "category": ["Sunglasses"]
+}
+
+
+###Uppdatera en produkt (en articleNr behövs i slutet)
+PUT http://localhost:3000/api/products/445667
+Content-Type: application/json
+
+{
+  "image": "/assets/images/Paris_black_1.webp"
+}
+
+
+###Radera en produkt (en articleNr behövs i slutet)
+DELETE http://localhost:3000/api/products/

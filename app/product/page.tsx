@@ -3,6 +3,7 @@ import { db } from "@/prisma/db";
 import Link from "next/link";
 import { getProductPrice } from "@/lib/product-price";
 
+//server komponent
 export default async function ProductPage({
   searchParams,
 }: {
