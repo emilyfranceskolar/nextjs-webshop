@@ -33,8 +33,8 @@ export default function ProductCard({
           className="block h-full w-full object-contain transition-transform duration-300 ease-out group-hover:scale-105"
         />
       </Link>
-      <Link href={`/product/${articleNumber}/${slug}`} className="block">
-        <CardHeader className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 p-4">
+      <Link href={`/product/${articleNumber}/${slug}`} className="block min-w-0 hover:underline">
+        <CardHeader className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 p-4 text-stone-600 font-semibold">
           <CardTitle data-cy="product-title" className="min-w-0">
             {title}
           </CardTitle>
