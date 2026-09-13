@@ -27,18 +27,15 @@ export default function Header() {
 
   return (
     <header
-      className={`relative z-50 flex flex-wrap items-center md:justify-between lg:justify-between bg-white transition-all duration-300 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-2.5  ${
-        isHomePage ? "sticky top-0" : ""
-      } ${
-        isScrolled ? "justify-center items-center px-4 py-3  " : "px-10 py-4"
-      }`}
+      className={`relative z-50 flex flex-wrap items-center md:justify-between lg:justify-between bg-white transition-all duration-300 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-2.5  ${isHomePage ? "sticky top-0" : ""
+        } ${isScrolled ? "justify-center items-center px-4 py-3  " : "px-10 py-4"
+        }`}
     >
       <div className="flex flex-1 justify-center items-center md:justify-start lg:justify-start">
         <Link
           href="/"
-          className={`bg-[url('/assets/images/glajjan-logo1.png')] block bg-contain bg-no-repeat bg-center md:bg-left text-4xl text-black transition-all duration-300 ${
-            isScrolled ? "w-40 h-20" : "w-66 h-42"
-          }`}
+          className={`bg-[url('/assets/images/glajjan-logo1.png')] block bg-contain bg-no-repeat bg-center md:bg-left text-4xl text-black transition-all duration-300 ${isScrolled ? "w-40 h-20" : "w-66 h-42"
+            }`}
           aria-label="Home"
         ></Link>
       </div>
@@ -58,7 +55,7 @@ export default function Header() {
           href="/checkout"
           data-cy="cart-link"
           aria-label={`Shopping cart with ${isLoaded ? totalQuantity : 0} items`}
-          className={`flex items-center gap-1 bg-zinc-50 hover:bg-[#f1f1ef] p-2 rounded-lg ${pathName === "/checkout"}`}
+          className={`flex items-center gap-1 bg-zinc-50 hover:bg-[#f1f1ef] p-2 shadow-sm rounded-lg ${pathName === "/checkout"}`}
         >
           <Handbag size={20} />
           {/* CART */}
