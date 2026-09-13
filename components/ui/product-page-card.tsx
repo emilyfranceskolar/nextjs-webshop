@@ -4,6 +4,7 @@ import Link from "next/link";
 import AddToCartButton from "../add-to-cart-button";
 import { HomePageCardProps } from "./home-page-card";
 import ProductPrice from "../product-price";
+import ProductSaleBadge from "../product-sale-badge";
 
 interface ProductCardProps extends HomePageCardProps {
   stock: number;
@@ -18,10 +19,10 @@ export default function ProductCard({
   salePrice,
   slug,
   stock,
-
 }: ProductCardProps) {
   return (
-    <Card data-cy="product" className="p-0 h-full">
+    <Card data-cy="product" className="relative p-0 h-full">
+      <ProductSaleBadge price={price} salePrice={salePrice} />
       <Link
         href={`/product/${articleNumber}/${slug}`}
         className="block h-[180px] sm:h-auto sm:aspect-[3/4] overflow-hidden bg-[#f1f0ec]"
@@ -34,18 +35,27 @@ export default function ProductCard({
       </Link>
 
       <Link href={`/product/${articleNumber}/${slug}`} className="block">
-        <CardHeader className="flex flex-wrap gap-3 p-2 justify-between sm:p-4">
-          <CardTitle data-cy="product-title" className="text-sm sm:text-base">{title}</CardTitle>
-          <ProductPrice price={price} salePrice={salePrice} />
+        <CardHeader className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 p-4">
+          <CardTitle data-cy="product-title" className="min-w-0">
+            {title}
+          </CardTitle>
+          <ProductPrice
+            price={price}
+            salePrice={salePrice}
+            variant="card"
+            className="max-w-32 justify-self-end"
+          />
         </CardHeader>
       </Link>
-
-      <p className="px-2 pb-2 sm:px-4 sm:text-sm text-red-600 font-semibold">
-        {stock === 0 ? "Out of stock" : stock <= 5 ? "Only a few left in stock" : "In stock"}
-
+      <p className="px-4 pb-2 text-red-600 font-semibold">
+        {stock === 0
+          ? "Out of stock"
+          : stock <= 5
+            ? "Only a few left in stock"
+            : "In stock"}
       </p>
 
-      <CardFooter className="mt-auto p-2 flex flex-wrap gap-3 sm:p-4 justify-between">
+      <CardFooter className="mt-auto flex flex-wrap gap-2 justify-between">
         <Link className="flex-1" href={`/product/${articleNumber}/${slug}`}>
           <Button
             variant="outline"
@@ -69,8 +79,7 @@ export default function ProductCard({
           stock={stock}
           disabled={stock === 0}
           buttonText="Add to Cart"
-          className="flex-1 bg-[#526E67]! text-white! hover:cursor-pointer hover:bg-[#7C9A92]!"
-
+          className="flex-1 bg-black! text-white! hover:cursor-pointer"
         />
       </CardFooter>
     </Card>

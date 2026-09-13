@@ -12,3 +12,11 @@ export function getProductPrice(product: ProductPricing) {
     ? salePrice
     : price;
 }
+
+export function getSalePercentage(product: ProductPricing) {
+  const currentPrice = getProductPrice(product);
+  if (!Number.isFinite(product.price) || currentPrice >= product.price)
+    return null;
+
+  return Math.round(((product.price - currentPrice) / product.price) * 100);
+}

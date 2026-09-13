@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import AddToCartButton from "../add-to-cart-button";
 import ProductPrice from "../product-price";
+import ProductSaleBadge from "../product-sale-badge";
 
 export interface HomePageCardProps {
   id: string;
@@ -31,29 +32,34 @@ export default function HomePageCard({
 }: HomePageCardProps) {
   return (
     <Card data-cy="product" className="p-0 relative h-full bg-[#f1f0ec]">
+      <ProductSaleBadge price={price} salePrice={salePrice} />
       <Link
         href={`/product/${articleNumber}/${slug}`}
-        className="block aspect-[3/4] overflow-hidden"
+        className="group block aspect-square overflow-hidden bg-[#f1f0ec]"
       >
         {imageUrl && (
           <img
             src={imageUrl}
             alt={title}
-            className="h-full w-full object-contain block"
+            className="block h-full w-full object-contain transition-transform duration-300 ease-out group-hover:scale-105"
           />
         )}
       </Link>
-      <div className="flex flex-wrap items-baseline justify-between gap-2 p-4 text-stone-600 font-semibold">
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 p-4 text-stone-600 font-semibold">
         <Link
           href={`/product/${articleNumber}/${slug}`}
-          className="hover:underline"
+          className="min-w-0 hover:underline"
           data-cy="product-title"
         >
           {title}
         </Link>
-        <ProductPrice price={price} salePrice={salePrice} />
+        <ProductPrice
+          price={price}
+          salePrice={salePrice}
+          variant="card"
+          className="max-w-32 justify-self-end"
+        />
       </div>
-
 
       <AddToCartButton
         id={id}
@@ -70,7 +76,7 @@ export default function HomePageCard({
         buttonText=""
         variant="outline"
         size="icon"
-        className="absolute top-2 right-2 p-4.5 sm:p-3 hover:cursor-pointer"
+        className="absolute right-2 top-2 h-6 w-6 rounded-sm border border-neutral-200 bg-white! p-0 text-black! shadow-sm hover:bg-neutral-100! hover:cursor-pointer"
         data-cy="product-buy-button"
       />
     </Card>

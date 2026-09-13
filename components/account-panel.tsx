@@ -103,8 +103,9 @@ export default function AccountPanel() {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <div className="flex items-center relative bg-zinc-50 hover:bg-zinc-200 px-4 py-2 rounded-sm shadow-sm">
-          <UserRound size={24} />
+        <div className="flex items-center gap-1 relative bg-zinc-50 hover:bg-[#f1f1ef] p-2 rounded-lg shadow-sm">
+          <UserRound size={20} />
+          {/* ACCOUNT */}
         </div>
       </SheetTrigger>
 

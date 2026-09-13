@@ -16,6 +16,7 @@ const product = {
   image: "/assets/images/test.webp",
   category: ["Sunglasses"],
   price: "899",
+  stock: "10",
   salePrice: "",
 };
 
@@ -32,9 +33,12 @@ test("the edit form shows the Sale price field for an existing discounted produc
   };
   const renderForm = (category: string[]) =>
     renderToStaticMarkup(
-      createElement(AppRouterContext.Provider, {
-        value: router,
-        children: createElement(ProductForm, {
+      createElement(
+        AppRouterContext.Provider,
+        {
+          value: router,
+        },
+        createElement(ProductForm, {
           initialValues: {
             ...product,
             id: "existing-product",
@@ -43,7 +47,7 @@ test("the edit form shows the Sale price field for an existing discounted produc
           },
           action: async () => {},
         }),
-      }),
+      ),
     );
   const legacy = renderForm(["Sunglasses", "ggggg", "test"]);
   assert.doesNotMatch(legacy, /value="ggggg"|value="test"/);
