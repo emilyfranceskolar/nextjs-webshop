@@ -25,12 +25,12 @@ export default function ProductCard({
       <ProductSaleBadge price={price} salePrice={salePrice} />
       <Link
         href={`/product/${articleNumber}/${slug}`}
-        className="block aspect-square overflow-hidden bg-[#f1f0ec]"
+        className="group block aspect-square overflow-hidden bg-[#f1f0ec]"
       >
         <img
           src={imageUrl}
           alt={title}
-          className="h-full w-full object-contain"
+          className="block h-full w-full object-contain transition-transform duration-300 ease-out group-hover:scale-105"
         />
       </Link>
       <Link href={`/product/${articleNumber}/${slug}`} className="block">
