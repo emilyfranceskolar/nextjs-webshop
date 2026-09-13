@@ -18,6 +18,8 @@ export default function ProductCard({
   price,
   salePrice,
   slug,
+  category,
+  description,
   stock,
 }: ProductCardProps) {
   return (
@@ -73,13 +75,15 @@ export default function ProductCard({
           price={price}
           salePrice={salePrice}
           slug={slug}
-          category=""
-          description=""
+          category={category}
+          description={description}
           stock={stock}
           disabled={stock === 0}
-          size="lg"
-          buttonText="Add to Cart"
-          className="flex-1 bg-black! text-white! hover:cursor-pointer"
+          buttonText=""
+          variant="outline"
+          size="icon"
+          className="absolute right-2 top-2 h-6 w-6 rounded-sm border border-neutral-200 bg-white! p-0 text-black! shadow-sm hover:cursor-pointer hover:bg-neutral-100!"
+          data-cy="product-buy-button"
         />
       </CardFooter>
     </Card>
