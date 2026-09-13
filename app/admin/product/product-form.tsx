@@ -225,39 +225,32 @@ function ProductFormInputs({
           Image
         </FieldLegend>
 
-        <div className="relative">
-          <Input
-            data-cy="product-image"
-            {...register("image")}
-            id="image"
-            type="text"
-            placeholder="Image URL or /assets/images/filename"
-            className={cn("h-10 p-4 pr-24", {
-              "border-red-600 border-2": formState.errors.image,
-            })}
-            autoComplete="off"
-          />
-
-          {/* Opens the hidden file picker */}
-          <label
-            htmlFor="image-upload"
-            className="absolute right-1 top-1/2 -translate-y-1/2 cursor-pointer rounded-md bg-black px-3 py-1.5 text-sm text-white"
-          >
-            Upload
-          </label>
-        </div>
-        {/* Hidden file input used by the Upload button */}
-        <input
-          id="image-upload"
-          type="file"
-          accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
-          onChange={handleImageUpload}
-          className="hidden"
+        <Input
+          data-cy="product-image"
+          {...register("image")}
+          id="image"
+          type="text"
+          placeholder="Image URL or /assets/images/filename"
+          className={cn("h-10 p-4", {
+            "border-red-600 border-2": formState.errors.image,
+          })}
+          autoComplete="off"
         />
 
-        <p className="text-sm text-muted-foreground">
-          Supported formats: JPG, JPEG, PNG, WEBP
-        </p>
+        <div className="space-y-2 pt-2">
+          <p className="text-sm font-medium">Upload image</p>
+
+          <Input
+            id="image-upload"
+            type="file"
+            accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+            onChange={handleImageUpload}
+          />
+
+          <p className="text-sm text-muted-foreground">
+            Supported formats: JPG, JPEG, PNG, WEBP
+          </p>
+        </div>
 
         {formState.errors.image && (
           <p data-cy="product-image-error" className="text-red-600 text-sm">
