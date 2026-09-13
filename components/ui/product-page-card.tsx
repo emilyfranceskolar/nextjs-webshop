@@ -21,11 +21,11 @@ export default function ProductCard({
   stock,
 }: ProductCardProps) {
   return (
-    <Card data-cy="product" className="relative p-0 h-full">
+    <Card data-cy="product" className="relative h-full bg-[#f1f0ec] p-0">
       <ProductSaleBadge price={price} salePrice={salePrice} />
       <Link
         href={`/product/${articleNumber}/${slug}`}
-        className="block aspect-[3/4] overflow-hidden bg-[#f1f0ec]"
+        className="block aspect-square overflow-hidden bg-[#f1f0ec]"
       >
         <img
           src={imageUrl}
