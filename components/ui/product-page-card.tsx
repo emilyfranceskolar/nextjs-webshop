@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import AddToCartButton from "../add-to-cart-button";
 import { HomePageCardProps } from "./home-page-card";
@@ -48,24 +47,9 @@ export default function ProductCard({
           />
         </CardHeader>
       </Link>
-      <p className="px-4 pb-2 text-red-600 font-semibold">
-        {stock === 0
-          ? "Out of stock"
-          : stock <= 5
-            ? "Only a few left in stock"
-            : "In stock"}
-      </p>
+     
 
-      <CardFooter className="mt-auto flex flex-wrap gap-2 justify-between">
-        <Link className="flex-1" href={`/product/${articleNumber}/${slug}`}>
-          <Button
-            variant="outline"
-            size="lg"
-            className="w-full hover:cursor-pointer"
-          >
-            View Details
-          </Button>
-        </Link>
+      
 
         <AddToCartButton
           id={id}
@@ -85,7 +69,7 @@ export default function ProductCard({
           className="absolute right-2 top-2 h-6 w-6 rounded-sm border border-neutral-200 bg-white! p-0 text-black! shadow-sm hover:cursor-pointer hover:bg-neutral-100!"
           data-cy="product-buy-button"
         />
-      </CardFooter>
+     
     </Card>
   );
 }
