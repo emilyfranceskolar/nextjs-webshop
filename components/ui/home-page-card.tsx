@@ -31,7 +31,7 @@ export default function HomePageCard({
   stock,
 }: HomePageCardProps) {
   return (
-    <Card data-cy="product" className="p-0 relative h-full bg-[#f1f0ec]">
+    <Card data-cy="product" className="relative h-full rounded-none bg-[#f1f0ec] p-0">
       <ProductSaleBadge price={price} salePrice={salePrice} />
       <Link
         href={`/product/${articleNumber}/${slug}`}
