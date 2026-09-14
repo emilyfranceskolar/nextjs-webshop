@@ -5,6 +5,7 @@ import AddToCartButton from "../add-to-cart-button";
 import { HomePageCardProps } from "./home-page-card";
 import ProductPrice from "../product-price";
 import ProductSaleBadge from "../product-sale-badge";
+import Image from "next/image";
 
 interface ProductCardProps extends HomePageCardProps {
   stock: number;
@@ -25,9 +26,9 @@ export default function ProductCard({
       <ProductSaleBadge price={price} salePrice={salePrice} />
       <Link
         href={`/product/${articleNumber}/${slug}`}
-        className="block aspect-[3/4] overflow-hidden bg-[#f1f0ec]"
+        className="block aspect-3/4 overflow-hidden bg-[#f1f0ec]"
       >
-        <img
+        <Image
           src={imageUrl}
           alt={title}
           className="h-full w-full object-contain"
