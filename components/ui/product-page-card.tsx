@@ -26,13 +26,21 @@ export default function ProductCard({
       <ProductSaleBadge price={price} salePrice={salePrice} />
       <Link
         href={`/product/${articleNumber}/${slug}`}
-        className="block aspect-3/4 overflow-hidden bg-[#f1f0ec]"
+        // className="block aspect-3/4 overflow-hidden bg-[#f1f0ec]"
+        className="relative block aspect-3/4 overflow-hidden bg-[#f1f0ec]"
       >
         <Image
           src={imageUrl}
           alt={title}
-          className="h-full w-full object-contain"
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          className="object-contain"
         />
+        {/* <Image
+          src={imageUrl}
+          alt={title}
+          className="h-full w-full object-contain"
+        /> */}
       </Link>
       <Link href={`/product/${articleNumber}/${slug}`} className="block">
         <CardHeader className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 p-4">
