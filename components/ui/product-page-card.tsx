@@ -32,13 +32,10 @@ export default function ProductCard({
         <Image
           src={imageUrl}
           alt={title}
+          width={500}
+          height={500}
           className="block h-full w-full object-contain transition-transform duration-300 ease-out group-hover:scale-105"
         />
-        {/* <Image
-          src={imageUrl}
-          alt={title}
-          className="h-full w-full object-contain"
-        /> */}
       </Link>
 
       <CardHeader className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 p-4 text-stone-600 font-semibold">
@@ -58,8 +55,6 @@ export default function ProductCard({
           className="max-w-32 justify-self-end"
         />
       </CardHeader>
-
-
 
       <AddToCartButton
         id={id}
