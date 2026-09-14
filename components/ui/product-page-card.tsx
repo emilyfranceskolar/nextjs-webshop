@@ -23,7 +23,7 @@ export default function ProductCard({
   stock,
 }: ProductCardProps) {
   return (
-    <Card data-cy="product" className="relative h-full rounded-none bg-[#f1f0ec] p-0">
+    <Card data-cy="product" className="relative h-full  bg-[#f1f0ec] p-0">
       <ProductSaleBadge price={price} salePrice={salePrice} />
       <Link
         href={`/product/${articleNumber}/${slug}`}
