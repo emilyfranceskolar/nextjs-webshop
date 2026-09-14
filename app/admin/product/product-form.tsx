@@ -1,6 +1,7 @@
 "use client";
 
-import { ImagePlus } from "lucide-react";
+import { useState } from "react";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Field, FieldLegend } from "@/components/ui/field";
@@ -108,6 +109,7 @@ function ProductFormInputs({
   onSale,
   setValue,
 }: ProductFormInputsProps) {
+  const [selectedFileName, setSelectedFileName] = useState("No file selected");
   // Runs when the user selects an image
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -117,6 +119,8 @@ function ProductFormInputs({
     if (!file) {
       return;
     }
+
+    setSelectedFileName(file.name);
 
     const uploadData = new FormData();
     uploadData.append("file", file);
@@ -238,7 +242,7 @@ function ProductFormInputs({
           autoComplete="off"
         />
 
-        <div className="space-y-2 pt-2">
+        {/* <div className="space-y-2 pt-2">
           <p className="text-sm font-medium">Upload image</p>
 
           <Input
@@ -250,6 +254,35 @@ function ProductFormInputs({
 
           <p className="text-sm text-muted-foreground">
             Supported formats: JPG, JPEG, PNG, WEBP
+          </p>
+        </div> */}
+
+        <div className="space-y-2 pt-2">
+          <p className="font-bold text-zinc-800">Upload image</p>
+
+          <div className="flex h-10 w-full items-center rounded-md border px-1">
+            <label
+              htmlFor="image-upload"
+              className="inline-flex h-8 cursor-pointer items-center rounded-md border px-3 text-sm font-medium hover:bg-muted"
+            >
+              Choose image
+            </label>
+
+            <span className="ml-3 truncate text-sm text-muted-foreground">
+              {selectedFileName}
+            </span>
+          </div>
+
+          <input
+            id="image-upload"
+            type="file"
+            accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+            onChange={handleImageUpload}
+            className="hidden"
+          />
+
+          <p className="text-sm text-muted-foreground">
+            JPG, JPEG, PNG, WEBP · max 5 MB
           </p>
         </div>
 
