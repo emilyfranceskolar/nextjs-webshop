@@ -34,42 +34,46 @@ export default function ProductCard({
           className="block h-full w-full object-contain transition-transform duration-300 ease-out group-hover:scale-105"
         />
       </Link>
-      <Link href={`/product/${articleNumber}/${slug}`} className="block min-w-0 hover:underline">
-        <CardHeader className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 p-4 text-stone-600 font-semibold">
-          <CardTitle data-cy="product-title" className="min-w-0">
+
+      <CardHeader className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 p-4 text-stone-600 font-semibold">
+        <CardTitle data-cy="product-title" className="min-w-0">
+          <Link
+            href={`/product/${articleNumber}/${slug}`}
+            className="hover:underline"
+          >
             {title}
-          </CardTitle>
-          <ProductPrice
-            price={price}
-            salePrice={salePrice}
-            variant="card"
-            className="max-w-32 justify-self-end"
-          />
-        </CardHeader>
-      </Link>
-     
+          </Link>
+        </CardTitle>
 
-      
-
-        <AddToCartButton
-          id={id}
-          title={title}
-          articleNumber={articleNumber}
-          imageUrl={imageUrl}
+        <ProductPrice
           price={price}
           salePrice={salePrice}
-          slug={slug}
-          category={category}
-          description={description}
-          stock={stock}
-          disabled={stock === 0}
-          buttonText=""
-          variant="outline"
-          size="icon"
-          className="absolute right-2 top-2 h-6 w-6 rounded-sm border border-neutral-200 bg-white! p-0 text-black! shadow-sm hover:cursor-pointer hover:bg-neutral-100!"
-          data-cy="product-buy-button"
+          variant="card"
+          className="max-w-32 justify-self-end"
         />
-     
+      </CardHeader>
+
+
+
+      <AddToCartButton
+        id={id}
+        title={title}
+        articleNumber={articleNumber}
+        imageUrl={imageUrl}
+        price={price}
+        salePrice={salePrice}
+        slug={slug}
+        category={category}
+        description={description}
+        stock={stock}
+        disabled={stock === 0}
+        buttonText=""
+        variant="outline"
+        size="icon"
+        className="absolute right-2 top-2 h-6 w-6 rounded-sm border border-neutral-200 bg-white! p-0 text-black! shadow-sm hover:cursor-pointer hover:bg-neutral-100!"
+        data-cy="product-buy-button"
+      />
+
     </Card>
   );
 }
