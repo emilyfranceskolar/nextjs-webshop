@@ -57,15 +57,9 @@ export const productSchema = z.object({
   price: priceSchema,
   stock: z
     .number({ error: "Required" })
-    .min(1, "Required")
-    .refine((value) => {
-      const parsed = Number(value);
-      return Number.isInteger(parsed) && parsed >= 0;
-    }, "Stock must be 0 or greater"),
-  salePrice: z.preprocess(
-    (value) => (value === "" ? undefined : value),
-    z.number().positive().optional(),
-  ),
+    .int("Stock must be a whole number")
+    .min(0, "Stock must be 0 or greater"),
+  salePrice: z.number().positive().optional(),
   articleNumber: z.string().min(1, "Required"),
   slug: z.string().optional(),
 });
