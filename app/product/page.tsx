@@ -2,6 +2,7 @@ import ProductCard from "@/components/ui/product-page-card";
 import { db } from "@/prisma/db";
 import Link from "next/link";
 import { getProductPrice } from "@/lib/product-price";
+import ProductGrid from "@/components/product-grid";
 
 export default async function ProductPage({
   searchParams,
@@ -23,7 +24,6 @@ export default async function ProductPage({
       : undefined,
   });
 
-  // Legacy Sale products may not have a discount yet. Keep them in All Products.
   const visibleProducts =
     params.category === "Sale"
       ? products.filter((product) => getProductPrice(product) < product.price)
@@ -90,24 +90,20 @@ export default async function ProductPage({
             : "No products found."}
         </p>
       )}
-      <section className="grid w-full gap-6 px-5 pb-10 pt-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {visibleProducts.map((product) => (
-          <ProductCard
-            key={product.id}
-            id={product.id}
-            title={product.title}
-            articleNumber={product.articleNumber}
-            price={product.price}
-            salePrice={product.salePrice}
-            imageUrl={product.image}
-            slug={product.slug}
-            stock={product.stock}
-            category=""
-            description=""
-
-          />
-        ))}
-      </section>
+      <ProductGrid
+        products={visibleProducts.map((product) => ({
+          id: product.id,
+          title: product.title,
+          articleNumber: product.articleNumber,
+          price: product.price,
+          salePrice: product.salePrice,
+          imageUrl: product.image,
+          slug: product.slug,
+          stock: product.stock,
+          category: "",
+          description: "",
+        }))}
+      />
     </main>
   );
 }
