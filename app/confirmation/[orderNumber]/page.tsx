@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState, useSyncExternalStore } from "react";
 import { Separator } from "@/components/ui/separator";
 
-const subscribeToHydration = () => () => {};
+const subscribeToHydration = () => () => { };
 
 export default function ConfirmationPage() {
   const isLoaded = useSyncExternalStore(
@@ -31,7 +31,7 @@ export default function ConfirmationPage() {
   return (
     <main>
       <div className="max-w-3xl mx-auto w-full rounded-xl p-4 m-6">
-        <Card className="min-h-[60vh] flex justify-center pl-8 pr-8">
+        <Card className="min-h-[60vh] flex justify-center p-12 m-6 shadow-md">
           <CardHeader>
             <CardTitle className="text-2xl pb-2">
               Payment succeeded! ✔️
@@ -60,7 +60,7 @@ export default function ConfirmationPage() {
 
             <div
               data-cy="product"
-              className="text-base bg-muted md:p-4 p-4 rounded-xl"
+              className="text-base md:p-4 p-4 rounded-xl"
             >
               <div className="pb-2">
                 <div className="mb-4 text-xs md:text-base flex flex-col gap-0.5">
@@ -118,7 +118,7 @@ export default function ConfirmationPage() {
             </div>
 
             <Link href="/product">
-              <Button className="p-4 w-full hover:bg-[#ddd9cd] hover:text-zinc-800 mt-auto">
+              <Button className="p-4 w-full bg-[#526E67] hover:bg-[#7C9A92] hover:text-white mt-auto">
                 Continue shopping
               </Button>
             </Link>
