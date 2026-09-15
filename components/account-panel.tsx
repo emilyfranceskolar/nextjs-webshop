@@ -49,10 +49,10 @@ export default function AccountPanel() {
       view === "sign-in"
         ? await authClient.signIn.email({ email, password })
         : await authClient.signUp.email({
-            name: String(formData.get("name")),
-            email,
-            password,
-          });
+          name: String(formData.get("name")),
+          email,
+          password,
+        });
 
     setIsSubmitting(false);
 

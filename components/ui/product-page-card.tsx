@@ -54,7 +54,7 @@ export default function ProductCard({
           variant="card"
           className="max-w-32 justify-self-end"
         />
-      </CardHeader>
+      </CardHeader >
 
       <AddToCartButton
         id={id}
@@ -75,6 +75,6 @@ export default function ProductCard({
         data-cy="product-buy-button"
       />
 
-    </Card>
+    </Card >
   );
 }
