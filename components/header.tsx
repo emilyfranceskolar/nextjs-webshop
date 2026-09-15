@@ -27,7 +27,7 @@ export default function Header() {
 
   return (
     <header
-      className={`relative z-50 flex flex-wrap items-center md:justify-between lg:justify-between bg-white transition-all duration-300 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-2.5  ${isHomePage ? "sticky top-0" : ""
+      className={`relative z-50 flex flex-wrap items-center md:justify-between lg:justify-between border-b-2 bg-white transition-all duration-300 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-2.5  ${isHomePage ? "sticky top-0" : ""
         } ${isScrolled ? "justify-center items-center px-4 py-3  " : "px-10 py-4"
         }`}
     >
