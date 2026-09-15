@@ -3,6 +3,7 @@ import { db } from "@/prisma/db";
 import Image from "next/image";
 import Link from "next/link";
 
+//server komponent
 export default async function Home() {
   const product = await db.product.findMany({
     include: {

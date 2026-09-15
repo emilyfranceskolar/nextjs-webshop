@@ -1,26 +1,25 @@
 "use client";
 
-import { useState } from "react";
-
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Field, FieldLegend } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import {
+  createProductSchema,
+  isSaleCategory,
+  productCategoryNames,
+  ProductFormValues,
+} from "@/data/form";
+import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import {
   FormState,
   useForm,
   UseFormRegister,
   UseFormSetValue,
 } from "react-hook-form";
-import {
-  ProductFormValues,
-  createProductSchema,
-  productCategoryNames,
-  isSaleCategory,
-} from "@/data/form";
-import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 interface ProductFormProps {
   initialValues?: ProductFormValues;
@@ -44,7 +43,7 @@ export default function ProductForm({
     useForm<ProductFormValues>({
       resolver: zodResolver(createProductSchema()),
       defaultValues: {
-        salePrice: "",
+        salePrice: undefined,
         ...initialValues,
         category:
           initialValues?.category.filter((name) =>
@@ -302,7 +301,9 @@ function ProductFormInputs({
 
         <Input
           data-cy="product-price"
-          {...register("price")}
+          {...register("price", {
+            setValueAs: (value) => (value === "" ? 0 : Number(value)),
+          })}
           id="price"
           type="number"
           min="0.01"
@@ -328,7 +329,10 @@ function ProductFormInputs({
 
         <Input
           data-cy="product-stock"
-          {...register("stock")}
+          {...register("stock", {
+            setValueAs: (value) => (value === "" ? 0 : Number(value)),
+          })}
+
           id="stock"
           type="number"
           min="0"
@@ -356,7 +360,9 @@ function ProductFormInputs({
             type="number"
             min="0.01"
             step="0.01"
-            {...register("salePrice")}
+            {...register("salePrice", {
+              setValueAs: (value) => (value === "" ? undefined : Number(value)),
+            })}
             data-cy="product-sale-price"
             aria-invalid={!!formState.errors.salePrice}
             className="h-10 p-4"
