@@ -1,3 +1,4 @@
+import { productSchema } from "@/data/form";
 import { require_isLoggedIn_IsAdmin } from "@/lib/admin";
 import { db } from "@/prisma/db";
 import { NextRequest, NextResponse } from "next/server";
@@ -27,6 +28,20 @@ export async function GET(request: NextRequest, { params }: Params) {
   return NextResponse.json(product);
 }
 
+//regler för vad en PUT får skicka
+const updateProductSchema = productSchema
+  //behåll och ändra enbart dessa fält
+  .pick({
+    title: true,
+    description: true,
+    image: true,
+    price: true,
+    stock: true,
+    salePrice: true,
+  })
+  .partial()
+  .strict();
+
 //uppdatera en specifik produkt
 export async function PUT(request: NextRequest, { params }: Params) {
   const error = await require_isLoggedIn_IsAdmin();
@@ -41,9 +56,28 @@ export async function PUT(request: NextRequest, { params }: Params) {
     return NextResponse.json({ message: "Product not found" }, { status: 404 });
   }
   const body = await request.json();
+  const result = updateProductSchema.safeParse(body);
+
+  if (!result.success) {
+    return NextResponse.json(
+      { message: "Invalid product data" },
+      { status: 400 },
+    );
+  }
+
+  //rea måste vara mindre än det vanliga priset
+  const final = { ...product, ...result.data };
+
+  if (final.salePrice != null && final.salePrice >= final.price) {
+    return NextResponse.json(
+      { message: "Sale price must be lower than price" },
+      { status: 400 },
+    );
+  }
+
   const updated = await db.product.update({
     where: { articleNumber },
-    data: body,
+    data: result.data,
   });
   return NextResponse.json(updated);
 }
