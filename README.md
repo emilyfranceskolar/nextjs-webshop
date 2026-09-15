@@ -67,6 +67,7 @@ Admin-panelen är skyddad och kan endast nås av användare med admin-behörighe
 - Formulär för kunduppgifter
 - Validering av formulär
 - Kontroll av lagersaldo vid beställning
+- Lagret minskas när ordern skapas. Om någon produkt inte räcker till avbryts hela beställningen utan att lagret ändras.
 - Orderbekräftelse med unikt ordernummer
 
 ---
