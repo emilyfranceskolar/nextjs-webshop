@@ -35,7 +35,7 @@ export default async function Home() {
 
   return (
     <main className="grid gap-8 place-items-center bg-[#fafaf8]">
-      <section className="relative h-dvh w-full overflow-hidden">
+      <section className="relative h-[55dvh] w-full overflow-hidden md:h-[65dvh] lg:h-dvh">
         <video
           autoPlay
           muted
@@ -45,12 +45,12 @@ export default async function Home() {
           disablePictureInPicture
           aria-hidden="true"
           tabIndex={-1}
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+          className="pointer-events-none absolute inset-0 h-full w-full scale-125 object-cover object-center md:scale-100 lg:scale-100"
           src="/assets/videos/1a42a2272c314240b3c559b3b9dedef4.mp4"
         />
         <Link
           href="/product"
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 rounded-lg bg-[#526E67] px-10 py-3 text-lg font-bold whitespace-nowrap text-white transition-all duration-300 hover:cursor-pointer hover:bg-[#ddd9cd] hover:text-black lg:bottom-12"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 rounded-lg bg-[#526E67] px-10 py-3 text-lg font-bold whitespace-nowrap text-white transition-all duration-300 hover:cursor-pointer hover:bg-[#ddd9cd] hover:text-black md:bottom-10 lg:bottom-12"
         >
           SHOP NOW
         </Link>

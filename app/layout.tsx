@@ -13,7 +13,6 @@ const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 const inter = Inter({ subsets: ["latin"] });
 
-/* Beskriv din hemsida för sökmotorerna */
 export const metadata: Metadata = {
   title: "Glajjan",
   description: "Dina favoritglajjor online till en bra pris...",
