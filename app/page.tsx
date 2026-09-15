@@ -1,5 +1,6 @@
 import ProductSlider from "@/components/product-slider";
 import { db } from "@/prisma/db";
+import Image from "next/image";
 import Link from "next/link";
 
 //server komponent
@@ -35,7 +36,7 @@ export default async function Home() {
 
   return (
     <main className="grid gap-8 place-items-center bg-[#fafaf8]">
-      <section className="relative h-dvh w-full overflow-hidden">
+      <section className="relative h-[55dvh] w-full overflow-hidden md:h-[65dvh] lg:h-dvh">
         <video
           autoPlay
           muted
@@ -45,12 +46,12 @@ export default async function Home() {
           disablePictureInPicture
           aria-hidden="true"
           tabIndex={-1}
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+          className="pointer-events-none absolute inset-0 h-full w-full scale-125 object-cover object-center md:scale-100 lg:scale-100"
           src="/assets/videos/1a42a2272c314240b3c559b3b9dedef4.mp4"
         />
         <Link
           href="/product"
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 rounded-lg bg-[#526E67] px-10 py-3 text-lg font-bold whitespace-nowrap text-white transition-all duration-300 hover:cursor-pointer hover:bg-[#ddd9cd] hover:text-black lg:bottom-12"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 rounded-lg bg-[#526E67] px-10 py-3 text-lg font-bold whitespace-nowrap text-white transition-all duration-300 hover:cursor-pointer hover:bg-[#ddd9cd] hover:text-black md:bottom-10 lg:bottom-12"
         >
           SHOP NOW
         </Link>
@@ -61,11 +62,11 @@ export default async function Home() {
       >
         {categories.map((category) => (
           <Link
-            className="group relative flex min-h-[480px] min-w-0 items-end overflow-hidden bg-stone-100 p-6 focus-visible:outline-4 focus-visible:-outline-offset-4 focus-visible:outline-white md:min-h-[800px]"
+            className="group relative flex min-h-120 min-w-0 items-end overflow-hidden bg-stone-100 p-6 focus-visible:outline-4 focus-visible:-outline-offset-4 focus-visible:outline-white md:min-h-200"
             href={`/product?category=${encodeURIComponent(category)}`}
             key={category}
           >
-            <img
+            <Image
               src={categoryImages[category]}
               alt=""
               loading="lazy"
@@ -94,7 +95,7 @@ export default async function Home() {
           label="All products, slider 1"
         />
         <section aria-label="Archive stock clearance" className="w-full">
-          <img
+          <Image
             src="/assets/images/SITE_BANNERS_9.webp"
             alt="Archive stock clearance — selected frames from SEK 349. Sunglasses resting in sunlit water."
             width={2752}
@@ -110,9 +111,9 @@ export default async function Home() {
       </section>
       <section
         aria-label="The Glajjan perspective"
-        className="relative isolate flex min-h-[32rem] w-full items-end overflow-hidden bg-[#526E67] md:min-h-[42rem]"
+        className="relative isolate flex min-h-128 w-full items-end overflow-hidden bg-[#526E67] md:min-h-168"
       >
-        <img
+        <Image
           src="/assets/images/hero-image.jpg"
           alt="A woman wearing tortoiseshell sunglasses in the sunshine"
           loading="lazy"
@@ -122,7 +123,7 @@ export default async function Home() {
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-gradient-to-t from-black/75 via-black/10 to-transparent"
+          className="absolute inset-0 -z-10 bg-linear-to-t from-black/75 via-black/10 to-transparent"
         />
         <figure className="max-w-lg p-6 text-white sm:p-10 md:max-w-2xl md:p-16">
           <blockquote className="text-3xl leading-tight font-medium tracking-tight text-balance md:text-5xl">
@@ -158,21 +159,21 @@ export default async function Home() {
             </p>
           </div>
           <div className="grid grid-cols-2 items-start gap-3 md:gap-5">
-            <img
+            <Image
               src="/assets/images/photo-1574258495973-f010dfbb5371.jpg"
               alt="Tortoiseshell and metal reading glasses resting on a book"
               width={5184}
               height={3456}
               loading="lazy"
-              className="aspect-[3/4] w-full object-cover object-[60%_center]"
+              className="aspect-3/4 w-full object-cover object-[60%_center]"
             />
-            <img
+            <Image
               src="/assets/images/Bilbao_Meadow_Green.jpg"
               alt="Round reading glasses in meadow green"
               width={1200}
               height={1600}
               loading="lazy"
-              className="mt-10 aspect-[3/4] w-full object-cover md:mt-16"
+              className="mt-10 aspect-3/4 w-full object-cover md:mt-16"
             />
           </div>
         </div>

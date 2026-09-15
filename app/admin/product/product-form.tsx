@@ -7,14 +7,19 @@ import {
   createProductSchema,
   isSaleCategory,
   productCategoryNames,
-  ProductFormInput,
   ProductFormValues,
 } from "@/data/form";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormState, useForm, UseFormRegister } from "react-hook-form";
+import { useState } from "react";
+import {
+  FormState,
+  useForm,
+  UseFormRegister,
+  UseFormSetValue,
+} from "react-hook-form";
 
 interface ProductFormProps {
   initialValues?: ProductFormValues;
@@ -23,8 +28,9 @@ interface ProductFormProps {
 
 interface ProductFormInputsProps {
   onSale: boolean;
-  register: UseFormRegister<ProductFormInput>;
-  formState: FormState<ProductFormInput>;
+  register: UseFormRegister<ProductFormValues>;
+  formState: FormState<ProductFormValues>;
+  setValue: UseFormSetValue<ProductFormValues>;
 }
 
 export default function ProductForm({
@@ -32,21 +38,19 @@ export default function ProductForm({
   action,
 }: ProductFormProps) {
   const router = useRouter();
-  const { register, handleSubmit, formState, watch, setError } = useForm<
-    ProductFormInput,
-    unknown,
-    ProductFormValues
-  >({
-    resolver: zodResolver(createProductSchema()),
-    defaultValues: {
-      salePrice: undefined,
-      ...initialValues,
-      category:
-        initialValues?.category.filter((name) =>
-          productCategoryNames.includes(name),
-        ) ?? [],
-    },
-  });
+
+  const { register, handleSubmit, formState, watch, setError, setValue } =
+    useForm<ProductFormValues>({
+      resolver: zodResolver(createProductSchema()),
+      defaultValues: {
+        salePrice: "",
+        ...initialValues,
+        category:
+          initialValues?.category.filter((name) =>
+            productCategoryNames.includes(name),
+          ) ?? [],
+      },
+    });
 
   const onSale = isSaleCategory(watch("category"));
 
@@ -82,16 +86,17 @@ export default function ProductForm({
       {initialValues?.category.some(
         (name) => !productCategoryNames.includes(name),
       ) && (
-          <p role="status" className="mb-4 text-sm text-amber-800">
-            This product has an unsupported category. Select from the four
-            categories below; saving will replace the old category selection.
-          </p>
-        )}
+        <p role="status" className="mb-4 text-sm text-amber-800">
+          This product has an unsupported category. Select from the four
+          categories below; saving will replace the old category selection.
+        </p>
+      )}
 
       <ProductFormInputs
         register={register}
         formState={formState}
         onSale={onSale}
+        setValue={setValue}
       />
     </form>
   );
@@ -101,7 +106,41 @@ function ProductFormInputs({
   register,
   formState,
   onSale,
+  setValue,
 }: ProductFormInputsProps) {
+  const [selectedFileName, setSelectedFileName] = useState("No file selected");
+  // Runs when the user selects an image
+  const handleImageUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    // Get the first selected file
+    const file = event.target.files?.[0];
+    if (!file) {
+      return;
+    }
+
+    setSelectedFileName(file.name);
+
+    const uploadData = new FormData();
+    uploadData.append("file", file);
+
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      body: uploadData,
+    });
+
+    if (!response.ok) {
+      return;
+    }
+    // Get the saved image path from the server
+    const data = await response.json();
+    // Put the uploaded image path into the Image field
+    setValue("image", data.imageUrl, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+  };
+
   return (
     <div className="w-full space-y-4">
       <input type="hidden" {...register("id")} />
@@ -195,11 +234,56 @@ function ProductFormInputs({
           {...register("image")}
           id="image"
           type="text"
+          placeholder="Image URL or /assets/images/filename"
           className={cn("h-10 p-4", {
             "border-red-600 border-2": formState.errors.image,
           })}
           autoComplete="off"
         />
+
+        {/* <div className="space-y-2 pt-2">
+          <p className="text-sm font-medium">Upload image</p>
+
+          <Input
+            id="image-upload"
+            type="file"
+            accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+            onChange={handleImageUpload}
+          />
+
+          <p className="text-sm text-muted-foreground">
+            Supported formats: JPG, JPEG, PNG, WEBP
+          </p>
+        </div> */}
+
+        <div className="space-y-2 pt-2">
+          <p className="font-bold text-zinc-800">Upload image</p>
+
+          <div className="flex h-10 w-full items-center rounded-md border px-1">
+            <label
+              htmlFor="image-upload"
+              className="inline-flex h-8 cursor-pointer items-center rounded-md border px-3 text-sm font-medium hover:bg-muted"
+            >
+              Choose image
+            </label>
+
+            <span className="ml-3 truncate text-sm text-muted-foreground">
+              {selectedFileName}
+            </span>
+          </div>
+
+          <input
+            id="image-upload"
+            type="file"
+            accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+            onChange={handleImageUpload}
+            className="hidden"
+          />
+
+          <p className="text-sm text-muted-foreground">
+            JPG, JPEG, PNG, WEBP · max 5 MB
+          </p>
+        </div>
 
         {formState.errors.image && (
           <p data-cy="product-image-error" className="text-red-600 text-sm">

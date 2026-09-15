@@ -1,7 +1,8 @@
 import AddToCartButton from "@/components/add-to-cart-button";
+import ProductPrice from "@/components/product-price";
+import ProductSaleBadge from "@/components/product-sale-badge";
 import DetailPageDropdown from "@/components/ui/detail-page-dropdown";
 import { db } from "@/prisma/db";
-import ProductPrice from "@/components/product-price";
 
 export default async function ProductDetailPage({
   params,
@@ -35,31 +36,26 @@ export default async function ProductDetailPage({
 
         <div className="flex justify-center">
           <div className="flex flex-col gap-4 justify-start md:mt-25 md:w-3/4">
-            <h1 className="text-3xl font-bold mb-5" data-cy="product-title">
-              {product.title}
-            </h1>
+            <div className="mb-5 flex flex-wrap items-center gap-3">
+              <h1 className="text-3xl font-bold" data-cy="product-title">
+                {product.title}
+              </h1>
+              <ProductSaleBadge
+                price={product.price}
+                salePrice={product.salePrice}
+                className="static shrink-0 whitespace-nowrap px-3 py-2 text-base font-semibold"
+              />
+            </div>
             <p className="mb-5" data-cy="product-description">
               {product.description}
             </p>
             <ProductPrice
               price={product.price}
               salePrice={product.salePrice}
-              className="text-xl font-semibold"
+              variant="card"
+              className="justify-start text-left text-xl font-semibold"
             />
 
-            {product.stock === 0 ? (
-              <p className="text-red-600 font-semibold">
-                Out of stock
-              </p>
-            ) : product.stock <= 5 ? (
-              <p className="text-orange-500 font-semibold">
-                Only a few left in stock
-              </p>
-            ) : (
-              <p className="text-green-600 font-semibold">
-                In stock
-              </p>
-            )}
             <AddToCartButton
               id={product.id}
               title={product.title}
@@ -74,23 +70,36 @@ export default async function ProductDetailPage({
               disabled={product.stock === 0}
               buttonText="Add to Cart"
               variant="default"
-              className="px-5 py-6 mb-10 mt-2 bg-[#ddd9cd] text-black rounded-xl hover:bg-[#526E67] hover:text-white  transition-all duration-300 cursor-pointer"
+              className="px-5 py-6 mb-10 mt-10 bg-[#ddd9cd] text-black rounded-xl hover:bg-[#526E67] hover:text-white  transition-all duration-300 cursor-pointer"
             />
+
+             {product.stock === 0 ? (
+              <p className="text-red-700 font">Out of stock</p>
+            ) : product.stock <= 5 ? (
+              <p className="text-gray-600 font">
+                Only a few left in stock
+              </p>
+            ) : (
+              <p className="text-gray-600 font">In stock</p>
+            )}
 
             <DetailPageDropdown
               title="Shipping"
-              content="We aim to dispatch all orders within 24 business hours. Worn Stories offers UPS and Postnord shipping services.\nThe shipping service and cost is based on your selected location. We offer free shipping worldwide on all orders over 250€."
+              content={
+                "We aim to dispatch all orders within 24 business hours. Glajjan offers UPS and Postnord shipping services. The shipping service and cost is based on your selected location. We offer free shipping worldwide on all orders over 250€."
+              }
             />
             <DetailPageDropdown
               title="Returns"
-              content="Worn Stories has a 14-day return policy: you have 14 days from
-              when your order is delivered to ship it back to us for a refund or
-              exchange.​ The order must be returned in original condition with
-              included original packaging."
+              content={
+                "Glajjans has a 14-day return policy: you have 14 days from when your order is delivered to ship it back to us for a refund or exchange. The order must be returned in original condition with included original packaging."
+              }
             />
             <DetailPageDropdown
-              title="Care for your vintage items"
-              content="You can machine wash most cotton & cotton blend products in 40 degrees celcius / 104 degrees fahrenheit. Wool products should preferably be hand washed. Machine wash at your own risk. Remember that the items we offer have been used previously and that some are more fragile (depending on age and condition). Always have that in mind before washing. Vintage leather products should hang in dry areas and should be conditioned regularly to avoid cracks. Note that we do not take responsibility for any product that got damaged when worn or washed."
+              title="Care"
+              content={
+                "Clean your glasses with lukewarm water and a drop of mild soap, then dry them gently with a soft microfiber cloth.\nAvoid paper towels, tissues and your clothes, as they can scratch the lenses. Never use household cleaners, alcohol or hot water, since they can damage lens coatings and frames. Please note that we do not take responsibility for damage caused by wear, improper cleaning or accidents."
+              }
             />
             <p className="text-xs text-gray-500" data-cy="product-id">
               Article number: {product.articleNumber}
