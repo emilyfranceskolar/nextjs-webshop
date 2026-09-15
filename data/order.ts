@@ -4,7 +4,8 @@ import { auth } from "@/lib/auth";
 import { db } from "@/prisma/db";
 import { headers } from "next/headers";
 import { customerSchema, type Customer } from "./form";
-import { getProductPrice } from "@/lib/product-price";
+import { placeOrder } from "@/lib/place-order";
+import { revalidatePath } from "next/cache";
 
 type CartItem = {
   id: string;
@@ -26,64 +27,17 @@ export default async function createOrder(
 
   const validCustomer = customerSchema.parse(customer);
 
-  if (cartItems.length === 0) {
-    throw new Error("Your cart is empty.");
-  }
-
-  if (
-    cartItems.some(
-      (item) =>
-        !item.id || !Number.isInteger(item.quantity) || item.quantity < 1,
-    )
-  ) {
-    throw new Error("Your cart contains an invalid item.");
-  }
-
-  const productIds = [...new Set(cartItems.map((item) => item.id))];
-  const products = await db.product.findMany({
-    where: { id: { in: productIds } },
-  });
-
-  if (products.length !== productIds.length) {
-    throw new Error("One or more products are no longer available.");
-  }
-
-  const productsById = new Map(
-    products.map((product) => [product.id, product]),
-  );
-  // Never place an order for a different price than the customer has seen.
-  if (
-    cartItems.some(
-      (item) => item.price !== getProductPrice(productsById.get(item.id)!),
-    )
-  ) {
-    throw new Error(
-      "A product price has changed. Remove it from your cart and add it again before ordering.",
-    );
-  }
-  const orderNumber = Math.floor(100000 + Math.random() * 900000).toString();
-
-  const order = await db.order.create({
-    data: {
-      orderNumber,
+  const order = await placeOrder(
+    db,
+    {
       name: validCustomer.name,
       email: session.user.email,
       address: validCustomer.address,
       userId: session.user.id,
-      items: {
-        create: cartItems.map((item) => {
-          const product = productsById.get(item.id)!;
-
-          return {
-            productId: product.id,
-            title: product.title,
-            price: getProductPrice(product),
-            quantity: item.quantity,
-          };
-        }),
-      },
     },
-  });
+    cartItems,
+  );
 
+  revalidatePath("/", "layout");
   return order.orderNumber;
 }
