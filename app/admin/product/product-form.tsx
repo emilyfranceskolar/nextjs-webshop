@@ -43,7 +43,7 @@ export default function ProductForm({
     useForm<ProductFormValues>({
       resolver: zodResolver(createProductSchema()),
       defaultValues: {
-        salePrice: "",
+        salePrice: undefined,
         ...initialValues,
         category:
           initialValues?.category.filter((name) =>
@@ -329,7 +329,10 @@ function ProductFormInputs({
 
         <Input
           data-cy="product-stock"
-          {...register("stock")}
+          {...register("stock", {
+            setValueAs: (value) => (value === "" ? 0 : Number(value)),
+          })}
+
           id="stock"
           type="number"
           min="0"
