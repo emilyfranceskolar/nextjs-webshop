@@ -6,7 +6,7 @@ import { Separator } from "./ui/separator";
 export default function Footer() {
   return (
     <main className="bg-[#fafaf8;]">
-      <footer className="grid grid-cols-3 text-xs mx-auto items-center justify-between p-4 px-6 py-8 justify-items-center pt-12 pb-12">
+      <footer className="grid grid-cols-3 border-t-2 text-xs mx-auto items-center justify-between p-4 px-6 py-8 justify-items-center pt-12 pb-12">
         <section className="grid gap-6">
           <h2 className="font-bold mb-4">Glajjan</h2>
           <Link

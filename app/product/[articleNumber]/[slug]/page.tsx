@@ -1,5 +1,6 @@
 import AddToCartButton from "@/components/add-to-cart-button";
 import ProductPrice from "@/components/product-price";
+import ProductSaleBadge from "@/components/product-sale-badge";
 import DetailPageDropdown from "@/components/ui/detail-page-dropdown";
 import { db } from "@/prisma/db";
 
@@ -35,27 +36,26 @@ export default async function ProductDetailPage({
 
         <div className="flex justify-center">
           <div className="flex flex-col gap-4 justify-start md:mt-25 md:w-3/4">
-            <h1 className="text-3xl font-bold mb-5" data-cy="product-title">
-              {product.title}
-            </h1>
+            <div className="mb-5 flex flex-wrap items-center gap-3">
+              <h1 className="text-3xl font-bold" data-cy="product-title">
+                {product.title}
+              </h1>
+              <ProductSaleBadge
+                price={product.price}
+                salePrice={product.salePrice}
+                className="static shrink-0 whitespace-nowrap px-3 py-2 text-base font-semibold"
+              />
+            </div>
             <p className="mb-5" data-cy="product-description">
               {product.description}
             </p>
             <ProductPrice
               price={product.price}
               salePrice={product.salePrice}
-              className="text-xl font-semibold"
+              variant="card"
+              className="justify-start text-left text-xl font-semibold"
             />
 
-            {product.stock === 0 ? (
-              <p className="text-red-600 font-semibold">Out of stock</p>
-            ) : product.stock <= 5 ? (
-              <p className="text-orange-500 font-semibold">
-                Only a few left in stock
-              </p>
-            ) : (
-              <p className="text-green-600 font-semibold">In stock</p>
-            )}
             <AddToCartButton
               id={product.id}
               title={product.title}
@@ -70,8 +70,18 @@ export default async function ProductDetailPage({
               disabled={product.stock === 0}
               buttonText="Add to Cart"
               variant="default"
-              className="px-5 py-6 mb-10 mt-2 bg-[#ddd9cd] text-black rounded-xl hover:bg-[#526E67] hover:text-white  transition-all duration-300 cursor-pointer"
+              className="px-5 py-6 mb-10 mt-10 bg-[#ddd9cd] text-black rounded-xl hover:bg-[#526E67] hover:text-white  transition-all duration-300 cursor-pointer"
             />
+
+             {product.stock === 0 ? (
+              <p className="text-red-700 font">Out of stock</p>
+            ) : product.stock <= 5 ? (
+              <p className="text-gray-600 font">
+                Only a few left in stock
+              </p>
+            ) : (
+              <p className="text-gray-600 font">In stock</p>
+            )}
 
             <DetailPageDropdown
               title="Shipping"
