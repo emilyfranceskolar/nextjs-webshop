@@ -2,25 +2,25 @@
 
 import { useState } from "react";
 
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Field, FieldLegend } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import {
+  createProductSchema,
+  isSaleCategory,
+  productCategoryNames,
+  ProductFormValues,
+} from "@/data/form";
+import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   FormState,
   useForm,
   UseFormRegister,
   UseFormSetValue,
 } from "react-hook-form";
-import {
-  ProductFormValues,
-  createProductSchema,
-  productCategoryNames,
-  isSaleCategory,
-} from "@/data/form";
-import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 interface ProductFormProps {
   initialValues?: ProductFormValues;
@@ -110,11 +110,10 @@ function ProductFormInputs({
   setValue,
 }: ProductFormInputsProps) {
   const [selectedFileName, setSelectedFileName] = useState("No file selected");
-  // Runs when the user selects an image
+
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    // Get the first selected file
     const file = event.target.files?.[0];
     if (!file) {
       return;
@@ -133,9 +132,9 @@ function ProductFormInputs({
     if (!response.ok) {
       return;
     }
-    // Get the saved image path from the server
+
     const data = await response.json();
-    // Put the uploaded image path into the Image field
+
     setValue("image", data.imageUrl, {
       shouldValidate: true,
       shouldDirty: true,
@@ -242,21 +241,6 @@ function ProductFormInputs({
           autoComplete="off"
         />
 
-        {/* <div className="space-y-2 pt-2">
-          <p className="text-sm font-medium">Upload image</p>
-
-          <Input
-            id="image-upload"
-            type="file"
-            accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
-            onChange={handleImageUpload}
-          />
-
-          <p className="text-sm text-muted-foreground">
-            Supported formats: JPG, JPEG, PNG, WEBP
-          </p>
-        </div> */}
-
         <div className="space-y-2 pt-2">
           <p className="font-bold text-zinc-800">Upload image</p>
 
@@ -320,7 +304,6 @@ function ProductFormInputs({
         )}
       </Field>
 
-      {/* stock input for admin inventory management */}
       <Field>
         <FieldLegend className="text-2xl font-bold text-zinc-800">
           Stock

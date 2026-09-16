@@ -14,10 +14,8 @@ export function parseProductForm(formData: FormData) {
     ...values,
     price: Number(values.price),
 
-    // convert stock from form string to number
     stock: Number(values.stock),
 
-    // Removing Sale also removes the discount.
     salePrice: isSaleCategory(values.category)
       ? Number(values.salePrice)
       : null,

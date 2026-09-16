@@ -53,7 +53,6 @@ export async function placeOrder(
     }
 
     for (const [id, quantity] of quantities) {
-      // Check and decrement in one write, including when another customer buys.
       const updated = await tx.product.updateMany({
         where: { id, stock: { gte: quantity } },
         data: { stock: { decrement: quantity } },
@@ -65,7 +64,6 @@ export async function placeOrder(
       }
     }
 
-    // Any failure here rolls back every stock change above.
     return tx.order.create({
       data: {
         ...customer,

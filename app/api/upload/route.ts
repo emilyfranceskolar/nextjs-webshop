@@ -1,7 +1,7 @@
 import { isAdmin } from "@/lib/admin";
 import { mkdir, writeFile } from "fs/promises";
-import path from "path";
 import { NextResponse } from "next/server";
+import path from "path";
 
 export const runtime = "nodejs";
 
@@ -14,7 +14,6 @@ const allowedTypes: Record<string, string> = {
 };
 
 export async function POST(request: Request) {
-  // Only logged-in admins can upload product images
   if (!(await isAdmin())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -27,7 +26,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "No image selected" }, { status: 400 });
     }
 
-    // Check if the image format is allowed
     const extension = allowedTypes[file.type];
 
     if (!extension) {
@@ -37,7 +35,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Limit image size to 5 MB
     if (file.size > MAX_FILE_SIZE) {
       return NextResponse.json(
         { error: "Image must be smaller than 5 MB" },
@@ -45,20 +42,16 @@ export async function POST(request: Request) {
       );
     }
 
-    // Get the original filename without the extension
     const originalName = path.basename(file.name, path.extname(file.name));
 
-    // Make the filename safe
     const safeName =
       originalName
         .replace(/[^a-zA-Z0-9-_]/g, "-")
         .replace(/-+/g, "-")
         .replace(/^-|-$/g, "") || "image";
 
-    // Create a unique filename
     const fileName = `${Date.now()}-${safeName}${extension}`;
 
-    // Save images inside public/assets/images
     const uploadDirectory = path.join(
       process.cwd(),
       "public",
@@ -66,16 +59,12 @@ export async function POST(request: Request) {
       "images",
     );
 
-    // Create the folder if it does not exist
     await mkdir(uploadDirectory, { recursive: true });
 
-    // Convert the uploaded file to bytes
     const bytes = await file.arrayBuffer();
 
-    // Save the image
     await writeFile(path.join(uploadDirectory, fileName), Buffer.from(bytes));
 
-    // Return the image path to the product form
     return NextResponse.json({
       imageUrl: `/assets/images/${fileName}`,
     });

@@ -15,7 +15,6 @@ export const customerSchema = z.object({
 
 export type Customer = z.infer<typeof customerSchema>;
 
-// The same four choices as main, independent of local test data.
 export const productCategoryNames = [
   "Bestseller",
   "Reading Glasses",
@@ -68,7 +67,6 @@ export const productSchema = z.object({
 
 export type ProductFormValues = z.infer<typeof productSchema>;
 
-// Validate the same category choices and prices in the browser and server actions.
 export function createProductSchema() {
   return productSchema.superRefine((product, context) => {
     if (product.category.some((name) => !productCategoryNames.includes(name))) {

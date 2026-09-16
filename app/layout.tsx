@@ -1,11 +1,10 @@
 import Footer from "@/components/footer";
 import Header from "@/components/header";
+import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import { Geist, Inter } from "next/font/google";
 import type { Metadata } from "next/types";
 import { PropsWithChildren } from "react";
-// import { FiShoppingCart } from "react-icons/fi";
-import { Toaster } from "@/components/ui/sonner";
 import "./global.css";
 import { CartProvider } from "./providers/cart-provider";
 
