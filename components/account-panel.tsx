@@ -15,6 +15,7 @@ import { UserRound } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
+import OrderGrid from "./order-grid";
 
 type AccountView = "sign-in" | "create-account";
 
@@ -139,30 +140,7 @@ export default function AccountPanel() {
                     You have not placed any orders yet.
                   </p>
                 ) : (
-                  <ul className="mt-3 space-y-3">
-                    {orders.map((order) => (
-                      <li
-                        key={order.orderNumber}
-                        className="rounded-lg border border-zinc-200 p-4 text-sm"
-                      >
-                        <div className="flex items-center justify-between gap-3">
-                          <span className="font-medium">
-                            Order #{order.orderNumber}
-                          </span>
-                          <span className="text-zinc-600">
-                            {new Date(order.createdAt).toLocaleDateString(
-                              "en-US",
-                            )}
-                          </span>
-                        </div>
-                        <p className="mt-2 text-zinc-600">
-                          {order.items
-                            .map((item) => `${item.quantity} × ${item.title}`)
-                            .join(", ")}
-                        </p>
-                      </li>
-                    ))}
-                  </ul>
+                  <OrderGrid orders={orders} />
                 )}
               </section>
 
