@@ -1,7 +1,6 @@
 "use client";
 
 import { Customer, customerSchema } from "@/data/form";
-import createOrder from "@/data/order";
 import { authClient } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -45,7 +44,18 @@ export function Form() {
         price: getProductPrice(product),
         salePrice: null,
       }));
-      const orderNumber = await createOrder(customer, orderProducts);
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ customer, cartItems: orderProducts }),
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message ?? "Could not place your order.");
+      }
+
+      const orderNumber = result.orderNumber;
       const order = {
         orderNumber,
         customer: { ...customer, email: session.user.email },
