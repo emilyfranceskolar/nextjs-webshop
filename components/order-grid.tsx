@@ -50,7 +50,7 @@ export default function OrderGrid({ orders }: OrderGridProps) {
                     onClick={() => setShowAll(!showAll)}
                     className="mt-4 text-sm font-medium underline underline-offset-4 hover:text-zinc-600"
                 >
-                    {showAll ? "Show Less" : "Show all orders"}
+                    {showAll ? "Show Less" : "Show All Orders"}
                 </button>
             )}
         </>
