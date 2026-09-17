@@ -3,7 +3,6 @@ import { require_isLoggedIn_IsAdmin } from "@/lib/admin";
 import { db } from "@/prisma/db";
 import { NextRequest, NextResponse } from "next/server";
 
-//hämta alla produkter
 export async function GET(request: NextRequest) {
   const error = await require_isLoggedIn_IsAdmin();
   if (error) return error;
@@ -26,7 +25,6 @@ export async function GET(request: NextRequest) {
   return NextResponse.json(productsWithCategories);
 }
 
-//skapar en produkt
 export async function POST(request: NextRequest) {
   const error = await require_isLoggedIn_IsAdmin();
   if (error) return error;

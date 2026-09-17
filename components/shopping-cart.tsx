@@ -3,9 +3,8 @@ import { useCartContext } from "@/app/providers/cart-provider";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
 import { getProductPrice } from "@/lib/product-price";
-import ProductPrice from "./product-price";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useState } from "react";
 import {
@@ -14,6 +13,7 @@ import {
   FiShoppingBag,
   FiTrash2,
 } from "react-icons/fi";
+import ProductPrice from "./product-price";
 
 export default function ShoppingCartList() {
   const { productsInCart, removeFromCart, updateQuantity } = useCartContext();
@@ -163,7 +163,6 @@ export default function ShoppingCartList() {
           )}
         </div>
 
-        {/* Order Summary */}
         <div className="flex flex-col gap-4 w-full">
           <Card className="sticky top-4 gap-0">
             <CardHeader className="pb-4">

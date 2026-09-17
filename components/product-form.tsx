@@ -86,11 +86,11 @@ export default function ProductForm({
       {initialValues?.category.some(
         (name) => !productCategoryNames.includes(name),
       ) && (
-          <p role="status" className="mb-4 text-sm text-amber-800">
-            This product has an unsupported category. Select from the four
-            categories below; saving will replace the old category selection.
-          </p>
-        )}
+        <p role="status" className="mb-4 text-sm text-amber-800">
+          This product has an unsupported category. Select from the four
+          categories below; saving will replace the old category selection.
+        </p>
+      )}
 
       <ProductFormInputs
         register={register}
@@ -109,11 +109,10 @@ function ProductFormInputs({
   setValue,
 }: ProductFormInputsProps) {
   const [selectedFileName, setSelectedFileName] = useState("No file selected");
-  // Runs when the user selects an image
+
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    // Get the first selected file
     const file = event.target.files?.[0];
     if (!file) {
       return;
@@ -132,9 +131,9 @@ function ProductFormInputs({
     if (!response.ok) {
       return;
     }
-    // Get the saved image path from the server
+
     const data = await response.json();
-    // Put the uploaded image path into the Image field
+
     setValue("image", data.imageUrl, {
       shouldValidate: true,
       shouldDirty: true,
@@ -241,21 +240,6 @@ function ProductFormInputs({
           autoComplete="off"
         />
 
-        {/* <div className="space-y-2 pt-2">
-          <p className="text-sm font-medium">Upload image</p>
-
-          <Input
-            id="image-upload"
-            type="file"
-            accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
-            onChange={handleImageUpload}
-          />
-
-          <p className="text-sm text-muted-foreground">
-            Supported formats: JPG, JPEG, PNG, WEBP
-          </p>
-        </div> */}
-
         <div className="space-y-2 pt-2">
           <p className="font-bold text-zinc-600">Upload image</p>
 
@@ -321,7 +305,6 @@ function ProductFormInputs({
         )}
       </Field>
 
-      {/* stock input for admin inventory management */}
       <Field>
         <FieldLegend className="text-2xl font-bold text-zinc-600">
           Stock

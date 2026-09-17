@@ -5,7 +5,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 type Params = { params: Promise<{ articleNumber: string }> };
 
-//hämta en specifik produkt
 export async function GET(request: NextRequest, { params }: Params) {
   const error = await require_isLoggedIn_IsAdmin();
   if (error) return error;
@@ -42,7 +41,6 @@ const updateProductSchema = productSchema
   .partial()
   .strict();
 
-//uppdatera en specifik produkt
 export async function PUT(request: NextRequest, { params }: Params) {
   const error = await require_isLoggedIn_IsAdmin();
   if (error) return error;
@@ -72,7 +70,6 @@ export async function PUT(request: NextRequest, { params }: Params) {
     );
   }
 
-  //rea måste vara mindre än det vanliga priset
   const final = { ...product, ...result.data };
 
   if (final.salePrice != null && final.salePrice >= final.price) {
@@ -89,7 +86,6 @@ export async function PUT(request: NextRequest, { params }: Params) {
   return NextResponse.json(updated);
 }
 
-//radera en specifik produkt
 export async function DELETE(request: NextRequest, { params }: Params) {
   const error = await require_isLoggedIn_IsAdmin();
   if (error) return error;

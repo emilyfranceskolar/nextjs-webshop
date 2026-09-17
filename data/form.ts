@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-// validering och schemat för customer form
 export const customerSchema = z.object({
   email: z.email({ error: "Enter an email" }),
   name: z.string().min(1, { error: "Enter a first name" }),
@@ -15,7 +14,6 @@ export const customerSchema = z.object({
 });
 export type Customer = z.infer<typeof customerSchema>;
 
-// validering och schemat för bilder
 export const imageSchema = z
   .string()
   .min(1, "Required")
@@ -32,11 +30,9 @@ export const imageSchema = z
   }, "Invalid image URL");
 export type Image = z.infer<typeof imageSchema>;
 
-// validering och schemat för priset coerce för att tvinga input att bli ett nummer
 export const priceSchema = z.number({ error: "Required" }).min(1, "Required");
 export type Price = z.infer<typeof priceSchema>;
 
-// The same four choices as main, independent of local test data.
 export const productCategoryNames = [
   "Bestseller",
   "Reading Glasses",
@@ -47,7 +43,6 @@ export function isSaleCategory(names: string[]) {
   return names.includes("Sale");
 }
 
-// validering och schemat för produkter
 export const productSchema = z.object({
   id: z.string().optional(),
   title: z.string().min(1, "Required"),
@@ -64,13 +59,9 @@ export const productSchema = z.object({
   slug: z.string().optional(),
 });
 
-// schemat för skapa produkt = samma som productSchema minus idInvalid input: expected number, received NaN
-// export const createProductSchema = productSchema.omit({ id: true });
-
 export type ProductFormValues = z.infer<typeof productSchema>;
 export type ProductFormInput = z.input<typeof productSchema>;
 
-// Validate the same category choices and prices in the browser and server actions.
 export function createProductSchema() {
   return productSchema.superRefine((product, context) => {
     if (product.category.some((name) => !productCategoryNames.includes(name))) {
