@@ -133,7 +133,7 @@ export default async function AdminOrdersPage() {
                     <Button
                       type="submit"
                       disabled={order.completed}
-                      className="w-full"
+                      className="w-full cursor-pointer"
                     >
                       {order.completed ? "Completed" : "Mark as completed"}
                     </Button>
