@@ -146,12 +146,6 @@ Kör tester för reapriser och kategorival med `npm run test:sale`.
 
 ---
 
-### Testning
-
-Projektet använder **Cypress** för end-to-end-tester.
-
-Testerna används för att kontrollera att webbshoppen fungerar som den ska och att projektets krav uppfylls.
-
 ### Testkonton
 
 ##### Kund
@@ -188,47 +182,37 @@ Sedan klicka dig in på: http://localhost:3000
 
 ---
 
-### Krav för Godkänt
+#### Kravspecifikation på projektet: ✅
 
-- [ ] Git & GitHub har använts
-- [ ] Projektmappen innehåller en README.md fil - (läs ovan för mer info)
-- [ ] Uppgiften lämnas in i tid!
-- [ ] Ett designsystem/komponentbibliotek används nästintill helt uteslutande för att bygga sidan (ex: MUI, ChakraUI, Mantine, etc).
-
-**Home**
-
-- [ ] Ska ha en övergripande layout med header, main & footer.
-- [ ] Startsidan ska lista samtliga produkter.
-- [ ] Det ska gå att lägga till produkter i kundvagnen (header + toast + ls).
-- [ ] Det ska gå att klicka på en produkt och komma till en detaljsida.
-- [ ] Sidan ska vara responsiv och gå att använda på mobil, tablet & desktop.
-
-**Produkt**
-
-- [ ] Ska ha en övergripande layout med header, main & footer.
-- [ ] Detaljsidan ska visa all info om en produkt.
-- [ ] Det ska gå att lägga till produkten i kundvagnen (header + toast + ls).
-- [ ] Sidan ska vara responsiv och gå att använda på mobil, tablet & desktop.
-
-**Kundvagn & Checkout**
-
-- [ ] Ska ha en övergripande layout med header, main & footer.
-- [ ] Det ska gå att gå till checkoutsidan och se innehållet i kundvagnen (knapp & url).
-- [ ] Det ska gå att se det totala priset i kundvagnen.
-- [ ] Det ska gå att ändra produkterna i kundvagnen (header + vyn + pris + ls).
-- [ ] Det ska gå att ange leveransuppgifter i ett formulär.
-- [ ] Samtliga fält för checkoutsidans formulär ska ha valideringsregler.
-- [ ] Formulären vid utcheckningen ska gå att automatiskt fyllas i.
-- [ ] Bekräftelsesidan ska visa orderdetaljer och leveransuppgifter
-
-**Admin**
-
-- [ ] Det finns en admin-sida för produkthantering
-- [ ] Det ska gå att se alla produkter på admin sidan
-- [ ] Det går att lägga till produkter via admin sidan + ls
-- [ ] Det går att ta bort produkter via admin sidan + ls
-- [ ] Det går att redigera produkter via admin sidan + ls
-- [ ] Samtliga fält för adminsidans formulär ska ha valideringsregler
+• Alla sidor skall vara responsiva. (G)
+• Arbetet ska implementeras med NextJS. (G)
+• Backenden ska ha validering på samtliga endpoints (även Server Actions). (G)
+• Skapa ett ER diagram som ska ha visats vid idégodkännandet (G)
+• Beskriv er företagsidé i en kort textuell presentation, detta ska ha visats vid
+idégodkännandet (G)
+• All data som programmet utnyttjar ska vara sparat i en SQL databas (produkter,
+beställningar, konton, mm) med undantaget av bilder. (G)
+• Man ska kunna logga in som administratör i systemet (G)
+• Inga Lösenord får sparas i klartext i databasen (G)
+• En besökare ska kunna beställa produkter från sidan, detta ska uppdatera lagersaldot i
+databasen (G)
+• Administratörer ska kunna uppdatera antalet produkter i lager från admin delen av sidan
+(G)
+• Administratörer ska kunna se en lista på alla gjorda beställningar (G)
+• Sidans produkter ska delas upp i kategorier, en produkt ska tillhöra minst en kategori,
+men kan tillhöra flera (G)
+• Från hemsidan ska man kunna se en lista över alla produkter, och man ska kunna lista
+bara dom produkter som tillhör en kategori (G)
+• Besökare ska kunna lägga produkterna i en kundkorg, som är sparad i local-storage på
+klienten (G)
+• En besökare som gör en beställning ska få möjligheten att registrera sig samt logga in
+och måste vara inloggad som kund innan beställningen skapas (G)
+• Checkoutflödet i frontendapplikationen ska ha validering på samtliga fält (G)
+• När man är inloggad som kund ska man kunna se sina gjorda beställning och om det är
+skickade eller inte (G)
+• Administratörer ska kunna redigera produkt (G)
+• Administratörer ska kunna lägga till och ta bort produkter (G)
+• Administratörer ska kunna markera beställningar som skickade (G)
 
 ## Glajjan – Your next pair of Glajjan.
 

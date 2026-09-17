@@ -86,11 +86,11 @@ export default function ProductForm({
       {initialValues?.category.some(
         (name) => !productCategoryNames.includes(name),
       ) && (
-        <p role="status" className="mb-4 text-sm text-amber-800">
-          This product has an unsupported category. Select from the four
-          categories below; saving will replace the old category selection.
-        </p>
-      )}
+          <p role="status" className="mb-4 text-sm text-amber-800">
+            This product has an unsupported category. Select from the four
+            categories below; saving will replace the old category selection.
+          </p>
+        )}
 
       <ProductFormInputs
         register={register}
@@ -146,7 +146,7 @@ function ProductFormInputs({
       <input type="hidden" {...register("id")} />
 
       <Field className="space-y-2 w-full">
-        <FieldLegend className="text-2xl font-bold text-zinc-800">
+        <FieldLegend className="text-2xl font-bold text-zinc-600">
           Title
         </FieldLegend>
 
@@ -169,7 +169,7 @@ function ProductFormInputs({
       </Field>
 
       <Field>
-        <FieldLegend className="text-2xl font-bold text-zinc-800">
+        <FieldLegend className="text-2xl font-bold text-zinc-600">
           Category
         </FieldLegend>
 
@@ -199,7 +199,7 @@ function ProductFormInputs({
       </Field>
 
       <Field>
-        <FieldLegend className="text-2xl font-bold text-zinc-800">
+        <FieldLegend className="text-2xl font-bold text-zinc-600">
           Description
         </FieldLegend>
 
@@ -225,7 +225,7 @@ function ProductFormInputs({
       </Field>
 
       <Field>
-        <FieldLegend className="text-2xl font-bold text-zinc-800">
+        <FieldLegend className="text-2xl font-bold text-zinc-600">
           Image
         </FieldLegend>
 
@@ -257,7 +257,7 @@ function ProductFormInputs({
         </div> */}
 
         <div className="space-y-2 pt-2">
-          <p className="font-bold text-zinc-800">Upload image</p>
+          <p className="font-bold text-zinc-600">Upload image</p>
 
           <div className="flex h-10 w-full items-center rounded-md border px-1">
             <label
@@ -293,7 +293,7 @@ function ProductFormInputs({
       </Field>
 
       <Field>
-        <FieldLegend className="text-2xl font-bold text-zinc-800">
+        <FieldLegend className="text-2xl font-bold text-zinc-600">
           <label htmlFor="price">
             {onSale ? "Regular price (kr)" : "Price (kr)"}
           </label>
@@ -323,7 +323,7 @@ function ProductFormInputs({
 
       {/* stock input for admin inventory management */}
       <Field>
-        <FieldLegend className="text-2xl font-bold text-zinc-800">
+        <FieldLegend className="text-2xl font-bold text-zinc-600">
           Stock
         </FieldLegend>
 
@@ -351,7 +351,7 @@ function ProductFormInputs({
       </Field>
       {onSale && (
         <Field>
-          <FieldLegend className="text-2xl font-bold text-zinc-800">
+          <FieldLegend className="text-2xl font-bold text-zinc-600">
             <label htmlFor="salePrice">Sale price (kr)</label>
           </FieldLegend>
 
@@ -385,7 +385,7 @@ function ProductFormInputs({
       )}
 
       <Field>
-        <FieldLegend className="text-2xl font-bold text-zinc-800">
+        <FieldLegend className="text-2xl font-bold text-zinc-600">
           Article Number
         </FieldLegend>
 

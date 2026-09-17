@@ -243,7 +243,7 @@ export default function AccountPanel() {
                 href="/admin"
                 data-cy="admin-link"
                 onClick={() => setIsOpen(false)}
-                className="text-sm font-medium text-zinc-700 underline underline-offset-4 hover:text-black"
+                className="text-sm pr-2.5 pl-2.5 pt-1 pb-1 rounded-lg bg-[#d8e5e269] font-medium text-zinc-600 hover:bg-[#d8e5e2a3]"
               >
                 Admin
               </Link>
@@ -272,7 +272,7 @@ function AccountField({
 }: AccountFieldProps) {
   return (
     <div className="space-y-2">
-      <label htmlFor={id} className="text-sm font-medium text-zinc-800">
+      <label htmlFor={id} className="text-sm font-medium text-zinc-600">
         {label}
       </label>
       <Input
