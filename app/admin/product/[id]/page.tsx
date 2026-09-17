@@ -2,8 +2,8 @@ import { isAdmin } from "@/lib/admin";
 import { db } from "@/prisma/db";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { readProductForm } from "../product-data";
-import ProductForm from "../product-form";
+import ProductForm from "../../../../components/product-form";
+import { readProductForm } from "../../../../lib/product-data";
 
 async function editProduct(formData: FormData) {
   "use server";

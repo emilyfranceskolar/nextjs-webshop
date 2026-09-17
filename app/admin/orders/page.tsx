@@ -1,3 +1,4 @@
+import AdminNavigation from "@/components/admin-navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { isAdmin } from "@/lib/admin";
@@ -5,7 +6,6 @@ import { db } from "@/prisma/db";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import AdminNavigation from "../admin-navigation";
 
 const orderIdSchema = z.string().trim().min(1);
 

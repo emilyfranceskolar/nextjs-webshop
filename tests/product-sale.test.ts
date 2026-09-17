@@ -1,13 +1,13 @@
+import { AppRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { createProductSchema, productCategoryNames } from "../data/form";
-import { getProductPrice } from "../lib/product-price";
+import ProductForm from "../components/product-form";
 import ProductPrice from "../components/product-price";
-import { parseProductForm } from "../app/admin/product/product-data";
-import ProductForm from "../app/admin/product/product-form";
-import { AppRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { createProductSchema, productCategoryNames } from "../data/form";
+import { parseProductForm } from "../lib/product-data";
+import { getProductPrice } from "../lib/product-price";
 
 const schema = createProductSchema();
 const product = {
