@@ -4,7 +4,7 @@ export async function readProductForm(formData: FormData) {
   return parseProductForm(formData);
 }
 
-export async function parseProductForm(formData: FormData) {
+export function parseProductForm(formData: FormData) {
   const rawData = Object.fromEntries(formData);
 
   const values = createProductSchema().parse({
