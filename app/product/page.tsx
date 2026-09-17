@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getProductPrice } from "@/lib/product-price";
 import ProductGrid from "@/components/product-grid";
 
+//server komponent
 export default async function ProductPage({
   searchParams,
 }: {

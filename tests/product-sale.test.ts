@@ -1,13 +1,13 @@
+import { AppRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { createProductSchema, productCategoryNames } from "../data/form";
-import { getProductPrice } from "../lib/product-price";
+import ProductForm from "../components/product-form";
 import ProductPrice from "../components/product-price";
-import { parseProductForm } from "../app/admin/product/product-data";
-import ProductForm from "../app/admin/product/product-form";
-import { AppRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { createProductSchema, productCategoryNames } from "../data/form";
+import { parseProductForm } from "../lib/product-data";
+import { getProductPrice } from "../lib/product-price";
 
 const schema = createProductSchema();
 const product = {
@@ -15,9 +15,10 @@ const product = {
   description: "Test description",
   image: "/assets/images/test.webp",
   category: ["Sunglasses"],
-  price: "899",
-  stock: "10",
-  salePrice: "",
+  price: 899,
+  stock: 10,
+  salePrice: undefined,
+  articleNumber: "test-article",
 };
 
 test("the edit form shows the Sale price field for an existing discounted product", () => {
@@ -43,7 +44,7 @@ test("the edit form shows the Sale price field for an existing discounted produc
             ...product,
             id: "existing-product",
             category,
-            salePrice: "699",
+            salePrice: 699,
           },
           action: async () => {},
         }),
@@ -72,7 +73,8 @@ test("regular products and older carts need no sale price", () => {
 test("editing an existing product adds, updates and removes Sale without losing other categories", () => {
   const form = new FormData();
   for (const [key, value] of Object.entries(product)) {
-    if (!Array.isArray(value)) form.set(key, value);
+    if (!Array.isArray(value) && value !== undefined)
+      form.set(key, String(value));
   }
   form.set("id", "existing-product");
   form.append("category", "Sunglasses");
@@ -96,7 +98,7 @@ test("main's checkbox choices work before categories are created in the database
     createProductSchema().safeParse({
       ...product,
       category: ["Bestseller", "Reading Glasses", "Sunglasses", "Sale"],
-      salePrice: "699",
+      salePrice: 699,
     }).success,
     true,
   );
@@ -114,7 +116,7 @@ test("only main's four categories are offered and test categories are rejected",
       schema.safeParse({
         ...product,
         category: [category, "Sale"],
-        salePrice: "699",
+        salePrice: 699,
       }).success,
       false,
     );
@@ -125,7 +127,7 @@ test("a product can keep its ordinary category while also being on sale", () => 
   const values = schema.parse({
     ...product,
     category: ["Sunglasses", "Sale"],
-    salePrice: "699.50",
+    salePrice: 699.5,
   });
   assert.deepEqual(values.category, ["Sunglasses", "Sale"]);
   assert.equal(
@@ -218,7 +220,8 @@ test("sale display shows the sale price in red and the regular price in black an
 test("server form parsing validates categories, saves discounts and clears removed sales", () => {
   const form = new FormData();
   for (const [key, value] of Object.entries(product)) {
-    if (!Array.isArray(value)) form.set(key, value);
+    if (!Array.isArray(value) && value !== undefined)
+      form.set(key, String(value));
   }
   form.append("category", "Sunglasses");
   form.append("category", "Sale");

@@ -1,9 +1,9 @@
-import ProductForm from "../product-form";
-import { readProductForm } from "../product-data";
-import { db } from "@/prisma/db";
 import { isAdmin } from "@/lib/admin";
-import { redirect } from "next/navigation";
+import { db } from "@/prisma/db";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import ProductForm from "../../../../components/product-form";
+import { readProductForm } from "../../../../lib/product-data";
 
 async function createNewProduct(formData: FormData) {
   "use server";

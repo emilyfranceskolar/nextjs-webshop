@@ -5,18 +5,18 @@ export async function readProductForm(formData: FormData) {
 }
 
 export function parseProductForm(formData: FormData) {
+  const rawData = Object.fromEntries(formData);
+
   const values = createProductSchema().parse({
-    ...Object.fromEntries(formData),
+    ...rawData,
+    price: Number(rawData.price),
+    stock: Number(rawData.stock),
+    salePrice: rawData.salePrice ? Number(rawData.salePrice) : undefined,
     category: [...new Set(formData.getAll("category"))],
   });
 
   return {
     ...values,
-    price: Number(values.price),
-
-    // convert stock from form string to number
-    stock: Number(values.stock),
-
     // Removing Sale also removes the discount.
     salePrice: isSaleCategory(values.category)
       ? Number(values.salePrice)
