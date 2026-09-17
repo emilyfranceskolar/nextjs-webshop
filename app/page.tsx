@@ -34,7 +34,7 @@ export default async function Home() {
   };
 
   return (
-    <main className="grid gap-12 place-items-center bg-[#fafaf8]">
+    <main className="grid gap-8 place-items-center bg-[#fafaf8]">
       <section className="relative h-[55dvh] w-full overflow-hidden md:h-[65dvh] lg:h-dvh">
         <video
           autoPlay
