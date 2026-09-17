@@ -109,7 +109,7 @@ export default function AccountPanel() {
         </div>
       </SheetTrigger>
 
-      <SheetContent className="w-full gap-0 overflow-y-auto p-0 sm:max-w-md">
+      <SheetContent className="flex w-full gap-0 flex-col overflow-y-auto p-0 sm:max-w-md">
         <SheetHeader className="border-b border-zinc-200 px-8 py-8">
           <SheetTitle className="text-2xl font-semibold">
             {session?.user.name
@@ -125,9 +125,9 @@ export default function AccountPanel() {
           </SheetDescription>
         </SheetHeader>
 
-        <div className="p-8">
+        <div className="flex min-h-0 flex-1 flex-col p-8 overflow-y-auto">
           {session ? (
-            <div className="space-y-6">
+            <div className="space-y-6 border-b border-zinc-200">
               <section>
                 <h2 className="text-lg font-semibold">Your orders</h2>
                 {isLoadingOrders ? (
@@ -145,7 +145,7 @@ export default function AccountPanel() {
 
               <Button
                 type="button"
-                className="h-11 w-full bg-[#526E67] hover:bg-[#7C9A92]"
+                className="h-11 w-full mb-6 bg-[#526E67] hover:bg-[#7C9A92]"
                 onClick={handleSignOut}
               >
                 Sign out
@@ -175,7 +175,7 @@ export default function AccountPanel() {
                 </Button>
               </div>
 
-              <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
+              <form className="mt-8  space-y-5" onSubmit={handleSubmit}>
                 {isCreatingAccount && (
                   <AccountField
                     id="name"
@@ -237,12 +237,12 @@ export default function AccountPanel() {
           )}
 
           {session?.user.role === "admin" && (
-            <div className="mt-8 border-t border-zinc-200 pt-6">
+            <div className="flex justify-end mt-auto pt-6">
               <Link
                 href="/admin"
                 data-cy="admin-link"
                 onClick={() => setIsOpen(false)}
-                className="text-sm font-medium text-zinc-700 underline underline-offset-4 hover:text-black"
+                className="text-sm pr-2.5 pl-2.5 pt-1 pb-1 rounded-lg bg-[#d8e5e269] font-medium text-zinc-600 hover:bg-[#d8e5e2a3]"
               >
                 Admin
               </Link>
@@ -271,7 +271,7 @@ function AccountField({
 }: AccountFieldProps) {
   return (
     <div className="space-y-2">
-      <label htmlFor={id} className="text-sm font-medium text-zinc-800">
+      <label htmlFor={id} className="text-sm font-medium text-zinc-600">
         {label}
       </label>
       <Input

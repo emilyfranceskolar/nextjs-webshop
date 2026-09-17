@@ -1,3 +1,4 @@
+import ProductPrice from "@/components/product-price";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -8,15 +9,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { db } from "@/prisma/db";
 import { isAdmin } from "@/lib/admin";
+import { getProductPrice } from "@/lib/product-price";
+import { db } from "@/prisma/db";
 import { Plus } from "lucide-react";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import AdminNavigation from "./admin-navigation";
-import ProductPrice from "@/components/product-price";
-import { getProductPrice } from "@/lib/product-price";
+import AdminNavigation from "../../components/admin-navigation";
 
 async function deleteProduct(formData: FormData) {
   "use server";

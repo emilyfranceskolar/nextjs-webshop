@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-
 import { Button } from "@/components/ui/button";
 import { Field, FieldLegend } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -15,6 +13,7 @@ import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import {
   FormState,
   useForm,
@@ -44,7 +43,7 @@ export default function ProductForm({
     useForm<ProductFormValues>({
       resolver: zodResolver(createProductSchema()),
       defaultValues: {
-        salePrice: "",
+        salePrice: undefined,
         ...initialValues,
         category:
           initialValues?.category.filter((name) =>
@@ -146,7 +145,7 @@ function ProductFormInputs({
       <input type="hidden" {...register("id")} />
 
       <Field className="space-y-2 w-full">
-        <FieldLegend className="text-2xl font-bold text-zinc-800">
+        <FieldLegend className="text-2xl font-bold text-zinc-600">
           Title
         </FieldLegend>
 
@@ -169,7 +168,7 @@ function ProductFormInputs({
       </Field>
 
       <Field>
-        <FieldLegend className="text-2xl font-bold text-zinc-800">
+        <FieldLegend className="text-2xl font-bold text-zinc-600">
           Category
         </FieldLegend>
 
@@ -199,7 +198,7 @@ function ProductFormInputs({
       </Field>
 
       <Field>
-        <FieldLegend className="text-2xl font-bold text-zinc-800">
+        <FieldLegend className="text-2xl font-bold text-zinc-600">
           Description
         </FieldLegend>
 
@@ -225,7 +224,7 @@ function ProductFormInputs({
       </Field>
 
       <Field>
-        <FieldLegend className="text-2xl font-bold text-zinc-800">
+        <FieldLegend className="text-2xl font-bold text-zinc-600">
           Image
         </FieldLegend>
 
@@ -242,7 +241,7 @@ function ProductFormInputs({
         />
 
         <div className="space-y-2 pt-2">
-          <p className="font-bold text-zinc-800">Upload image</p>
+          <p className="font-bold text-zinc-600">Upload image</p>
 
           <div className="flex h-10 w-full items-center rounded-md border px-1">
             <label
@@ -278,7 +277,7 @@ function ProductFormInputs({
       </Field>
 
       <Field>
-        <FieldLegend className="text-2xl font-bold text-zinc-800">
+        <FieldLegend className="text-2xl font-bold text-zinc-600">
           <label htmlFor="price">
             {onSale ? "Regular price (kr)" : "Price (kr)"}
           </label>
@@ -286,7 +285,9 @@ function ProductFormInputs({
 
         <Input
           data-cy="product-price"
-          {...register("price")}
+          {...register("price", {
+            setValueAs: (value) => (value === "" ? 0 : Number(value)),
+          })}
           id="price"
           type="number"
           min="0.01"
@@ -305,13 +306,16 @@ function ProductFormInputs({
       </Field>
 
       <Field>
-        <FieldLegend className="text-2xl font-bold text-zinc-800">
+        <FieldLegend className="text-2xl font-bold text-zinc-600">
           Stock
         </FieldLegend>
 
         <Input
           data-cy="product-stock"
-          {...register("stock")}
+          {...register("stock", {
+            setValueAs: (value) => (value === "" ? 0 : Number(value)),
+          })}
+
           id="stock"
           type="number"
           min="0"
@@ -330,7 +334,7 @@ function ProductFormInputs({
       </Field>
       {onSale && (
         <Field>
-          <FieldLegend className="text-2xl font-bold text-zinc-800">
+          <FieldLegend className="text-2xl font-bold text-zinc-600">
             <label htmlFor="salePrice">Sale price (kr)</label>
           </FieldLegend>
 
@@ -339,7 +343,9 @@ function ProductFormInputs({
             type="number"
             min="0.01"
             step="0.01"
-            {...register("salePrice")}
+            {...register("salePrice", {
+              setValueAs: (value) => (value === "" ? undefined : Number(value)),
+            })}
             data-cy="product-sale-price"
             aria-invalid={!!formState.errors.salePrice}
             className="h-10 p-4"
@@ -362,7 +368,7 @@ function ProductFormInputs({
       )}
 
       <Field>
-        <FieldLegend className="text-2xl font-bold text-zinc-800">
+        <FieldLegend className="text-2xl font-bold text-zinc-600">
           Article Number
         </FieldLegend>
 

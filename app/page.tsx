@@ -3,6 +3,7 @@ import { db } from "@/prisma/db";
 import Image from "next/image";
 import Link from "next/link";
 
+//server komponent
 export default async function Home() {
   const product = await db.product.findMany({
     include: {
@@ -81,11 +82,11 @@ export default async function Home() {
       </section>
       <section
         aria-labelledby="all-products-heading"
-        className="grid min-w-0 w-full gap-8"
+        className="grid min-w-0 w-full"
       >
         <h2
           id="all-products-heading"
-          className="m-4 text-center text-xl md:text-3xl"
+          className="m-2 text-center text-xl md:text-3xl"
         >
           All Products
         </h2>

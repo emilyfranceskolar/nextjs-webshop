@@ -83,7 +83,7 @@ export function Form() {
       <ContactFormFields register={register} formState={formState} />
       <PaymentFormFields register={register} />
       {!session && (
-        <p className="rounded-lg border border-[#526E67] bg-[#526E67]/5 p-4 text-sm text-zinc-800">
+        <p className="rounded-lg border border-[#526E67] bg-[#526E67]/5 p-4 text-sm text-zinc-600">
           Please sign in or create an account using the account icon before
           placing your order.
         </p>
