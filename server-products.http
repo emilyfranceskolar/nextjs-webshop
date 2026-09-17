@@ -21,14 +21,7 @@ POST http://localhost:3000/api/products
 Content-Type: application/json
 
 {
-  "title": "Latest New product",
-  "description": "This is the latest create product",
-  "image": "https://unsplash.com/photos/gold-colored-framed-hippie-sunglasses-on-white-surface-1-nx1QR5dTE",
-  "price": 699,
-  "stock": 5,
-  "articleNumber": "445667",
-  "category": ["Sunglasses"]
-}
+  "title": "Broken"
 
 
 ###Uppdatera en produkt (en articleNr behövs i slutet)
@@ -36,9 +29,9 @@ PUT http://localhost:3000/api/products/445667
 Content-Type: application/json
 
 {
-  "image": "/assets/images/Paris_black_1.webp"
-}
+  "stock": 5
+
 
 
 ###Radera en produkt (en articleNr behövs i slutet)
-DELETE http://localhost:3000/api/products/
+DELETE http://localhost:3000/api/products/445667

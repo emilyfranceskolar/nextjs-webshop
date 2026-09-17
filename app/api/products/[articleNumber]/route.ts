@@ -55,7 +55,14 @@ export async function PUT(request: NextRequest, { params }: Params) {
   if (!product) {
     return NextResponse.json({ message: "Product not found" }, { status: 404 });
   }
-  const body = await request.json();
+
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ message: "Invalid JSON data" }, { status: 400 });
+  }
+
   const result = updateProductSchema.safeParse(body);
 
   if (!result.success) {

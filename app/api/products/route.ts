@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
     ...product,
     categories: product.categories.map((item) => item.category),
   }));
-  //returnera enkel data för UI:n
+
   return NextResponse.json(productsWithCategories);
 }
 
@@ -31,7 +31,12 @@ export async function POST(request: NextRequest) {
   const error = await require_isLoggedIn_IsAdmin();
   if (error) return error;
 
-  const body = await request.json();
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ message: "Invalid JSON data" }, { status: 400 });
+  }
 
   const result = createProductSchema().safeParse(body);
 
@@ -48,7 +53,6 @@ export async function POST(request: NextRequest) {
     productData.slug ??
     productData.title.toLocaleLowerCase().replace(/[^a-z0-9]+/g, "-");
 
-  //skapa denna produkt, hitta den existerande kategori med samma slug, skapa en link mellan dem
   const newProduct = await db.product.create({
     data: {
       ...productData,
