@@ -17,7 +17,6 @@ export function parseProductForm(formData: FormData) {
 
   return {
     ...values,
-    // Removing Sale also removes the discount.
     salePrice: isSaleCategory(values.category)
       ? Number(values.salePrice)
       : null,
