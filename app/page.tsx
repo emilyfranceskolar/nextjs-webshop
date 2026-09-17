@@ -35,7 +35,7 @@ export default async function Home() {
   };
 
   return (
-    <main className="grid gap-8 place-items-center bg-[#fafaf8]">
+    <main className="grid gap-12 place-items-center bg-[#fafaf8]">
       <section className="relative h-[55dvh] w-full overflow-hidden md:h-[65dvh] lg:h-dvh">
         <video
           autoPlay
@@ -82,11 +82,11 @@ export default async function Home() {
       </section>
       <section
         aria-labelledby="all-products-heading"
-        className="grid min-w-0 w-full gap-8"
+        className="grid min-w-0 w-full"
       >
         <h2
           id="all-products-heading"
-          className="m-4 text-center text-xl md:text-3xl"
+          className="m-2 text-center text-xl md:text-3xl"
         >
           All Products
         </h2>

@@ -31,6 +31,7 @@ model Order {
   email       String
   address     String
   createdAt   DateTime    @default(now())
+  completed   Boolean     @default(false)
   items       OrderItem[]
   userId      String?
   user        User?       @relation(fields: [userId], references: [id])

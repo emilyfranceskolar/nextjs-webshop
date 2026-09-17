@@ -1,8 +1,34 @@
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { isAdmin } from "@/lib/admin";
 import { db } from "@/prisma/db";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import AdminNavigation from "../../../components/admin-navigation";
+import { z } from "zod";
+import AdminNavigation from "../admin-navigation";
+
+const orderIdSchema = z.string().trim().min(1);
+
+async function markOrderAsCompleted(formData: FormData) {
+  "use server";
+
+  if (!(await isAdmin())) {
+    throw new Error("Unauthorized");
+  }
+
+  const result = orderIdSchema.safeParse(formData.get("orderId"));
+
+  if (!result.success) {
+    throw new Error("Invalid order ID");
+  }
+
+  await db.order.update({
+    where: { id: result.data },
+    data: { completed: true },
+  });
+
+  revalidatePath("/admin/orders");
+}
 
 const currency = new Intl.NumberFormat("en-GB", {
   style: "currency",
@@ -41,6 +67,16 @@ export default async function AdminOrdersPage() {
 
                 <p className="text-sm text-muted-foreground">
                   {order.createdAt.toLocaleDateString("en-GB")}
+                </p>
+
+                <p
+                  className={
+                    order.completed
+                      ? "text-sm font-medium text-green-700"
+                      : "text-sm font-medium text-gray-600"
+                  }
+                >
+                  Status: {order.completed ? "Completed" : "Pending"}
                 </p>
               </CardHeader>
 
@@ -91,6 +127,17 @@ export default async function AdminOrdersPage() {
                       )}
                     </span>
                   </p>
+
+                  <form action={markOrderAsCompleted} className="mt-4">
+                    <input type="hidden" name="orderId" value={order.id} />
+                    <Button
+                      type="submit"
+                      disabled={order.completed}
+                      className="w-full"
+                    >
+                      {order.completed ? "Completed" : "Mark as completed"}
+                    </Button>
+                  </form>
                 </div>
               </CardContent>
             </Card>
